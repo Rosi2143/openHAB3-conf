@@ -1,0 +1,42 @@
+{
+  "GroundFloor": {
+    "class": "org.openhab.core.items.ManagedItemProvider$PersistedItem",
+    "value": {
+      "groupNames": [
+        "House"
+      ],
+      "itemType": "Group",
+      "tags": [
+        "Location"
+      ],
+      "label": "Erdgeschoss",
+      "category": "groundfloor"
+    }
+  },
+  "kittchen": {
+    "class": "org.openhab.core.items.ManagedItemProvider$PersistedItem",
+    "value": {
+      "groupNames": [
+        "GroundFloor"
+      ],
+      "itemType": "Group",
+      "tags": [
+        "Location"
+      ],
+      "label": "Küche",
+      "category": "kitchen"
+    }
+  },
+  "House": {
+    "class": "org.openhab.core.items.ManagedItemProvider$PersistedItem",
+    "value": {
+      "groupNames": [],
+      "itemType": "Group",
+      "tags": [
+        "Location"
+      ],
+      "label": "Haus",
+      "category": "house"
+    }
+  }
+}

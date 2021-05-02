@@ -1,0 +1,14 @@
+{
+  "House": {
+    "class": "org.openhab.core.items.ManagedItemProvider$PersistedItem",
+    "value": {
+      "groupNames": [],
+      "itemType": "Group",
+      "tags": [
+        "Location"
+      ],
+      "label": "Haus",
+      "category": "house"
+    }
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "overview": {
+    "class": "org.openhab.core.ui.components.RootUIComponent",
+    "value": {
+      "uid": "overview",
+      "timestamp": "Apr 6, 2021, 4:04:41 PM",
+      "component": "oh-layout-page",
+      "config": {
+        "label": "Overview"
+      },
+      "slots": {
+        "default": []
+      }
+    }
+  },
+  "page_3177f849ba": {
+    "class": "org.openhab.core.ui.components.RootUIComponent",
+    "value": {
+      "uid": "page_3177f849ba",
+      "timestamp": "Apr 6, 2021, 4:18:15 PM",
+      "component": "oh-plan-page",
+      "config": {
+        "label": "Wohnzimmer",
+        "sidebar": true,
+        "imageUrl": "floorplan/Wohnzimmer.png"
+      },
+      "slots": {
+        "default": []
+      }
+    }
+  }
+}

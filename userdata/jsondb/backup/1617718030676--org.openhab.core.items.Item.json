@@ -1,0 +1,28 @@
+{
+  "GroundFloor": {
+    "class": "org.openhab.core.items.ManagedItemProvider$PersistedItem",
+    "value": {
+      "groupNames": [
+        "House"
+      ],
+      "itemType": "Group",
+      "tags": [
+        "Location"
+      ],
+      "label": "Erdgeschoss",
+      "category": "groundfloor"
+    }
+  },
+  "House": {
+    "class": "org.openhab.core.items.ManagedItemProvider$PersistedItem",
+    "value": {
+      "groupNames": [],
+      "itemType": "Group",
+      "tags": [
+        "Location"
+      ],
+      "label": "Haus",
+      "category": "house"
+    }
+  }
+}

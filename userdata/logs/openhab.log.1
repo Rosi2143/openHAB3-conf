@@ -1,0 +1,40 @@
+2021-04-30 21:23:10.060 [WARN ] [org.apache.karaf.shell.ssh.Activator] - Exception caught while starting SSH server
+java.net.BindException: Address already in use
+	at sun.nio.ch.Net.bind0(Native Method) ~[?:?]
+	at sun.nio.ch.Net.bind(Net.java:455) ~[?:?]
+	at sun.nio.ch.Net.bind(Net.java:447) ~[?:?]
+	at sun.nio.ch.AsynchronousServerSocketChannelImpl.bind(AsynchronousServerSocketChannelImpl.java:164) ~[?:?]
+	at org.apache.sshd.common.io.nio2.Nio2Acceptor.bind(Nio2Acceptor.java:63) ~[bundleFile:1.7.0]
+	at org.apache.sshd.common.io.nio2.Nio2Acceptor.bind(Nio2Acceptor.java:87) ~[bundleFile:1.7.0]
+	at org.apache.sshd.server.SshServer.start(SshServer.java:324) ~[bundleFile:1.7.0]
+	at org.apache.karaf.shell.ssh.Activator.createAndRunSshServer(Activator.java:124) [bundleFile:?]
+	at org.apache.karaf.shell.ssh.Activator.doStart(Activator.java:113) [bundleFile:?]
+	at org.apache.karaf.util.tracker.BaseActivator.run(BaseActivator.java:312) [bundleFile:?]
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515) [?:?]
+	at java.util.concurrent.FutureTask.run(FutureTask.java:264) [?:?]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128) [?:?]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628) [?:?]
+	at java.lang.Thread.run(Thread.java:834) [?:?]
+2021-04-30 21:23:22.050 [INFO ] [.core.internal.i18n.I18nProviderImpl] - Time zone set to 'Europe/Berlin'.
+2021-04-30 21:23:22.088 [INFO ] [.core.internal.i18n.I18nProviderImpl] - Location set to '52.08425313826753,10.174713134765627'.
+2021-04-30 21:23:22.116 [INFO ] [.core.internal.i18n.I18nProviderImpl] - Locale set to 'en_DE'.
+2021-04-30 21:25:00.083 [ERROR] [.core.model.lsp.internal.ModelServer] - Error starting the Language Server
+java.net.BindException: Address already in use (Bind failed)
+	at java.net.PlainSocketImpl.socketBind(Native Method) ~[?:?]
+	at java.net.AbstractPlainSocketImpl.bind(AbstractPlainSocketImpl.java:436) ~[?:?]
+	at java.net.ServerSocket.bind(ServerSocket.java:395) ~[?:?]
+	at java.net.ServerSocket.<init>(ServerSocket.java:257) ~[?:?]
+	at java.net.ServerSocket.<init>(ServerSocket.java:149) ~[?:?]
+	at org.openhab.core.model.lsp.internal.ModelServer.listen(ModelServer.java:100) [bundleFile:?]
+	at org.openhab.core.model.lsp.internal.ModelServer.lambda$0(ModelServer.java:84) [bundleFile:?]
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515) [?:?]
+	at java.util.concurrent.FutureTask.run(FutureTask.java:264) [?:?]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128) [?:?]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628) [?:?]
+	at java.lang.Thread.run(Thread.java:834) [?:?]
+2021-04-30 21:25:08.928 [INFO ] [e.automation.internal.RuleEngineImpl] - Rule engine started.
+2021-04-30 21:25:23.304 [INFO ] [org.openhab.ui.internal.UIService   ] - Started UI on port 8080
+2021-04-30 21:25:30.768 [INFO ] [ab.ui.habpanel.internal.HABPanelTile] - Started HABPanel at /habpanel
+2021-05-01 08:41:22.216 [INFO ] [ab.ui.habpanel.internal.HABPanelTile] - Stopped HABPanel
+2021-05-01 08:41:22.309 [INFO ] [basic.internal.servlet.WebAppServlet] - Stopped Basic UI
+2021-05-01 08:41:22.433 [INFO ] [org.openhab.ui.internal.UIService   ] - Stopped UI

@@ -1,0 +1,88 @@
+{
+  "remoteopenhab:server:172_17_0_2": {
+    "class": "org.openhab.core.config.discovery.internal.DiscoveryResultImpl",
+    "value": {
+      "thingUID": {
+        "segments": [
+          "remoteopenhab",
+          "server",
+          "172_17_0_2"
+        ],
+        "uid": "remoteopenhab:server:172_17_0_2"
+      },
+      "thingTypeUID": {
+        "segments": [
+          "remoteopenhab",
+          "server"
+        ],
+        "uid": ""
+      },
+      "properties": {
+        "host": "172.17.0.2",
+        "restPath": "/rest"
+      },
+      "representationProperty": "host",
+      "flag": "NEW",
+      "label": "openHAB server",
+      "timestamp": 1617717963104,
+      "timeToLive": -1
+    }
+  },
+  "astro:sun:local": {
+    "class": "org.openhab.core.config.discovery.internal.DiscoveryResultImpl",
+    "value": {
+      "thingUID": {
+        "segments": [
+          "astro",
+          "sun",
+          "local"
+        ],
+        "uid": "astro:sun:local"
+      },
+      "thingTypeUID": {
+        "segments": [
+          "astro",
+          "sun"
+        ],
+        "uid": ""
+      },
+      "properties": {
+        "useMeteorologicalSeason": false,
+        "geolocation": "52.08425313826753,10.174713134765627,0"
+      },
+      "representationProperty": "geolocation",
+      "flag": "NEW",
+      "label": "Local Sun",
+      "timestamp": 1619885988695,
+      "timeToLive": -1
+    }
+  },
+  "astro:moon:local": {
+    "class": "org.openhab.core.config.discovery.internal.DiscoveryResultImpl",
+    "value": {
+      "thingUID": {
+        "segments": [
+          "astro",
+          "moon",
+          "local"
+        ],
+        "uid": "astro:moon:local"
+      },
+      "thingTypeUID": {
+        "segments": [
+          "astro",
+          "moon"
+        ],
+        "uid": ""
+      },
+      "properties": {
+        "geolocation": "52.08425313826753,10.174713134765627,0"
+      },
+      "representationProperty": "geolocation",
+      "flag": "NEW",
+      "label": "Local Moon",
+      "timestamp": 1619885988706,
+      "timeToLive": -1
+    }
+  }
+}
