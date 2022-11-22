@@ -21,7 +21,7 @@ handlers:
 
   HABApp_default:
     class: HABApp.config.logging.MidnightRotatingFileHandler
-    filename: '/var/log/openhab/HABApp.log'
+    filename: '/etc/openhab/habapp/log/HABApp.log'
     maxBytes: 1_048_576
     backupCount: 3
 
@@ -30,13 +30,57 @@ handlers:
 
   EventFile:
     class: HABApp.config.logging.MidnightRotatingFileHandler
-    filename: 'HABApp_events.log'
+    filename: '/etc/openhab/habapp/log/HABApp_events.log'
     maxBytes: 1_048_576
     backupCount: 3
 
     formatter: HABApp_format
     level: DEBUG
 
+  MyRuleHandler:
+    class: HABApp.config.logging.MidnightRotatingFileHandler
+    filename: '/etc/openhab/habapp/log/MyRule.log'    # absolute filename is recommended
+    maxBytes: 10_000_000
+    backupCount: 3
+
+    formatter: HABApp_format
+    level: DEBUG
+
+  ContactSwitchMapping:
+    class: HABApp.config.logging.MidnightRotatingFileHandler
+    filename: '/etc/openhab/habapp/log/ContactSwitch.log'
+    maxBytes: 10_000_000
+    backupCount: 3
+
+    formatter: HABApp_format
+    level: INFO
+
+  TinkerforgeHandler:
+    class: HABApp.config.logging.MidnightRotatingFileHandler
+    filename: '/etc/openhab/habapp/log/Tinkerforge.log'    # absolute filename is recommended
+    maxBytes: 10_000_000
+    backupCount: 3
+
+    formatter: HABApp_format
+    level: INFO
+
+  IkeaHandler:
+    class: HABApp.config.logging.MidnightRotatingFileHandler
+    filename: '/etc/openhab/habapp/log/Ikea.log'    # absolute filename is recommended
+    maxBytes: 10_000_000
+    backupCount: 3
+
+    formatter: HABApp_format
+    level: INFO
+
+  MqttHandler:
+    class: HABApp.config.logging.MidnightRotatingFileHandler
+    filename: '/etc/openhab/habapp/log/Mqtt.log'    # absolute filename is recommended
+    maxBytes: 10_000_000
+    backupCount: 3
+
+    formatter: HABApp_format
+    level: INFO
 
 loggers:
   HABApp:
@@ -51,3 +95,32 @@ loggers:
       - EventFile
     propagate: False
 
+  MyRule:
+    level: DEBUG
+    handlers:
+      - MyRuleHandler  # This logger uses the MyRuleHandler
+    propagate: False
+
+  ContactSwitch:
+    level: DEBUG
+    handlers:
+      - ContactSwitchMapping
+    propagate: False
+
+  Tinkerforge:
+    level: DEBUG
+    handlers:
+      - TinkerforgeHandler
+    propagate: False
+
+  Ikea:
+    level: DEBUG
+    handlers:
+      - IkeaHandler
+    propagate: False
+
+  Mqtt:
+    level: DEBUG
+    handlers:
+      - MqttHandler
+    propagate: False

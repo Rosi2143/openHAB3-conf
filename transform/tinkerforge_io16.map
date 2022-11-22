@@ -1,0 +1,113 @@
+// map the switch configured names to readable names
+//*********************
+//***** Module 1 ******
+//*********************
+// IO_1 PortA
+tinkerforge_Io16_mod1_ina0=Schalter_1_A0:Keller Werkstatt
+tinkerforge_Io16_mod1_ina1=Schalter_1_A1:Keller Flur (unten)
+tinkerforge_Io16_mod1_ina2=Schalter_1_A2:Keller Gast
+tinkerforge_Io16_mod1_ina3=Schalter_1_A3:Keller Waschküche (TerrassenTür)
+tinkerforge_Io16_mod1_ina4=Schalter_1_A4:Unknown
+tinkerforge_Io16_mod1_ina5=Schalter_1_A5:Keller Terrasse (FlurTür)
+tinkerforge_Io16_mod1_ina6=Schalter_1_A6:Keller Büro
+tinkerforge_Io16_mod1_ina7=Schalter_1_A7:Keller Abstellkammer
+// IO_1 PortB
+tinkerforge_Io16_mod1_inb0=Schalter_1_B0:EG Gast WC
+tinkerforge_Io16_mod1_inb1=Schalter_1_B1:EG Flur (WC)
+tinkerforge_Io16_mod1_inb2=Schalter_1_B2:EG Schlafzimmer
+tinkerforge_Io16_mod1_inb3=Schalter_1_B3:EG Sofa (Schrank)
+tinkerforge_Io16_mod1_inb4=Schalter_1_B4:EG Wohnzimmer
+tinkerforge_Io16_mod1_inb5=Schalter_1_B5:EG Sofa (Tür)
+tinkerforge_Io16_mod1_inb6=Schalter_1_B6:EG Esszimmer (Tür)
+tinkerforge_Io16_mod1_inb7=Schalter_1_B7:EG Esszimmer (Schrank)
+
+//*********************
+//***** Module 2 ******
+//*********************
+// IO_1 PortA
+tinkerforge_Io16_mod2_ina0=Schalter_2_A0:EG Küche
+tinkerforge_Io16_mod2_ina1=Schalter_2_A1:EG Keller Flur (oben)
+tinkerforge_Io16_mod2_ina2=Schalter_2_A2:OG Mika
+tinkerforge_Io16_mod2_ina3=Schalter_2_A3:OG Sara
+tinkerforge_Io16_mod2_ina4=Schalter_2_A4:OG Finnja Tür
+tinkerforge_Io16_mod2_ina5=Schalter_2_A5:OG Finnja Schreibtisch
+tinkerforge_Io16_mod2_ina6=Schalter_2_A6:OG Finnja Bett
+tinkerforge_Io16_mod2_ina7=Schalter_2_A7:OG FLur Ecke Finnja/Mika
+// IO_1 PortB
+tinkerforge_Io16_mod2_inb0=Schalter_2_B0:EG Flur (Treppe)
+tinkerforge_Io16_mod2_inb1=Schalter_2_B1:OG Flur (Treppe unten)
+tinkerforge_Io16_mod2_inb2=Schalter_2_B2:OG Flur (Treppe oben)
+tinkerforge_Io16_mod2_inb3=Schalter_2_B3:OG Bad Decke
+tinkerforge_Io16_mod2_inb4=Schalter_2_B4:OG Bad Spiegel
+tinkerforge_Io16_mod2_inb5=Schalter_2_B5:OG Abstellkammer
+tinkerforge_Io16_mod2_inb6=Schalter_2_B6:DG Dach
+tinkerforge_Io16_mod2_inb7=Schalter_2_B7:Unknown
+Light_UpperFloor_Kammer_Switch=Schalter_2_B5:OG Abstellkammer
+//*********************
+//***** Module 4 ******
+//*********************
+// IO_1 PortA
+tinkerforge_Io16_mod3_ina0=Schalter_3_A0:Küche Fenster West
+tinkerforge_Io16_mod3_ina1=Schalter_3_A1:Schlafzimmer Fenster
+tinkerforge_Io16_mod3_ina2=Schalter_3_A2:Küche Fenster Nord
+tinkerforge_Io16_mod3_ina3=Schalter_3_A3:Sofa Ost Fenster
+tinkerforge_Io16_mod3_ina4=Schalter_3_A4:Sara West Fenster
+tinkerforge_Io16_mod3_ina5=Schalter_3_A5:Bad Fenster
+tinkerforge_Io16_mod3_ina6=Schalter_3_A6:Küche Tür
+tinkerforge_Io16_mod3_ina7=Schalter_3_A7:Gast WC Fenster
+// IO_1 PortB
+tinkerforge_Io16_mod3_inb0=Schalter_3_B0:Keller HWR Tür
+tinkerforge_Io16_mod3_inb1=Schalter_3_B1:Keller Kammer
+tinkerforge_Io16_mod3_inb2=Schalter_3_B2:Keller Gast
+tinkerforge_Io16_mod3_inb3=Schalter_3_B3:Keller Werkstatt
+tinkerforge_Io16_mod3_inb4=Schalter_3_B4:Keller HWR Fenster
+tinkerforge_Io16_mod3_inb5=Schalter_3_B5:Keller Büro
+tinkerforge_Io16_mod3_inb6=Schalter_3_B6:Unknown
+tinkerforge_Io16_mod3_inb7=Schalter_3_B7:io16_bricklet_check
+
+//*********************
+//***** Module 4 ******
+//*********************
+// IO_1 PortA
+tinkerforge_Io16_mod4_ina0=Schalter_4_A0:Esszimmer Rechts
+tinkerforge_Io16_mod4_ina1=Schalter_4_A1:Terrasse Links Tür
+tinkerforge_Io16_mod4_ina2=Schalter_4_A2:Erker Links
+tinkerforge_Io16_mod4_ina3=Schalter_4_A3:Mika Ost Fenster
+tinkerforge_Io16_mod4_ina4=Schalter_4_A4:Finnja Fenster
+tinkerforge_Io16_mod4_ina5=Schalter_4_A5:Erker Mitte Links
+tinkerforge_Io16_mod4_ina6=Schalter_4_A6:Erker Mitte Rechts
+tinkerforge_Io16_mod4_ina7=Schalter_4_A7:Erker Rechts
+// IO_1 PortB
+tinkerforge_Io16_mod4_inb0=Schalter_4_B0:Sara Gaube Links
+tinkerforge_Io16_mod4_inb1=Schalter_4_B1:Mika Gaube Rechts
+tinkerforge_Io16_mod4_inb2=Schalter_4_B2:Mika Gaube Links
+tinkerforge_Io16_mod4_inb3=Schalter_4_B3:Sara Gaube Rechts
+tinkerforge_Io16_mod4_inb4=Schalter_4_B4:Esszimmer Links
+tinkerforge_Io16_mod4_inb5=Schalter_4_B5:Sofa Süd Fenster
+tinkerforge_Io16_mod4_inb6=Schalter_4_B6:Terrasse Mitte Tür
+tinkerforge_Io16_mod4_inb7=Schalter_4_B7:Terrasse Rechts Tür
+
+//*************************
+//***** Homematic Ip ******
+//*************************
+// add Homematic-Ip elements here also, so they can be used in rule security.rules:"A window state changed - check alert message sending"
+Tuer_Schlafzimmer_Contact=Homematic-Ip:SchlafzimmerTür
+Tuer_Werkstatt_Contact=Homematic-Ip:WerkstattTür
+Tuer_HausTuer_Contact=Homematic-Ip:HausTür
+Tuer_Gast_WC_Contact=Homematic-Ip:GastWcTür
+Tuer_HWR_Innen_Contact=Homematic-Ip:WaschküchenTür
+Tuer_Gast_Contact=Homematic-Ip:GästeZimmerTür
+
+//**************************
+//**** translate states ****
+//**************************
+ON=OPEN
+OFF=CLOSED
+
+True=pressed
+False=released
+
+//***************************
+//*** for security rule *****
+//***************************
+TestSecurity=Test:TestSecurity

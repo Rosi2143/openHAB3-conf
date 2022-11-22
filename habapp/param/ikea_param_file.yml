@@ -1,0 +1,15 @@
+min_battery_charge: 20
+MotionDetectors:
+  md1: Buero
+  md2: Gast
+  md3: Kammer
+  md4: Werkstatt
+  md5: WC
+RemoteControls:
+  rm1: Schlafzimmer
+  rm2: Terrasse
+Lights:
+  li1: Terrasse1
+  li2: Terrasse2
+  li3: Buero
+  lig1: TerrasseAlle

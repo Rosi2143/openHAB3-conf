@@ -1,0 +1,291 @@
+{
+    "connection": {
+        "host": "192.168.178.28",
+        "port": "4223"
+    },
+    "devices": [
+        {
+            "type": "io16_switch",
+            "uid": "io1",
+            "device_callback_all_config": {
+                "period": 200,
+                "value_has_to_change": "True"
+            },
+            "device_callback_config": {
+                "4": {
+                    "period": 201,
+                    "value_has_to_change": "True"
+                }
+            },
+            "OH_port_mapping": {
+                "0": "tinkerforge_Io16_mod1_ina0",
+                "1": "tinkerforge_Io16_mod1_ina1",
+                "2": "tinkerforge_Io16_mod1_ina2",
+                "3": "tinkerforge_Io16_mod1_ina3",
+                "4": "tinkerforge_Io16_mod1_ina4",
+                "5": "tinkerforge_Io16_mod1_ina5",
+                "6": "tinkerforge_Io16_mod1_ina6",
+                "7": "tinkerforge_Io16_mod1_ina7",
+                "8": "tinkerforge_Io16_mod1_inb0",
+                "9": "tinkerforge_Io16_mod1_inb1",
+                "10": "tinkerforge_Io16_mod1_inb2",
+                "11": "tinkerforge_Io16_mod1_inb3",
+                "12": "tinkerforge_Io16_mod1_inb4",
+                "13": "tinkerforge_Io16_mod1_inb5",
+                "14": "tinkerforge_Io16_mod1_inb6",
+                "15": "tinkerforge_Io16_mod1_inb7"
+            },
+            "OH_short_long_mapping": {
+                "0": "Light_Basement_Werkstatt",
+                "1": "Light_Basement_Flur",
+                "2": "Light_Basement_Gast",
+                "3": "Light_Basement_Waschkueche",
+                "4": "Light_Basement_Terrasse",
+                "5": "Light_Basement_Waschkueche",
+                "6": "Light_Basement_Buero",
+                "7": "Light_Basement_AbstellKammer",
+                "8": "Light_GroundFloor_GastWC",
+                "9": "Light_GroundFloor_Flur",
+                "10": "Light_GroundFloor_Schlafzimmer",
+                "11": "Light_GroundFloor_Sofa",
+                "12": "Light_GroundFloor_Wohnzimmer",
+                "13": "Light_GroundFloor_Sofa",
+                "14": "Light_GroundFloor_Esszimmer",
+                "15": "Light_GroundFloor_Esszimmer"
+            }
+        },
+        {
+            "type": "io16_switch",
+            "uid": "io2",
+            "device_callback_all_config": {
+                "period": 200,
+                "value_has_to_change": "True"
+            },
+            "device_callback_config": {
+                "4": {
+                    "period": 201,
+                    "value_has_to_change": "True"
+                }
+            },
+            "OH_port_mapping": {
+                "0": "tinkerforge_Io16_mod2_ina0",
+                "1": "tinkerforge_Io16_mod2_ina1",
+                "2": "tinkerforge_Io16_mod2_ina2",
+                "3": "tinkerforge_Io16_mod2_ina3",
+                "4": "tinkerforge_Io16_mod2_ina4",
+                "5": "tinkerforge_Io16_mod2_ina5",
+                "6": "tinkerforge_Io16_mod2_ina6",
+                "7": "tinkerforge_Io16_mod2_ina7",
+                "8": "tinkerforge_Io16_mod2_inb0",
+                "9": "tinkerforge_Io16_mod2_inb1",
+                "10": "tinkerforge_Io16_mod2_inb3",
+                "11": "tinkerforge_Io16_mod2_inb3",
+                "12": "tinkerforge_Io16_mod2_inb4",
+                "13": "Light_UpperFloor_Kammer_Switch",
+                "14": "tinkerforge_Io16_mod2_inb6",
+                "15": "tinkerforge_Io16_mod2_inb7"
+            },
+            "OH_short_long_mapping": {
+                "0": "Light_GroundFloor_Kueche",
+                "1": "Light_Basement_Flur",
+                "2": "Light_UpperFloor_Mika",
+                "3": "Light_UpperFloor_Sara",
+                "4": "Light_UpperFloor_Finnja",
+                "5": "Light_UpperFloor_Finnja",
+                "6": "Light_UpperFloor_Finnja",
+                "7": "Light_UpperFloor_Flur",
+                "8": "Light_GroundFloor_Flur",
+                "9": "Light_UpperFloor_Flur",
+                "10": "Light_UpperFloor_Flur",
+                "11": "Light_UpperFloor_Bad",
+                "12": "Light_UpperFloor_BadSpiegel",
+                "13": "Light_UpperFloor_Kammer",
+                "14": "Light_Attic_Dach",
+                "15": "",
+                "switch_overwrite": {
+                    "13": "inverted"
+                }
+            }
+        },
+        {
+            "type": "io16_window",
+            "uid": "io3",
+            "device_callback_all_config": {
+                "period": 1000,
+                "value_has_to_change": "True"
+            },
+            "device_callback_config": {
+                "4": {
+                    "period": 1001,
+                    "value_has_to_change": "True"
+                }
+            },
+            "OH_port_mapping": {
+                "0": "tinkerforge_Io16_mod3_ina0",
+                "1": "tinkerforge_Io16_mod3_ina1",
+                "2": "tinkerforge_Io16_mod3_ina2",
+                "3": "tinkerforge_Io16_mod3_ina3",
+                "4": "tinkerforge_Io16_mod3_ina4",
+                "5": "tinkerforge_Io16_mod3_ina5",
+                "6": "tinkerforge_Io16_mod3_ina6",
+                "7": "tinkerforge_Io16_mod3_ina7",
+                "8": "tinkerforge_Io16_mod3_inb0",
+                "9": "tinkerforge_Io16_mod3_inb1",
+                "10": "tinkerforge_Io16_mod3_inb2",
+                "11": "tinkerforge_Io16_mod3_inb3",
+                "12": "tinkerforge_Io16_mod3_inb4",
+                "13": "tinkerforge_Io16_mod3_inb5",
+                "14": "tinkerforge_Io16_mod3_inb6",
+                "15": "tinkerforge_Io16_mod3_inb7"
+            }
+        },
+        {
+            "type": "io16_window",
+            "uid": "io4",
+            "device_callback_all_config": {
+                "period": 1000,
+                "value_has_to_change": "True"
+            },
+            "device_callback_config": {
+                "4": {
+                    "period": 1001,
+                    "value_has_to_change": "True"
+                }
+            },
+            "OH_port_mapping": {
+                "0": "tinkerforge_Io16_mod4_ina0",
+                "1": "tinkerforge_Io16_mod4_ina1",
+                "2": "tinkerforge_Io16_mod4_ina2",
+                "3": "tinkerforge_Io16_mod4_ina3",
+                "4": "tinkerforge_Io16_mod4_ina4",
+                "5": "tinkerforge_Io16_mod4_ina5",
+                "6": "tinkerforge_Io16_mod4_ina6",
+                "7": "tinkerforge_Io16_mod4_ina7",
+                "8": "tinkerforge_Io16_mod4_inb0",
+                "9": "tinkerforge_Io16_mod4_inb1",
+                "10": "tinkerforge_Io16_mod4_inb2",
+                "11": "tinkerforge_Io16_mod4_inb3",
+                "12": "tinkerforge_Io16_mod4_inb4",
+                "13": "tinkerforge_Io16_mod4_inb5",
+                "14": "tinkerforge_Io16_mod4_inb6",
+                "15": "tinkerforge_Io16_mod4_inb7"
+            }
+        },
+        {
+            "type": "out4",
+            "uid": "do1",
+            "checkinterval_ms": 1000,
+            "OH_port_mapping": {
+                "0": "Light_Basement_Buero",
+                "1": "Light_Basement_AbstellKammer",
+                "2": "Light_Basement_Terrasse",
+                "3": "tinkerforge_out4_mod1_3"
+            }
+        },
+        {
+            "type": "out4",
+            "uid": "do2",
+            "checkinterval_ms": 1000,
+            "OH_port_mapping": {
+                "0": "Light_Basement_Werkstatt",
+                "1": "Light_Basement_Flur",
+                "2": "Light_Basement_Gast",
+                "3": "Light_Basement_Waschkueche"
+            }
+        },
+        {
+            "type": "out4",
+            "uid": "do3",
+            "checkinterval_ms": 1000,
+            "OH_port_mapping": {
+                "0": "Light_GroundFloor_Kueche",
+                "1": "Light_GroundFloor_Flur",
+                "2": "Light_GroundFloor_Schlafzimmer",
+                "3": "Light_GroundFloor_GastWC"
+            }
+        },
+        {
+            "type": "out4",
+            "uid": "do4",
+            "checkinterval_ms": 1000,
+            "OH_port_mapping": {
+                "0": "Light_GroundFloor_Kueche_Toaster",
+                "1": "Light_GroundFloor_Kueche_Abzug",
+                "2": "Light_GroundFloor_Kueche_Backen",
+                "3": "Light_GroundFloor_Haustuer"
+            }
+        },
+        {
+            "type": "out4",
+            "uid": "do5",
+            "checkinterval_ms": 1000,
+            "OH_port_mapping": {
+                "0": "Light_UpperFloor_Finnja",
+                "1": "Light_UpperFloor_Mika",
+                "2": "Light_UpperFloor_Sara",
+                "3": "Light_UpperFloor_Flur"
+            }
+        },
+        {
+            "type": "out4",
+            "uid": "do6",
+            "checkinterval_ms": 1000,
+            "OH_port_mapping": {
+                "0": "tinkerforge_out4_mod6_0",
+                "1": "tinkerforge_out4_mod6_1",
+                "2": "tinkerforge_out4_mod6_2",
+                "3": "tinkerforge_out4_mod6_3"
+            }
+        },
+        {
+            "type": "out4",
+            "uid": "do7",
+            "checkinterval_ms": 1000,
+            "OH_port_mapping": {
+                "0": "Light_UpperFloor_Kammer_Switch",
+                "1": "Light_UpperFloor_BadSpiegel",
+                "2": "Light_UpperFloor_Bad",
+                "3": "tinkerforge_out4_mod7_3"
+            }
+        },
+        {
+            "type": "out4",
+            "uid": "do8",
+            "checkinterval_ms": 1000,
+            "OH_port_mapping": {
+                "0": "tinkerforge_out4_mod8_0",
+                "1": "tinkerforge_out4_mod8_1",
+                "2": "Light_Attic_Dach",
+                "3": "tinkerforge_out4_mod8_3"
+            }
+        },
+        {
+            "type": "out4",
+            "uid": "do9",
+            "checkinterval_ms": 1000,
+            "OH_port_mapping": {
+                "0": "tinkerforge_out4_mod9_0",
+                "1": "Light_GroundFloor_Sofa",
+                "2": "Light_GroundFloor_Esszimmer",
+                "3": "Light_GroundFloor_Wohnzimmer"
+            }
+        },
+        {
+            "type": "out4",
+            "uid": "doA",
+            "checkinterval_ms": 1000,
+            "OH_port_mapping": {
+                "0": "tinkerforge_out4_modA_0",
+                "1": "tinkerforge_out4_modA_1",
+                "2": "tinkerforge_out4_modA_2",
+                "3": "tinkerforge_out4_modA_3"
+            }
+        }
+    ],
+    "OH_port_mapping": {
+        "OH_dir_env_var": "OPENHAB_CONF",
+        "OH_dir_env_path": "/etc/openhab",
+        "mapfile": "tinkerforge_io16.map"
+    },
+    "mode": "daemon"
+}
