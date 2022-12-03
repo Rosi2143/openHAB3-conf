@@ -36,22 +36,22 @@
                 "15": "tinkerforge_Io16_mod1_inb7"
             },
             "OH_short_long_mapping": {
-                "0": "Light_Basement_Werkstatt",
-                "1": "Light_Basement_Flur",
-                "2": "Light_Basement_Gast",
-                "3": "Light_Basement_Waschkueche",
-                "4": "Light_Basement_Terrasse",
-                "5": "Light_Basement_Waschkueche",
-                "6": "Light_Basement_Buero",
-                "7": "Light_Basement_AbstellKammer",
-                "8": "Light_GroundFloor_GastWC",
-                "9": "Light_GroundFloor_Flur",
-                "10": "Light_GroundFloor_Schlafzimmer",
-                "11": "Light_GroundFloor_Sofa",
-                "12": "Light_GroundFloor_Wohnzimmer",
-                "13": "Light_GroundFloor_Sofa",
-                "14": "Light_GroundFloor_Esszimmer",
-                "15": "Light_GroundFloor_Esszimmer"
+                "0": "LichtWerkstatt",
+                "1": "LichtFlurKeller",
+                "2": "LichtGaestezimmer",
+                "3": "LichtWaschkueche",
+                "4": "LichtTerrasseUnten",
+                "5": "LichtWaschkueche",
+                "6": "LichtBuero",
+                "7": "LichtAbstellraum",
+                "8": "LichtGastWc",
+                "9": "LichtFlurErdgeschoss",
+                "10": "LichtSchlafzimmer",
+                "11": "LichtWohnzimmer",
+                "12": "LichtKaminzimmer",
+                "13": "LichtWohnzimmer",
+                "14": "LichtEsszimmer",
+                "15": "LichtEsszimmer"
             }
         },
         {
@@ -81,26 +81,26 @@
                 "10": "tinkerforge_Io16_mod2_inb3",
                 "11": "tinkerforge_Io16_mod2_inb3",
                 "12": "tinkerforge_Io16_mod2_inb4",
-                "13": "Light_UpperFloor_Kammer_Switch",
+                "13": "LichtKammer_Switch",
                 "14": "tinkerforge_Io16_mod2_inb6",
                 "15": "tinkerforge_Io16_mod2_inb7"
             },
             "OH_short_long_mapping": {
-                "0": "Light_GroundFloor_Kueche",
-                "1": "Light_Basement_Flur",
-                "2": "Light_UpperFloor_Mika",
-                "3": "Light_UpperFloor_Sara",
-                "4": "Light_UpperFloor_Finnja",
-                "5": "Light_UpperFloor_Finnja",
-                "6": "Light_UpperFloor_Finnja",
-                "7": "Light_UpperFloor_Flur",
-                "8": "Light_GroundFloor_Flur",
-                "9": "Light_UpperFloor_Flur",
-                "10": "Light_UpperFloor_Flur",
-                "11": "Light_UpperFloor_Bad",
-                "12": "Light_UpperFloor_BadSpiegel",
-                "13": "Light_UpperFloor_Kammer",
-                "14": "Light_Attic_Dach",
+                "0": "LichtKuecheDecke",
+                "1": "LichtFlurKeller",
+                "2": "LichtMika",
+                "3": "LichtSara",
+                "4": "LichtFinnja",
+                "5": "LichtFinnja",
+                "6": "LichtFinnja",
+                "7": "LichtFlurObergeschoss",
+                "8": "LichtFlurErdgeschoss",
+                "9": "LichtFlurObergeschoss",
+                "10": "LichtFlurObergeschoss",
+                "11": "LichtBadDecke",
+                "12": "LichtBadSpiegel",
+                "13": "LichtKammer",
+                "14": "LichtDachboden",
                 "15": "",
                 "switch_overwrite": {
                     "13": "inverted"
@@ -176,9 +176,9 @@
             "uid": "do1",
             "checkinterval_ms": 1000,
             "OH_port_mapping": {
-                "0": "Light_Basement_Buero",
-                "1": "Light_Basement_AbstellKammer",
-                "2": "Light_Basement_Terrasse",
+                "0": "LichtBuero",
+                "1": "LichtAbstellraum",
+                "2": "LichtTerrasseUnten",
                 "3": "tinkerforge_out4_mod1_3"
             }
         },
@@ -187,10 +187,10 @@
             "uid": "do2",
             "checkinterval_ms": 1000,
             "OH_port_mapping": {
-                "0": "Light_Basement_Werkstatt",
-                "1": "Light_Basement_Flur",
-                "2": "Light_Basement_Gast",
-                "3": "Light_Basement_Waschkueche"
+                "0": "LichtWerkstatt",
+                "1": "LichtFlurKeller",
+                "2": "LichtGaestezimmer",
+                "3": "LichtWaschkueche"
             }
         },
         {
@@ -198,10 +198,10 @@
             "uid": "do3",
             "checkinterval_ms": 1000,
             "OH_port_mapping": {
-                "0": "Light_GroundFloor_Kueche",
-                "1": "Light_GroundFloor_Flur",
-                "2": "Light_GroundFloor_Schlafzimmer",
-                "3": "Light_GroundFloor_GastWC"
+                "0": "LichtKuecheDecke",
+                "1": "LichtFlurErdgeschoss",
+                "2": "LichtSchlafzimmer",
+                "3": "LichtGastWc"
             }
         },
         {
@@ -209,9 +209,9 @@
             "uid": "do4",
             "checkinterval_ms": 1000,
             "OH_port_mapping": {
-                "0": "Light_GroundFloor_Kueche_Toaster",
-                "1": "Light_GroundFloor_Kueche_Abzug",
-                "2": "Light_GroundFloor_Kueche_Backen",
+                "0": "LichtKuecheDecke_Toaster",
+                "1": "LichtKuecheDecke_Abzug",
+                "2": "LichtKuecheDecke_Backen",
                 "3": "Light_GroundFloor_Haustuer"
             }
         },
@@ -220,10 +220,10 @@
             "uid": "do5",
             "checkinterval_ms": 1000,
             "OH_port_mapping": {
-                "0": "Light_UpperFloor_Finnja",
-                "1": "Light_UpperFloor_Mika",
-                "2": "Light_UpperFloor_Sara",
-                "3": "Light_UpperFloor_Flur"
+                "0": "LichtFinnja",
+                "1": "LichtMika",
+                "2": "LichtSara",
+                "3": "LichtFlurObergeschoss"
             }
         },
         {
@@ -242,9 +242,9 @@
             "uid": "do7",
             "checkinterval_ms": 1000,
             "OH_port_mapping": {
-                "0": "Light_UpperFloor_Kammer_Switch",
-                "1": "Light_UpperFloor_BadSpiegel",
-                "2": "Light_UpperFloor_Bad",
+                "0": "LichtKammer_Switch",
+                "1": "LichtBadSpiegel",
+                "2": "LichtBadDecke",
                 "3": "tinkerforge_out4_mod7_3"
             }
         },
@@ -255,7 +255,7 @@
             "OH_port_mapping": {
                 "0": "tinkerforge_out4_mod8_0",
                 "1": "tinkerforge_out4_mod8_1",
-                "2": "Light_Attic_Dach",
+                "2": "LichtDachboden",
                 "3": "tinkerforge_out4_mod8_3"
             }
         },
@@ -265,9 +265,9 @@
             "checkinterval_ms": 1000,
             "OH_port_mapping": {
                 "0": "tinkerforge_out4_mod9_0",
-                "1": "Light_GroundFloor_Sofa",
-                "2": "Light_GroundFloor_Esszimmer",
-                "3": "Light_GroundFloor_Wohnzimmer"
+                "1": "LichtWohnzimmer",
+                "2": "LichtEsszimmer",
+                "3": "LichtKaminzimmer"
             }
         },
         {
