@@ -176,9 +176,9 @@
             "uid": "do1",
             "checkinterval_ms": 1000,
             "OH_port_mapping": {
-                "0": "LichtBuero",
-                "1": "LichtAbstellraum",
-                "2": "LichtTerrasseUnten",
+                "0": "LichtBuero_State",
+                "1": "LichtAbstellraum_State",
+                "2": "LichtTerrasseUnten_State",
                 "3": "tinkerforge_out4_mod1_3"
             }
         },
@@ -187,10 +187,10 @@
             "uid": "do2",
             "checkinterval_ms": 1000,
             "OH_port_mapping": {
-                "0": "LichtWerkstatt",
-                "1": "LichtFlurKeller",
-                "2": "LichtGaestezimmer",
-                "3": "LichtWaschkueche"
+                "0": "LichtWerkstatt_State",
+                "1": "LichtFlurKeller_State",
+                "2": "LichtGaestezimmer_State",
+                "3": "LichtWaschkueche_State"
             }
         },
         {
@@ -198,10 +198,10 @@
             "uid": "do3",
             "checkinterval_ms": 1000,
             "OH_port_mapping": {
-                "0": "LichtKuecheDecke",
-                "1": "LichtFlurErdgeschoss",
-                "2": "LichtSchlafzimmer",
-                "3": "LichtGastWc"
+                "0": "LichtKuecheDecke_State",
+                "1": "LichtFlurErdgeschoss_State",
+                "2": "LichtSchlafzimmer_State",
+                "3": "LichtGastWc_State"
             }
         },
         {
@@ -209,10 +209,10 @@
             "uid": "do4",
             "checkinterval_ms": 1000,
             "OH_port_mapping": {
-                "0": "LichtKuecheDecke_Toaster",
-                "1": "LichtKuecheDecke_Abzug",
-                "2": "LichtKuecheDecke_Backen",
-                "3": "Light_GroundFloor_Haustuer"
+                "0": "LichtKuecheToaster_State",
+                "1": "LichtKuecheAbzug_State",
+                "2": "LichtKuecheBacken_State",
+                "3": "LichtHaustuer_State"
             }
         },
         {
@@ -220,10 +220,10 @@
             "uid": "do5",
             "checkinterval_ms": 1000,
             "OH_port_mapping": {
-                "0": "LichtFinnja",
-                "1": "LichtMika",
-                "2": "LichtSara",
-                "3": "LichtFlurObergeschoss"
+                "0": "LichtFinnja_State",
+                "1": "LichtMika_State",
+                "2": "LichtSara_State",
+                "3": "LichtFlurObergeschoss_State"
             }
         },
         {
@@ -242,9 +242,9 @@
             "uid": "do7",
             "checkinterval_ms": 1000,
             "OH_port_mapping": {
-                "0": "LichtKammer_Switch",
-                "1": "LichtBadSpiegel",
-                "2": "LichtBadDecke",
+                "0": "LichtKammer_State",
+                "1": "LichtBadSpiegel_State",
+                "2": "LichtBadDecke_State",
                 "3": "tinkerforge_out4_mod7_3"
             }
         },
@@ -255,7 +255,7 @@
             "OH_port_mapping": {
                 "0": "tinkerforge_out4_mod8_0",
                 "1": "tinkerforge_out4_mod8_1",
-                "2": "LichtDachboden",
+                "2": "LichtDachboden_State",
                 "3": "tinkerforge_out4_mod8_3"
             }
         },
@@ -265,9 +265,9 @@
             "checkinterval_ms": 1000,
             "OH_port_mapping": {
                 "0": "tinkerforge_out4_mod9_0",
-                "1": "LichtWohnzimmer",
-                "2": "LichtEsszimmer",
-                "3": "LichtKaminzimmer"
+                "1": "LichtWohnzimmer_State",
+                "2": "LichtEsszimmer_State",
+                "3": "LichtKaminzimmer_State"
             }
         },
         {

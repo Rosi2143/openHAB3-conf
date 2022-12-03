@@ -5,7 +5,7 @@ import json, sys
 
 sys.path.append('/etc/openhab/habapp/rules/')
 from tinkerforge.bricklet_industrial_digital_out_4 import BrickletIndustrialDigitalOut4
-from HABApp.openhab.events import ItemStateEvent
+from HABApp.openhab.events import ItemStateEvent, ItemStateEventFilter
 from HABApp.openhab.items import SwitchItem
 from tinkerforge_oh.tinkerforge_base import tinkerforge_base
 from tinkerforge_oh.oh_base          import oh_base
@@ -86,9 +86,9 @@ class out4(tinkerforge_base, oh_base):
       portvalue = self.out4.get_value()
       for portNumber, oh_item in self.port_mapping.items():
          if self.get_normalized_bit(portvalue, int(portNumber)):
-            self.logger.info("Bit " + portNumber + " is set -- " + oh_item)
+            self.logger.info("Bit " + portNumber + " is set     -- " + oh_item)
          else:
-            self.logger.info("Bit " + portNumber + " is not set" + oh_item)
+            self.logger.info("Bit " + portNumber + " is not set -- " + oh_item)
 
    def add_item_listener(self):
       """add listener to all openHAB items"""
@@ -97,7 +97,7 @@ class out4(tinkerforge_base, oh_base):
       for oh_item in self.port_mapping.values():
          if self.openhab.item_exists(oh_item):
                switchItem = SwitchItem.get_item(oh_item)
-               switchItem.listen_event(self.switchitem_update, ItemStateEvent)
+               switchItem.listen_event(self.switchitem_update, ItemStateEventFilter())
          else:
                self.logger.error(f"{oh_item} does not exist")
 

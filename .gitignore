@@ -1,2 +1,4 @@
 **/*$py.class
 habapp/log/
+**/__pycache__/*
+*.pyc

@@ -42,7 +42,7 @@ tinkerforge_Io16_mod2_inb4=Schalter_2_B4:OG Bad Spiegel
 tinkerforge_Io16_mod2_inb5=Schalter_2_B5:OG Abstellkammer
 tinkerforge_Io16_mod2_inb6=Schalter_2_B6:DG Dach
 tinkerforge_Io16_mod2_inb7=Schalter_2_B7:Unknown
-Light_UpperFloor_Kammer_Switch=Schalter_2_B5:OG Abstellkammer
+LichtKammer_Switch=Schalter_2_B5:OG Abstellkammer
 //*********************
 //***** Module 4 ******
 //*********************
