@@ -2,19 +2,19 @@
 python3 based daemon to handle changes in tinkerforge bricklets.
 
 # Currently supported bricklets
-* io16_2
+* BrickletIo16V2
   * derived:
-  * io16_switch
-  * io16_window
+    * BrickletIo16V2Switch
+    * BrickletIo16V2Window
 
 # currently implemented features
 * configuration via [json file](tinkerforge_oh.json)
-  * io16_2 (and all derived once)
+  * BrickletIo16V2 (and all derived once)
     * configure callback timers for
       * complete bricklet
       * overwrite with specifc config for single ports
     * define OH-item for each port
-  * io16_switch
+  * BrickletIo16V2Switch
     * detection of `long` and `short` press
   * trace configuration
 * read OH items

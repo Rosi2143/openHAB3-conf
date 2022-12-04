@@ -5,7 +5,7 @@
     },
     "devices": [
         {
-            "type": "io16_switch",
+            "type": "BrickletIo16V2Switch",
             "uid": "io1",
             "device_callback_all_config": {
                 "period": 200,
@@ -18,44 +18,26 @@
                 }
             },
             "OH_port_mapping": {
-                "0": "tinkerforge_Io16_mod1_ina0",
-                "1": "tinkerforge_Io16_mod1_ina1",
-                "2": "tinkerforge_Io16_mod1_ina2",
-                "3": "tinkerforge_Io16_mod1_ina3",
-                "4": "tinkerforge_Io16_mod1_ina4",
-                "5": "tinkerforge_Io16_mod1_ina5",
-                "6": "tinkerforge_Io16_mod1_ina6",
-                "7": "tinkerforge_Io16_mod1_ina7",
-                "8": "tinkerforge_Io16_mod1_inb0",
-                "9": "tinkerforge_Io16_mod1_inb1",
-                "10": "tinkerforge_Io16_mod1_inb2",
-                "11": "tinkerforge_Io16_mod1_inb3",
-                "12": "tinkerforge_Io16_mod1_inb4",
-                "13": "tinkerforge_Io16_mod1_inb5",
-                "14": "tinkerforge_Io16_mod1_inb6",
-                "15": "tinkerforge_Io16_mod1_inb7"
-            },
-            "OH_short_long_mapping": {
-                "0": "LichtWerkstatt",
-                "1": "LichtFlurKeller",
-                "2": "LichtGaestezimmer",
-                "3": "LichtWaschkueche",
-                "4": "LichtTerrasseUnten",
-                "5": "LichtWaschkueche",
-                "6": "LichtBuero",
-                "7": "LichtAbstellraum",
-                "8": "LichtGastWc",
-                "9": "LichtFlurErdgeschoss",
-                "10": "LichtSchlafzimmer",
-                "11": "LichtWohnzimmer",
-                "12": "LichtKaminzimmer",
-                "13": "LichtWohnzimmer",
-                "14": "LichtEsszimmer",
-                "15": "LichtEsszimmer"
+                "0": "SchalterWerkstatt",
+                "1": "SchalterFlurKeller",
+                "2": "SchalterGaestezimmer",
+                "3": "SchalterWaschkuecheAussen",
+                "4": "SchalterTerrasseUnten",
+                "5": "SchalterWaschkuecheInnen",
+                "6": "SchalterBuero",
+                "7": "SchalterAbstellraum",
+                "8": "SchalterGastWc",
+                "9": "SchalterFlurKeller",
+                "10": "SchalterSchlafzimmer",
+                "11": "SchalterWohnzimmerSchrank",
+                "12": "SchalterKaminzimmer",
+                "13": "SchalterWohnzimmerTuer",
+                "14": "SchalterEsszimmerTuer",
+                "15": "SchalterEsszimmerSchrank"
             }
         },
         {
-            "type": "io16_switch",
+            "type": "BrickletIo16V2Switch",
             "uid": "io2",
             "device_callback_all_config": {
                 "period": 200,
@@ -68,39 +50,21 @@
                 }
             },
             "OH_port_mapping": {
-                "0": "tinkerforge_Io16_mod2_ina0",
-                "1": "tinkerforge_Io16_mod2_ina1",
-                "2": "tinkerforge_Io16_mod2_ina2",
-                "3": "tinkerforge_Io16_mod2_ina3",
-                "4": "tinkerforge_Io16_mod2_ina4",
-                "5": "tinkerforge_Io16_mod2_ina5",
-                "6": "tinkerforge_Io16_mod2_ina6",
-                "7": "tinkerforge_Io16_mod2_ina7",
-                "8": "tinkerforge_Io16_mod2_inb0",
-                "9": "tinkerforge_Io16_mod2_inb1",
-                "10": "tinkerforge_Io16_mod2_inb3",
-                "11": "tinkerforge_Io16_mod2_inb3",
-                "12": "tinkerforge_Io16_mod2_inb4",
-                "13": "LichtKammer_Switch",
-                "14": "tinkerforge_Io16_mod2_inb6",
-                "15": "tinkerforge_Io16_mod2_inb7"
-            },
-            "OH_short_long_mapping": {
-                "0": "LichtKuecheDecke",
-                "1": "LichtFlurKeller",
-                "2": "LichtMika",
-                "3": "LichtSara",
-                "4": "LichtFinnja",
-                "5": "LichtFinnja",
-                "6": "LichtFinnja",
-                "7": "LichtFlurObergeschoss",
-                "8": "LichtFlurErdgeschoss",
-                "9": "LichtFlurObergeschoss",
-                "10": "LichtFlurObergeschoss",
-                "11": "LichtBadDecke",
-                "12": "LichtBadSpiegel",
-                "13": "LichtKammer",
-                "14": "LichtDachboden",
+                "0": "SchalterKueche",
+                "1": "SchalterFlurKellerOben",
+                "2": "SchalterMika",
+                "3": "SchalterSara",
+                "4": "SchalterFinnjaTuer",
+                "5": "SchalterFinnjaBettLinks",
+                "6": "SchalterFinnjaBettRechts",
+                "7": "SchalterFlurObergeschossMika",
+                "8": "SchalterFlurErdgeschossTreppe",
+                "9": "SchalterFlurObergeschossUnten",
+                "10": "SchalterFlurObergeschossBad",
+                "11": "SchalterBadTuer",
+                "12": "SchalterBadSpiegel",
+                "13": "TuerKammer_OpenState",
+                "14": "SchalterDachboden",
                 "15": "",
                 "switch_overwrite": {
                     "13": "inverted"
@@ -108,7 +72,7 @@
             }
         },
         {
-            "type": "io16_window",
+            "type": "BrickletIo16V2Window",
             "uid": "io3",
             "device_callback_all_config": {
                 "period": 1000,
@@ -121,26 +85,26 @@
                 }
             },
             "OH_port_mapping": {
-                "0": "tinkerforge_Io16_mod3_ina0",
-                "1": "tinkerforge_Io16_mod3_ina1",
-                "2": "tinkerforge_Io16_mod3_ina2",
-                "3": "tinkerforge_Io16_mod3_ina3",
-                "4": "tinkerforge_Io16_mod3_ina4",
-                "5": "tinkerforge_Io16_mod3_ina5",
-                "6": "tinkerforge_Io16_mod3_ina6",
-                "7": "tinkerforge_Io16_mod3_ina7",
-                "8": "tinkerforge_Io16_mod3_inb0",
-                "9": "tinkerforge_Io16_mod3_inb1",
-                "10": "tinkerforge_Io16_mod3_inb2",
-                "11": "tinkerforge_Io16_mod3_inb3",
-                "12": "tinkerforge_Io16_mod3_inb4",
-                "13": "tinkerforge_Io16_mod3_inb5",
-                "14": "tinkerforge_Io16_mod3_inb6",
-                "15": "tinkerforge_Io16_mod3_inb7"
+                "0": "FensterKuecheWest",
+                "1": "FensterSchlafzimmer",
+                "2": "FensterKuecheNord",
+                "3": "FensterWohnzimmerOst",
+                "4": "FensterSaraWest",
+                "5": "FensterBad",
+                "6": "TuerKueche",
+                "7": "FensterGastWC",
+                "8": "TuerWaschkueche",
+                "9": "FensterAbstellraum",
+                "10": "FensterGaestezimmer",
+                "11": "FensterWerkstatt",
+                "12": "FensterWaschkueche",
+                "13": "FensterBuero",
+                "14": "",
+                "15": "Tinkerforge_TestIn"
             }
         },
         {
-            "type": "io16_window",
+            "type": "BrickletIo16V2Window",
             "uid": "io4",
             "device_callback_all_config": {
                 "period": 1000,
@@ -153,139 +117,134 @@
                 }
             },
             "OH_port_mapping": {
-                "0": "tinkerforge_Io16_mod4_ina0",
-                "1": "tinkerforge_Io16_mod4_ina1",
-                "2": "tinkerforge_Io16_mod4_ina2",
-                "3": "tinkerforge_Io16_mod4_ina3",
-                "4": "tinkerforge_Io16_mod4_ina4",
-                "5": "tinkerforge_Io16_mod4_ina5",
-                "6": "tinkerforge_Io16_mod4_ina6",
-                "7": "tinkerforge_Io16_mod4_ina7",
-                "8": "tinkerforge_Io16_mod4_inb0",
-                "9": "tinkerforge_Io16_mod4_inb1",
-                "10": "tinkerforge_Io16_mod4_inb2",
-                "11": "tinkerforge_Io16_mod4_inb3",
-                "12": "tinkerforge_Io16_mod4_inb4",
-                "13": "tinkerforge_Io16_mod4_inb5",
-                "14": "tinkerforge_Io16_mod4_inb6",
-                "15": "tinkerforge_Io16_mod4_inb7"
+                "0": "FensterEsszimmerSuedRechts",
+                "1": "FensterKaminzimmerLinks",
+                "2": "FensterEsszimmerErkerLinksLinks",
+                "3": "FensterMikaOst",
+                "4": "FensterFinnja",
+                "5": "FensterEsszimmerErkerLinksRechts",
+                "6": "FensterEsszimmerErkerRechtsLinks",
+                "7": "FensterEsszimmerErkerRechtsRechts",
+                "8": "FensterSaraErkerLinks",
+                "9": "FensterMikaErkerRechts",
+                "10": "FensterMikaErkerLinks",
+                "11": "FensterSaraErkerRechts",
+                "12": "FensterEsszimmerSuedLinks",
+                "13": "FensterWohnzimmerSued",
+                "14": "FensterKaminzimmerRechts",
+                "15": "TuerKaminzimmer"
             }
         },
         {
-            "type": "out4",
+            "type": "BrickletOut4",
             "uid": "do1",
             "checkinterval_ms": 1000,
             "OH_port_mapping": {
-                "0": "LichtBuero_State",
-                "1": "LichtAbstellraum_State",
-                "2": "LichtTerrasseUnten_State",
-                "3": "tinkerforge_out4_mod1_3"
+                "0": "LichtBuero",
+                "1": "LichtAbstellraum",
+                "2": "LichtTerrasseUnten",
+                "3": ""
             }
         },
         {
-            "type": "out4",
+            "type": "BrickletOut4",
             "uid": "do2",
             "checkinterval_ms": 1000,
             "OH_port_mapping": {
-                "0": "LichtWerkstatt_State",
-                "1": "LichtFlurKeller_State",
-                "2": "LichtGaestezimmer_State",
-                "3": "LichtWaschkueche_State"
+                "0": "LichtWerkstatt",
+                "1": "LichtFlurKeller",
+                "2": "LichtGaestezimmer",
+                "3": "LichtWaschkueche"
             }
         },
         {
-            "type": "out4",
+            "type": "BrickletOut4",
             "uid": "do3",
             "checkinterval_ms": 1000,
             "OH_port_mapping": {
-                "0": "LichtKuecheDecke_State",
-                "1": "LichtFlurErdgeschoss_State",
-                "2": "LichtSchlafzimmer_State",
-                "3": "LichtGastWc_State"
+                "0": "LichtKuecheDecke",
+                "1": "LichtFlurErdgeschoss",
+                "2": "LichtSchlafzimmer",
+                "3": "LichtGastWc"
             }
         },
         {
-            "type": "out4",
+            "type": "BrickletOut4",
             "uid": "do4",
             "checkinterval_ms": 1000,
             "OH_port_mapping": {
-                "0": "LichtKuecheToaster_State",
-                "1": "LichtKuecheAbzug_State",
-                "2": "LichtKuecheBacken_State",
-                "3": "LichtHaustuer_State"
+                "0": "LichtKuecheToaster",
+                "1": "LichtKuecheBacken",
+                "2": "LichtKuecheAbzug",
+                "3": "LichtHaustuer"
             }
         },
         {
-            "type": "out4",
+            "type": "BrickletOut4",
             "uid": "do5",
             "checkinterval_ms": 1000,
             "OH_port_mapping": {
-                "0": "LichtFinnja_State",
-                "1": "LichtMika_State",
-                "2": "LichtSara_State",
-                "3": "LichtFlurObergeschoss_State"
+                "0": "LichtFinnja",
+                "1": "LichtMika",
+                "2": "LichtSara",
+                "3": "LichtFlurObergeschoss"
             }
         },
         {
-            "type": "out4",
+            "type": "BrickletOut4",
             "uid": "do6",
             "checkinterval_ms": 1000,
             "OH_port_mapping": {
-                "0": "tinkerforge_out4_mod6_0",
-                "1": "tinkerforge_out4_mod6_1",
-                "2": "tinkerforge_out4_mod6_2",
-                "3": "tinkerforge_out4_mod6_3"
+                "0": "",
+                "1": "",
+                "2": "",
+                "3": ""
             }
         },
         {
-            "type": "out4",
+            "type": "BrickletOut4",
             "uid": "do7",
             "checkinterval_ms": 1000,
             "OH_port_mapping": {
-                "0": "LichtKammer_State",
-                "1": "LichtBadSpiegel_State",
-                "2": "LichtBadDecke_State",
-                "3": "tinkerforge_out4_mod7_3"
+                "0": "LichtKammer",
+                "1": "LichtBadSpiegel",
+                "2": "LichtBadDecke",
+                "3": ""
             }
         },
         {
-            "type": "out4",
+            "type": "BrickletOut4",
             "uid": "do8",
             "checkinterval_ms": 1000,
             "OH_port_mapping": {
-                "0": "tinkerforge_out4_mod8_0",
-                "1": "tinkerforge_out4_mod8_1",
-                "2": "LichtDachboden_State",
-                "3": "tinkerforge_out4_mod8_3"
+                "0": "",
+                "1": "",
+                "2": "LichtDachboden",
+                "3": ""
             }
         },
         {
-            "type": "out4",
+            "type": "BrickletOut4",
             "uid": "do9",
             "checkinterval_ms": 1000,
             "OH_port_mapping": {
-                "0": "tinkerforge_out4_mod9_0",
-                "1": "LichtWohnzimmer_State",
-                "2": "LichtEsszimmer_State",
-                "3": "LichtKaminzimmer_State"
+                "0": "",
+                "1": "LichtWohnzimmer",
+                "2": "LichtEsszimmer",
+                "3": "LichtKaminzimmer"
             }
         },
         {
-            "type": "out4",
+            "type": "BrickletOut4",
             "uid": "doA",
             "checkinterval_ms": 1000,
             "OH_port_mapping": {
-                "0": "tinkerforge_out4_modA_0",
-                "1": "tinkerforge_out4_modA_1",
-                "2": "tinkerforge_out4_modA_2",
-                "3": "tinkerforge_out4_modA_3"
+                "0": "",
+                "1": "",
+                "2": "",
+                "3": "Tinkerforge_TestOut"
             }
         }
     ],
-    "OH_port_mapping": {
-        "OH_dir_env_var": "OPENHAB_CONF",
-        "OH_dir_env_path": "/etc/openhab",
-        "mapfile": "tinkerforge_io16.map"
-    },
     "mode": "daemon"
 }
