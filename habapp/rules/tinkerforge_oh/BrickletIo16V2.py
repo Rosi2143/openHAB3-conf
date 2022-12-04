@@ -43,7 +43,7 @@ class BrickletIo16V2(TinkerforgeBase, OhBase, metaclass=abc.ABCMeta):
 
     @abc.abstractmethod
     def set_oh_item_state_abs(self, port, item_name, item_state, inverted_item_state):
-        """abstract method to set an OpenHAB state."""
+        """abstract method to set an openHAB state."""
         self.logger.info(
             "function 'BrickletIo16V2::set_oh_item_state_abs' needs to be overwritten")
 

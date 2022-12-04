@@ -22,8 +22,9 @@ class OhBase(HABApp.Rule):
         """set the state of a OpenHAB item.
 
         Supported are
-        * switch
-        * contact"""
+        * Switch
+        * Contact
+        """
 
         start_time = time.time()
         oh_item = None

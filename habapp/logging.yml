@@ -61,7 +61,7 @@ handlers:
     backupCount: 3
 
     formatter: HABApp_format
-    level: DEBUG
+    level: INFO
 
   IkeaHandler:
     class: HABApp.config.logging.MidnightRotatingFileHandler
