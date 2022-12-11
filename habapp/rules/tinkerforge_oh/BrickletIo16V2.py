@@ -67,7 +67,7 @@ class BrickletIo16V2(TinkerforgeBase, OhBase, metaclass=abc.ABCMeta):
                 seconds=timediff.seconds)), str(timediff.microseconds / 1000))
             self.set_oh_item_state_abs(channel, oh_item, self.port_state_state_mapping[str(
                 value)], self.port_state_state_mapping[str(not value)])
-            self.handle_timediff(timediff, str(channel), oh_item)
+            self.handle_timediff(timediff, str(channel), str(value))
             self.logger.debug("---------------------------------------------")
         else:
             self.logger.debug(BrickletIO16V2.DEVICE_DISPLAY_NAME +

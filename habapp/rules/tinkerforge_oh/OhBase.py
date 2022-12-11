@@ -41,19 +41,20 @@ class OhBase(HABApp.Rule):
                     self.logger.error("Unknown type: %s", item_type)
                     return
             oh_item.oh_post_update(item_state)
+        self.logger.info("Item %s is set to item_state %s",
+                         item_name, item_state)
         time_difference = time.time() - start_time
         self.logger.debug(
             f"--- {time_difference:5f} seconds to set state {item_name}({item_type}) ---")
 
-    def run_every(self, startTime, intervalTime, callbackFunction):
+    def run_every(self, start_delay, timerval_time, callback_function):
         """support cyclic tasks"""
         ret = self.run.every(
-            start_time=datetime.timedelta(seconds=startTime),
-            interval=datetime.timedelta(seconds=intervalTime),
-            callback=callbackFunction
-        )
+            start_time=datetime.timedelta(seconds=start_delay),
+            interval=timerval_time,
+            callback=callback_function)
         self.logger.info(
-            f"{startTime} : {intervalTime} : {callbackFunction} :: {ret}")
+            f"{start_delay} : {timerval_time} : {callback_function} :: {ret}")
 
     def test(self):
         """test function

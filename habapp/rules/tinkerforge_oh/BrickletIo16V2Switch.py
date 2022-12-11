@@ -26,7 +26,8 @@ class BrickletIo16V2Switch(BrickletIo16V2):
 
     def handle_timediff(self, timediff, port, oh_state):
         """check if the time was 'Short' or 'Long'"""
-        if oh_state == "released":
+        contact_state_map = {"True": "pressed", "False": "released"}
+        if contact_state_map[oh_state] == "released":
             press = ""
             if timediff.total_seconds() > 2:
                 press = "Long"

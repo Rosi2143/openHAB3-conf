@@ -275,6 +275,7 @@ class zigbee2Mqtt_Bridge(HABApp.Rule):
 # https://www.zigbee2mqtt.io/guide/usage/ota_updates.html#automatic-checking-for-available-updates
 #############
 
+
     def on_TriggerUpdate(self, event):
         """the OpenHAB item to trigger an device update has changed"""
 

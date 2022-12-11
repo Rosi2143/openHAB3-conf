@@ -5,6 +5,7 @@
 
 import json
 import sys
+import datetime
 import logging  # required for extended logging
 
 sys.path.append('/usr/lib/python3/dist-packages')
@@ -62,6 +63,12 @@ class BrickletOut4(TinkerforgeBase, OhBase):
         self.check_ports()
 
         self.add_item_listener()
+
+        self.run_every(
+            start_delay=10,
+            timerval_time=10,
+            callback_function=self.check_ports
+        )
 
     # taken from https://realpython.com/python-bitwise-operators/#getting-a-bit
     def get_bit(self, value, bit_index):
@@ -128,16 +135,18 @@ class BrickletOut4(TinkerforgeBase, OhBase):
 
         assert isinstance(event, ItemStateEvent)
         self.logger.info(f'received {event.name} <- {event.value}')
-        portNumber = list(self.port_mapping.keys())[list(
-            self.port_mapping.values()).index(event.name)]
-        selectionMask = 0
-        selectionMask = self.set_bit(selectionMask, int(portNumber))
+        switch_name = event.name.replace("_State", "")
+        port_number = list(self.port_mapping.keys())[list(
+            self.port_mapping.values()).index(switch_name)]
+        selection_mask = 0
+        selection_mask = self.set_bit(selection_mask, int(port_number))
         if event.value == "ON":
             self.logger.debug(
-                f"{self.uid}: setting port {portNumber} to {event.value} : Mask = {selectionMask}")
+                f"{self.uid}: setting port {port_number} to {event.value} \
+                    : Mask = {selection_mask}")
             self.out4_bricklet.set_selected_values(
-                selectionMask, selectionMask)
+                selection_mask, selection_mask)
         else:
             self.logger.debug(
-                f"{self.uid}: clearing port {portNumber} : Mask = {selectionMask}")
-            self.out4_bricklet.set_selected_values(selectionMask, 0)
+                f"{self.uid}: clearing port {port_number} : Mask = {selection_mask}")
+            self.out4_bricklet.set_selected_values(selection_mask, 0)
