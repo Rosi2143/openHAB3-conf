@@ -59,7 +59,7 @@ try:
 
     log.info("Added %s tinkerforge devices", str(len(devices)))
     if json_config['mode'] == "daemon":
-        while (1):
+        while 1:
             time.sleep(10)
     else:
         input("Press key to exit\n")  # Use raw_input() in Python 2
