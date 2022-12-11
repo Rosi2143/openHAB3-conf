@@ -8,8 +8,10 @@ from core.triggers import when
 
 
 # description and tags are optional
-@rule("Jython Hello World (cron decorators)", description="This is an example cron triggered rule using decorators", tags=["Test tag", "Hello World"])
-@when("Time cron 0/10 * * * * ?")
+@rule("Jython Hello World (cron decorators)",
+      description="This is an example cron triggered rule using decorators",
+      tags=["Test tag", "Hello World"])
+@when("Time cron 0/60 * * * * ?")
 def hello_world_cron_decorators(event):
     """
     prints Hello World
