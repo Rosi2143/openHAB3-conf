@@ -123,7 +123,7 @@ class zigbee2Mqtt_Bridge(HABApp.Rule):
             self.on_RequestNetworkMap, ItemStateChangedEventFilter())
 
         self.oh_RestartBridge_State.listen_event(
-            self.on_BridgeRestartRequest, ItemStateChangedEventFilter())
+            self.on_bridge_restart_request, ItemStateChangedEventFilter())
 
         itemcount = 0
         for types in self.mqttitems:
@@ -139,7 +139,7 @@ class zigbee2Mqtt_Bridge(HABApp.Rule):
                             time.sleep(1)
 
                 (SwitchItem.get_item(triggerUpdateName)).listen_event(
-                    self.on_TriggerUpdate, ItemStateChangedEventFilter())
+                    self.on_trigger_update, ItemStateChangedEventFilter())
                 log.info(
                     f"register listener for {triggerUpdateName} item # {itemcount}")
                 itemcount = itemcount + 1
@@ -260,40 +260,41 @@ class zigbee2Mqtt_Bridge(HABApp.Rule):
         self.mqtt_networkMap_update.oh_send_command(datetime.datetime.now())
 
 # bridge restart request
-    def on_BridgeRestartRequest(self, event):
+    def on_bridge_restart_request(self, event):
         """the OpenHAB item to request a bridge restart has changed"""
 
         assert isinstance(event, ItemStateChangedEvent)
-        log.info(f"set {event.name} updated to {event.value}")
+        log.info("set %s updated to %s", event.name, event.value)
         if event.value == "ON":
             self.mqtt_BridgeRestart_request_item.publish("")
         else:
             publish_value = "{\"value\": false}"
+            self.mqtt_BridgeRestart_request_item.publish(publish_value)
 
 
 # firmware update
 # https://www.zigbee2mqtt.io/guide/usage/ota_updates.html#automatic-checking-for-available-updates
 #############
 
-    def on_TriggerUpdate(self, event):
+    def on_trigger_update(self, event):
         """the OpenHAB item to trigger an device update has changed"""
 
         assert isinstance(event, ItemStateChangedEvent)
-        log.info(f"set {event.name} updated to {event.value}")
+        log.info("set %s updated to %s", event.name, event.value)
         if event.value == "ON":
-            deviceName = (event.name).replace("_TriggerUpdate", "")
+            device_name = (event.name).replace("_TriggerUpdate", "")
             publish_value = "IKEA/"
-            if (deviceName.find("Licht") != -1):
+            if device_name.find("Licht") != -1:
                 publish_value = publish_value + "Lampe/" + \
-                    deviceName.replace("Licht", "")
-            if (deviceName.find("FernBedienung") != -1):
+                    device_name.replace("Licht", "")
+            if device_name.find("FernBedienung") != -1:
                 publish_value = publish_value + "FernBedienung/" + \
-                    deviceName.replace("FernBedienung", "")
-            if (deviceName.find("BewegungsMelder") != -1):
+                    device_name.replace("FernBedienung", "")
+            if device_name.find("BewegungsMelder") != -1:
                 publish_value = publish_value + "BewegungsMelder/" + \
-                    deviceName.replace("BewegungsMelder", "")
+                    device_name.replace("BewegungsMelder", "")
 
-            log.info(f"trigger update for {deviceName}")
+            log.info("trigger update for %s", device_name)
             self.mqtt_TriggerUpdate_request_item.publish(
                 "{\"id\": \"" + publish_value + "\"}")
         else:

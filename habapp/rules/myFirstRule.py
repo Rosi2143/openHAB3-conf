@@ -1,5 +1,6 @@
 # https://habapp.readthedocs.io/en/latest/getting_started.html
 import logging  # required for extended logging
+from datetime import time, timedelta
 
 import HABApp
 from HABApp.core.items import Item
@@ -21,6 +22,10 @@ class MyFirstRule(HABApp.Rule):
         # don't do blocking things in __init__
         self.run.soon(self.say_something)
 
+        self.run.every(start_time=timedelta(seconds=10),
+                       interval=200,
+                       callback=self.say_something_nice)
+
         logger.debug('Debug Message')
         logger.info('Info Message')
         logger.warning('Warning Message')
@@ -32,6 +37,11 @@ class MyFirstRule(HABApp.Rule):
         """print another log message to test the callbacks"""
 
         logger.info('That was easy! -')
+
+    def say_something_nice(self):
+        """print another log message to test the callbacks"""
+
+        logger.info('That was easy and nice! -')
 
 
 class MyFirstRule2(HABApp.Rule):

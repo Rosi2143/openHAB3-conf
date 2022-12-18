@@ -5,7 +5,6 @@
 
 import json
 import sys
-import datetime
 import logging  # required for extended logging
 
 sys.path.append('/usr/lib/python3/dist-packages')
@@ -31,6 +30,11 @@ class BrickletOut4(TinkerforgeBase, OhBase):
     port_mapping = {}
     # logger passed via constructor
     logger = None
+    # state_map --> to allow filtering out changes only
+    state_map = {0: False,
+                 1: False,
+                 2: False,
+                 3: False}
 
     def __init__(self, ipconnection, deviceconfig, logger):
         """initialize the output bricklet"""
@@ -45,7 +49,8 @@ class BrickletOut4(TinkerforgeBase, OhBase):
         self.logger = logger
 
         self.logger.info("initializing bricklet " +
-                         BrickletIndustrialDigitalOut4.DEVICE_DISPLAY_NAME + " with uid: " + self.uid)
+                         BrickletIndustrialDigitalOut4.DEVICE_DISPLAY_NAME +
+                         " with uid: " + self.uid)
 
         self.logger.debug("initializing bricklet:")
         self.logger.debug("\t\ttype         : " +
@@ -60,19 +65,13 @@ class BrickletOut4(TinkerforgeBase, OhBase):
         self.check_device_identity(
             self.out4_bricklet, BrickletIndustrialDigitalOut4.DEVICE_IDENTIFIER)
 
-        self.check_ports()
+        self.check_ports(True)
 
         self.add_item_listener()
 
-        self.run_every(
-            start_delay=10,
-            timerval_time=10,
-            callback_function=self.check_ports
-        )
-
-    # taken from https://realpython.com/python-bitwise-operators/#getting-a-bit
     def get_bit(self, value, bit_index):
-        """get a bitmask with only the selected bit (not)set"""
+        """ taken from https://realpython.com/python-bitwise-operators/#getting-a-bit
+            get a bitmask with only the selected bit (not)set"""
 
         return value & (1 << int(bit_index))
 
@@ -96,32 +95,39 @@ class BrickletOut4(TinkerforgeBase, OhBase):
 
         return value ^ (1 << int(bit_index))
 
-    def check_ports(self):
+    def check_ports(self, initial_check=False):
         """get port value from bricklet"""
 
-        self.logger.info("check_ports for %s", self.uid)
+        if !initial_check:
+            self.logger.info("check_ports for %s", self.uid)
         portvalue = self.out4_bricklet.get_value()
         for port_number, oh_item in self.port_mapping.items():
+            if oh_item == "":
+                continue
             oh_item_name = oh_item + "_State"
             is_on = self.get_normalized_bit(portvalue, int(port_number))
-            if is_on:
-                self.logger.info("Bit " + port_number +
-                                 " is set     -- " + oh_item_name)
-            else:
-                self.logger.info("Bit " + port_number +
-                                 " is not set -- " + oh_item_name)
-            if self.openhab.item_exists(oh_item_name):
-                switch_item = SwitchItem.get_item(oh_item_name)
+            if (is_on != self.state_map[int(port_number)]) | initial_check:
+                self.state_map[int(port_number)] = is_on
                 if is_on:
-                    switch_item.on()
+                    self.logger.info("Bit " + port_number +
+                                     " is set     -- " + oh_item_name)
                 else:
-                    switch_item.off()
+                    self.logger.info("Bit " + port_number +
+                                     " is not set -- " + oh_item_name)
+                if self.openhab.item_exists(oh_item_name):
+                    switch_item = SwitchItem.get_item(oh_item_name)
+                    if is_on:
+                        switch_item.on()
+                    else:
+                        switch_item.off()
 
     def add_item_listener(self):
         """add listener to all openHAB items"""
 
         self.logger.info(f"add listener for items: {self.uid}")
         for oh_item in self.port_mapping.values():
+            if oh_item == "":
+                continue
             oh_item_name = oh_item + "_State"
             if self.openhab.item_exists(oh_item_name):
                 switch_item = SwitchItem.get_item(oh_item_name)

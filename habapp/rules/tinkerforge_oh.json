@@ -75,7 +75,7 @@
             "type": "BrickletIo16V2Window",
             "uid": "io3",
             "device_callback_all_config": {
-                "period": 1000,
+                "period": 10,
                 "value_has_to_change": "True"
             },
             "device_callback_config": {
@@ -107,7 +107,7 @@
             "type": "BrickletIo16V2Window",
             "uid": "io4",
             "device_callback_all_config": {
-                "period": 1000,
+                "period": 10,
                 "value_has_to_change": "True"
             },
             "device_callback_config": {
@@ -138,7 +138,7 @@
         {
             "type": "BrickletOut4",
             "uid": "do1",
-            "checkinterval_ms": 1000,
+            "checkinterval_s": 10,
             "OH_port_mapping": {
                 "0": "LichtBuero",
                 "1": "LichtAbstellraum",
@@ -149,7 +149,7 @@
         {
             "type": "BrickletOut4",
             "uid": "do2",
-            "checkinterval_ms": 1000,
+            "checkinterval_s": 10,
             "OH_port_mapping": {
                 "0": "LichtWerkstatt",
                 "1": "LichtFlurKeller",
@@ -160,7 +160,7 @@
         {
             "type": "BrickletOut4",
             "uid": "do3",
-            "checkinterval_ms": 1000,
+            "checkinterval_s": 10,
             "OH_port_mapping": {
                 "0": "LichtKuecheDecke",
                 "1": "LichtFlurErdgeschoss",
@@ -171,7 +171,7 @@
         {
             "type": "BrickletOut4",
             "uid": "do4",
-            "checkinterval_ms": 1000,
+            "checkinterval_s": 10,
             "OH_port_mapping": {
                 "0": "LichtKuecheToaster",
                 "1": "LichtKuecheBacken",
@@ -182,7 +182,7 @@
         {
             "type": "BrickletOut4",
             "uid": "do5",
-            "checkinterval_ms": 1000,
+            "checkinterval_s": 10,
             "OH_port_mapping": {
                 "0": "LichtFinnja",
                 "1": "LichtMika",
@@ -193,7 +193,7 @@
         {
             "type": "BrickletOut4",
             "uid": "do6",
-            "checkinterval_ms": 1000,
+            "checkinterval_s": 10,
             "OH_port_mapping": {
                 "0": "",
                 "1": "",
@@ -204,7 +204,7 @@
         {
             "type": "BrickletOut4",
             "uid": "do7",
-            "checkinterval_ms": 1000,
+            "checkinterval_s": 10,
             "OH_port_mapping": {
                 "0": "LichtKammer",
                 "1": "LichtBadSpiegel",
@@ -215,7 +215,7 @@
         {
             "type": "BrickletOut4",
             "uid": "do8",
-            "checkinterval_ms": 1000,
+            "checkinterval_s": 10,
             "OH_port_mapping": {
                 "0": "",
                 "1": "",
@@ -226,7 +226,7 @@
         {
             "type": "BrickletOut4",
             "uid": "do9",
-            "checkinterval_ms": 1000,
+            "checkinterval_s": 10,
             "OH_port_mapping": {
                 "0": "",
                 "1": "LichtWohnzimmer",
@@ -237,7 +237,7 @@
         {
             "type": "BrickletOut4",
             "uid": "doA",
-            "checkinterval_ms": 1000,
+            "checkinterval_s": 10,
             "OH_port_mapping": {
                 "0": "",
                 "1": "",
@@ -246,5 +246,5 @@
             }
         }
     ],
-    "mode": "daemon"
+    "mode": "openhab"
 }

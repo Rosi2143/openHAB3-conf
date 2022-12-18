@@ -28,19 +28,21 @@ class OhBase(HABApp.Rule):
 
         start_time = time.time()
         oh_item = None
+
         if not self.openhab.item_exists(item_name):
             self.logger.error("Item %s does not exist", item_name)
             return
+
+        if item_type == "Switch":
+            oh_item = SwitchItem.get_item(item_name)
         else:
-            if item_type == "Switch":
-                oh_item = SwitchItem.get_item(item_name)
+            if item_type == "Contact":
+                oh_item = ContactItem.get_item(item_name)
             else:
-                if item_type == "Contact":
-                    oh_item = ContactItem.get_item(item_name)
-                else:
-                    self.logger.error("Unknown type: %s", item_type)
-                    return
-            oh_item.oh_post_update(item_state)
+                self.logger.error("Unknown type: %s", item_type)
+                return
+
+        oh_item.oh_post_update(item_state)
         self.logger.info("Item %s is set to item_state %s",
                          item_name, item_state)
         time_difference = time.time() - start_time
