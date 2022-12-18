@@ -43,4 +43,4 @@ class ExampleMqttTestRule(HABApp.Rule):
                  " updated to " + str(event.value))
 
 
-ExampleMqttTestRule()
+# ExampleMqttTestRule()

@@ -634,4 +634,4 @@ class IkeaZigbeeDevices(HABApp.Rule):
             logger.error(f"Did not find action {action}")
 
 
-IkeaZigbeeDevices()
+# IkeaZigbeeDevices()
