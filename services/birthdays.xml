@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tns:Configuration hierarchy="de" description="Germany"
+    xmlns:tns="http://www.example.org/Holiday" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.example.org/Holiday /Holiday.xsd">
+    <tns:Holidays>
+        <tns:Fixed month="JANUARY"    day="14" descriptionPropertiesKey="Mikas Birthday" />
+        <tns:Fixed month="MAY"        day="01" descriptionPropertiesKey="Saras Birthday" />
+        <tns:Fixed month="MAY"        day="08" descriptionPropertiesKey="Finnjas Birthday" />
+        <tns:Fixed month="JUNE"       day="03" descriptionPropertiesKey="Michaels Birthday" />
+        <tns:Fixed month="JUNE"       day="23" descriptionPropertiesKey="Kristiinas Birthday" />
+        <tns:Fixed month="AUGUST"     day="13" descriptionPropertiesKey="Wedding day" />
+        <!-- Großeltern/Onkel -->
+        <tns:Fixed month="FEBRUARY"   day="16" descriptionPropertiesKey="Omas Birthday" />
+        <tns:Fixed month="NOVEMBER"   day="10" descriptionPropertiesKey="Opas Birthday" />
+        <tns:Fixed month="JANUARY"    day="21" descriptionPropertiesKey="Andreas Birthday" />
+        <!-- Großeltern/Onkel -->
+        <tns:Fixed month="APRIL"      day="16" descriptionPropertiesKey="Vaaris Birthday" />
+        <tns:Fixed month="SEPTEMBER"  day="22" descriptionPropertiesKey="Mummos Birthday" />
+        <tns:Fixed month="OCTOBER"    day="28" descriptionPropertiesKey="Daniels Birthday" />
+    </tns:Holidays>
+</tns:Configuration>
