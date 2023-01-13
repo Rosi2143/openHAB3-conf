@@ -33,14 +33,14 @@ var getValue = function (item, semantic, relation) {
             logger.debug("getValue[out]: " + item + " -> " + relation + " -> " + relationItem.getName())
         }
         else {
-            logger.info("getValue[out]: No relation found in Model!")
+            logger.info("getValue[out]: No relation found in Model! - " + hasRelation)
         }
     }
     else {
         logger.info("getValue[out]: No semantic found in Model!")
     }
 
-    return hasRelation === undefined ? null : relationItem.getName()
+    return ((hasRelation === undefined) || (hasRelation === null)) ? null : relationItem.getName()
 }
 
 var enrichMetadata = function (item, icon) {
@@ -52,59 +52,63 @@ var enrichMetadata = function (item, icon) {
     if (isPointOf !== null) {
         var equipmentItem = isPointOf === undefined ? ir.getItem(item) : ir.getItem(isPointOf)
         logger.debug("equipmentItem found: " + equipmentItem.name)
+    } else {
+        logger.debug("no equipmentItem found. Setting it to " + item)
+        equipmentItem = ir.getItem(item)
+    }
 
-        var hasLocation = getValue(equipmentItem.name, "semantics", "hasLocation")
-        logger.debug("EquipmentItem " + equipmentItem.name + " hasLocation: " + hasLocation)
+    var hasLocation = getValue(equipmentItem.name, "semantics", "hasLocation")
+    logger.debug("EquipmentItem " + equipmentItem.name + " hasLocation: " + hasLocation)
 
-        if (hasLocation === null) {
-            var metaEquipment = "none"
-            var safetyCounter = 0
-            hasLocation = "none"
-            while ((metaEquipment !== null) && (hasLocation !== null) && (safetyCounter < 5)) {
-                metaEquipment = getValue(equipmentItem.name, "semantics", "isPartOf")
-                logger.debug(safetyCounter + ": Equipment " + equipmentItem.name + " is part of: " + metaEquipment)
-                safetyCounter = safetyCounter + 1
+    if (hasLocation === null) {
+        var metaEquipment = "none"
+        var safetyCounter = 0
+        hasLocation = "none"
+        while ((metaEquipment !== null) && (hasLocation !== null) && (safetyCounter < 5)) {
+            metaEquipment = getValue(equipmentItem.name, "semantics", "isPartOf")
+            logger.debug(safetyCounter + ": Equipment " + equipmentItem.name + " is part of: " + metaEquipment)
+            safetyCounter = safetyCounter + 1
 
-                if (metaEquipment !== null) {
-                    var metaEquipmentItem = metaEquipment === undefined ? ir.getItem(equipmentItem) : ir.getItem(metaEquipment)
-                    logger.debug("metaEquipmentItem found: " + metaEquipmentItem.name)
+            if (metaEquipment !== null) {
+                var metaEquipmentItem = metaEquipment === undefined ? ir.getItem(equipmentItem.name) : ir.getItem(metaEquipment)
+                logger.debug("metaEquipmentItem found: " + metaEquipmentItem.name)
 
-                    hasLocation = getValue(metaEquipmentItem.name, "semantics", "hasLocation")
-                    logger.debug("metaEquipmentItem " + metaEquipmentItem.name + " hasLocation: " + hasLocation)
-                }
-            }
-        }
-
-        if (hasLocation !== null) {
-
-            var locationItem = hasLocation === undefined ? ir.getItem(equipmentItem.name) : ir.getItem(hasLocation)
-
-            uiSemanticsKeys.equipment = equipmentItem.label
-            uiSemanticsKeys.equipmentItem = equipmentItem.name
-            uiSemanticsKeys.location = locationItem.label
-            uiSemanticsKeys.preposition = (prepositionFor.indexOf(uiSemanticsKeys.location) > -1) ? " in der " : " im "
-            uiSemanticsKeys.icon = icon
-
-            var warnTimeoutFor = { "LUMITH": -720, "SHELLYDW": -240, "SHELLYFLOOD": -1440 }
-            for (var s in warnTimeoutFor) {
-                if (item.toUpperCase().indexOf(s) > -1) {
-                    uiSemanticsKeys.warn = warnTimeoutFor[s]
-                    break
-                }
-            }
-            uiSemanticsKeys.fail = uiSemanticsKeys.warn * 1.5
-
-            if (getValue(item, UI_NAMESPACE, "equipmentItem") !== null) {
-                logger.info("Item: " + item + " UPDATE Metadata in " + UI_NAMESPACE + ": " + uiSemanticsKeys.equipment + uiSemanticsKeys.preposition + uiSemanticsKeys.location)
-                itemsAdded.push(item)
-                MetadataRegistry.update(new Metadata(new MetadataKey(UI_NAMESPACE, item), null, uiSemanticsKeys))
-            } else {
-                logger.info("Item: " + item + " ADD Metadata in " + UI_NAMESPACE + ": " + uiSemanticsKeys.equipment + uiSemanticsKeys.preposition + uiSemanticsKeys.location)
-                itemsAdded.push(item)
-                MetadataRegistry.add(new Metadata(new MetadataKey(UI_NAMESPACE, item), null, uiSemanticsKeys))
+                hasLocation = getValue(metaEquipmentItem.name, "semantics", "hasLocation")
+                logger.debug("metaEquipmentItem " + metaEquipmentItem.name + " hasLocation: " + hasLocation)
             }
         }
     }
+
+    if ((hasLocation !== null) && (metaEquipment !== null)) {
+
+        var locationItem = hasLocation === undefined ? ir.getItem(equipmentItem.name) : ir.getItem(hasLocation)
+
+        uiSemanticsKeys.equipment = equipmentItem.label
+        uiSemanticsKeys.equipmentItem = equipmentItem.name
+        uiSemanticsKeys.location = locationItem.label
+        uiSemanticsKeys.preposition = (prepositionFor.indexOf(uiSemanticsKeys.location) > -1) ? " in der " : " im "
+        uiSemanticsKeys.icon = icon
+
+        var warnTimeoutFor = { "LUMITH": -720, "SHELLYDW": -240, "SHELLYFLOOD": -1440 }
+        for (var s in warnTimeoutFor) {
+            if (item.toUpperCase().indexOf(s) > -1) {
+                uiSemanticsKeys.warn = warnTimeoutFor[s]
+                break
+            }
+        }
+        uiSemanticsKeys.fail = uiSemanticsKeys.warn * 1.5
+
+        if (getValue(item, UI_NAMESPACE, "equipmentItem") !== null) {
+            logger.info("Item: " + item + " UPDATE Metadata in " + UI_NAMESPACE + ": " + uiSemanticsKeys.equipment + uiSemanticsKeys.preposition + uiSemanticsKeys.location)
+            itemsAdded.push(item)
+            MetadataRegistry.update(new Metadata(new MetadataKey(UI_NAMESPACE, item), null, uiSemanticsKeys))
+        } else {
+            logger.info("Item: " + item + " ADD Metadata in " + UI_NAMESPACE + ": " + uiSemanticsKeys.equipment + uiSemanticsKeys.preposition + uiSemanticsKeys.location)
+            itemsAdded.push(item)
+            MetadataRegistry.add(new Metadata(new MetadataKey(UI_NAMESPACE, item), null, uiSemanticsKeys))
+        }
+    }
+
     return null
 }
 
@@ -116,14 +120,6 @@ function logItemInfo(item, metaItem) {
         logger.debug("found in Registry ItemName: " + item.getUID().getItemName())
     }
 }
-
-
-//logger.info("Starting: removing all elements for " + UI_NAMESPACE + "...")
-
-//for each(var item in MetadataRegistry.getAll()) {
-//    logger.info("remove item" + item.getUID().getItemName())
-//    MetadataRegistry.remove(new MetadataKey(UI_NAMESPACE, item.getUID().getItemName()))
-//}
 
 logger.info("Starting: Collecting semantics for 'main_widget'...")
 
