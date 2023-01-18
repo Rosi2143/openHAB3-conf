@@ -65,9 +65,9 @@ def initialize_thermostat_statemachines(event):
                     "handling: BoostMode: " + oh_item.getName() + "(" + str(item_state) + ")")
                 state_machine.set_boost(oh_item.getState() == "ON")
                 state_machine.send("tr_boost_change")
-            if "ConfigMode" in oh_item.getName():
+            if "ConfigPending" in oh_item.getName():
                 initialize_thermostat_statemachines.log.info(
-                    "handling: ConfigMode: " + oh_item.getName() + "(" + str(item_state) + ")")
+                    "handling: ConfigPending: " + oh_item.getName() + "(" + str(item_state) + ")")
                 state_machine.set_config(oh_item.getState() == "ON")
                 state_machine.send("tr_config_change")
             if "PartyMode" in oh_item.getName():
