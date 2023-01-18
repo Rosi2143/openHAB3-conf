@@ -15,7 +15,7 @@ import os
 
 @rule("ephemeris day typ detection",
       description="determine todays day type",
-      tags=["ephemeris", "weekend", "holiday"])
+      tags=["ephemeris", "weekend", "holiday", "systemstart", "cronjob"])
 @when("Time cron 5 5 0 ? * * *")
 # @when("Time cron 0/60 * * * * ?")
 @when("System started")

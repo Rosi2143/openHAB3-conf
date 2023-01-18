@@ -14,7 +14,7 @@ with open(os.path.join(scriptpath, 'switch2light_mapping.json'), "rt") as json_f
 
 @rule("Switch2Light (Long) mapper",
       description="switch light(s) on/off if wall switches are pressed long",
-      tags=["wallswitch", "light", "long"])
+      tags=["wallswitch", "light", "long", "memberchange"])
 @when("Member of gSchalter_Long changed to CLOSED")
 def switch2wall_mapping_long(event):
     """

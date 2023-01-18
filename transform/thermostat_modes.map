@@ -1,0 +1,9 @@
+// see https://homematic-forum.de/forum/viewtopic.php?t=45775
+
+0=Auto
+1=Manu
+2=Urlaub
+
+Auto=0
+Manu=1
+Urlaub=2
