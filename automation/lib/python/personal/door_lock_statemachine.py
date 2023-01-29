@@ -99,23 +99,13 @@ class door_lock_statemachine(StateMachine):
                             )
 
     tr_error_change = (st_unlocked.to(st_error, cond="cond_error") |
+                       st_unlocked.to.itself() |
                        st_locked.to(st_error, cond="cond_error") |
+                       st_locked.to.itself() |
                        st_error.to.itself(cond="cond_error") |
                        st_error.to(st_locked, cond="cond_lock_required") |
                        st_error.to(st_unlocked, unless="cond_lock_required")
                        )
-
-    tr_reported_lock_change = (st_unlocked.to(st_error, cond="cond_error") |
-                               st_unlocked.to(st_locked, cond="cond_reported_lock") |
-                               st_unlocked.to.itself() |
-                               st_locked.to(st_error, cond="cond_error") |
-                               st_locked.to(st_unlocked, unless="cond_reported_lock") |
-                               st_locked.to.itself() |
-                               st_error.to.itself(cond="cond_error") |
-                               st_error.to(st_locked, cond="cond_lock_required") |
-                               st_error.to(
-                                   st_unlocked, unless="cond_lock_required")
-                               )
 
     tr_light_change = (st_unlocked.to(st_error, cond="cond_error") |
                        st_unlocked.to(st_locked, cond="cond_lock_required") |
@@ -142,6 +132,18 @@ class door_lock_statemachine(StateMachine):
                                       cond="cond_lock_required") |
                           st_error.to.itself()
                           )
+
+    tr_reported_lock_change = (st_unlocked.to(st_error, cond="cond_error") |
+                               st_unlocked.to(st_locked, cond="cond_reported_lock") |
+                               st_unlocked.to.itself() |
+                               st_locked.to(st_error, cond="cond_error") |
+                               st_locked.to(st_unlocked, unless="cond_reported_lock") |
+                               st_locked.to.itself() |
+                               st_error.to.itself(cond="cond_error") |
+                               st_error.to(st_locked, cond="cond_lock_required") |
+                               st_error.to(
+                                   st_unlocked, unless="cond_lock_required")
+                               )
 
     def __init__(self, name="unnamed", logger=None):
         # variables
@@ -175,13 +177,6 @@ class door_lock_statemachine(StateMachine):
             bool: door_open state
         """
         return self._door_open
-
-    def get_reported_lock(self):
-        """return the state of reported lock state
-        Returns:
-            bool: door_open state
-        """
-        return self._reported_lock
 
     def get_light(self):
         """return the state of the light
@@ -228,6 +223,13 @@ class door_lock_statemachine(StateMachine):
         """
         return self._presence
 
+    def get_reported_lock(self):
+        """return the state of reported lock state
+        Returns:
+            bool: door_open state
+        """
+        return self._reported_lock
+
     # set internal states BEFORE the event is send
     def set_dark_outside(self, state):
         """set internal state of dark_outside
@@ -246,19 +248,6 @@ class door_lock_statemachine(StateMachine):
         self._door_open = state
         self._logger.info(self.get_name() +
                           ": - DoorOpen is: " + str(self._door_open))
-
-    def set_reported_lock(self, state):
-        """set internal state of reported lock state
-        Args:
-            state (bool): reported state of lock
-        """
-        if state not in self.state_map.keys():
-            self._logger.error(self.get_name() +
-                               ": - reported LockState invalid: " + str(state))
-        else:
-            self._reported_lock = self.state_map[state]
-            self._logger.info(self.get_name() +
-                              ": - reported LockState is: " + str(self._reported_lock))
 
     def set_light(self, state):
         """set internal state of light
@@ -290,6 +279,19 @@ class door_lock_statemachine(StateMachine):
         self._presence = state
         self._logger.info(
             self.get_name() + "(" + str(id(self)) + "): - Presence is: " + str(self._presence))
+
+    def set_reported_lock(self, state):
+        """set internal state of reported lock state
+        Args:
+            state (bool): reported state of lock
+        """
+        if state not in self.state_map.keys():
+            self._logger.error(self.get_name() +
+                               ": - reported LockState invalid: " + str(state) + "\n" + str(self.state_map))
+        else:
+            self._reported_lock = self.state_map[state]
+            self._logger.info(self.get_name() +
+                              ": - reported LockState is: " + str(self._reported_lock))
 
     # Conditions
     def cond_dark_outside(self):

@@ -30,7 +30,7 @@ log.addHandler(ch)
 def test_state(state_machine, state):
     """make testing of states with logging easier"""
     log.debug(f"assert: {state_machine.current_state.id} == {state}")
-    assert state_machine.get_state() == state
+    assert state_machine.current_state.id == state
 
 
 def test_single_sm():
