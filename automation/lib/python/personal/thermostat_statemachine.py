@@ -1,6 +1,7 @@
 """StateMachine for Homematic-IP thermostats """
 import sys
 import os
+import platform
 
 # log:set INFO jsr223.jython.Thermostat_statemachines_create
 
@@ -37,10 +38,11 @@ def get_state_machine(item_name, logger):
         logger.info("Created ThermostatSm: (" + str(id(thermostate_list[thing_name])) + "):" +
                     thermostate_list[thing_name].get_name())
 
-        # also accepts instances
-        graph = DotGraphMachine(thermostate_list[thing_name])
-        graph().write_png(os.path.join(scriptpath, "images",
-                                       thermostate_list[thing_name].get_name() + "_thermostate_sm.png"))
+        if (platform.system() != "Windows"):
+            # also accepts instances
+            graph = DotGraphMachine(thermostate_list[thing_name])
+            graph().write_png(os.path.join(scriptpath, "images",
+                                           thermostate_list[thing_name].get_name() + "_thermostate_sm.png"))
     else:
         logger.info("Use existing ThermostatSm (" + str(id(thermostate_list[thing_name])) + "): " +
                     thermostate_list[thing_name].get_name())
