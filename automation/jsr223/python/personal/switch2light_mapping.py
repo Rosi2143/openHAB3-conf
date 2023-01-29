@@ -21,7 +21,7 @@ def switch2wall_mapping_long(event):
     handles long presses of wallswitches
 
     Args:
-        event (_type_): _description_
+        event (_type_): long press item
     """
     switch2wall_mapping_long.log.info(
         "rule fired because of %s", event.itemName)
@@ -47,7 +47,7 @@ def switch2wall_mapping_short(event):
     handles short presses of wallswitches
 
     Args:
-        event (_type_): _description_
+        event (_type_): short press item
     """
     switch2wall_mapping_short.log.info(
         "rule fired because of %s", event.itemName)

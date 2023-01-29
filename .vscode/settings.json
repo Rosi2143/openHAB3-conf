@@ -10,7 +10,8 @@
     "cSpell.words": [
         "habapp",
         "rgba",
-        "swiper"
+        "swiper",
+        "thermostate"
     ],
     //
     // Python pylint
@@ -29,5 +30,6 @@
     "python.linting.ignorePatterns": [
         "**/automation/**/python/core/**/*.py",
         "**/automation/**/python/community/**/*.py"
-    ]
+    ],
+    "python.formatting.provider": "autopep8"
 }

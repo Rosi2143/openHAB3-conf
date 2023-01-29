@@ -1,13 +1,12 @@
 Metadata-Version: 2.1
 Name: python-statemachine
-Version: 1.0.2
+Version: 1.0.3
 Summary: Python Finite State Machines made easy.
 Home-page: https://github.com/fgmacedo/python-statemachine
 Author: Fernando Macedo
 Author-email: fgmacedo@gmail.com
 License: MIT license
 Keywords: statemachine
-Platform: UNKNOWN
 Classifier: Intended Audience :: Developers
 Classifier: License :: OSI Approved :: MIT License
 Classifier: Natural Language :: English
@@ -22,6 +21,8 @@ Classifier: Programming Language :: Python :: 3.9
 Classifier: Programming Language :: Python :: 3.10
 Classifier: Programming Language :: Python :: 3.11
 Classifier: Topic :: Software Development :: Libraries
+License-File: LICENSE
+License-File: AUTHORS.rst
 Provides-Extra: diagrams
 Requires-Dist: pydot ; extra == 'diagrams'
 
@@ -336,7 +337,6 @@ True
 True
 
 
-There's a lot more to cover, please take a look at our docs:
-https://python-statemachine.readthedocs.io.
-
-
+* There's a lot more to cover, please take a look at our docs:
+  https://python-statemachine.readthedocs.io.
+* If you found this project helpful, please consider giving it a star on GitHub.

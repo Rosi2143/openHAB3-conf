@@ -29,8 +29,9 @@ log.addHandler(ch)
 
 def test_state(state_machine, state):
     """make testing of states with logging easier"""
-    log.debug("assert: {state_machine.current_state.id} == {state}")
-    assert state_machine.current_state.id == state
+    log.debug(
+        f"assert: {state_machine.get_name()} {state_machine.current_state.name} == {state}")
+    assert state_machine.current_state.name == state
 
 
 def test_default_state():
@@ -42,7 +43,7 @@ def test_default_state():
     state_machine = ThermostatStateMachine(
         name="TestMachine", logger=log)
 
-    test_state(state_machine, "st_auto")
+    test_state(state_machine, "auto")
 
 
 def test_auto_manual_vacation_state():
@@ -56,27 +57,27 @@ def test_auto_manual_vacation_state():
 
     state_machine.set_mode(state_machine.MANUAL)
     state_machine.send("tr_mode_change")
-    test_state(state_machine, "st_manual")
+    test_state(state_machine, "manual")
 
     state_machine.set_mode(state_machine.AUTO)
     state_machine.send("tr_mode_change")
-    test_state(state_machine, "st_auto")
+    test_state(state_machine, "auto")
 
     state_machine.set_mode(state_machine.VACATION)
     state_machine.send("tr_mode_change")
-    test_state(state_machine, "st_vacation")
+    test_state(state_machine, "vacation")
 
     state_machine.set_mode(state_machine.AUTO)
     state_machine.send("tr_mode_change")
-    test_state(state_machine, "st_auto")
+    test_state(state_machine, "auto")
 
     state_machine.set_mode(state_machine.VACATION)
     state_machine.send("tr_mode_change")
-    test_state(state_machine, "st_vacation")
+    test_state(state_machine, "vacation")
 
     state_machine.set_mode(state_machine.MANUAL)
     state_machine.send("tr_mode_change")
-    test_state(state_machine, "st_manual")
+    test_state(state_machine, "manual")
 
 
 def test_config_change():
@@ -90,35 +91,35 @@ def test_config_change():
 
     state_machine.set_config(True)
     state_machine.send("tr_config_change")
-    test_state(state_machine, "st_config")
+    test_state(state_machine, "config")
 
     state_machine.set_boost(True)
     state_machine.send("tr_boost_change")
-    test_state(state_machine, "st_config")
+    test_state(state_machine, "config")
 
     state_machine.set_window_open(True)
     state_machine.send("tr_boost_change")
-    test_state(state_machine, "st_config")
+    test_state(state_machine, "config")
 
     state_machine.set_mode(state_machine.VACATION)
     state_machine.send("tr_mode_change")
-    test_state(state_machine, "st_config")
+    test_state(state_machine, "config")
 
     state_machine.set_window_open(False)
     state_machine.send("tr_boost_change")
-    test_state(state_machine, "st_config")
+    test_state(state_machine, "config")
 
     state_machine.set_mode(state_machine.MANUAL)
     state_machine.send("tr_mode_change")
-    test_state(state_machine, "st_config")
+    test_state(state_machine, "config")
 
     state_machine.set_boost(False)
     state_machine.send("tr_boost_change")
-    test_state(state_machine, "st_config")
+    test_state(state_machine, "config")
 
     state_machine.set_config(False)
     state_machine.send("tr_config_change")
-    test_state(state_machine, "st_manual")
+    test_state(state_machine, "manual")
 
 
 def test_window_change():
@@ -132,35 +133,35 @@ def test_window_change():
 
     state_machine.set_window_open(True)
     state_machine.send("tr_window_change")
-    test_state(state_machine, "st_off")
+    test_state(state_machine, "off")
 
     state_machine.set_boost(True)
     state_machine.send("tr_boost_change")
-    test_state(state_machine, "st_off")
+    test_state(state_machine, "off")
 
     state_machine.set_mode(state_machine.VACATION)
     state_machine.send("tr_mode_change")
-    test_state(state_machine, "st_off")
+    test_state(state_machine, "off")
 
     state_machine.set_mode(state_machine.MANUAL)
     state_machine.send("tr_mode_change")
-    test_state(state_machine, "st_off")
+    test_state(state_machine, "off")
 
     state_machine.set_config(True)
     state_machine.send("tr_config_change")
-    test_state(state_machine, "st_config")
+    test_state(state_machine, "config")
 
     state_machine.set_config(False)
     state_machine.send("tr_config_change")
-    test_state(state_machine, "st_off")
+    test_state(state_machine, "off")
 
     state_machine.set_boost(False)
     state_machine.send("tr_boost_change")
-    test_state(state_machine, "st_off")
+    test_state(state_machine, "off")
 
     state_machine.set_window_open(False)
     state_machine.send("tr_window_change")
-    test_state(state_machine, "st_manual")
+    test_state(state_machine, "manual")
 
 
 test_default_state()
