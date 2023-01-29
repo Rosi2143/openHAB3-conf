@@ -32,7 +32,7 @@ def get_state_machine(item_name, logger):
     """
     thing_name = item_name.split("_")[0]
     if thing_name not in thermostate_list:
-        thermostate_list[thing_name] = ThermostatStateMachine(
+        thermostate_list[thing_name] = thermostat_statemachine(
             thing_name, logger)
         logger.info("Created ThermostatSm: (" + str(id(thermostate_list[thing_name])) + "):" +
                     thermostate_list[thing_name].get_name())
@@ -65,7 +65,7 @@ def get_internal_state_machine_state(sm):
     return info
 
 
-class ThermostatStateMachine(StateMachine):
+class thermostat_statemachine(StateMachine):
     "handle state of thermostats"
 
     # constants
@@ -186,7 +186,7 @@ class ThermostatStateMachine(StateMachine):
 #        for name, value in os.environ.items():
 #            self._logger.debug("{0}: {1}".format(name, value))
 
-        super(ThermostatStateMachine, self).__init__()
+        super(thermostat_statemachine, self).__init__()
 
     def get_name(self):
         """return the name of the statemachine

@@ -10,7 +10,7 @@ OH_CONF = os.getenv('OPENHAB_CONF')
 
 sys.path.append(os.path.join(OH_CONF, "automation/lib/python/personal"))
 sys.path.append(os.path.join(OH_CONF, "automation/lib/python"))
-from ThermostatStateMachine import get_state_machine, get_state_machine_list
+from thermostat_statemachine import get_state_machine, get_state_machine_list
 
 log = logging.getLogger(__name__)
 log.setLevel(logging.DEBUG)

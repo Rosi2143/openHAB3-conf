@@ -14,7 +14,7 @@ from core.items import add_item
 OH_CONF = os.getenv('OPENHAB_CONF')
 
 sys.path.append(os.path.join(OH_CONF, "automation/lib/python/personal"))
-from ThermostatStateMachine import get_state_machine, get_state_machine_list, get_internal_state_machine_state
+from thermostat_statemachine import get_state_machine, get_state_machine_list, get_internal_state_machine_state
 
 log = logging.getLogger("{}.thermostate_mode".format(LOG_PREFIX))
 
