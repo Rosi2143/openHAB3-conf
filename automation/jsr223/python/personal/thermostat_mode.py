@@ -113,6 +113,7 @@ def thermostate_boost_mode_changes(event):
         event.itemName, thermostate_boost_mode_changes.log)
     therm_sm.set_boost(str(event.itemState) == "ON")
     therm_sm.send("tr_boost_change")
+    set_mode_item(therm_sm.get_name(), therm_sm.get_state_name())
 
 # Check ConfigModes
 
@@ -134,6 +135,7 @@ def thermostate_config_mode_changes(event):
         event.itemName, thermostate_config_mode_changes.log)
     therm_sm.set_config(str(event.itemState) == "ON")
     therm_sm.send("tr_config_change")
+    set_mode_item(therm_sm.get_name(), therm_sm.get_state_name())
 
 # Check Modes
 
@@ -158,9 +160,8 @@ def thermostate_mode_changes(event):
     else:
         thermostate_mode_changes.log.info(
             "unknown mode %s value for %s", event.itemState, event.itemName)
-    thermostate_mode_changes.log.info(therm_sm.get_name())
     therm_sm.send("tr_mode_change")
-    thermostate_mode_changes.log.info(therm_sm.get_name())
+    set_mode_item(therm_sm.get_name(), therm_sm.get_state_name())
 
 # Check PartyModes
 
@@ -182,6 +183,7 @@ def thermostate_party_mode_changes(event):
         event.itemName, thermostate_party_mode_changes.log)
     therm_sm.set_party(str(event.itemState) == "ON")
     therm_sm.send("tr_party_change")
+    set_mode_item(therm_sm.get_name(), therm_sm.get_state_name())
 
 # Check WindowStates
 
@@ -203,3 +205,4 @@ def thermostate_window_mode_changes(event):
         event.itemName, thermostate_window_mode_changes.log)
     therm_sm.set_window_open(str(event.itemState) == "ON")
     therm_sm.send("tr_window_change")
+    set_mode_item(therm_sm.get_name(), therm_sm.get_state_name())
