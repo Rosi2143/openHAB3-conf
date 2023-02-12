@@ -8,7 +8,7 @@ log = logging.getLogger('ContactSwitch')
 
 
 class ContactSwitchMapper(HABApp.Rule):
-    """convert a contact to a switch - as tinkerforge and homematic are incompatible"""
+    """convert a contact to a switch - as tinkerforge and Homematic are incompatible"""
 
     def __init__(self):
         """initialize the class and create an element for all contact items

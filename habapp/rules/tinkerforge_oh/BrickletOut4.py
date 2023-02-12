@@ -23,30 +23,27 @@ class BrickletOut4(TinkerforgeBase, OhBase):
     # map boolean states to switch states
     port_state_state_mapping = {"True": "ON", "False": "OFF"}
 
-    # uid read from parameter file
-    uid = None
-    out4_bricklet = None
-    # map port number to name
-    port_mapping = {}
-    # logger passed via constructor
-    logger = None
-    # state_map --> to allow filtering out changes only
-    state_map = {0: False,
-                 1: False,
-                 2: False,
-                 3: False}
-
     def __init__(self, ipconnection, deviceconfig, logger):
         """initialize the output bricklet"""
 
         TinkerforgeBase.__init__(self, ipconnection, logger)
         OhBase.__init__(self, logger)
 
+        self.state_high = 1
+        self.state_low = 0
+
+        # uid read from parameter file
         self.uid = deviceconfig['uid']
-        # see class definition
+        # map port number to name
         self.port_mapping = deviceconfig['OH_port_mapping']
         # logger passed via constructor
         self.logger = logger
+
+        # state_map --> to alstate_low filtering out changes only
+        self.state_map = {0: self.state_low,
+                          1: self.state_low,
+                          2: self.state_low,
+                          3: self.state_low}
 
         self.logger.info("initializing bricklet " +
                          BrickletIndustrialDigitalOut4.DEVICE_DISPLAY_NAME +
@@ -98,14 +95,22 @@ class BrickletOut4(TinkerforgeBase, OhBase):
     def check_ports(self, initial_check=False):
         """get port value from bricklet"""
 
-        if !initial_check:
+        if not initial_check:
             self.logger.info("check_ports for %s", self.uid)
         portvalue = self.out4_bricklet.get_value()
+        self.logger.debug("portvalue " + str(portvalue))
+        self.logger.debug(
+            f"self.state_map = {str(self.state_map)}")
         for port_number, oh_item in self.port_mapping.items():
+            self.logger.debug("port_number " + str(port_number))
+            self.logger.debug("oh_item    " + oh_item)
             if oh_item == "":
                 continue
             oh_item_name = oh_item + "_State"
             is_on = self.get_normalized_bit(portvalue, int(port_number))
+            self.logger.debug("is_on " + str(is_on))
+            self.logger.debug(
+                "state_map " + str(self.state_map[int(port_number)]))
             if (is_on != self.state_map[int(port_number)]) | initial_check:
                 self.state_map[int(port_number)] = is_on
                 if is_on:
@@ -144,15 +149,18 @@ class BrickletOut4(TinkerforgeBase, OhBase):
         switch_name = event.name.replace("_State", "")
         port_number = list(self.port_mapping.keys())[list(
             self.port_mapping.values()).index(switch_name)]
-        selection_mask = 0
-        selection_mask = self.set_bit(selection_mask, int(port_number))
+        selection_mask = self.set_bit(0, int(port_number))
         if event.value == "ON":
             self.logger.debug(
                 f"{self.uid}: setting port {port_number} to {event.value} \
                     : Mask = {selection_mask}")
             self.out4_bricklet.set_selected_values(
                 selection_mask, selection_mask)
+            self.state_map[int(port_number)] = self.state_high
         else:
             self.logger.debug(
                 f"{self.uid}: clearing port {port_number} : Mask = {selection_mask}")
             self.out4_bricklet.set_selected_values(selection_mask, 0)
+            self.state_map[int(port_number)] = self.state_low
+        self.logger.debug(
+            f"self.state_map = {str(self.state_map)}")
