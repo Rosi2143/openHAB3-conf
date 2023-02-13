@@ -1,6 +1,6 @@
 # https://habapp.readthedocs.io/en/latest/getting_started.html
 import logging  # required for extended logging
-from datetime import time, timedelta
+from datetime import timedelta
 
 import HABApp
 from HABApp.core.items import Item

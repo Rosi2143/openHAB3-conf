@@ -5,8 +5,6 @@ This script sets todays type of days using ephemeris actions
 from core.rules import rule
 from core.triggers import when
 from core.actions import Ephemeris
-from core.items import add_item
-import java.time.temporal.ChronoUnit
 import os
 
 # description and tags are optional
@@ -28,7 +26,6 @@ def determine_day_type(event):
     OH_CONF = os.getenv('OPENHAB_CONF')
     ephemeris_public_holiday_file = OH_CONF + '/services/holidays_de.xml'
     today_morning = ZonedDateTime.now().truncatedTo(ChronoUnit.DAYS)
-    current_year = today_morning.getYear()
 
     determine_day_type.log.debug(OH_CONF)
     next_holiday = Ephemeris.getNextBankHoliday(

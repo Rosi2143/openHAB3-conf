@@ -45,6 +45,15 @@ handlers:
     formatter: HABApp_format
     level: DEBUG
 
+  AstralHandler:
+    class: HABApp.config.logging.MidnightRotatingFileHandler
+    filename: "/etc/openhab/habapp/log/Astral.log"
+    maxBytes: 10_000_000
+    backupCount: 3
+
+    formatter: HABApp_format
+    level: INFO
+
   ContactSwitchMapping:
     class: HABApp.config.logging.MidnightRotatingFileHandler
     filename: "/etc/openhab/habapp/log/ContactSwitch.log"
@@ -98,6 +107,12 @@ loggers:
     level: DEBUG
     handlers:
       - MyRuleHandler # This logger uses the MyRuleHandler
+    propagate: False
+
+  Astral:
+    level: DEBUG
+    handlers:
+      - AstralHandler
     propagate: False
 
   ContactSwitch:
