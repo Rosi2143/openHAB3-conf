@@ -9,7 +9,6 @@ import os
 from core.log import logging, LOG_PREFIX
 from core.rules import rule
 from core.triggers import when
-from core.items import add_item
 
 OH_CONF = os.getenv('OPENHAB_CONF')
 
