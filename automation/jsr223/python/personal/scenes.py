@@ -2,8 +2,6 @@
 This script enables activation of scenes via a switch-item.
 """
 
-import os
-import json
 from core.rules import rule
 from core.triggers import when
 

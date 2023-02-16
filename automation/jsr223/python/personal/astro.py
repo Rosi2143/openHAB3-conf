@@ -2,8 +2,6 @@
 This script handles event triggers of the astro binding.
 """
 
-import os
-import json
 from core.rules import rule
 from core.triggers import when
 
