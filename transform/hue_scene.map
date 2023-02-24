@@ -1,0 +1,95 @@
+// maps names to scene ID's
+
+// hue hue:bridge:1 scenes
+
+// *************************************
+// ***   ROOMS   ***********************
+// *************************************
+
+// hue hue:group:1:hueRoomDriveWay scenes
+roomDriveWay_Nachtlicht=yT3Jshdv9A-Qm2Q
+roomDriveWay_Konzentrieren=FQEgO9IpI0UuZIP
+
+// hue hue:group:1:hueRoomOrielWay scenes
+roomOrielWay_Konzentrieren=n4M-9bfD2CIN3Zi
+roomOrielWay_Nachtlicht=bx5CWjHdoLZPZYV
+
+// hue hue:group:1:hueRoomBike scenes
+roomBike_Konzentrieren=I05pbw0zPQulTO-
+roomBike_Nachtlicht=7peYOCd93P3jtdc
+
+// hue hue:group:1:hueRoomLivingRoom scenes
+roomLivingRoom_Energie\ tanken=HcGsVmwOABfKBav
+roomLivingRoom_Entspannen=zfkyuZ4oYZs-PKi
+roomLivingRoom_Frühlingsblüten=TtVeR4IvjaUSRL9
+roomLivingRoom_Gedimmt=8Gu-ULj7Ay1NDyF
+roomLivingRoom_Hell=Q-FR-1BZWkHKXA9
+roomLivingRoom_Konzentrieren=W46ZifXoWzhWcLB
+roomLivingRoom_Lesen=D1LMXaPKBhJoYV1
+roomLivingRoom_Nachtlicht=EzQGhFTbvt0CEz-
+roomLivingRoom_Nordlichter=eQhj-i1boADNJB5
+roomLivingRoom_Sonnenuntergang\ Savanne=o79WBZS8mBHzV8H
+roomLivingRoom_Tropendämmerung=-tP1TSBFl8IRF4U
+
+// hue hue:group:1:hueRoomHobby scenes
+roomHobby_Gedimmt=FfVcXWEd7rlx3p0
+roomHobby_Hell=c-uj1a7Z3pLsjEe
+roomHobby_Nachtlicht=w6fohIO8GiCSF1Y
+
+// hue hue:group:1:hueRoomKitchen scenes
+roomKitchen_Gedimmt=nNo8L2DQWY9uImS
+roomKitchen_Hell=BrxaH8hiaJtI3Zt
+roomKitchen_Nachtlicht=yR-e9OZlvQmN2SY
+
+// hue hue:group:1:hueRoomShed scenes
+roomShed_Konzentrieren=jMWLupCfH5pzrRV
+roomShed_Nachtlicht=bd8qBPQsZKTqUw0
+
+// hue hue:group:1:hueRoomHouseCorner scenes
+roomHouseCorner_Gedimmt=BppvF3M2R4PHX07
+roomHouseCorner_Hell=6QmzTXr5ovgr4WA
+roomHouseCorner_Konzentrieren=UWKXWzZ4cY0GMwY
+roomHouseCorner_Nachtlicht=zIL1-fizE1SCpzk
+
+// hue hue:group:1:hueRoomTerrasse scenes
+roomTerrasse_Hell=a-BnH6ODYBqLrmM
+roomTerrasse_Konzentrieren=tHCX7-GHa7Mte6D
+roomTerrasse_Nachtlicht=vOT9JgDx0zIjvRl
+
+// *************************************
+// ***   SCENES   **********************
+// *************************************
+// hue hue:group:1:allElements scenes
+
+// hue hue:group:1:hueSceneLights scenes
+sceneLights_Energie\ tanken=c4BpqQk-04J3yS7
+sceneLights_Entspannen=woaG4EiVfSvrbVU
+sceneLights_Frühlingsblüten=cFs1tyFGuvrITgX
+sceneLights_Gedimmt=sDmR9602nWQRJaf
+sceneLights_Hell=JRhsOBKYKlpArfw
+sceneLights_Konzentrieren=3YgSvxIJ79kSmj3
+sceneLights_Lesen=52Jip5Sr9B1vNFe
+sceneLights_Nachtlicht=PYGw1R6sgzkiRsq
+sceneLights_Nordlichter=KKAUrJY8MbjfLBA
+sceneLights_Sonnenuntergang\ Savanne=p7V00BXBnhpGZ2f
+sceneLights_Tropendämmerung=0APc30sWpjvJViT
+
+// hue hue:group:1:hueSceneGarden scenes
+sceneShed_Konzentrieren=6UGV4IHOks-kO5Y
+sceneShed_Nachtlicht=l7Vupj3gn20HJds
+
+// hue hue:group:1:hueSceneGroundFloor scenes
+sceneSchuppen_Konzentrieren=6UGV4IHOks-kO5Y
+sceneSchuppen_Nachtlicht=l7Vupj3gn20HJds
+
+// hue hue:group:1:hueSceneSofa scenes
+sceneSofa_Blau=8EDtDoWCMexBVFz
+sceneSofa_Gold=1ZU82LUOLWmuhhL
+sceneSofa_Gruen=hcrRummH3t3H1Zn
+sceneSofa_Rot=mX28jWtdDgCghaT
+sceneSofa_TV\ aus=phfjVkK0wygYa1u
+
+// hue hue:group:1:hueScenePlugs scenes
+scenePlugs_Gedimmt=Wohjaerjt88mGDz
+scenePlugs_Hell=31ZuE09yDx6zdtT
+scenePlugs_Nachtlicht=t9xtZ69OKGCpFTu
