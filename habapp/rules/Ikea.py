@@ -198,7 +198,7 @@ class IkeaZigbeeDevices(HABApp.Rule):
                 value = int(value * 2.04)
             else:
                 logger.error(
-                    "wrong callback numberitem_update for " + event.name)
+                    "wrong callback numberitem_update for %s", event.name)
                 return
 
         if "_Step" in event.name:
@@ -208,7 +208,7 @@ class IkeaZigbeeDevices(HABApp.Rule):
                 mqttTopicValue = mqttTopicValue + "_move"
             else:
                 logger.error(
-                    "wrong callback numberitem_update for " + event.name)
+                    "wrong callback numberitem_update for %s", event.name)
                 return
 
         mqttTopicValue = mqttTopicValue + "\": " + str(value) + "}"
@@ -231,7 +231,7 @@ class IkeaZigbeeDevices(HABApp.Rule):
                 mqttTopicValue = "{ \"effect"
             else:
                 logger.error(
-                    "wrong callback stringitem_update for " + event.name)
+                    "wrong callback stringitem_update for %s", event.name)
                 return
 
         mqttTopicValue = mqttTopicValue + "\": \"" + str(event.value) + "\"}"
@@ -335,9 +335,9 @@ class IkeaZigbeeDevices(HABApp.Rule):
             mqtt_Light_topic = self.mqtt_base_topic + 'Lampe/' + Light
             self.listen_event(mqtt_Light_topic,
                               self.light_updated, ValueUpdateEventFilter())
-            logger.info("added listener for " + mqtt_Light_topic)
+            logger.info("added listener for %s", mqtt_Light_topic)
 
-            logger.info("added listener for Light " + Light)
+            logger.info("added listener for Light %s", Light)
         logger.info('lights are setup')
 
     def light_updated(self, event):
@@ -355,7 +355,7 @@ class IkeaZigbeeDevices(HABApp.Rule):
                 new_value = str(event.value["state"])
                 if self.OH_SwitchItem_Changed(switchItem, new_value):
                     switchItem.oh_send_command(new_value)
-                logger.info(f"state     : " + new_value)
+                logger.info("state     : %s", new_value)
             else:
                 logger.error(f'item {stateItemName} does not exist')
 
@@ -369,7 +369,7 @@ class IkeaZigbeeDevices(HABApp.Rule):
                     # IKEA https://www.zigbee2mqtt.io/devices/LED1732G11.html#light
                     # 0 ... 254
                     dimmerItem.oh_send_command(new_value)
-                logger.info(f"brightness: " + str(new_value))
+                logger.info("brightness: %s", str(new_value))
             else:
                 logger.error(f'item {dimmerItemName} does not exist')
 
@@ -383,7 +383,7 @@ class IkeaZigbeeDevices(HABApp.Rule):
                     # IKEA https://www.zigbee2mqtt.io/devices/LED1732G11.html#light
                     # 250 ... 454
                     colorTempItem.oh_send_command(new_value)
-                logger.info(f"colortemp : " + str(new_value))
+                logger.info("colortemp : %s", str(new_value))
             else:
                 logger.error(f'item {colorTempItemName} does not exist')
 
@@ -402,7 +402,7 @@ class IkeaZigbeeDevices(HABApp.Rule):
                         # IKEA https://www.zigbee2mqtt.io/devices/LED1732G11.html#light
                         # 250 ... 454
                         UpdateItem.oh_send_command(new_value)
-                    logger.info(f"update    : " + new_value)
+                    logger.info("update    : %s", new_value)
                 else:
                     logger.error(f'item {UpdateItemName} does not exist')
 
@@ -444,13 +444,13 @@ class IkeaZigbeeDevices(HABApp.Rule):
 
         logger.debug(f"mqtt topic " + event.name +
                      " updated to\n" + json.dumps(event.value, indent=2))
-        logger.info(f"Item       : " + topic_items[2] + topic_items[3])
-        logger.info(f"MotionState: " + occupancy)
-        logger.info(f"Battery    : " + str(batteryCharge))
-        logger.info(f"BatteryWeak: " + str(batteryWeak))
-        logger.info(f"LinkQuality: " + str(linkQuality))
-        logger.info(f"LightState : " + str(illuminanceAboveThreshold))
-        logger.info(f"FW Update  : " + str(updateAvailable))
+        logger.info("Item       : %s", topic_items[2] + topic_items[3])
+        logger.info("MotionState: %s", occupancy)
+        logger.info("Battery    : %s", str(batteryCharge))
+        logger.info("BatteryWeak: %s", str(batteryWeak))
+        logger.info("LinkQuality: %s", str(linkQuality))
+        logger.info("LightState : %s", str(illuminanceAboveThreshold))
+        logger.info("FW Update  : %s", str(updateAvailable))
 
         exitcode = 0
         if self.openhab.item_exists(topic_items[2] + topic_items[3] + "_BatteryStatus"):
@@ -539,12 +539,12 @@ class IkeaZigbeeDevices(HABApp.Rule):
 
         logger.debug(f"mqtt topic " + event.name +
                      " updated to\n" + json.dumps(event.value, indent=2))
-        logger.info(f"Item       : " + topic_items[2] + topic_items[3])
-        logger.info(f"Action     : " + action)
-        logger.info(f"Battery    : " + str(batteryCharge))
-        logger.info(f"BatteryWeak: " + str(batteryWeak))
-        logger.info(f"LinkQuality: " + str(linkQuality))
-        logger.info(f"FW Update  : " + str(updateAvailable))
+        logger.info("Item       : %s", topic_items[2] + topic_items[3])
+        logger.info("Action     : %s", action)
+        logger.info("Battery    : %s", str(batteryCharge))
+        logger.info("BatteryWeak: %s", str(batteryWeak))
+        logger.info("LinkQuality: %s", str(linkQuality))
+        logger.info("FW Update  : %s", str(updateAvailable))
 
         exitcode = 0
         if self.openhab.item_exists(topic_items[2] + topic_items[3] + "_BatteryStatus"):
@@ -631,7 +631,7 @@ class IkeaZigbeeDevices(HABApp.Rule):
             return exitcode
 
         if not found_action:
-            logger.error(f"Did not find action {action}")
+            logger.error("Did not find action %s", action)
 
 
 # IkeaZigbeeDevices()

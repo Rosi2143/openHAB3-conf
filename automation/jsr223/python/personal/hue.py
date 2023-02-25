@@ -38,29 +38,25 @@ def hue_offline_handler(event):
         event (_type_): triggering event
     """
 
-    hue_offline_handler.log.info(
-        "rule fired")
-
     EinfahrtDunkel = items["eLichtSensorEinfahrt_Dunkel"]
-    EinfahrtHell = items["eLichtSensorEinfahrt_Hell"]
     EinfahrtBewegung = items["BewegungsmelderErkerweg_MotionLong"]
-    EinfahrtMax = items["Hue_Raum_Einfahrt_Max"]
-    EinfahrtMin = items["Hue_Raum_Einfahrt_Min"]
-    EinfahrtStatus = items["Hue_Raum_Einfahrt_Betrieb"]
+    EinfahrtMax = items["Hue_Raum_Einfahrt_Max"].intValue()
+    EinfahrtMin = items["Hue_Raum_Einfahrt_Min"].intValue()
 
-    ErkerWegDunkel = items["eLichtSensorErkerWeg_Dunkel"]
-    ErkerWegHell = items["eLichtSensorErkerWeg_Hell"]
+    ErkerWegDunkel = items["LichtSensorErkerWeg_Dunkel"]
     ErkerWegBewegung = items["BewegungsmelderErkerweg_MotionLong"]
-    ErkerWegMax = items["Hue_Raum_Erkerweg_Max"]
-    ErkerWegMin = items["Hue_Raum_Erkerweg_Min"]
-    ErkerWegStatus = items["Hue_Raum_Erkerweg_Betrieb"]
+    ErkerWegMax = items["Hue_Raum_Erkerweg_Max"].intValue()
+    ErkerWegMin = items["Hue_Raum_Erkerweg_Min"].intValue()
+
+    hue_offline_handler.log.info("rule fired: \n Einfahrt: Dunkel %s; Bewegung %s; Min %s; Max %s\nErkerWeg: Dunkel %s; Bewegung %s; Min %s; Max %s",
+                                 EinfahrtDunkel, EinfahrtBewegung, EinfahrtMin, EinfahrtMax, ErkerWegDunkel, ErkerWegBewegung, ErkerWegMin, ErkerWegMax)
 
     if (EinfahrtMax - EinfahrtMin) > 5:
         hue_offline_handler.log.error(
             "Diff in EinfahrtLights = %d", (EinfahrtMax - EinfahrtMin))
-    if EinfahrtDunkel:
+    if EinfahrtDunkel == "ON":
         events.sendCommand("Hue_Raum_Einfahrt_Betrieb", "ON")
-        if EinfahrtBewegung:
+        if EinfahrtBewegung == "ON":
             hue_offline_handler.log.info("EinfahrtLights activate Light")
             events.sendCommand("Hue_Raum_Einfahrt_Szene",
                                "6UGV4IHOks-kO5Y")  # Konzentrieren
@@ -74,9 +70,9 @@ def hue_offline_handler(event):
     if (ErkerWegMax - ErkerWegMin) > 5:
         hue_offline_handler.log.error(
             "Diff in ErkerWegLights = %d", (ErkerWegMax - ErkerWegMin))
-    if ErkerWegDunkel:
+    if ErkerWegDunkel == "ON":
         events.sendCommand("Hue_Raum_Erkerweg_Betrieb", "ON")
-        if ErkerWegBewegung:
+        if ErkerWegBewegung == "ON":
             hue_offline_handler.log.info("ErkerWegLights activate Light")
             events.sendCommand("Hue_Raum_Erkerweg_Szene",
                                "n4M-9bfD2CIN3Zi")  # Konzentrieren
