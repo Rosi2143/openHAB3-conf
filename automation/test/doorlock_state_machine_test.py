@@ -15,12 +15,12 @@ sys.path.append(os.path.join(OH_CONF, "automation/lib/python"))
 from door_lock_statemachine import door_lock_statemachine
 
 log = logging.getLogger(__name__)
-log.setLevel(logging.INFO)
+log.setLevel(logging.DEBUG)
 
 # https://docs.python.org/3/howto/logging-cookbook.html
 # create console handler with a higher log level
 ch = logging.StreamHandler()
-ch.setLevel(logging.INFO)
+ch.setLevel(logging.DEBUG)
 # create formatter and add it to the handlers
 formatter = logging.Formatter(
     '%(asctime)s - %(name)s - %(levelname)s - %(message)s')
@@ -32,7 +32,7 @@ log.addHandler(ch)
 def test_state(state_machine, state):
     """make testing of states with logging easier"""
     log.debug(
-        f"assert: {state_machine.get_name()} {state_machine.current_state.name} == {state}")
+        f"assert: {state_machine.get_name()} [current]{state_machine.current_state.name} == [expect]{state}")
     assert state_machine.current_state.name == state
 
     # simulate the lock is reporting back the correct result
@@ -40,6 +40,58 @@ def test_state(state_machine, state):
         state_machine.set_reported_lock(state_machine.LOCKED)
     else:
         state_machine.set_reported_lock(state_machine.UNLOCKED)
+
+def run_tests(event, base_test, test_set, state_machine):
+
+    event_function = getattr(state_machine, "set_" + event)
+
+    event_function(True)
+    state_machine.send("tr_" + event + "_change")
+    test_state(state_machine, base_test[0])
+
+    event_function(False)
+    state_machine.send("tr_" + event + "_change")
+    test_state(state_machine, base_test[1])
+
+    # ####################
+    # DARK_OUTSIDE == TRUE
+    # ####################
+
+    event_function(True)
+    state_machine.send("tr_" + event + "_change")
+    test_state(state_machine, base_test[0])
+
+    for test, results in test_set.items():
+        log.info("")
+        log.info("")
+        log.info("*************************************")
+        log.info("%s: ********** testing '%s' *************", event, test)
+        log.info("*************************************")
+        test_function = getattr(state_machine, "set_" + test)
+
+        log.debug("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
+        log.debug("%s: ********** testing '%s'->True:[ON] *************", event, test)
+        test_function(True)
+        state_machine.send("tr_" + test + "_change")
+        test_state(state_machine, results["ON"])
+
+        log.debug("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
+        log.debug("%s: ********** testing '%s'->False:[ON_OFF] *************", event, event)
+        event_function(False)
+        state_machine.send("tr_" + event + "_change")
+        test_state(state_machine, results["ON_OFF"])
+
+        log.debug("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
+        log.debug("%s: ********** testing '%s'->True:[ON_ON] *************", event, event)
+        event_function(True)
+        state_machine.send("tr_" + event + "_change")
+        test_state(state_machine, results["ON_ON"])
+
+        log.debug("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
+        log.debug("%s: ********** testing '%s'->False:[OFF] *************", event, test)
+        test_function(False)
+        state_machine.send("tr_" + test + "_change")
+        test_state(state_machine, results["OFF"])
 
 
 def test_default_state():
@@ -62,100 +114,24 @@ def test_dark_outside_state():
     state_machine = door_lock_statemachine(
         name=function_name, logger=log)
 
-    state_machine.set_dark_outside(True)
-    state_machine.send("tr_dark_outside_change")
-    test_state(state_machine, "locked")
+    test_set = {"door_open": {"ON": "error",
+                              "ON_OFF": "unlocked",
+                              "ON_ON": "error",
+                              "OFF": "locked"
+                             },
+                "light": {"ON": "unlocked",
+                          "ON_OFF": "unlocked",
+                          "ON_ON": "unlocked",
+                          "OFF": "locked"
+                         },
+                "presence": {"ON": "locked",
+                             "ON_OFF": "locked",
+                             "ON_ON": "locked",
+                             "OFF": "locked"
+                            }
+                }
 
-    state_machine.set_dark_outside(False)
-    state_machine.send("tr_dark_outside_change")
-    test_state(state_machine, "unlocked")
-
-    # ####################
-    # DARK_OUTSIDE == TRUE
-    # ####################
-    state_machine.set_dark_outside(True)
-    state_machine.send("tr_dark_outside_change")
-    test_state(state_machine, "locked")
-
-    # check door state
-    state_machine.set_door_open(True)
-    state_machine.send("tr_door_state_change")
-    test_state(state_machine, "error")
-
-    state_machine.set_door_open(False)
-    state_machine.send("tr_door_state_change")
-    test_state(state_machine, "locked")
-
-    # check light
-    state_machine.set_light(True)
-    state_machine.send("tr_light_change")
-    test_state(state_machine, "unlocked")
-
-    state_machine.set_light(False)
-    state_machine.send("tr_light_change")
-    test_state(state_machine, "locked")
-
-    # check presence
-    state_machine.set_presence(False)
-    state_machine.send("tr_presence_change")
-    test_state(state_machine, "locked")
-
-    state_machine.set_presence(True)
-    state_machine.send("tr_presence_change")
-    test_state(state_machine, "locked")
-
-    # reported reported lock state
-    state_machine.set_reported_lock(state_machine.UNLOCKED)
-    state_machine.send("tr_reported_lock_change")
-    test_state(state_machine, "unlocked")
-
-    state_machine.set_reported_lock(state_machine.LOCKED)
-    state_machine.send("tr_reported_lock_change")
-    test_state(state_machine, "locked")
-
-    # #####################
-    # DARK_OUTSIDE == FALSE
-    # #####################
-
-    state_machine.set_dark_outside(False)
-    state_machine.send("tr_dark_outside_change")
-    test_state(state_machine, "unlocked")
-
-    # check door open
-    state_machine.set_door_open(True)
-    state_machine.send("tr_door_state_change")
-    test_state(state_machine, "unlocked")
-
-    state_machine.set_door_open(False)
-    state_machine.send("tr_door_state_change")
-    test_state(state_machine, "unlocked")
-
-    # check light
-    state_machine.set_light(True)
-    state_machine.send("tr_light_change")
-    test_state(state_machine, "unlocked")
-
-    state_machine.set_light(False)
-    state_machine.send("tr_light_change")
-    test_state(state_machine, "unlocked")
-
-    # check presence
-    state_machine.set_presence(False)
-    state_machine.send("tr_presence_change")
-    test_state(state_machine, "locked")
-
-    state_machine.set_presence(True)
-    state_machine.send("tr_presence_change")
-    test_state(state_machine, "unlocked")
-
-    # reported reported lock state
-    state_machine.set_reported_lock(state_machine.LOCKED)
-    state_machine.send("tr_reported_lock_change")
-    test_state(state_machine, "locked")
-
-    state_machine.set_reported_lock(state_machine.UNLOCKED)
-    state_machine.send("tr_reported_lock_change")
-    test_state(state_machine, "unlocked")
+    run_tests("dark_outside", ["locked", "locked"], test_set, state_machine)
 
 
 def test_door_open_state():
@@ -166,100 +142,24 @@ def test_door_open_state():
     state_machine = door_lock_statemachine(
         name=function_name, logger=log)
 
-    state_machine.set_door_open(True)
-    state_machine.send("tr_door_state_change")
-    test_state(state_machine, "unlocked")
+    test_set = {"dark_outside": {"ON": "error",
+                                 "ON_OFF": "locked",
+                                 "ON_ON": "error",
+                                 "OFF": "unlocked"
+                                },
+                "light": {"ON": "unlocked",
+                          "ON_OFF": "unlocked",
+                          "ON_ON": "unlocked",
+                          "OFF": "unlocked"
+                         },
+                "presence": {"ON": "unlocked",
+                             "ON_OFF": "unlocked",
+                             "ON_ON": "unlocked",
+                             "OFF": "error"
+                            }
+                }
 
-    state_machine.set_door_open(False)
-    state_machine.send("tr_door_state_change")
-    test_state(state_machine, "unlocked")
-
-    # ################
-    # DOOR == OPEN
-    # ################
-    state_machine.set_door_open(True)
-    state_machine.send("tr_door_state_change")
-    test_state(state_machine, "unlocked")
-
-    # check dark_outside
-    state_machine.set_dark_outside(True)
-    state_machine.send("tr_dark_outside_change")
-    test_state(state_machine, "error")
-
-    state_machine.set_dark_outside(False)
-    state_machine.send("tr_dark_outside_change")
-    test_state(state_machine, "unlocked")
-
-    # check light
-    state_machine.set_light(True)
-    state_machine.send("tr_light_change")
-    test_state(state_machine, "unlocked")
-
-    state_machine.set_light(False)
-    state_machine.send("tr_light_change")
-    test_state(state_machine, "unlocked")
-
-    # check presence
-    state_machine.set_presence(False)
-    state_machine.send("tr_presence_change")
-    test_state(state_machine, "error")
-
-    state_machine.set_presence(True)
-    state_machine.send("tr_presence_change")
-    test_state(state_machine, "unlocked")
-
-    # reported reported lock state
-    state_machine.set_reported_lock(state_machine.LOCKED)
-    state_machine.send("tr_reported_lock_change")
-    test_state(state_machine, "error")
-
-    state_machine.set_reported_lock(state_machine.UNLOCKED)
-    state_machine.send("tr_reported_lock_change")
-    test_state(state_machine, "unlocked")
-
-    # ################
-    # DOOR == CLOSED
-    # ################
-
-    state_machine.set_door_open(False)
-    state_machine.send("tr_door_state_change")
-    test_state(state_machine, "unlocked")
-
-    # check dark_outside
-    state_machine.set_dark_outside(True)
-    state_machine.send("tr_dark_outside_change")
-    test_state(state_machine, "locked")
-
-    state_machine.set_dark_outside(False)
-    state_machine.send("tr_dark_outside_change")
-    test_state(state_machine, "unlocked")
-
-    # check light
-    state_machine.set_light(True)
-    state_machine.send("tr_light_change")
-    test_state(state_machine, "unlocked")
-
-    state_machine.set_light(False)
-    state_machine.send("tr_light_change")
-    test_state(state_machine, "unlocked")
-
-    # check presence
-    state_machine.set_presence(False)
-    state_machine.send("tr_presence_change")
-    test_state(state_machine, "locked")
-
-    state_machine.set_presence(True)
-    state_machine.send("tr_presence_change")
-    test_state(state_machine, "unlocked")
-
-    # reported reported lock state
-    state_machine.set_reported_lock(state_machine.LOCKED)
-    state_machine.send("tr_reported_lock_change")
-    test_state(state_machine, "locked")
-
-    state_machine.set_reported_lock(state_machine.UNLOCKED)
-    state_machine.send("tr_reported_lock_change")
-    test_state(state_machine, "unlocked")
+    run_tests("door_open", ["unlocked", "unlocked"], test_set, state_machine)
 
 
 def test_error_state():
@@ -312,11 +212,11 @@ def test_error_state():
 
     # check door open
     state_machine.set_door_open(True)
-    state_machine.send("tr_door_state_change")
+    state_machine.send("tr_door_open_change")
     test_state(state_machine, "error")
 
     state_machine.set_door_open(False)
-    state_machine.send("tr_door_state_change")
+    state_machine.send("tr_door_open_change")
     test_state(state_machine, "error")
 
     # check light
@@ -355,99 +255,24 @@ def test_light_state():
     state_machine = door_lock_statemachine(
         name=function_name, logger=log)
 
-    state_machine.set_light(True)
-    state_machine.send("tr_light_change")
-    test_state(state_machine, "unlocked")
+    test_set = {"dark_outside": {"ON": "unlocked",
+                                 "ON_OFF": "locked",
+                                 "ON_ON": "unlocked",
+                                 "OFF": "unlocked"
+                                },
+                "door_open": {"ON": "unlocked",
+                              "ON_OFF": "unlocked",
+                              "ON_ON": "unlocked",
+                              "OFF": "unlocked"
+                             },
+                "presence": {"ON": "unlocked",
+                             "ON_OFF": "unlocked",
+                             "ON_ON": "unlocked",
+                             "OFF": "locked"
+                            }
+                }
 
-    state_machine.set_light(False)
-    state_machine.send("tr_light_change")
-    test_state(state_machine, "unlocked")
-
-    # ################
-    # LIGHT == ON
-    # ################
-    state_machine.set_light(True)
-    state_machine.send("tr_light_change")
-    test_state(state_machine, "unlocked")
-
-    # check dark_outside
-    state_machine.set_dark_outside(True)
-    state_machine.send("tr_dark_outside_change")
-    test_state(state_machine, "unlocked")
-
-    state_machine.set_dark_outside(False)
-    state_machine.send("tr_dark_outside_change")
-    test_state(state_machine, "unlocked")
-
-    # check door_open
-    state_machine.set_door_open(True)
-    state_machine.send("tr_door_state_change")
-    test_state(state_machine, "unlocked")
-
-    state_machine.set_door_open(False)
-    state_machine.send("tr_door_state_change")
-    test_state(state_machine, "unlocked")
-
-    # check presence
-    state_machine.set_presence(False)
-    state_machine.send("tr_presence_change")
-    test_state(state_machine, "locked")
-
-    state_machine.set_presence(True)
-    state_machine.send("tr_presence_change")
-    test_state(state_machine, "unlocked")
-
-    # reported reported lock state
-    state_machine.set_reported_lock(state_machine.LOCKED)
-    state_machine.send("tr_reported_lock_change")
-    test_state(state_machine, "locked")
-
-    state_machine.set_reported_lock(state_machine.UNLOCKED)
-    state_machine.send("tr_reported_lock_change")
-    test_state(state_machine, "unlocked")
-
-    # ################
-    # LIGHT == OFF
-    # ################
-    state_machine.set_light(False)
-    state_machine.send("tr_dark_outside_change")
-    test_state(state_machine, "unlocked")
-
-    # check dark_outside
-    state_machine.set_dark_outside(True)
-    state_machine.send("tr_dark_outside_change")
-    test_state(state_machine, "locked")
-
-    state_machine.set_dark_outside(False)
-    state_machine.send("tr_dark_outside_change")
-    test_state(state_machine, "unlocked")
-
-    # check door_open
-    state_machine.set_door_open(True)
-    state_machine.send("tr_door_state_change")
-    test_state(state_machine, "unlocked")
-
-    state_machine.set_door_open(False)
-    state_machine.send("tr_door_state_change")
-    test_state(state_machine, "unlocked")
-
-    # check presence
-    state_machine.set_presence(False)
-    state_machine.send("tr_presence_change")
-    test_state(state_machine, "locked")
-
-    state_machine.set_presence(True)
-    state_machine.send("tr_presence_change")
-    test_state(state_machine, "unlocked")
-
-    # reported reported lock state
-    state_machine.set_reported_lock(state_machine.LOCKED)
-    state_machine.send("tr_reported_lock_change")
-    test_state(state_machine, "locked")
-
-    state_machine.set_reported_lock(state_machine.UNLOCKED)
-    state_machine.send("tr_reported_lock_change")
-    test_state(state_machine, "unlocked")
+    run_tests("light", ["unlocked", "unlocked"], test_set, state_machine)
 
 
 def test_presence_state():
@@ -458,100 +283,34 @@ def test_presence_state():
     state_machine = door_lock_statemachine(
         name=function_name, logger=log)
 
-    state_machine.set_presence(True)
-    state_machine.send("tr_presence_change")
-    test_state(state_machine, "unlocked")
+    test_set = {"dark_outside": {"ON": "locked",
+                                 "ON_OFF": "locked",
+                                 "ON_ON": "locked",
+                                 "OFF": "locked"
+                                },
+                "door_open": {"ON": "error",
+                              "ON_OFF": "error",
+                              "ON_ON": "unlocked",
+                              "OFF": "unlocked"
+                             },
+                "light": {"ON": "unlocked",
+                          "ON_OFF": "locked",
+                          "ON_ON": "unlocked",
+                          "OFF": "unlocked"
+                         },
+                }
 
-    state_machine.set_presence(False)
-    state_machine.send("tr_presence_change")
-    test_state(state_machine, "locked")
+    run_tests("presence", ["unlocked", "locked"], test_set, state_machine)
 
-    # ################
-    # PRESENCE == TRUE
-    # ################
-    state_machine.set_presence(True)
-    state_machine.send("tr_presence_change")
-    test_state(state_machine, "unlocked")
+    test_set = {# use this twice to start checking door_open in unlocked state
+                "door_open": {"ON": "unlocked",
+                              "ON_OFF": "error",
+                              "ON_ON": "unlocked",
+                              "OFF": "unlocked"
+                             },
+                }
 
-    # check dark_outside
-    state_machine.set_dark_outside(True)
-    state_machine.send("tr_dark_outside_change")
-    test_state(state_machine, "locked")
-
-    state_machine.set_dark_outside(False)
-    state_machine.send("tr_dark_outside_change")
-    test_state(state_machine, "unlocked")
-
-    # check door_open
-    state_machine.set_door_open(True)
-    state_machine.send("tr_door_state_change")
-    test_state(state_machine, "unlocked")
-
-    state_machine.set_door_open(False)
-    state_machine.send("tr_door_state_change")
-    test_state(state_machine, "unlocked")
-
-    # check light
-    state_machine.set_light(False)
-    state_machine.send("tr_light_change")
-    test_state(state_machine, "unlocked")
-
-    state_machine.set_light(True)
-    state_machine.send("tr_light_change")
-    test_state(state_machine, "unlocked")
-
-    # reported reported lock state
-    state_machine.set_reported_lock(state_machine.LOCKED)
-    state_machine.send("tr_reported_lock_change")
-    test_state(state_machine, "locked")
-
-    state_machine.set_reported_lock(state_machine.UNLOCKED)
-    state_machine.send("tr_reported_lock_change")
-    test_state(state_machine, "unlocked")
-
-    # #################
-    # PRESENCE == FALSE
-    # #################
-    state_machine.set_presence(False)
-    state_machine.send("tr_presence_change")
-    test_state(state_machine, "locked")
-
-    # check dark_outside
-    state_machine.set_dark_outside(True)
-    state_machine.send("tr_dark_outside_change")
-    test_state(state_machine, "locked")
-
-    state_machine.set_dark_outside(False)
-    state_machine.send("tr_dark_outside_change")
-    test_state(state_machine, "locked")
-
-    # check door_open
-    state_machine.set_door_open(True)
-    state_machine.send("tr_door_state_change")
-    test_state(state_machine, "error")
-
-    state_machine.set_door_open(False)
-    state_machine.send("tr_door_state_change")
-    test_state(state_machine, "locked")
-
-    # check light
-    state_machine.set_light(False)
-    state_machine.send("tr_light_change")
-    test_state(state_machine, "locked")
-
-    state_machine.set_light(True)
-    state_machine.send("tr_light_change")
-    test_state(state_machine, "locked")
-
-    # reported reported lock state
-    state_machine.set_reported_lock(state_machine.LOCKED)
-    state_machine.send("tr_reported_lock_change")
-    test_state(state_machine, "locked")
-
-    state_machine.set_reported_lock(state_machine.UNLOCKED)
-    state_machine.send("tr_reported_lock_change")
-    test_state(state_machine, "unlocked")
-
+    run_tests("presence", ["unlocked", "locked"], test_set, state_machine)
 
 def test_reported_lock_state():
     """Test if reported lock state handling is OK"""
