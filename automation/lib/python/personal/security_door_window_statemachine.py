@@ -6,6 +6,7 @@ import platform
 # log:set INFO jsr223.jython.Thermostat_statemachines_create
 
 OH_CONF = os.getenv('OPENHAB_CONF')
+LIGHT_LEVEL = 60
 
 sys.path.append(os.path.join(OH_CONF, "automation/lib/python/personal"))
 from statemachine import State, StateMachine
@@ -84,7 +85,8 @@ class security_door_window_statemachine(StateMachine):
                      st_red.to(st_yellow, cond="cond_bell_rang") |
                      st_red.to(st_purple, cond="cond_outer_door_open") |
                      st_red.to(st_blue, cond="cond_window_open") |
-                     st_red.to(st_green)
+                     st_red.to(st_green) |
+                     st_black.to.itself()
                     )
 
     tr_outer_door_open = (st_black.to(st_purple, cond="cond_outer_door_open") |
@@ -94,7 +96,8 @@ class security_door_window_statemachine(StateMachine):
                           st_red.to.itself() |
                           st_yellow.to.itself() |
                           st_purple.to(st_blue, cond="cond_window_open") |
-                          st_purple.to(st_green)
+                          st_purple.to(st_green) |
+                          st_black.to.itself()
                          )
 
     tr_window_open = (st_black.to(st_blue, cond="cond_window_open") |
@@ -103,7 +106,8 @@ class security_door_window_statemachine(StateMachine):
                       st_purple.to.itself() |
                       st_red.to.itself() |
                       st_yellow.to.itself() |
-                      st_blue.to(st_green)
+                      st_blue.to(st_green) |
+                      st_black.to.itself()
                      )
 
     tr_timeout = (st_black.to.itself() |
@@ -127,6 +131,8 @@ class security_door_window_statemachine(StateMachine):
         self._outer_door_open = False
         self._timeout = False
         self._window_open = False
+
+        self._light_level = 0
 
 #        for name, value in os.environ.items():
 #            self._logger.debug("{0}: {1}".format(name, value))
@@ -183,7 +189,14 @@ class security_door_window_statemachine(StateMachine):
         Returns:
             string: state name
         """
-        return self.current_state.name
+        return self.current_state.name.upper()
+
+    def get_light_level(self):
+        """return the level (0..100) of the light
+        Returns:
+            bool: light level
+        """
+        return self._light_level
 
     # set internal states BEFORE the event is send
     def set_bell_rang(self, state):
@@ -193,7 +206,7 @@ class security_door_window_statemachine(StateMachine):
         """
         self._bell_rang = state
         self._logger.info(
-            self.get_name() + "(" + str(id(self)) + "): - bell rang is: " + str(self._bell_rang))
+            self.get_name() + ": - bell rang is: " + str(self._bell_rang))
 
     def set_lock_error(self, state):
         """set internal state of lock_error
@@ -202,7 +215,7 @@ class security_door_window_statemachine(StateMachine):
         """
         self._lock_error = state
         self._logger.info(
-            self.get_name() + "(" + str(id(self)) + "): - lock error is: " + str(self._lock_error))
+            self.get_name() + ": - lock error is: " + str(self._lock_error))
 
     def set_outer_door_open(self, state):
         """set internal state of outer_door_open
@@ -228,8 +241,7 @@ class security_door_window_statemachine(StateMachine):
             state (bool): state of light
         """
         self._window_open = state
-        self._logger.info(
-            self.get_name() + "(" + str(id(self)) + "): - window open is: " + str(self._window_open))
+        self._logger.info(self.get_name() + ": - window open is: " + str(self._window_open))
 
     # Conditions
     def cond_bell_rang(self):
@@ -237,8 +249,7 @@ class security_door_window_statemachine(StateMachine):
         Returns:
             boolean: True/False
         """
-        self._logger.debug(self.get_name() + "(" + str(id(self)) +
-                           "): bell_rang = '{}'.".format(str(self._bell_rang)))
+        self._logger.debug(self.get_name() + ": bell_rang = '{}'.".format(str(self._bell_rang)))
         return self._bell_rang
 
     def cond_outer_door_open(self):
@@ -246,8 +257,7 @@ class security_door_window_statemachine(StateMachine):
         Returns:
             boolean: True/False
         """
-        self._logger.debug(self.get_name() + "(" + str(id(self)) +
-                           "): outer_door_open = '{}'.".format(str(self._outer_door_open)))
+        self._logger.debug(self.get_name() + ": outer_door_open = '{}'.".format(str(self._outer_door_open)))
         return self._outer_door_open
 
     def cond_lock_error (self):
@@ -256,8 +266,7 @@ class security_door_window_statemachine(StateMachine):
             boolean: True/False
         """
 
-        self._logger.debug(self.get_name() + "(" + str(id(self)) +
-                           "): lock_error = '{}'.".format(str(self._lock_error)))
+        self._logger.debug(self.get_name() + ": lock_error = '{}'.".format(str(self._lock_error)))
 
         return self._lock_error
 
@@ -266,8 +275,7 @@ class security_door_window_statemachine(StateMachine):
         Returns:
             boolean: True/False
         """
-        self._logger.debug(self.get_name() + "(" + str(id(self)) +
-                           "): light = '" + str(self._window_open) + "'.")
+        self._logger.debug(self.get_name() + ": light = '" + str(self._window_open) + "'.")
         return self._window_open
 
 
@@ -284,5 +292,25 @@ class security_door_window_statemachine(StateMachine):
 
     def after_transition(self, event, state):
         """last function in state change queue """
-        self._logger.info(
-            self.get_name() + "(" + str(id(self)) + "): is in state {}.".format(state.id))
+        self._logger.debug(
+            self.get_name() + ": is in state {}.".format(state.id))
+
+    def on_enter_st_black(self, source, target):
+        """entry action for state st_black"""
+        if source != target:
+            self._light_level = 0
+            self._logger.debug(
+                self.get_name() + ": set light level to %d", self._light_level)
+        else:
+            self._logger.debug(
+                self.get_name() + ": internal transition")
+
+    def on_exit_st_black(self, source, target):
+        """entry action for state st_black"""
+        if source != target:
+            self._light_level = LIGHT_LEVEL
+            self._logger.debug(
+                self.get_name() + ": set light level to %d", self._light_level)
+        else:
+            self._logger.debug(
+                self.get_name() + ": internal transition")

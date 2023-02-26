@@ -264,6 +264,25 @@ def test_timeout_state():
 
     run_tests("timeout", test_set, state_machine)
 
+def test_light_level():
+    """Test if if light level is correctly set"""
+    function_name = inspect.currentframe().f_code.co_name
+    print(f"\n########## {function_name} #########")
+
+    state_machine = security_door_window_statemachine(
+        name=function_name, logger=log)
+
+    assert state_machine.get_light_level() == 0
+
+    state_machine.set_bell_rang(True)
+    state_machine.send("tr_bell_rang")
+    assert state_machine.get_light_level() != 0
+
+    state_machine.set_bell_rang(False)
+    state_machine.send("tr_bell_rang")
+    assert state_machine.get_light_level() != 0
+    state_machine.send("tr_timeout")
+    assert state_machine.get_light_level() == 0
 
 test_default_state()
 test_bell_rang_state()
@@ -271,3 +290,4 @@ test_lock_error_state()
 test_outer_door_state()
 test_window_state()
 test_timeout_state()
+test_light_level()

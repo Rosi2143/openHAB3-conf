@@ -75,3 +75,10 @@ def astro_astrodusk_start(event):
 
     astro_astrodusk_start.log.info(
         "rule fired because of %s", event.event)
+
+    if items["TuerWaschkueche_OpenState"] == "OPEN":
+        events.sendCommand("SchlossWaschkueche_Fehler", "ON")
+        astro_astrodusk_start.log.error(
+            "cannot lock the door -- as it is open")
+    else:
+        events.sendCommand("SchlossWaschkueche_LockTargetLevel", "LOCKED")
