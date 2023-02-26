@@ -99,7 +99,7 @@ def initialize_door_lock_statemachine(event):
     initialize_door_lock_statemachine.log.info(
         "handling DoorOpen: (" + str(door_open_state) + ")")
     DOOR_LOCK_STATE_MACHINE.set_door_open((door_open_state == "OPEN"))
-    DOOR_LOCK_STATE_MACHINE.send("tr_door_state_change")
+    DOOR_LOCK_STATE_MACHINE.send("tr_door_open_change")
 
     # TerraceLight
     light_state = itemRegistry.getItem("LichtTerrasseUnten_State").state
@@ -156,7 +156,7 @@ def door_lock_party_mode_changes(event):
         "rule fired because of %s %s --> %s", event.itemName, event.oldItemState, event.itemState)
 
     DOOR_LOCK_STATE_MACHINE.set_door_open(str(event.itemState) == "ON")
-    DOOR_LOCK_STATE_MACHINE.send("tr_door_state_change")
+    DOOR_LOCK_STATE_MACHINE.send("tr_door_open_change")
     set_mode_item(DOOR_LOCK_STATE_MACHINE.get_state_name())
 
 # Check Errors

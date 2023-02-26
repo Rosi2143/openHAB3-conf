@@ -41,6 +41,7 @@ def test_state(state_machine, state):
     else:
         state_machine.set_reported_lock(state_machine.UNLOCKED)
 
+
 def run_tests(event, base_test, test_set, state_machine):
 
     event_function = getattr(state_machine, "set_" + event)
@@ -311,6 +312,7 @@ def test_presence_state():
                 }
 
     run_tests("presence", ["unlocked", "locked"], test_set, state_machine)
+
 
 def test_reported_lock_state():
     """Test if reported lock state handling is OK"""
