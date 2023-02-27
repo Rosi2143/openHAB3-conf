@@ -20,12 +20,10 @@ log = logging.getLogger("{}.mp3_player_mode".format(LOG_PREFIX))
 MP3_PLAYER_STATE_MACHINE = security_door_window_statemachine(
     "Kueche", log)
 
-
 def set_mode_item(state, level):
     """set the mp3_player_mode item """
     events.sendCommand("Mp3Spieler_Color", state)
     events.sendCommand("Mp3Spieler_Level", str(level))
-
 
 @rule("MP3_player_statemachine_create",
       description="initialize the statemachines for mp3-player device",
@@ -131,7 +129,7 @@ def mp3_player_outer_door_open(event):
 # Check window_open
 @rule("mp3_Player_window_open",
       description="react on changes in window_open",
-      tags=["itemchange", "mp3_player", "statemachines", "lock_error"])
+      tags=["itemchange", "mp3_player", "statemachines", "window_open"])
 @when("Item gWindows changed")
 def mp3_player_window_open(event):
     """
@@ -145,7 +143,6 @@ def mp3_player_window_open(event):
     MP3_PLAYER_STATE_MACHINE.set_window_open(str(event.itemState) == "ON")
     MP3_PLAYER_STATE_MACHINE.send("tr_window_open")
     set_mode_item(MP3_PLAYER_STATE_MACHINE.get_state_name(), MP3_PLAYER_STATE_MACHINE.get_light_level())
-
 
 # Check Timeout
 @rule("MP3_Player_Timeout",
