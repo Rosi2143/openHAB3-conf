@@ -48,33 +48,23 @@ def mqtt_terrasse_remote(event):
 
     if event.itemName.contains("_Long"):
         if event.itemName.contains("_MainButton_"):
-            pass
-#            events.postUpdate("LichtGaestezimmer_State", toggle_map[items["LichtGaestezimmer_State"]])
+            events.postUpdate("eLichtTerrasse_Pergola_Alle_State", toggle_map[items["eLichtTerrasse_Pergola_Alle_State"]])
         if event.itemName.contains("_Up_"):
-            pass
-#            events.postUpdate("LichtGaestezimmer_State", toggle_map[items["LichtGaestezimmer_State"]])
+            events.postUpdate("eLichtTerrasse_Pergola_Alle_Dimmer", "100")
         if event.itemName.contains("_Left_"):
-            pass
-#            events.postUpdate("LichtGaestezimmer_State", toggle_map[items["LichtGaestezimmer_State"]])
+            events.postUpdate("eLichtTerrasse_Pergola_Alle_ColorTemp", "0")
         if event.itemName.contains("_Right_"):
-            pass
-#            events.postUpdate("LichtGaestezimmer_State", toggle_map[items["LichtGaestezimmer_State"]])
+            events.postUpdate("eLichtTerrasse_Pergola_Alle_ColorTemp", "100")
         if event.itemName.contains("_Down_"):
-            pass
-#            events.postUpdate("LichtGaestezimmer_State", toggle_map[items["LichtGaestezimmer_State"]])
+            events.postUpdate("eLichtTerrasse_Pergola_Alle_Dimmer", "1")
     else:
         if event.itemName.contains("_MainButton"):
-            pass
-#            events.postUpdate("LichtGaestezimmer_State", toggle_map[items["LichtGaestezimmer_State"]])
+            events.postUpdate("eLichtTerrasse_Pergola_Alle_State", toggle_map[items["eLichtTerrasse_Pergola_Alle_State"]])
         if event.itemName.contains("_Up"):
-            pass
-#            events.postUpdate("LichtGaestezimmer_State", toggle_map[items["LichtGaestezimmer_State"]])
+            events.postUpdate("eLichtTerrasse_Pergola_Alle_Dimmer_Step", "20")
         if event.itemName.contains("_Left"):
-            pass
-#            events.postUpdate("LichtGaestezimmer_State", toggle_map[items["LichtGaestezimmer_State"]])
+            events.postUpdate("eLichtTerrasse_Pergola_Alle_ColorTemp_Step", "-20")
         if event.itemName.contains("_Right"):
-            pass
-#            events.postUpdate("LichtGaestezimmer_State", toggle_map[items["LichtGaestezimmer_State"]])
+            events.postUpdate("eLichtTerrasse_Pergola_Alle_ColorTemp_Step", "20")
         if event.itemName.contains("_Down"):
-            pass
-#            events.postUpdate("LichtGaestezimmer_State", toggle_map[items["LichtGaestezimmer_State"]])
+            events.postUpdate("eLichtTerrasse_Pergola_Alle_Dimmer_Step", "-20")
