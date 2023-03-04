@@ -52,15 +52,25 @@ def switch2wall_mapping_short(event):
     switch2wall_mapping_short.log.info(
         "rule fired because of %s", event.itemName)
 
+    toggle_map = {"ON" : "OFF",
+                  "OFF" : "ON"
+                 }
     switch_equipment_name = event.itemName.replace("_Short", "")
     if switch_equipment_name in json_config["Short"]:
-        light_item_name = json_config["Short"][switch_equipment_name] + "_State"
+        light_items = json_config["Short"][switch_equipment_name]
         switch2wall_mapping_short.log.info(
-            "setting item %s", light_item_name)
-        if items[light_item_name] == ON:
-            events.sendCommand(light_item_name, "OFF")
+            "found light(s) %s (is type == %s)", light_items, type(light_items))
+        if isinstance(light_items, unicode):
+            switch2wall_mapping_short.log.info(
+                "setting item %s", light_items)
+            light_item_name = light_items + "_State"
+            events.sendCommand(light_items, toggle_map[str(items[light_item_name])])
         else:
-            events.sendCommand(light_item_name, "ON")
+            for light_item in light_items:
+                light_item_name = light_item + "_State"
+                switch2wall_mapping_short.log.info(
+                    "setting item %s", light_item_name)
+                events.sendCommand(light_item_name, toggle_map[str(items[light_item_name])])
     else:
         switch2wall_mapping_short.log.warn(
             "event %s does not exist", switch_equipment_name)
