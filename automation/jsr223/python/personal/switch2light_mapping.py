@@ -1,6 +1,6 @@
 """
 This script maps the wall switches to the lights they handle.
-xvs change to reload
+ change to reload
 """
 
 import os
