@@ -41,7 +41,7 @@ def homematic_comm_wd_timeout(event):
     events.sendCommand("RaspiMaticGatewayExtras_Commcounter_Openhab", "0")
     homematic_comm_wd_timeout.log.debug("Timer has executed")
     events.postUpdate("RaspiMaticGatewayExtras_Commcounter_Error",
-                      str(items["RaspiMaticGatewayExtras_Commcounter_Error"] + 1))
+                      str(items["RaspiMaticGatewayExtras_Commcounter_Error"].intValue() + 1))
     events.postUpdate("openHab_Binding_Restart_String", "none")
     sleep(50 / 1000)
     events.postUpdate("openHab_Binding_Restart_String",

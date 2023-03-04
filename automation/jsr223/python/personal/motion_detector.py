@@ -23,7 +23,7 @@ def motiondetect_frontdoor(event):
     motiondetect_frontdoor.log.info(
         "rule fired because of %s %s --> %s", event.itemName, event.oldItemState, event.itemState)
 
-    events.postUpdate(LichtHaustuer_State, event.itemState)
+    events.postUpdate("LichtHaustuer_State", str(event.itemState))
 
 
 @rule("MotionDetect: BasementCorridor",
@@ -40,7 +40,7 @@ def motiondetect_basement_corridor(event):
     motiondetect_basement_corridor.log.info(
         "rule fired because of %s %s --> %s", event.itemName, event.oldItemState, event.itemState)
 
-    events.postUpdate("LichtFlurKeller_State", event.itemState)
+    events.postUpdate("LichtFlurKeller_State", str(event.itemState))
 
 
 # IKEA
@@ -58,7 +58,7 @@ def motiondetect_guest(event):
     motiondetect_guest.log.info(
         "rule fired because of %s %s --> %s", event.itemName, event.oldItemState, event.itemState)
 
-    events.postUpdate("LichtGastWC_State", event.itemState)
+    events.postUpdate("LichtGastWC_State", str(event.itemState))
 
 
 @rule("MotionDetect: Abstellraum",
@@ -75,7 +75,7 @@ def motiondetect_guest(event):
     motiondetect_guest.log.info(
         "rule fired because of %s %s --> %s", event.itemName, event.oldItemState, event.itemState)
 
-    events.postUpdate("LichtAbstellraum_State", event.itemState)
+    events.postUpdate("LichtAbstellraum_State", str(event.itemState))
 
 
 @rule("MotionDetect: Gast",
@@ -92,7 +92,7 @@ def motiondetect_guest(event):
     motiondetect_guest.log.info(
         "rule fired because of %s %s --> %s", event.itemName, event.oldItemState, event.itemState)
 
-    events.postUpdate("LichtGast_State", event.itemState)
+    events.postUpdate("LichtGast_State", (event.itemState))
 
 
 @rule("MotionDetect: Office",
@@ -109,7 +109,7 @@ def motiondetect_office(event):
     motiondetect_office.log.info(
         "rule fired because of %s %s --> %s", event.itemName, event.oldItemState, event.itemState)
 
-    events.postUpdate("LichtBuero_State", event.itemState)
+    events.postUpdate("LichtBuero_State", str(event.itemState))
 
 
 @rule("MotionDetect: Werkstatt",
@@ -126,4 +126,4 @@ def motiondetect_werkstatt(event):
     motiondetect_werkstatt.log.info(
         "rule fired because of %s %s --> %s", event.itemName, event.oldItemState, event.itemState)
 
-    events.postUpdate("LichtWerkstatt_State", event.itemState)
+    events.postUpdate("LichtWerkstatt_State", str(event.itemState))

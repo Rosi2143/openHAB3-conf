@@ -1,23 +1,59 @@
 {
     "Long": {
-        "SchalterFlurKeller": "gLichterKeller",
-        "SchalterGaestezimmer": "gLichterHaus",
-        "SchalterGastWC": "LichtHaustuer ",
-        "SchalterFlurErdgeschossHaustuer": "gLichterHaus",
+        "SchalterFlurKeller": {
+            "id": "gLichterKeller",
+            "command": "OFF"
+        },
+        "SchalterGaestezimmer": {
+            "id": "gLichterHaus",
+            "command": "OFF"
+        },
+        "SchalterGastWC": {
+            "id": "LichtHaustuer",
+            "command": "toggle"
+        },
+        "SchalterFlurErdgeschossHaustuer": {
+            "id": "gLichterHaus",
+            "command": "OFF"
+        },
         "SchalterWohnzimmerTuer": [
-            "LichtWohnzimmer",
-            "LichtEsszimmer",
-            "SteckdoseHighboard",
-            "LichtKaminzimmer"
+            {
+                "id": "LichtWohnzimmer",
+                "command": "OFF"
+            },
+            {
+                "id": "LichtEsszimmer",
+                "command": "OFF"
+            },
+            {
+                "id": "SteckdoseHighboard",
+                "command": "OFF"
+            },
+            {
+                "id": "LichtKaminzimmer",
+                "command": "OFF"
+            }
         ],
-        "SchalterEsszimmerSchrank": "LichtEsszimmer",
-        "SchalterKueche": [
-            "LichtKuecheDecke",
-            "LichtKuecheToaster"
-        ],
-        "SchalterFlurKellerOben": "gLichterKeller",
-        "SchalterFlurObergeschossUnten": "gLichterObergeschoss",
-        "SchalterBadTuer": "gLichterBad"
+        "SchalterEsszimmerSchrank": {
+            "id": "LichtEsszimmer",
+            "command": "OFF"
+        },
+        "SchalterKueche": {
+            "id": "LichtKuecheBacken",
+            "command": "toggle"
+        },
+        "SchalterFlurKellerOben": {
+            "id": "gLichterKeller",
+            "command": "OFF"
+        },
+        "SchalterFlurObergeschossUnten": {
+            "id": "gLichterObergeschoss",
+            "command": "OFF"
+        },
+        "SchalterBadTuer": {
+            "id": "gLichterBad",
+            "command": "toggle"
+        }
     },
     "Short": {
         "SchalterWerkstatt": [
@@ -31,7 +67,7 @@
         "SchalterWaschkuecheInnen": "LichtWaschkueche",
         "SchalterBuero": "LichtBuero",
         "SchalterAbstellraum": "LichtAbstellraum",
-        "SchalterGastWC": "LichtGastWc ",
+        "SchalterGastWC": "LichtGastWC",
         "SchalterFlurErdgeschossHaustuer": "LichtFlurErdgeschoss",
         "SchalterSchlafzimmer": [
             "LichtSchlafzimmer",

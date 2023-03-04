@@ -21,7 +21,7 @@ def habpanel_notifications_first_floor_lights(event):
     habpanel_notifications_first_floor_lights.log.info(
         "rule fired because of %s %s --> %s", event.itemName, event.oldItemState, event.itemState)
 
-    events.postUpdate("LightNotification_FF", event.itemState)
+    events.postUpdate("LightNotification_FF", str(event.itemState))
 
 @rule("HABPanel: ground floor lights",
       description="handle light state if ground floor",
@@ -37,7 +37,7 @@ def habpanel_notifications_ground_floor_lights(event):
     habpanel_notifications_ground_floor_lights.log.info(
         "rule fired because of %s %s --> %s", event.itemName, event.oldItemState, event.itemState)
 
-    events.postUpdate("LightNotification_GF", event.itemState)
+    events.postUpdate("LightNotification_GF", str(event.itemState))
 
 @rule("HABPanel: basement lights",
       description="handle light state if basement",
@@ -53,7 +53,7 @@ def habpanel_notifications_basement_lights(event):
     habpanel_notifications_basement_lights.log.info(
         "rule fired because of %s %s --> %s", event.itemName, event.oldItemState, event.itemState)
 
-    events.postUpdate("LightNotification_BM", event.itemState)
+    events.postUpdate("LightNotification_BM", str(event.itemState))
 
 
 @rule("HABPanel: security issue",
@@ -99,5 +99,3 @@ def habpanel_notifications_thing_state(event):
         events.sendCommand("ThingItems", "ON")
     else:
         events.sendCommand("ThingItems", "OFF")
-
-
