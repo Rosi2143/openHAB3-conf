@@ -22,7 +22,7 @@
     "Short": {
         "SchalterWerkstatt": [
             "LichtWerkstatt",
-            "LichtWerkstatt"
+            "SteckdoseWerkstatt"
         ],
         "SchalterFlurKeller": "LichtFlurKeller",
         "SchalterGaestezimmer": "LichtGaestezimmer",
@@ -33,7 +33,10 @@
         "SchalterAbstellraum": "LichtAbstellraum",
         "SchalterGastWC": "LichtGastWc ",
         "SchalterFlurErdgeschossHaustuer": "LichtFlurErdgeschoss",
-        "SchalterSchlafzimmer": "LichtSchlafzimmer",
+        "SchalterSchlafzimmer": [
+            "LichtSchlafzimmer",
+            "SteckdoseSchlafzimmer"
+        ],
         "SchalterWohnzimmerSchrank": "LichtWohnzimmer",
         "SchalterKaminzimmer": "LichtKaminzimmer",
         "SchalterWohnzimmerTuer": "LichtWohnzimmer",
