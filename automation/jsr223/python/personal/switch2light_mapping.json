@@ -1,64 +1,68 @@
 {
     "Long": {
-        "_SchalterFlurKeller": "gLichterKeller",
-        "_SchalterGaestezimmer": "gLichterHaus",
-        "_SchalterGastWC": "LichtHaustuer ",
-        "_SchalterFlurErdgeschossHaustuer": "gLichterHaus",
-        "_SchalterWohnzimmerTuer": [
+        "SchalterFlurKeller": "gLichterKeller",
+        "SchalterGaestezimmer": "gLichterHaus",
+        "SchalterGastWC": "LichtHaustuer ",
+        "SchalterFlurErdgeschossHaustuer": "gLichterHaus",
+        "SchalterWohnzimmerTuer": [
             "LichtWohnzimmer",
             "LichtEsszimmer",
+            "SteckdoseHighboard",
             "LichtKaminzimmer"
         ],
-        "_SchalterEsszimmerSchrank": "LichtEsszimmer",
-        "_SchalterKueche": [
+        "SchalterEsszimmerSchrank": "LichtEsszimmer",
+        "SchalterKueche": [
             "LichtKuecheDecke",
             "LichtKuecheToaster"
         ],
-        "_SchalterFlurKellerOben": "gLichterKeller",
-        "_SchalterFlurObergeschossUnten": "gLichterObergeschoss",
-        "_SchalterBadTuer": "gLichterBad"
+        "SchalterFlurKellerOben": "gLichterKeller",
+        "SchalterFlurObergeschossUnten": "gLichterObergeschoss",
+        "SchalterBadTuer": "gLichterBad"
     },
     "Short": {
-        "_SchalterWerkstatt": [
+        "SchalterWerkstatt": [
             "LichtWerkstatt",
             "LichtWerkstatt"
         ],
-        "_SchalterFlurKeller": "LichtFlurKeller",
-        "_SchalterGaestezimmer": "LichtGaestezimmer",
-        "_SchalterWaschkuecheAussen": "LichtWaschkueche",
-        "_SchalterTerrasseUnten": "LichtTerrasseUnten",
-        "_SchalterWaschkuecheInnen": "LichtWaschkueche",
-        "_SchalterBuero": "LichtBuero",
-        "_SchalterAbstellraum": "LichtAbstellraum",
-        "_SchalterGastWC": "LichtGastWc ",
-        "_SchalterFlurErdgeschossHaustuer": "LichtFlurErdgeschoss",
-        "_SchalterSchlafzimmer": "LichtSchlafzimmer",
-        "_SchalterWohnzimmerSchrank": "LichtWohnzimmer",
-        "_SchalterKaminzimmer": "LichtKaminzimmer",
-        "_SchalterWohnzimmerTuer": "LichtWohnzimmer",
-        "_SchalterEsszimmerTuer": [
+        "SchalterFlurKeller": "LichtFlurKeller",
+        "SchalterGaestezimmer": "LichtGaestezimmer",
+        "SchalterWaschkuecheAussen": "LichtWaschkueche",
+        "SchalterTerrasseUnten": "LichtTerrasseUnten",
+        "SchalterWaschkuecheInnen": "LichtWaschkueche",
+        "SchalterBuero": "LichtBuero",
+        "SchalterAbstellraum": "LichtAbstellraum",
+        "SchalterGastWC": "LichtGastWc ",
+        "SchalterFlurErdgeschossHaustuer": "LichtFlurErdgeschoss",
+        "SchalterSchlafzimmer": "LichtSchlafzimmer",
+        "SchalterWohnzimmerSchrank": "LichtWohnzimmer",
+        "SchalterKaminzimmer": "LichtKaminzimmer",
+        "SchalterWohnzimmerTuer": "LichtWohnzimmer",
+        "SchalterEsszimmerTuer": [
             "LichtEsszimmer",
             "SteckdoseHighboard"
         ],
-        "_SchalterEsszimmerSchrank": "LichtEsszimmer",
-        "_SchalterKueche": [
+        "SchalterEsszimmerSchrank": [
+            "LichtEsszimmer",
+            "SteckdoseHighboard"
+        ],
+        "SchalterKueche": [
             "LichtKuecheDecke",
             "LichtKuecheToaster"
         ],
-        "_SchalterFlurKellerOben": "LichtFlurKeller",
-        "_SchalterMika": "LichtMika",
-        "_SchalterSara": "LichtSara",
-        "_SchalterFinnjaTuer": "LichtFinnja",
-        "_SchalterFinnjaBettLinks": "LichtFinnja",
-        "_SchalterFinnjaBettRechts": "LichtFinnja",
-        "_SchalterFlurObergeschossMika": "LichtFlurObergeschoss",
-        "_SchalterFlurErdgeschossTreppe": "LichtFlurErdgeschoss",
-        "_SchalterFlurObergeschossUnten": "LichtFlurObergeschoss",
-        "_SchalterFlurObergeschossBad": "LichtFlurObergeschoss",
-        "_SchalterBadTuer": "LichtBadDecke",
-        "_SchalterBadSpiegel": "LichtBadSpiegel",
+        "SchalterFlurKellerOben": "LichtFlurKeller",
+        "SchalterMika": "LichtMika",
+        "SchalterSara": "LichtSara",
+        "SchalterFinnjaTuer": "LichtFinnja",
+        "SchalterFinnjaBettLinks": "LichtFinnja",
+        "SchalterFinnjaBettRechts": "LichtFinnja",
+        "SchalterFlurObergeschossMika": "LichtFlurObergeschoss",
+        "SchalterFlurErdgeschossTreppe": "LichtFlurErdgeschoss",
+        "SchalterFlurObergeschossUnten": "LichtFlurObergeschoss",
+        "SchalterFlurObergeschossBad": "LichtFlurObergeschoss",
+        "SchalterBadTuer": "LichtBadDecke",
+        "SchalterBadSpiegel": "LichtBadSpiegel",
         "TuerKammer": "LichtKammer",
-        "_SchalterDachboden": "LichtDachboden",
+        "SchalterDachboden": "LichtDachboden",
         "Tinkerforge_TestIn_OpenState": "Tinkerforge_TestOut"
     }
 }
