@@ -12,7 +12,6 @@ scriptpath = os.environ["OPENHAB_CONF"] + "/automation/jsr223/python/personal/"
 with open(os.path.join(scriptpath, 'switch2light_mapping.json'), "rt") as json_file:
     json_config = json.load(json_file)
 
-
 toggle_map = {"ON" : "OFF",
               "OFF" : "ON"
              }
