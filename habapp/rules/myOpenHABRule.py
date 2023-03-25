@@ -69,4 +69,4 @@ class MyOpenhabRule(HABApp.Rule):
         self.oh.post_update('HABApp_String', str(event))
 
 
-MyOpenhabRule()
+# MyOpenhabRule()

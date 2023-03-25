@@ -125,14 +125,14 @@ class MyFirstRule4(HABApp.Rule):
 
 
 # Rules
-MyFirstRule()
+# MyFirstRule()
 
 # This is normal python code, so you can create Rule instances as you like
-for i in range(2):
-    MyFirstRule2(i)
-for t in ['Text 1', 'Text 2']:
-    MyFirstRule2(t)
+# for i in range(2):
+#     MyFirstRule2(i)
+# for t in ['Text 1', 'Text 2']:
+#     MyFirstRule2(t)
 
-MyFirstRule4()
+# MyFirstRule4()
 
-MyFirstRule3()
+# MyFirstRule3()
