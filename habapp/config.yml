@@ -11,12 +11,12 @@ location:
 mqtt:
   connection:
     client_id: "HABApp3" # ClientId that is used to uniquely identify this client on the mqtt broker.
-    host: "Volumio" # Connect to this host. Empty string ("") disables the connection.
+    host: "192.168.178.37" # Connect to this host. Empty string ("") disables the connection.
     port: 1883
     user: ""
     password: ""
     tls:
-      enabled: true # Enable TLS for the connection
+      enabled: false # Enable TLS for the connection
       ca cert: . # Path to a CA certificate that will be treated as trusted
       insecure: false # Validate server hostname in server certificate
   subscribe:
