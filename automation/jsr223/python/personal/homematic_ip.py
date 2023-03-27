@@ -66,9 +66,11 @@ def homematic_ip_ring_end(event):
 
     events.sendCommand("HabPanelDashboardName", "Erdgeschoss")
 
+
 MAX_ALLOWED_TEMP = 27
 NEW_ALLOWED_TEMP = 20
 OVERHEAT_STRING = "_HitzeSchutzTimer"
+
 
 @rule("HomematicIP: OverHeatProtectionStart",
       description="start timer to prevent too high temperatures",
@@ -91,9 +93,11 @@ def homematic_overheat_protection_start(event):
         timer_item_name = event.itemName + OVERHEAT_STRING
         timer_item = itemRegistry.getItems(timer_item_name)
         if timer_item == []:
-            homematic_overheat_protection_start.log.info("TimerItem: " + timer_item.name + " does not exist.")
+            homematic_overheat_protection_start.log.info(
+                "TimerItem: " + timer_item_name + " does not exist.")
         else:
             events.sendCommand(timer_item, "ON")
+
 
 @rule("HomematicIP: OverHeatProtectionEnd",
       description="end of timer to prevent too high temperatures",
@@ -115,5 +119,27 @@ def homematic_overheat_protection_end(event):
     new_temp = str(NEW_ALLOWED_TEMP)
 
     if set_temp >= MAX_ALLOWED_TEMP:
-        homematic_overheat_protection_end.log.info("Reset: " + item_name + " to lower temperature of " + new_temp + "°C.")
+        homematic_overheat_protection_end.log.info(
+            "Reset: " + item_name + " to lower temperature of " + new_temp + "°C.")
         events.sendCommand(item_name, new_temp)
+
+
+@rule("HomematicIP: handle WindowStates",
+      description="set thermostat state depending on window states",
+      tags=["memberchange", "HomematicIP", "windowstate"])
+@when("Member of gThermostate_WindowOpenStates changed")
+def homematic_window_open_state_handling(event):
+    """set thermostat item depending on window open state"""
+
+    homematic_window_open_state_handling.log.info(
+        "rule fired because of %s %s --> %s", event.itemName, event.oldItemState, event.itemState)
+
+    windowstate_item_name = event.itemName.replace(
+        "_WindowOpenState", "_WindowState")
+    windowstate_item = itemRegistry.getItems(windowstate_item_name)
+    if windowstate_item == []:
+        homematic_window_open_state_handling.log.info(
+            "WindowOpenStateItem: " + windowstate_item_name + " does not exist.")
+    else:
+        events.sendCommand(itemRegistry.getItem(
+            windowstate_item_name), event.itemState)
