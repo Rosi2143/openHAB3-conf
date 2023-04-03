@@ -22,7 +22,7 @@ def homematic_ip_shed_door(event):
     homematic_ip_shed_door.log.info(
         "rule fired because of %s %s --> %s", event.itemName, event.oldItemState, event.itemState)
 
-    if event.itemState == "OPEN":
+    if str(event.itemState) == "OPEN":
         events.postUpdate("Schuppen_State", "ON")
     else:
         events.postUpdate("Schuppen_State", "OFF")
@@ -143,3 +143,4 @@ def homematic_window_open_state_handling(event):
     else:
         events.sendCommand(itemRegistry.getItem(
             windowstate_item_name), event.itemState)
+
