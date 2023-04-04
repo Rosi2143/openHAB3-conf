@@ -96,7 +96,7 @@ class BrickletOut4(TinkerforgeBase, OhBase):
         """get port value from bricklet"""
 
         if not initial_check:
-            self.logger.info("check_ports for %s", self.uid)
+            self.logger.debug("check_ports for %s", self.uid)
         portvalue = self.out4_bricklet.get_value()
         self.logger.debug("portvalue " + str(portvalue))
         self.logger.debug(

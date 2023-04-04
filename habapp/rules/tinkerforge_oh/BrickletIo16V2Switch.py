@@ -49,15 +49,15 @@ class BrickletIo16V2Switch(BrickletIo16V2):
         if "switch_overwrite" in self.port_mapping:
             if str(port) in self.port_mapping["switch_overwrite"]:
                 if self.port_mapping["switch_overwrite"][str(port)] == "inverted":
-                    item_name = item_name + "OpenState"
+                    item_name = item_name + "_OpenState"
                     self.logger.info("switch overwrite for: " +
                                      item_name + ":" + inverted_item_state)
                     self.set_oh_item_state(
-                        item_name, inverted_item_state, "Switch")
+                        item_name, inverted_item_state, "Contact")
                 else:
                     self.logger.info("switch overwrite for: " +
                                      item_name + ":" + item_state)
-                    self.set_oh_item_state(item_name, item_state, "Switch ")
+                    self.set_oh_item_state(item_name, item_state, "Contact ")
             else:
                 self.logger.debug("no overwrite(1): " +
                                   json.dumps(self.port_mapping, indent=2))
