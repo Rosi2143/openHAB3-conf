@@ -78,10 +78,10 @@ def switch2wall_mapping_short(event):
         switch2wall_mapping_short.log.info(
             "found light(s) %s (is type == %s)", light_items, type(light_items))
         if not isinstance(light_items, list):
-            switch2wall_mapping_short.log.info(
-                "setting item %s", light_items)
             light_item_name = light_items + "_State"
-            events.sendCommand(light_items, toggle_map[str(items[light_item_name])])
+            switch2wall_mapping_short.log.info(
+                "setting item %s", light_item_name)
+            events.sendCommand(light_item_name, toggle_map[str(items[light_item_name])])
         else:
             for light_item in light_items:
                 light_item_name = light_item + "_State"

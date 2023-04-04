@@ -25,7 +25,7 @@ def check_charging_state(event):
 
     if event:
         check_charging_state.log.info(
-            "rule fired because of %s", event.event)
+            "rule fired because of %s", event.itemName)
 
     check_charging_state.log.debug(
         "HABPanel_Battery_Level = %s", items["HABPanel_Battery_Level"])
