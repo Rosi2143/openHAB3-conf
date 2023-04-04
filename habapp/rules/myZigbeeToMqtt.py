@@ -33,11 +33,11 @@ class zigbee2Mqtt_Bridge(HABApp.Rule):
         parmFile = 'ikea_param_file'
         # array of maps of all MQTT item read from parameter file
         self.mqttitems = {}
-        self.mqttitems['BewegungsMelder'] = HABApp.DictParameter(
+        self.mqttitems['Bewegungsmelder'] = HABApp.DictParameter(
             parmFile, 'MotionDetectors', default_value=None)
         self.mqttitems['Licht'] = HABApp.DictParameter(
             parmFile, 'Lights', default_value=None)
-        self.mqttitems['FernBedienung'] = HABApp.DictParameter(
+        self.mqttitems['Fernbedienung'] = HABApp.DictParameter(
             parmFile, 'RemoteControls', default_value=None)
 
         # item definitions
@@ -288,12 +288,12 @@ class zigbee2Mqtt_Bridge(HABApp.Rule):
             if device_name.find("Licht") != -1:
                 publish_value = publish_value + "Lampe/" + \
                     device_name.replace("Licht", "")
-            if device_name.find("FernBedienung") != -1:
-                publish_value = publish_value + "FernBedienung/" + \
-                    device_name.replace("FernBedienung", "")
-            if device_name.find("BewegungsMelder") != -1:
-                publish_value = publish_value + "BewegungsMelder/" + \
-                    device_name.replace("BewegungsMelder", "")
+            if device_name.find("Fernbedienung") != -1:
+                publish_value = publish_value + "Fernbedienung/" + \
+                    device_name.replace("Fernbedienung", "")
+            if device_name.find("Bewegungsmelder") != -1:
+                publish_value = publish_value + "Bewegungsmelder/" + \
+                    device_name.replace("Bewegungsmelder", "")
 
             log.info("trigger update for %s", device_name)
             self.mqtt_TriggerUpdate_request_item.publish(

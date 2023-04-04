@@ -45,14 +45,14 @@ class IkeaZigbeeDevices(HABApp.Rule):
 
         for motion_detector in self.motion_detectors.values():
             mqtt_motion_detector_topic = self.mqtt_base_topic + \
-                'BewegungsMelder/' + motion_detector
+                'Bewegungsmelder/' + motion_detector
             self.listen_event(mqtt_motion_detector_topic,
                               self.motion_detect_updated, ValueUpdateEventFilter())
             logger.info("added listener for %s", mqtt_motion_detector_topic)
 
         for remote_control in self.remote_controls.values():
             mqtt_remote_control_topic = self.mqtt_base_topic + \
-                'FernBedienung/' + remote_control
+                'Fernbedienung/' + remote_control
             self.listen_event(mqtt_remote_control_topic,
                               self.remote_control_updated, ValueUpdateEventFilter())
             logger.info("added listener for %s", mqtt_remote_control_topic)

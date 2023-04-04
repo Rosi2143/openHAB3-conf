@@ -16,8 +16,8 @@ toggle_map = {"OFF": "ON",
 @rule("MQTT: Sleeping remote",
       description="handle buttons of remote control",
       tags=["itemchange", "mqtt", "remote"])
-@when("Item FernBedienungSchlafzimmer_Main changed to ON")
-@when("Item FernBedienungSchlafzimmer_Main_Long changed to ON")
+@when("Item FernbedienungSchlafzimmer_Main changed to ON")
+@when("Item FernbedienungSchlafzimmer_Main_Long changed to ON")
 def mqtt_sleeping_remote(event):
     """
     key of remote control
@@ -38,7 +38,7 @@ def mqtt_sleeping_remote(event):
 @rule("MQTT: Terrasse remote",
       description="handle buttons of remote control",
       tags=["itemchange", "mqtt", "remote"])
-@when("Member of gFernBedienungTerrasse changed to ON")
+@when("Member of gFernbedienungTerrasse changed to ON")
 def mqtt_terrasse_remote(event):
     """
     key of remote control

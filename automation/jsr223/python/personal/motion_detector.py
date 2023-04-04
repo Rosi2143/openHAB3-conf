@@ -8,7 +8,28 @@ from core.rules import rule
 from core.triggers import when
 
 
+@rule("generic Motion detector rule",
+      description="set light for motion detector",
+      tags=["memberchange", "MotionDetect"])
+@when("Member of gBewegungsmelder_State changed")
+def motiondetect_generic(event):
+    """switch lamps when motion is detected"""
+    motiondetect_generic.log.info(
+        "rule fired because of %s %s --> %s", event.itemName, event.oldItemState, event.itemState)
+
+    light_item_name_map = {"LichtFlur_State", "LichtFlurKeller_State"}
+
+    light_item_name = "Licht" + \
+        str(event.itemName).replace("Bewegungsmelder",
+                                    "").replace("_MotionState", "_State")
+    if light_item_name in light_item_name_map:
+        light_item_name = light_item_name_map["light_item_name"]
+
+    events.postUpdate(light_item_name, str(event.itemState))
+
 # Homematic-IP
+
+
 @rule("MotionDetect: FrontDoor",
       description="MotionDetector of FrontDoor",
       tags=["itemchange", "MotionDetect", "frontdoor"])
@@ -41,89 +62,3 @@ def motiondetect_basement_corridor(event):
         "rule fired because of %s %s --> %s", event.itemName, event.oldItemState, event.itemState)
 
     events.postUpdate("LichtFlurKeller_State", str(event.itemState))
-
-
-# IKEA
-@rule("MotionDetect: GastWC",
-      description="MotionDetector of GastWC",
-      tags=["itemchange", "MotionDetect", "GuestWC", "mqtt"])
-@when("Item BewegungsmelderGastWC_Motion changed")
-def motiondetect_guest(event):
-    """
-    switch lamp with motion detect
-
-    Args:
-        event (_type_): triggering event
-    """
-    motiondetect_guest.log.info(
-        "rule fired because of %s %s --> %s", event.itemName, event.oldItemState, event.itemState)
-
-    events.postUpdate("LichtGastWC_State", str(event.itemState))
-
-
-@rule("MotionDetect: Abstellraum",
-      description="MotionDetector of Abstellraum",
-      tags=["itemchange", "MotionDetect", "Abstellraum", "mqtt"])
-@when("Item BewegungsmelderAbstellraum_Motion changed")
-def motiondetect_guest(event):
-    """
-    switch lamp with motion detect
-
-    Args:
-        event (_type_): triggering event
-    """
-    motiondetect_guest.log.info(
-        "rule fired because of %s %s --> %s", event.itemName, event.oldItemState, event.itemState)
-
-    events.postUpdate("LichtAbstellraum_State", str(event.itemState))
-
-
-@rule("MotionDetect: Gast",
-      description="MotionDetector of Gast",
-      tags=["itemchange", "MotionDetect", "Guest", "mqtt"])
-@when("Item BewegungsmelderGaestezimmer_Motion changed")
-def motiondetect_guest(event):
-    """
-    switch lamp with motion detect
-
-    Args:
-        event (_type_): triggering event
-    """
-    motiondetect_guest.log.info(
-        "rule fired because of %s %s --> %s", event.itemName, event.oldItemState, event.itemState)
-
-    events.postUpdate("LichtGast_State", (event.itemState))
-
-
-@rule("MotionDetect: Office",
-      description="MotionDetector of Office",
-      tags=["itemchange", "MotionDetect", "office", "mqtt"])
-@when("Item BewegungsmelderBuero_Motion changed")
-def motiondetect_office(event):
-    """
-    switch lamp with motion detect
-
-    Args:
-        event (_type_): triggering event
-    """
-    motiondetect_office.log.info(
-        "rule fired because of %s %s --> %s", event.itemName, event.oldItemState, event.itemState)
-
-    events.postUpdate("LichtBuero_State", str(event.itemState))
-
-
-@rule("MotionDetect: Werkstatt",
-      description="MotionDetector of Werkstatt",
-      tags=["itemchange", "MotionDetect", "Werkstatt", "mqtt"])
-@when("Item BewegungsmelderWerkstatt_Motion changed")
-def motiondetect_werkstatt(event):
-    """
-    switch lamp with motion detect
-
-    Args:
-        event (_type_): triggering event
-    """
-    motiondetect_werkstatt.log.info(
-        "rule fired because of %s %s --> %s", event.itemName, event.oldItemState, event.itemState)
-
-    events.postUpdate("LichtWerkstatt_State", str(event.itemState))

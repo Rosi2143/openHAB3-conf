@@ -1,15 +1,15 @@
 min_battery_charge: 20
 MotionDetectors:
   md1: Buero
-  md2: Gast
-  md3: Kammer
+  md2: Gaestezimmer
+  md3: Abstellraum
   md4: Werkstatt
-  md5: WC
+  md5: GastWC
 RemoteControls:
   rm1: Schlafzimmer
   rm2: Terrasse
 Lights:
   li1: Terrasse_Pergola_Rechts
   li2: Terrasse_Pergola_Links
-  li3: BueroBuero_Lampe
+  li3: Buero_Lampe
   lig1: Terrasse_Pergola_Alle
