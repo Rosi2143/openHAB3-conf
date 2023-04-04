@@ -121,9 +121,12 @@ class IkeaZigbeeDevices(HABApp.Rule):
         """helper function to extract the mqtt item name from the OH topic"""
 
         logger.debug(oh_item_name)
-        _oh_item_name = oh_item_name.split("_")[0]
+        _oh_item_name = oh_item_name.rsplit("_", 1)[0]
         logger.debug(_oh_item_name)
-        _oh_item_name = _oh_item_name.replace("Licht", "")
+        _oh_item_name = _oh_item_name.replace(
+            "_Dimmer", "").replace("_ColorTemp", "")
+        logger.debug(_oh_item_name)
+        _oh_item_name = _oh_item_name.replace("eLicht", "")
         logger.debug(_oh_item_name)
         return _oh_item_name
 
@@ -258,7 +261,8 @@ class IkeaZigbeeDevices(HABApp.Rule):
         see https://www.zigbee2mqtt.io/devices/LED1545G12.html"""
 
         for light in self.lights.values():
-            state_item_name = "Licht" + light + "_State"
+            light_equipment_name = "eLicht" + light
+            state_item_name = light_equipment_name + "_State"
             if self.openhab.item_exists(state_item_name):
                 switch_item_light = SwitchItem.get_item(state_item_name)
                 switch_item_light.listen_event(
@@ -266,7 +270,7 @@ class IkeaZigbeeDevices(HABApp.Rule):
             else:
                 logger.error("%s does not exist", state_item_name)
 
-            dimmer_item_name = "Licht" + light + "_Dimmer"
+            dimmer_item_name = light_equipment_name + "_Dimmer"
             if self.openhab.item_exists(dimmer_item_name):
                 dimmer_item_light = DimmerItem.get_item(
                     dimmer_item_name)
@@ -275,7 +279,7 @@ class IkeaZigbeeDevices(HABApp.Rule):
             else:
                 logger.error("%s does not exist", dimmer_item_name)
 
-            dimmer_move_item_name = "Licht" + light + "_Dimmer_Move"
+            dimmer_move_item_name = light_equipment_name + "_Dimmer_Move"
             if self.openhab.item_exists(dimmer_move_item_name):
                 dimmer_move_item_light = NumberItem.get_item(
                     dimmer_move_item_name)
@@ -284,7 +288,7 @@ class IkeaZigbeeDevices(HABApp.Rule):
             else:
                 logger.error("%s does not exist", dimmer_move_item_name)
 
-            dimmer_step_item_name = "Licht" + light + "_Dimmer_Step"
+            dimmer_step_item_name = light_equipment_name + "_Dimmer_Step"
             if self.openhab.item_exists(dimmer_step_item_name):
                 dimmer_step_item_light = NumberItem.get_item(
                     dimmer_step_item_name)
@@ -293,7 +297,7 @@ class IkeaZigbeeDevices(HABApp.Rule):
             else:
                 logger.error("%s does not exist", dimmer_step_item_name)
 
-            color_temp_item_name = "Licht" + light + "_ColorTemp"
+            color_temp_item_name = light_equipment_name + "_ColorTemp"
             if self.openhab.item_exists(color_temp_item_name):
                 color_temp_item_light = dimmer_item_light.get_item(
                     color_temp_item_name)
@@ -302,7 +306,7 @@ class IkeaZigbeeDevices(HABApp.Rule):
             else:
                 logger.error("%s does not exist", color_temp_item_name)
 
-            color_temp_string_item_name = "Licht" + light + "_ColorTemp_String"
+            color_temp_string_item_name = light_equipment_name + "_ColorTemp_String"
             if self.openhab.item_exists(color_temp_string_item_name):
                 color_temp_string_item = StringItem.get_item(
                     color_temp_string_item_name)
@@ -311,7 +315,7 @@ class IkeaZigbeeDevices(HABApp.Rule):
             else:
                 logger.error("%s does not exist", color_temp_string_item_name)
 
-            color_temp_move_item_name = "Licht" + light + "_ColorTemp_Move"
+            color_temp_move_item_name = light_equipment_name + "_ColorTemp_Move"
             if self.openhab.item_exists(color_temp_move_item_name):
                 color_temp_move_item = NumberItem.get_item(
                     color_temp_move_item_name)
@@ -320,7 +324,7 @@ class IkeaZigbeeDevices(HABApp.Rule):
             else:
                 logger.error("%s does not exist", color_temp_move_item_name)
 
-            color_temp_step_item_name = "Licht" + light + "_ColorTemp_Step"
+            color_temp_step_item_name = light_equipment_name + "_ColorTemp_Step"
             if self.openhab.item_exists(color_temp_step_item_name):
                 color_temp_step_item = NumberItem.get_item(
                     color_temp_step_item_name)
@@ -329,7 +333,7 @@ class IkeaZigbeeDevices(HABApp.Rule):
             else:
                 logger.error("%s does not exist", color_temp_step_item_name)
 
-            effect_item_name = "Licht" + light + "_Effect"
+            effect_item_name = light_equipment_name + "_Effect"
             if self.openhab.item_exists(effect_item_name):
                 effect_item = StringItem.get_item(effect_item_name)
                 effect_item.listen_event(
@@ -337,7 +341,7 @@ class IkeaZigbeeDevices(HABApp.Rule):
             else:
                 logger.error("%s does not exist", effect_item_name)
 
-            transition_item_name = "Licht" + light + "_Transition"
+            transition_item_name = light_equipment_name + "_Transition"
             if self.openhab.item_exists(transition_item_name):
                 transition_item = NumberItem.get_item(transition_item_name)
                 transition_item.listen_event(
@@ -595,23 +599,23 @@ class IkeaZigbeeDevices(HABApp.Rule):
                 self.state_map[str(update_available)])
 
         keypress_items = {"toggle": ["_MainButton", "ON"],
-                          "brightness_up_click": ["_UpButton", "ON"],
-                          "brightness_down_click": ["_DownButton", "ON"],
-                          "arrow_left_click": ["_LeftButton", "ON"],
-                          "arrow_right_click": ["_RightButton", "ON"],
+                          "brightness_up_click": ["_Up", "ON"],
+                          "brightness_down_click": ["_Down", "ON"],
+                          "arrow_left_click": ["_Left", "ON"],
+                          "arrow_right_click": ["_Right", "ON"],
 
                           "toggle_hold": ["_MainButton_Long", "ON"],
-                          "brightness_up_hold": ["_UpButton_Long", "ON"],
-                          "brightness_down_hold": ["_DownButton_Long", "ON"],
-                          "arrow_left_hold": ["_LeftButton_Long", "ON"],
-                          "arrow_right_hold": ["_RightButton_Long", "ON"],
+                          "brightness_up_hold": ["_Up_Long", "ON"],
+                          "brightness_down_hold": ["_Down_Long", "ON"],
+                          "arrow_left_hold": ["_Left_Long", "ON"],
+                          "arrow_right_hold": ["_Right_Long", "ON"],
 
-                          "brightness_up_release": ["_UpButton_Long", "OFF"],
-                          "brightness_down_release": ["_DownButton_Long", "OFF"],
-                          "arrow_left_release": ["_LeftButton_Long", "OFF"],
-                          "arrow_right_release": ["_RightButton_Long", "OFF"],
+                          "brightness_up_release": ["_Up_Long", "OFF"],
+                          "brightness_down_release": ["_Down_Long", "OFF"],
+                          "arrow_left_release": ["_Left_Long", "OFF"],
+                          "arrow_right_release": ["_Right_Long", "OFF"],
 
-                          "on": ["_MainButton", "ON"],
+                          "on": ["_Main", "ON"],
                           "brightness_move_up": ["_MainButton_Long", "ON"],
                           "brightness_stop": ["_MainButton_Long", "OFF"],
                           }

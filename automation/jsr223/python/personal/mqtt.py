@@ -7,15 +7,17 @@ from core.log import logging, LOG_PREFIX
 from core.rules import rule
 from core.triggers import when
 
-toggle_map = {"OFF" : "ON",
-              "ON" : "OFF"
-             }
+toggle_map = {"OFF": "ON",
+              "ON": "OFF",
+              "NULL": "ON"
+              }
+
 
 @rule("MQTT: Sleeping remote",
       description="handle buttons of remote control",
       tags=["itemchange", "mqtt", "remote"])
-@when("Item RemoteControl_Sleeping_Main changed to ON")
-@when("Item RemoteControl_Sleeping_Main_Long changed to ON")
+@when("Item FernBedienungSchlafzimmer_Main changed to ON")
+@when("Item FernBedienungSchlafzimmer_Main_Long changed to ON")
 def mqtt_sleeping_remote(event):
     """
     key of remote control
@@ -26,16 +28,17 @@ def mqtt_sleeping_remote(event):
     mqtt_sleeping_remote.log.info(
         "rule fired because of %s %s --> %s", event.itemName, event.oldItemState, event.itemState)
 
-    if event.itemName.contains("_Long"):
+    if "_Long" in event.itemName:
         events.postUpdate("gLichterKeller_State", "OFF")
     else:
-        events.postUpdate("LichtGaestezimmer_State", toggle_map[items["LichtGaestezimmer_State"]])
+        events.postUpdate("LichtGaestezimmer_State",
+                          toggle_map[str(items["LichtGaestezimmer_State"])])
 
 
 @rule("MQTT: Terrasse remote",
       description="handle buttons of remote control",
       tags=["itemchange", "mqtt", "remote"])
-@when("Member of eRemoteControl_Terrasse changed to ON")
+@when("Member of gFernBedienungTerrasse changed to ON")
 def mqtt_terrasse_remote(event):
     """
     key of remote control
@@ -46,25 +49,29 @@ def mqtt_terrasse_remote(event):
     mqtt_terrasse_remote.log.info(
         "rule fired because of %s %s --> %s", event.itemName, event.oldItemState, event.itemState)
 
-    if event.itemName.contains("_Long"):
-        if event.itemName.contains("_MainButton_"):
-            events.postUpdate("eLichtTerrasse_Pergola_Alle_State", toggle_map[items["eLichtTerrasse_Pergola_Alle_State"]])
-        if event.itemName.contains("_Up_"):
+    if "_Long" in event.itemName:
+        if "_MainButton_" in event.itemName:
+            events.postUpdate("eLichtTerrasse_Pergola_Alle_State",
+                              toggle_map[str(items["eLichtTerrasse_Pergola_Alle_State"])])
+        if "_Up_" in event.itemName:
             events.postUpdate("eLichtTerrasse_Pergola_Alle_Dimmer", "100")
-        if event.itemName.contains("_Left_"):
+        if "_Left_" in event.itemName:
             events.postUpdate("eLichtTerrasse_Pergola_Alle_ColorTemp", "0")
-        if event.itemName.contains("_Right_"):
+        if "_Right_" in event.itemName:
             events.postUpdate("eLichtTerrasse_Pergola_Alle_ColorTemp", "100")
-        if event.itemName.contains("_Down_"):
+        if "_Down_" in event.itemName:
             events.postUpdate("eLichtTerrasse_Pergola_Alle_Dimmer", "1")
     else:
-        if event.itemName.contains("_MainButton"):
-            events.postUpdate("eLichtTerrasse_Pergola_Alle_State", toggle_map[items["eLichtTerrasse_Pergola_Alle_State"]])
-        if event.itemName.contains("_Up"):
+        if "_MainButton" in event.itemName:
+            events.postUpdate("eLichtTerrasse_Pergola_Alle_State",
+                              toggle_map[str(items["eLichtTerrasse_Pergola_Alle_State"])])
+        if "_Up" in event.itemName:
             events.postUpdate("eLichtTerrasse_Pergola_Alle_Dimmer_Step", "20")
-        if event.itemName.contains("_Left"):
-            events.postUpdate("eLichtTerrasse_Pergola_Alle_ColorTemp_Step", "-20")
-        if event.itemName.contains("_Right"):
-            events.postUpdate("eLichtTerrasse_Pergola_Alle_ColorTemp_Step", "20")
-        if event.itemName.contains("_Down"):
+        if "_Left" in event.itemName:
+            events.postUpdate(
+                "eLichtTerrasse_Pergola_Alle_ColorTemp_Step", "-20")
+        if "_Right" in event.itemName:
+            events.postUpdate(
+                "eLichtTerrasse_Pergola_Alle_ColorTemp_Step", "20")
+        if "_Down" in event.itemName:
             events.postUpdate("eLichtTerrasse_Pergola_Alle_Dimmer_Step", "-20")

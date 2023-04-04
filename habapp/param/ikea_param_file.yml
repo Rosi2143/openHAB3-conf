@@ -9,7 +9,7 @@ RemoteControls:
   rm1: Schlafzimmer
   rm2: Terrasse
 Lights:
-  li1: Terrasse1
-  li2: Terrasse2
-  li3: Buero
-  lig1: TerrasseAlle
+  li1: Terrasse_Pergola_Rechts
+  li2: Terrasse_Pergola_Links
+  li3: BueroBuero_Lampe
+  lig1: Terrasse_Pergola_Alle
