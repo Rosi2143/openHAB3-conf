@@ -67,6 +67,6 @@ def proximity_alert(event):
 
     if event:
         proximity_alert.log.info(
-            "rule fired because of %s", events.event)
+            "rule fired because of %s", event.itemName)
 
     events.sendCommand("HABPanel_Command", "SCREEN_ON")
