@@ -126,7 +126,7 @@ class IkeaZigbeeDevices(HABApp.Rule):
         _oh_item_name = _oh_item_name.replace(
             "_Dimmer", "").replace("_ColorTemp", "")
         logger.debug(_oh_item_name)
-        _oh_item_name = _oh_item_name.replace("eLicht", "")
+        _oh_item_name = _oh_item_name.replace("Licht", "")
         logger.debug(_oh_item_name)
         return _oh_item_name
 
@@ -146,7 +146,7 @@ class IkeaZigbeeDevices(HABApp.Rule):
         mqtt_topic = self.mqtt_base_topic + "Lampe/" + \
             self.extract_mqtt_item_name(event.name) + "/set"
         mqtt_topic_value = "{ \"state\": \"" + str(event.value) + "\"}"
-        logger.info("%s: %s", mqtt_topic, mqtt_topic_value)
+        logger.info("send - %s: %s", mqtt_topic, mqtt_topic_value)
         self.mqtt.publish(mqtt_topic, mqtt_topic_value)
 
     def dimmer_item_update(self, event):
@@ -185,7 +185,7 @@ class IkeaZigbeeDevices(HABApp.Rule):
                 ", \"transition\": " + str(int(transition_item_value))
 
         mqtt_topic_value = mqtt_topic_value + "}"
-        logger.info("%s: %s", mqtt_topic, mqtt_topic_value)
+        logger.info("send - %s: %s", mqtt_topic, mqtt_topic_value)
         self.mqtt.publish(mqtt_topic, mqtt_topic_value)
 
     def numberitem_update(self, event):
@@ -221,7 +221,7 @@ class IkeaZigbeeDevices(HABApp.Rule):
                 return
 
         mqtt_topic_value = mqtt_topic_value + "\": " + str(value) + "}"
-        logger.info("%s: %s", mqtt_topic, mqtt_topic_value)
+        logger.info("send - %s: %s", mqtt_topic, mqtt_topic_value)
         self.mqtt.publish(mqtt_topic, mqtt_topic_value)
 
     def stringitem_update(self, event):
@@ -246,7 +246,7 @@ class IkeaZigbeeDevices(HABApp.Rule):
         mqtt_topic_value = mqtt_topic_value + \
             "\": \"" + str(event.value) + "\"}"
 
-        logger.info("%s: %s", mqtt_topic, mqtt_topic_value)
+        logger.info("send - %s: %s", mqtt_topic, mqtt_topic_value)
         self.mqtt.publish(mqtt_topic, mqtt_topic_value)
 
 ###############################################################################
@@ -261,7 +261,7 @@ class IkeaZigbeeDevices(HABApp.Rule):
         see https://www.zigbee2mqtt.io/devices/LED1545G12.html"""
 
         for light in self.lights.values():
-            light_equipment_name = "eLicht" + light
+            light_equipment_name = "Licht" + light
             state_item_name = light_equipment_name + "_State"
             if self.openhab.item_exists(state_item_name):
                 switch_item_light = SwitchItem.get_item(state_item_name)
@@ -368,7 +368,7 @@ class IkeaZigbeeDevices(HABApp.Rule):
             state_item_name = "Licht" + \
                 self.extract_oh_item_name(event.name) + "_State"
             if self.openhab.item_exists(state_item_name):
-                switch_item_state = switch_item_state.get_item(state_item_name)
+                switch_item_state = SwitchItem.get_item(state_item_name)
                 new_value = str(event.value["state"])
                 if self.oh_switch_item_changed(switch_item_state, new_value):
                     switch_item_state.oh_send_command(new_value)
@@ -380,7 +380,7 @@ class IkeaZigbeeDevices(HABApp.Rule):
             dimmer_item_name = "Licht" + \
                 self.extract_oh_item_name(event.name) + "_Dimmer"
             if self.openhab.item_exists(dimmer_item_name):
-                dimmer_item_bright = dimmer_item_bright.get_item(
+                dimmer_item_bright = DimmerItem.get_item(
                     dimmer_item_name)
                 new_value = int(int(event.value["brightness"]) / 2.54)
                 if self.oh_dimmer_item_changed(dimmer_item_bright, new_value):
@@ -395,7 +395,7 @@ class IkeaZigbeeDevices(HABApp.Rule):
             color_temp_item_name = "Licht" + \
                 self.extract_oh_item_name(event.name) + "_ColorTemp"
             if self.openhab.item_exists(color_temp_item_name):
-                color_temp_item = dimmer_item_bright.get_item(
+                color_temp_item = DimmerItem.get_item(
                     color_temp_item_name)
                 new_value = int((int(event.value["color_temp"]) - 250) / 2.04)
                 if self.oh_dimmer_item_changed(color_temp_item, new_value):
@@ -411,7 +411,7 @@ class IkeaZigbeeDevices(HABApp.Rule):
                 update_item_name = "Licht" + \
                     self.extract_oh_item_name(event.name) + "_UpdatePending"
                 if self.openhab.item_exists(update_item_name):
-                    update_item = switch_item_state.get_item(update_item_name)
+                    update_item = SwitchItem.get_item(update_item_name)
                     new_value = str(event.value["update"]["state"])
                     if new_value == "available":
                         new_value = "ON"
@@ -616,8 +616,8 @@ class IkeaZigbeeDevices(HABApp.Rule):
                           "arrow_right_release": ["_Right_Long", "OFF"],
 
                           "on": ["_Main", "ON"],
-                          "brightness_move_up": ["_MainButton_Long", "ON"],
-                          "brightness_stop": ["_MainButton_Long", "OFF"],
+                          "brightness_move_up": ["_Main_Long", "ON"],
+                          "brightness_stop": ["_Main_Long", "OFF"],
                           }
 
         itemcount = 3

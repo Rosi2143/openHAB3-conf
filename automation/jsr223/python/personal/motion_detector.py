@@ -11,7 +11,7 @@ from core.triggers import when
 @rule("generic Motion detector rule",
       description="set light for motion detector",
       tags=["memberchange", "MotionDetect"])
-@when("Member of gBewegungsmelder_State changed")
+@when("Member of gBewegungsmelder_MotionState changed")
 def motiondetect_generic(event):
     """switch lamps when motion is detected"""
     motiondetect_generic.log.info(

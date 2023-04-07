@@ -16,7 +16,7 @@ def office_light_following(event):
     office_light_following.log.info(
         "rule fired because of %s", event.itemName)
 
-    events.sendCommand("eLichtBuero_Lampe_State", str(event.itemState))
+    events.sendCommand("LichtBuero_Lampe_State", str(event.itemState))
 
 
 @rule("LightFollow: Workshop",
