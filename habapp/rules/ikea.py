@@ -598,55 +598,56 @@ class IkeaZigbeeDevices(HABApp.Rule):
             my_oh_item_updatepending.oh_send_command(
                 self.state_map[str(update_available)])
 
-        keypress_items = {"toggle": ["_MainButton", "ON"],
-                          "brightness_up_click": ["_Up", "ON"],
-                          "brightness_down_click": ["_Down", "ON"],
-                          "arrow_left_click": ["_Left", "ON"],
-                          "arrow_right_click": ["_Right", "ON"],
+        if action != "none":
+            keypress_items = {"toggle": ["_MainButton", "ON"],
+                              "brightness_up_click": ["_Up", "ON"],
+                              "brightness_down_click": ["_Down", "ON"],
+                              "arrow_left_click": ["_Left", "ON"],
+                              "arrow_right_click": ["_Right", "ON"],
 
-                          "toggle_hold": ["_MainButton_Long", "ON"],
-                          "brightness_up_hold": ["_Up_Long", "ON"],
-                          "brightness_down_hold": ["_Down_Long", "ON"],
-                          "arrow_left_hold": ["_Left_Long", "ON"],
-                          "arrow_right_hold": ["_Right_Long", "ON"],
+                              "toggle_hold": ["_MainButton_Long", "ON"],
+                              "brightness_up_hold": ["_Up_Long", "ON"],
+                              "brightness_down_hold": ["_Down_Long", "ON"],
+                              "arrow_left_hold": ["_Left_Long", "ON"],
+                              "arrow_right_hold": ["_Right_Long", "ON"],
 
-                          "brightness_up_release": ["_Up_Long", "OFF"],
-                          "brightness_down_release": ["_Down_Long", "OFF"],
-                          "arrow_left_release": ["_Left_Long", "OFF"],
-                          "arrow_right_release": ["_Right_Long", "OFF"],
+                              "brightness_up_release": ["_Up_Long", "OFF"],
+                              "brightness_down_release": ["_Down_Long", "OFF"],
+                              "arrow_left_release": ["_Left_Long", "OFF"],
+                              "arrow_right_release": ["_Right_Long", "OFF"],
 
-                          "on": ["_Main", "ON"],
-                          "brightness_move_up": ["_Main_Long", "ON"],
-                          "brightness_stop": ["_Main_Long", "OFF"],
-                          }
+                              "on": ["_Main", "ON"],
+                              "brightness_move_up": ["_Main_Long", "ON"],
+                              "brightness_stop": ["_Main_Long", "OFF"],
+                              }
 
-        itemcount = 3
-        found_action = False
-        for key, item in keypress_items.items():
-            logger.debug("check action for %s for %s", action, key)
-            key_item_name = topic_items[2] + topic_items[3] + item[0]
-            if action == key:
-                itemcount = itemcount + 1
-                if self.openhab.item_exists(key_item_name):
-                    oh_keypress_item = SwitchItem.get_item(key_item_name)
-                    logger.debug("found action for %s for %s :: %s --> %s",
-                                 action, key, key_item_name, item[1])
-                    if self.oh_switch_item_changed(oh_keypress_item, item[1]):
-                        oh_keypress_item.oh_send_command(item[1])
-                    found_action = True
-                    break
+            itemcount = 3
+            found_action = False
+            for key, item in keypress_items.items():
+                logger.debug("check action for %s for %s", action, key)
+                key_item_name = topic_items[2] + topic_items[3] + item[0]
+                if action == key:
+                    itemcount = itemcount + 1
+                    if self.openhab.item_exists(key_item_name):
+                        oh_keypress_item = SwitchItem.get_item(key_item_name)
+                        logger.debug("found action for %s for %s :: %s --> %s",
+                                     action, key, key_item_name, item[1])
+                        if self.oh_switch_item_changed(oh_keypress_item, item[1]):
+                            oh_keypress_item.oh_send_command(item[1])
+                        found_action = True
+                        break
+                    else:
+                        logger.error("item %s does not exist", key_item_name)
+                        exitcode = itemcount
                 else:
-                    logger.error("item %s does not exist", key_item_name)
-                    exitcode = itemcount
-            else:
-                logger.info("skip OH item %s - for action %s",
-                            key_item_name, action)
+                    logger.info("skip OH item %s - for action %s",
+                                key_item_name, action)
 
-        if exitcode != 0:
-            return exitcode
+            if exitcode != 0:
+                return exitcode
 
-        if not found_action:
-            logger.error("Did not find action %s", action)
+            if not found_action:
+                logger.error("Did not find action %s", action)
 
 
 IkeaZigbeeDevices()

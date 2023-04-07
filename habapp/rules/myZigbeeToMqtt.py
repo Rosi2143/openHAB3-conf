@@ -6,6 +6,7 @@ import time
 
 import HABApp
 from HABApp.core.events import ValueUpdateEvent, ValueUpdateEventFilter
+from HABApp.core.events import ValueChangeEvent, ValueChangeEventFilter
 from HABApp.mqtt.items import MqttItem
 from HABApp.openhab.items import SwitchItem, NumberItem, DatetimeItem
 
@@ -53,9 +54,13 @@ class Zigbee2MqttBridge(HABApp.Rule):
         # OpenHAB item to trigger permitToJoin
         self.oh_permit_to_join_state = SwitchItem.get_item(
             'Zigbee2Mqtt_PermitJoin')
+        log.info('Zigbee2Mqtt_PermitJoin state: %s',
+                 self.oh_permit_to_join_state.get_value())
         # OpenHAB item for permitToJoin timeout
         self.oh_permit_to_join_timeout = NumberItem.get_item(
             'Zigbee2Mqtt_PermitJoin_Timeout')
+        log.info('Zigbee2Mqtt_PermitJoin_Timeout state: %s',
+                 self.oh_permit_to_join_timeout.get_value())
         # OpenHAB item to store remaining permitToJoin time
         self.oh_permit_to_join_time_remain = NumberItem.get_item(
             'Zigbee2Mqtt_PermitJoin_TimeRemain')
@@ -105,24 +110,23 @@ class Zigbee2MqttBridge(HABApp.Rule):
 
         # event registration
         self.listen_event(self.mqtt_base_info,
-                          self.info_topic_updated, ValueUpdateEventFilter())
+                          self.info_topic_updated, ValueChangeEventFilter())
 
         self.listen_event(self.mqtt_base_response_topic + "permit_join",
                           self.permit_to_join_topic_updated, ValueUpdateEventFilter())
         self.oh_permit_to_join_state.listen_event(
-            self.on_permit_join, ValueUpdateEventFilter())
+            self.on_permit_join, ValueUpdateEventFilter(value="ON"))
 
         self.listen_event(self.mqtt_base_response_topic + "health_check",
                           self.health_check_topic_updated, ValueUpdateEventFilter())
 
         self.listen_event(self.mqtt_base_response_topic + "networkmap",
                           self.networkmap_topic_updated, ValueUpdateEventFilter())
-
         self.oh_network_map_request_state.listen_event(
-            self.on_request_network_map, ValueUpdateEventFilter())
+            self.on_request_network_map, ValueUpdateEventFilter(value="ON"))
 
         self.oh_restart_bridge_state.listen_event(
-            self.on_bridge_restart_request, ValueUpdateEventFilter())
+            self.on_bridge_restart_request, ValueUpdateEventFilter(value="ON"))
 
         itemcount = 0
         for types in self.mqtt_items:
@@ -144,7 +148,7 @@ class Zigbee2MqttBridge(HABApp.Rule):
                             time.sleep(1)
 
                 (SwitchItem.get_item(trigger_update_name)).listen_event(
-                    self.on_trigger_update, ValueUpdateEventFilter())
+                    self.on_trigger_update)
                 log.info(
                     "register listener for %s item # %s", trigger_update_name, itemcount)
                 itemcount = itemcount + 1
@@ -168,18 +172,20 @@ class Zigbee2MqttBridge(HABApp.Rule):
     def info_topic_updated(self, event):
         """the topic of bridge info has changed"""
 
-        assert isinstance(event, ValueUpdateEvent), type(event)
-        log.info("mqtt topic %s updated to %s", event.name, event.value)
+        assert isinstance(event, ValueChangeEvent), type(event)
+        log.info("mqtt topic %s updated to %s (type = %s)",
+                 event.name, event.value, type(event))
 
         permit_join = self.state_map[str(event.value["permit_join"]).upper()]
         if self.oh_switch_item_changed(self.oh_permit_to_join_state, permit_join):
             self.oh_permit_to_join_state.oh_send_command(permit_join)
 
-        if "permit_join_timeout" in event.value:
-            remaining_time = int(event.value["permit_join_timeout"])
-            if (remaining_time % 5) == 0:
-                self.oh_permit_to_join_time_remain.oh_send_command(
-                    remaining_time)
+        if permit_join == "ON":
+            if "permit_join_timeout" in event.value:
+                remaining_time = int(event.value["permit_join_timeout"])
+                if (remaining_time % 5) == 0:
+                    self.oh_permit_to_join_time_remain.oh_send_command(
+                        remaining_time)
         else:
             if self.oh_permit_to_join_time_remain.get_value() != 0:
                 self.oh_permit_to_join_time_remain.oh_send_command(0)
@@ -187,11 +193,13 @@ class Zigbee2MqttBridge(HABApp.Rule):
 # permit_join
 # https://www.zigbee2mqtt.io/guide/usage/mqtt_topics_and_messages.html#zigbee2mqtt-bridge-request-permit-join
 #############
-    def on_permit_join(self, event: ValueUpdateEvent):
+    def on_permit_join(self, event):
         """the OpenHAB item to trigger permitToJoin has changed"""
 
-        assert isinstance(event, ItemStateChangedEvent)
-        log.info("set %s updated to %s", event.name, event.value)
+        log.info("set %s updated to %s (type = %s)",
+                 event.name, event.value, type(event))
+        assert isinstance(event, ValueUpdateEvent)
+
         if str(event.value) == "ON":
             timeout = 30
             if self.openhab.item_exists("Zigbee2Mqtt_PermitJoin_Timeout"):
@@ -205,8 +213,9 @@ class Zigbee2MqttBridge(HABApp.Rule):
     def permit_to_join_topic_updated(self, event):
         """the topic of permitToJoin has changed"""
 
+        log.info("mqtt topic %s updated to %s (type = %s)",
+                 event.name, event.value, type(event))
         assert isinstance(event, ValueUpdateEvent), type(event)
-        log.info("mqtt topic %s updated to %s", event.name, event.value)
 
 # health check
 # https://www.zigbee2mqtt.io/guide/usage/mqtt_topics_and_messages.html#zigbee2mqtt-bridge-request-health-check
@@ -220,7 +229,9 @@ class Zigbee2MqttBridge(HABApp.Rule):
         """the topic of bridge health check has changed"""
 
         assert isinstance(event, ValueUpdateEvent), type(event)
-        log.info("mqtt topic %s updated to %s", event.name, event.value)
+        log.info("mqtt topic %s updated to %s (type = %s)",
+                 event.name, event.value, type(event))
+
         if "data" in event.value:
             if "healthy" in event.value["data"]:
                 self.oh_health_check_state.oh_send_command(
@@ -233,45 +244,47 @@ class Zigbee2MqttBridge(HABApp.Rule):
     def on_request_network_map(self, event: ValueUpdateEvent):
         """helper function to trigger generation of network map"""
 
-        assert isinstance(event, ItemStateChangedEvent)
-        log.info("set %s updated to %s", event.name, event.value)
+        log.info("set %s updated to %s (type = %s)",
+                 event.name, event.value, type(event))
+        assert isinstance(event, ValueUpdateEvent)
+
         if event.value == "ON":
             self.trigger_networkmap_update()
         else:
-            publish_value = "{\"value\": false}"
+            log.error("Check the event filter")
 
     def trigger_networkmap_update(self):
         """the OpenHAB item to trigger creation of network Map has changed"""
 
         self.mqtt_network_map_request_item.publish(
-            "{\"type\": \"graphviz\", \"routes\": false}")
+            "{\"type\": \"graphviz\", \"routes\": true}")
 
     def networkmap_topic_updated(self, event):
         """the topic of generated network map has changed"""
 
         assert isinstance(event, ValueUpdateEvent), type(event)
-        log.info("mqtt topic %s updated to %s", event.name, event.value)
+        log.info("mqtt topic %s updated to %s (type = %s)",
+                 event.name, event.value, type(event))
+
+        map_file = "/home/openhabian/git/public_files/mqtt_networkmap.svg"
         if "data" in event.value:
             if "value" in event.value["data"]:
-                digraph = "<details>\n<summary></summary>\nzigbee_networkmap\n"
-                digraph = digraph + str(event.value["data"]["value"])
-                digraph = digraph + "}\nzigbee_networkmap\n</details>\n"
+                digraph = str(event.value["data"]["value"])
                 digraph = digraph.replace("\\n", '\n').replace("\\\"", "\"")
-                with open("/home/openhabian/git/public_files/mqtt_networkmap.svg", "w") as text_file:
+                with open(map_file, "w") as text_file:
                     text_file.write(digraph)
-#            subprocess.run(args=["./upload_mqtt_networkmap.sh"],\
-#                           cwd="/home/openhabian/git/public_files/",\
-#                           check=True,\
-#                           shell=True,\
-#                           capture_output=True)
         self.mqtt_network_map_update.oh_send_command(datetime.datetime.now())
+        log.info("Check http://www.webgraphviz.com/ to generate graph")
+        log.info("Data are stored in %s.", map_file)
 
 # bridge restart request
     def on_bridge_restart_request(self, event: ValueUpdateEvent):
         """the OpenHAB item to request a bridge restart has changed"""
 
-        assert isinstance(event, ItemStateChangedEvent)
-        log.info("set %s updated to %s", event.name, event.value)
+        log.info("set %s updated to %s (type = %s)",
+                 event.name, event.value, type(event))
+        assert isinstance(event, ValueUpdateEvent)
+
         if event.value == "ON":
             self.mqtt_bridge_restart_request_item.publish("")
         else:
@@ -283,12 +296,13 @@ class Zigbee2MqttBridge(HABApp.Rule):
 # https://www.zigbee2mqtt.io/guide/usage/ota_updates.html#automatic-checking-for-available-updates
 #############
 
-
     def on_trigger_update(self, event: ValueUpdateEvent):
         """the OpenHAB item to trigger an device update has changed"""
 
-        assert isinstance(event, ItemStateChangedEvent)
-        log.info("set %s updated to %s", event.name, event.value)
+        log.info("set %s updated to %s (type = %s)",
+                 event.name, event.value, type(event))
+        assert isinstance(event, ValueUpdateEvent)
+
         if event.value == "ON":
             device_name = (event.name).replace("_TriggerUpdate", "")
             publish_value = "IKEA/"
