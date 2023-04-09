@@ -1,0 +1,22 @@
+# Doors
+
+## requirements
+
+* door state shall control the thermostat
+** thermostats shall be set to a lower temperature when a door in this room is open
+* security check shall be possible if all doors are closed
+* if absence is set - change in door state shall create a message to mobile app
+
+## used HW
+
+### door switches
+
+* https://www.tinkerforge.com/de/shop/bricklets/io/io16-v2-bricklet.html[tinkerforge io16_2]
+* https://homematic-ip.com/en/product/window-and-door-contact-optical[hmip-swdo]
+
+## flow
+.flow for door states
+[plantuml, "{plantUMLDir}doors", png]
+----
+include::plantuml/act_doors.puml[]
+----

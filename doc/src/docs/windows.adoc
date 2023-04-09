@@ -9,9 +9,9 @@
 
 ## used HW
 
-### window switches (HAL)
+### window switches
 
-* https://www.tinkerforge.com/de/shop/bricklets/io/io16-v2-bricklet.html[tinkerforge io16_2]
+* https://www.tinkerforge.com/de/shop/bricklets/io/io16-v2-bricklet.html[tinkerforge io16_2] using https://www.conrad.de/de/p/pic-ms-214-3-reed-kontakt-1-schliesser-180-v-dc-130-v-ac-0-7-a-10-w-506961.html[reed switches]
 
 ## flow
 .flow for window states

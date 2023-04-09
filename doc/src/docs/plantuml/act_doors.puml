@@ -1,0 +1,40 @@
+@startuml
+(*) --> "door state changed"
+
+partition Tinkerforge #lightgreen {
+
+  partition io16 #green {
+    "door state changed" --> "detect changes" #olive
+  }
+
+  partition brick #green {
+     "detect changes" --> "send signal" #olive
+  }
+}
+
+partition homematic-raspi #aqua {
+  "door state changed" --> "set door state" #springgreen
+}
+
+partition raspi #pink {
+
+  partition habapp #red {
+     "send signal" --> tinkerforge_oh_.py #purple
+  }
+
+  partition OH3 #red {
+    tinkerforge_oh_.py --> "set item door state (*_Open_State)" #orchid
+    "set door state" --> "set item door state (*_Open_State)"
+
+    "set item door state (*_Open_State)" --> "set group gThermostate_WindowOpenStates" #purple
+    "set group gThermostate_WindowOpenStates" --> homematic_ip.py #purple
+    homematic_ip.py --> "set thermostat (*_WindowState)" #orchid
+  }
+
+}
+
+partition homematic-raspi #aqua {
+  "set thermostat (*_WindowState)" --> "set WindowState" #springgreen
+}
+"set WindowState" --> (*)
+@enduml

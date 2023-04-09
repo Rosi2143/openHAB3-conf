@@ -1,4 +1,7 @@
-include::basic_setup.adoc[]
+#Smarthome setup
+
+include::basic_setup.adoc[leveloffset=-1]]
 
 include::lights.adoc[leveloffset=-1]
 include::windows.adoc[leveloffset=-1]
+include::doors.adoc[leveloffset=-1]

@@ -1,22 +1,35 @@
 @startuml
+package tinkerforge {
+  node "Tinkerforge" #lightgreen {
 
-node "Tinkerforge" #lightgreen {
+    component brick #green {
+    }
 
-  component brick #green {
+    component io16 #green {
+    }
+
+    component out4 #green {
+    }
+
+    port USB as usb
+
+    interface brickd #green
+
+    brick - brickd
+    brick --> io16
+    brick --> out4
+
+    brick - usb
   }
 
-  component io16 #green {
+  node bricklet_io16{
   }
 
-  component out4 #green {
+  node bricklet_out4{
   }
 
-  interface brickd #green
-
-  brick - brickd
-  brick --> io16
-  brick --> out4
-
+  bricklet_io16 --> usb
+  bricklet_out4 --> usb
 }
 
 node raspi #pink {
@@ -24,69 +37,148 @@ node raspi #pink {
   component habapp #red {
   }
 
-  component "OH3" as oh #red {
+  component OH3 as oh #red {
+  }
+
+  component grafana #red {
   }
 
   interface OH_Rest_API as oh_rest #red
-  oh - oh_rest
+  oh -up- oh_rest
 
   habapp ..> oh_rest : use
+  grafana ..> oh_rest : use
 }
 
-node volumio #lightblue {
+package MQTT {
 
-  component zigbee2mqtt #blue {
+  node volumio #lightblue {
+
+    component zigbee2mqtt #blue {
+    }
+
+    component mosquitto #blue {
+    }
+
+    port zigbee #blue
+
+    interface MQTT as mqtt #blue
+    mosquitto -left- mqtt
+
+    zigbee2mqtt - zigbee
+    zigbee2mqtt ..> mqtt
   }
 
-  component mosquitto #blue {
+  node zigbee_lamp{
   }
 
-  port zigbee #blue
-
-  interface MQTT as mqtt #blue
-  mosquitto - mqtt
-
-  zigbee2mqtt - zigbee
-  zigbee2mqtt ..> mqtt
-}
-
-node homematic-raspi #aqua{
-
-  component CCU3 #springgreen{
+  node zigbee_motion_detect{
   }
 
-  interface homematic #springgreen
+  node zigbee_remote{
+  }
 
-  CCU3 - homematic
+  zigbee_lamp --> zigbee
+  zigbee_motion_detect --> zigbee
+  zigbee_remote --> zigbee
 }
 
-node "Google Assistent" #lightyellow {
-  component googleassistent as google #yellow
+package homematic_ip {
+  node homematic-raspi #aqua{
+
+    component CCU3 #springgreen{
+    }
+
+    interface homematic #springgreen
+    port "RPI-RF-MOD" as rf
+
+    CCU3 - homematic
+    CCU3 - rf
+  }
+
+  node hmip_blind {
+  }
+
+  node hmip_door_window {
+  }
+
+  node hmip_lock {
+  }
+
+  node hmip_motion_detect {
+  }
+
+  node hmip_mp3 {
+  }
+
+  node hmip_ring_detect {
+  }
+
+  node hmip_thermostat {
+  }
+
+  hmip_blind --> rf
+  hmip_door_window --> rf
+  hmip_lock --> rf
+  hmip_motion_detect --> rf
+  hmip_mp3 --> rf
+  hmip_ring_detect --> rf
+  hmip_thermostat --> rf
 }
 
-node "Alexa" #lightyellow {
-  component alexa #yellow
+package cloud {
+  node "Google Assistent" #lightyellow {
+    component googleassistent as google #yellow
+  }
+
+  node "Alexa" #lightyellow {
+    component alexa #yellow
+  }
+
+  node "Philips Hue" #lightyellow {
+    component HueApp as hueApp #yellow
+  }
+
+  node "Mobile" #lightyellow {
+    component HabPanel as habpanel #yellow
+    component App as app #yellow
+  }
+
+  cloud myOpenhab #sienna {
+    component myopenhab #brown
+
+    interface myOH_Rest_API as myOH_Rest #brown
+
+    myopenhab -up- myOH_Rest
+  }
 }
 
-node "Philips Hue" #lightyellow {
-  component Hue as hue #yellow
+package hue {
+  node "Hue" #gold{
+    component HueBridge as hueBridge #orange
 
-  interface HueRest #yellow
+    interface HueRest #orange
 
-  hue - HueRest
-}
+    port zigbeeHue
 
-node "Mobile" #lightyellow {
-  component HabPanel as habpanel #yellow
-  component App as app #yellow
-}
+    hueBridge -left- HueRest
+    hueBridge - zigbeeHue
 
-cloud myOpenhab #sienna {
-  component myopenhab #brown
+    hueApp ..> HueRest : use
+  }
 
-  interface myOH_Rest_API as myOH_Rest #brown
+  node hue_light {
+  }
 
-  myopenhab - myOH_Rest
+  node hue_motion_sensor {
+  }
+
+  node hue_plug {
+  }
+
+  hue_light --> zigbeeHue
+  hue_motion_sensor --> zigbeeHue
+  hue_plug --> zigbeeHue
 }
 
 habapp ..> mqtt : use
@@ -102,5 +194,4 @@ habpanel ..> myOH_Rest : use
 app ..> myOH_Rest : use
 
 oh ..> homematic : use
-
 @enduml
