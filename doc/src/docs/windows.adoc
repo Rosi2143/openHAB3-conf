@@ -1,0 +1,21 @@
+# Windows
+
+## requirements
+
+* window state shall control the thermostat
+** thermostats shall be set to a lower temperature when a window in this room is open
+* security check shall be possible if all windows are closed
+* if absence is set - change in window position shall create a message to mobile app
+
+## used HW
+
+### window switches (HAL)
+
+* https://www.tinkerforge.com/de/shop/bricklets/io/io16-v2-bricklet.html[tinkerforge io16_2]
+
+## flow
+.flow for window states
+[plantuml, "{plantUMLDir}windows", png]
+----
+include::plantuml/act_windows.puml[]
+----

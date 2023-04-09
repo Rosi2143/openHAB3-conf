@@ -1,0 +1,106 @@
+@startuml
+
+node "Tinkerforge" #lightgreen {
+
+  component brick #green {
+  }
+
+  component io16 #green {
+  }
+
+  component out4 #green {
+  }
+
+  interface brickd #green
+
+  brick - brickd
+  brick --> io16
+  brick --> out4
+
+}
+
+node raspi #pink {
+
+  component habapp #red {
+  }
+
+  component "OH3" as oh #red {
+  }
+
+  interface OH_Rest_API as oh_rest #red
+  oh - oh_rest
+
+  habapp ..> oh_rest : use
+}
+
+node volumio #lightblue {
+
+  component zigbee2mqtt #blue {
+  }
+
+  component mosquitto #blue {
+  }
+
+  port zigbee #blue
+
+  interface MQTT as mqtt #blue
+  mosquitto - mqtt
+
+  zigbee2mqtt - zigbee
+  zigbee2mqtt ..> mqtt
+}
+
+node homematic-raspi #aqua{
+
+  component CCU3 #springgreen{
+  }
+
+  interface homematic #springgreen
+
+  CCU3 - homematic
+}
+
+node "Google Assistent" #lightyellow {
+  component googleassistent as google #yellow
+}
+
+node "Alexa" #lightyellow {
+  component alexa #yellow
+}
+
+node "Philips Hue" #lightyellow {
+  component Hue as hue #yellow
+
+  interface HueRest #yellow
+
+  hue - HueRest
+}
+
+node "Mobile" #lightyellow {
+  component HabPanel as habpanel #yellow
+  component App as app #yellow
+}
+
+cloud myOpenhab #sienna {
+  component myopenhab #brown
+
+  interface myOH_Rest_API as myOH_Rest #brown
+
+  myopenhab - myOH_Rest
+}
+
+habapp ..> mqtt : use
+habapp ..> brickd : use
+myopenhab ..> oh_rest : use
+hue ..> oh_rest : use
+habpanel ..> oh_rest : use
+
+google ..> myOH_Rest : use
+google ..> HueRest : use
+alexa ..> myOH_Rest : use
+habpanel ..> myOH_Rest : use
+app ..> myOH_Rest : use
+
+oh ..> homematic : use
+
+@enduml

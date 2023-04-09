@@ -1,0 +1,33 @@
+# Lights
+
+## requirements
+
+Lights are required to be controlled via
+
+* wall switches (wife acceptance factor)
+* alexa / google assistant
+
+and intended to be controlled via
+
+* mobile app
+* motion detectors
+* depending on other lights (for more than one light per area/room)
+
+## used HW
+
+### wall switches
+
+* https://www.tinkerforge.com/de/shop/bricklets/io/io16-v2-bricklet.html[tinkerforge io16_2]
+
+### lights
+
+. https://www.tinkerforge.com/de/shop/bricklets/industrial/industrial-digital-out-4-v2-bricklet.html[tinkerforge industrial io]
+. hue
+. osram/IKEA/Paulmann -> zigbee
+
+## flow
+.flow for lights
+[plantuml, "{plantUMLDir}lights", png]
+----
+include::plantuml/act_lights.puml[]
+----

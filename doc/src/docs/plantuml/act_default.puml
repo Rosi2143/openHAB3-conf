@@ -1,0 +1,40 @@
+@startuml
+
+partition Tinkerforge #lightgreen {
+
+  partition out4 #green {
+  }
+
+  partition io16 #green {
+  }
+
+  partition brick #green {
+  }
+
+}
+
+partition raspi #pink {
+
+  partition habapp #red {
+  }
+
+  partition OH3 #red {
+  }
+
+}
+
+partition volumio #lightblue{
+
+  partition zigbeee2mqtt #blue {
+  }
+
+  partition mosquitto #blue {
+  }
+
+}
+
+(*) --> "initial"
+initial --> final
+"final" --> (*)
+
+@enduml

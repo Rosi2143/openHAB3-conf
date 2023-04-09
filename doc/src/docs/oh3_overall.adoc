@@ -1,0 +1,4 @@
+include::basic_setup.adoc[]
+
+include::lights.adoc[leveloffset=-1]
+include::windows.adoc[leveloffset=-1]

@@ -5,3 +5,5 @@ habapp/log/
 
 # generated images
 automation/jsr223/python/personal/images/*
+
+doc/build

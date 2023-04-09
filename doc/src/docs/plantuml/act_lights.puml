@@ -1,0 +1,40 @@
+@startuml
+(*) --> "key press"
+
+partition Tinkerforge #lightgreen {
+
+  partition io16 #green {
+    "key press" --> "detect keys" #olive
+  }
+
+  partition out4 #green {
+  }
+
+  partition brick #green {
+     "detect keys" --> "send signal" #olive
+  }
+}
+
+partition raspi #pink {
+
+  partition habapp #red {
+     "send signal" --> tinkerforge_oh_.py #purple
+  }
+
+  partition OH3 #red {
+    tinkerforge_oh_.py --> "set item keypress" #orchid
+    "set item keypress" --> switch2light_mapping.py #purple
+    switch2light_mapping.py --> "set item light (*_Short/_Long)" #orchid
+    "set item light (*_Short/_Long)" --> light_follow.py #purple
+    light_follow.py --> "set item light (*_Short/_Long)"
+    "set item light (*_Short/_Long)" --> tinkerforge_oh_.py
+  }
+
+}
+
+partition out4 #green {
+  tinkerforge_oh_.py --> "set light" #olive
+}
+
+"set light" --> (*)
+@enduml
