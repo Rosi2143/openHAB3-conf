@@ -1,4 +1,4 @@
-@startuml
+@startuml default
 
 partition Tinkerforge #lightgreen {
 

@@ -14,7 +14,9 @@ inputFiles = [
         [file: 'oh3_overall.adoc',      formats: ['html','pdf']],
 
         [file: 'basic_setup.adoc',      formats: ['html','pdf']],
+        [file: 'doors.adoc',            formats: ['html','pdf']],
         [file: 'lights.adoc',           formats: ['html','pdf']],
+        [file: 'security.adoc',         formats: ['html','pdf']],
         [file: 'windows.adoc',          formats: ['html','pdf']],
 ]
 
@@ -48,15 +50,16 @@ customTasks = [
 
 //Configuration for microsite: generateSite + previewSite
 
-microsite = [:]
+//microsite = [:]
 
 // these properties will be set as jBake properties
 // microsite.foo will be site.foo in jBake and can be used as config.site_foo in a template
 // see https://jbake.org/docs/2.6.4/#configuration for how to configure jBake
 // other properties listed here might be used in the jBake templates and thus are not
 // documented in the jBake docs but hopefully in the template docs.
+/**
 microsite.with {
-    /** start:microsite **/
+    /** start:microsite ** /
 
     // is your microsite deployed with a context path?
     contextPath = '/'
@@ -65,7 +68,7 @@ microsite.with {
     // the folder of a site definition (theme) relative to the docDir+inputPath
     //siteFolder = '../site'
 
-    /** end:microsite **/
+    /** end:microsite ** /
 
     //project theme
     //site folder relative to the docs folder
@@ -132,7 +135,7 @@ you have three different types of script you can define:
 Needs `python3` and `docutils` installed.
 
 end::additionalConverters[]
-**/
+** /
     additionalConverters = [
         //'.one': [command: 'println "test"+file.canonicalPath', type: 'groovy'],
         //'.two': [command: 'scripts/convert-md.groovy', type: 'groovyFile'],
@@ -152,7 +155,7 @@ end::additionalConverters[]
         System.out.println file.canonicalPath
         headers.title += " - from CustomConvention"
     """.stripIndent()
-    **/
+    ** /
 
     // if you need to register custom Asciidoctor extensions, this is the right place
     // configure the name and path to your extension, relative to the root of your project
@@ -161,6 +164,7 @@ end::additionalConverters[]
 
     // rubyExtensions = []
 }
+**/
 
 //*****************************************************************************************
 
@@ -194,7 +198,7 @@ changelog.with {
 //tag::confluenceConfig[]
 //Configuration for publishToConfluence
 
-confluence = [:]
+// confluence = [:]
 
 /**
 //tag::input-config[]
@@ -233,6 +237,7 @@ only 'file' or 'url' is allowed. If both are given, 'url' is ignored
 //end::input-config[]
 **/
 
+/**
 confluence.with {
     input = [
             [ file: "build/html5/arc42-template-de.html" ],
@@ -272,7 +277,7 @@ confluence.with {
      - gradle variables set through gradle properties (uses the 'confluenceUser' and 'confluencePass' keys)
     Often, same credentials are used for Jira & Confluence, in which case it is recommended to pass CLI parameters for both entities as
     -Pusername=myUser -Ppassword=myPassword
-    */
+    * /
 
     //optional API-token to be added in case the credentials are needed for user and password exchange.
     //apikey = "[API-token]"
@@ -309,6 +314,7 @@ confluence.with {
 
 }
 //end::confluenceConfig[]
+**/
 
 //*****************************************************************************************
 //tag::exportEAConfig[]
@@ -321,6 +327,7 @@ confluence.with {
 // A packageGUID, that is not found in the currently opened project, is silently skipped.
 // PackageGUID of multiple project files can be mixed in case multiple projects have to be opened.
 
+/**
 exportEA.with {
 // OPTIONAL: Set the connection to a certain project or comment it out to use all project files inside the src folder or its child folder.
 // connection = "DBType=1;Connect=Provider=SQLOLEDB.1;Integrated Security=SSPI;Persist Security Info=False;Initial Catalog=[THE_DB_NAME_OF_THE_PROJECT];Data Source=[server_hosting_database.com];LazyLoad=1;"
@@ -336,6 +343,7 @@ exportEA.with {
 
 }
 //end::exportEAConfig[]
+**/
 
 //tag::htmlSanityCheckConfig[]
 htmlSanityCheck.with {
@@ -344,6 +352,7 @@ htmlSanityCheck.with {
 }
 //end::htmlSanityCheckConfig[]
 
+/**
 //tag::jiraConfig[]
 // Configuration for Jira related tasks
 jira = [:]
@@ -362,7 +371,7 @@ jira.with {
      - gradle variables set through gradle properties (uses the 'jiraUser' and 'jiraPass' keys)
     Often, Jira & Confluence credentials are the same, in which case it is recommended to pass CLI parameters for both entities as
     -Pusername=myUser -Ppassword=myPassword
-    */
+    * /
 
     // the key of the Jira project
     project = 'PROJECTKEY'
@@ -393,7 +402,7 @@ jira.with {
     These are basically JQL expressions bundled with a filename in which results will be saved.
     User can configure custom fields IDs and name those for column header,
     i.e. customfield_10026:'Story Points' for Jira instance that has custom field with that name and will be saved in a coloumn named "Story Points"
-    */
+    * /
     requests = [
         new JiraRequest(
             filename:"File1_Done_issues",
@@ -415,7 +424,9 @@ class JiraRequest {
     Map<String,String> customfields // map of customFieldId:displayName values for Jira fields which don't have default names, i.e. customfield_10026:StoryPoints
 }
 //end::jiraConfig[]
+**/
 
+/**
 //tag::openApiConfig[]
 // Configuration for OpenAPI related task
 openApi = [:]
@@ -430,7 +441,10 @@ openApi.with {
     infoEmail = 'info@company.com'
 }
 //end::openApiConfig[]
+**/
 
+
+/**
 //tag::sprintChangelogConfig[]
 // Sprint changelog configuration generate changelog lists based on tickets in sprints of an Jira instance.
 // This feature requires at least Jira API & credentials to be properly set in Jira section of this configuration
@@ -452,7 +466,9 @@ sprintChangelog.with {
     allSprintsFilename = 'Sprints_Changelogs' // Extension will be automatically added.
 }
 //end::sprintChangelogConfig[]
+**/
 
+/**
 //tag::collectIncludesConfig[]
 collectIncludes = [:]
 
@@ -469,7 +485,9 @@ collectIncludes.with {
     cleanOutputFolder = true // should the output folder be emptied before generation? defailt: false
 }
 //end::collectIncludesConfig[]
+**/
 
+/**
 //tag::structurizrConfig[]
 // Configuration for Structurizr related tasks
 structurizr = [:]
@@ -503,3 +521,4 @@ structurizr.with {
     }
 }
 //end::structurizrConfig[]
+**/

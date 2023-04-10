@@ -1,7 +1,17 @@
-#Smarthome setup
+# Smarthome setup
 
-include::basic_setup.adoc[leveloffset=-1]]
+:leveloffset: +1
 
-include::lights.adoc[leveloffset=-1]
-include::windows.adoc[leveloffset=-1]
-include::doors.adoc[leveloffset=-1]
+include::basic_setup.adoc[]
+
+<<<
+include::lights.adoc[]
+
+<<<
+include::windows.adoc[]
+
+<<<
+include::doors.adoc[]
+
+<<<
+include::security.adoc[]

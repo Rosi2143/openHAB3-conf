@@ -1,4 +1,4 @@
-@startuml
+@startuml lights
 (*) --> "key press"
 
 partition Tinkerforge #lightgreen {
@@ -22,12 +22,13 @@ partition raspi #pink {
   }
 
   partition OH3 #red {
-    tinkerforge_oh_.py --> "set item keypress" #orchid
-    "set item keypress" --> switch2light_mapping.py #purple
-    switch2light_mapping.py --> "set item light (*_Short/_Long)" #orchid
-    "set item light (*_Short/_Long)" --> light_follow.py #purple
-    light_follow.py --> "set item light (*_Short/_Long)"
-    "set item light (*_Short/_Long)" --> tinkerforge_oh_.py
+    tinkerforge_oh_.py --> "set item keypress (*_Short/_Long)" #orchid
+    "set item keypress (*_Short/_Long)" -> "gSchalter_Short/_Long"  #lightcoral
+    "gSchalter_Short/_Long" --> switch2light_mapping.py #purple
+    switch2light_mapping.py --> "set item light" #orchid
+    "set item light" --> light_follow.py #purple
+    light_follow.py --> "set item light"
+    "set item light" --> tinkerforge_oh_.py
   }
 
 }

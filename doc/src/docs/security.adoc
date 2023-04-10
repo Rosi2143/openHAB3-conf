@@ -1,0 +1,48 @@
+# Security
+
+## requirements
+
+* control if all
+** windows are closed
+** external doors are closed
+** door(s) is(are) properly locked
+* check if anyone is home
+* simulate presence
+
+## used HW
+
+### window / door state
+
+see link:windows.adoc[windows] and link:doors.adoc[doors]
+
+### door lock
+
+* https://homematic-ip.com/en/product/lock[hmip-dld]
+
+## flow doors and windows state
+.flow for security (doors/windows)
+[plantuml, "{plantUMLDir}doors_windows", png]
+----
+include::plantuml/act_security_doors_windows.puml[]
+----
+
+## flow presence simulation
+.flow for security presence simulation
+[plantuml, "{plantUMLDir}presence_simulation", png]
+----
+include::plantuml/act_security_presence_simulation.puml[]
+----
+
+## flow presence detection
+.flow for security presence detection
+[plantuml, "{plantUMLDir}presence_detection", png]
+----
+include::plantuml/act_security_presence_detection.puml[]
+----
+
+## flow lock state
+.flow for security lock state
+[plantuml, "{plantUMLDir}lock_state", png]
+----
+include::plantuml/act_security_lock_state.puml[]
+----

@@ -1,30 +1,43 @@
-@startuml
+@startuml basic_setup
+legend top left
+    |Color| Type |
+    |<#lightgreen> lightgreen | Tinkerforge HW|
+    |<#green> green | bricklet or brick|
+    |<#olive> olive | activity on tinkerforge|
+
+    |<#pink> pink | RaspberryPi HW|
+    |<#red> red | Process on RaspberryPi|
+    |<#orchid> orchid | activity on RaspberryPi|
+    |<#purple> purple | group changes on RaspberryPi|
+    |<#lightcoral> lightcoral | scripty run on RaspberryPi|
+
+    |<#aqua> aqua | homematic-raspi HW|
+    |<#springgreen> springgreen | activity on homematic-raspi HW|
+
+    |<#lightyellow> lightyellow | cloud / mobile device|
+    |<#yellow> yellow | App running on mobile device|
+endlegend
+
 package tinkerforge {
   node "Tinkerforge" #lightgreen {
-
     component brick #green {
     }
-
     component io16 #green {
     }
-
     component out4 #green {
     }
 
     port USB as usb
-
     interface brickd #green
 
     brick - brickd
+    brick - usb
+
     brick --> io16
     brick --> out4
-
-    brick - usb
   }
-
   node bricklet_io16{
   }
-
   node bricklet_out4{
   }
 
@@ -33,13 +46,10 @@ package tinkerforge {
 }
 
 node raspi #pink {
-
   component habapp #red {
   }
-
   component OH3 as oh #red {
   }
-
   component grafana #red {
   }
 
@@ -51,30 +61,23 @@ node raspi #pink {
 }
 
 package MQTT {
-
   node volumio #lightblue {
-
     component zigbee2mqtt #blue {
     }
-
     component mosquitto #blue {
     }
 
     port zigbee #blue
-
     interface MQTT as mqtt #blue
-    mosquitto -left- mqtt
 
+    mosquitto -left- mqtt
     zigbee2mqtt - zigbee
     zigbee2mqtt ..> mqtt
   }
-
   node zigbee_lamp{
   }
-
   node zigbee_motion_detect{
   }
-
   node zigbee_remote{
   }
 
@@ -85,35 +88,26 @@ package MQTT {
 
 package homematic_ip {
   node homematic-raspi #aqua{
-
     component CCU3 #springgreen{
     }
-
     interface homematic #springgreen
     port "RPI-RF-MOD" as rf
 
     CCU3 - homematic
     CCU3 - rf
   }
-
   node hmip_blind {
   }
-
   node hmip_door_window {
   }
-
   node hmip_lock {
   }
-
   node hmip_motion_detect {
   }
-
   node hmip_mp3 {
   }
-
   node hmip_ring_detect {
   }
-
   node hmip_thermostat {
   }
 
@@ -130,20 +124,16 @@ package cloud {
   node "Google Assistent" #lightyellow {
     component googleassistent as google #yellow
   }
-
   node "Alexa" #lightyellow {
     component alexa #yellow
   }
-
   node "Philips Hue" #lightyellow {
     component HueApp as hueApp #yellow
   }
-
   node "Mobile" #lightyellow {
     component HabPanel as habpanel #yellow
     component App as app #yellow
   }
-
   cloud myOpenhab #sienna {
     component myopenhab #brown
 
@@ -166,16 +156,12 @@ package hue {
 
     hueApp ..> HueRest : use
   }
-
   node hue_light {
   }
-
   node hue_motion_sensor {
   }
-
   node hue_plug {
   }
-
   hue_light --> zigbeeHue
   hue_motion_sensor --> zigbeeHue
   hue_plug --> zigbeeHue

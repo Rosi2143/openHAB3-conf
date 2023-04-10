@@ -1,4 +1,4 @@
-@startuml
+@startuml doors
 (*) --> "door state changed"
 
 partition Tinkerforge #lightgreen {
@@ -23,10 +23,10 @@ partition raspi #pink {
   }
 
   partition OH3 #red {
-    tinkerforge_oh_.py --> "set item door state (*_Open_State)" #orchid
-    "set door state" --> "set item door state (*_Open_State)"
+    tinkerforge_oh_.py --> "set item door state (*_OpenState)" #orchid
+    "set door state" --> "set item door state (*_OpenState)"
 
-    "set item door state (*_Open_State)" --> "set group gThermostate_WindowOpenStates" #purple
+    "set item door state (*_OpenState)" --> "set group gThermostate_WindowOpenStates" #purple
     "set group gThermostate_WindowOpenStates" --> homematic_ip.py #purple
     homematic_ip.py --> "set thermostat (*_WindowState)" #orchid
   }

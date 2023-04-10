@@ -1,0 +1,38 @@
+@startuml doors_and_windows
+
+(*) --> "door state changed"
+"door state changed" --> "see flow door state detection"
+(*) --> "window state changed"
+"window state changed" --> "see flow window state detection"
+
+partition raspi #pink {
+
+  partition OH3 #red {
+    "see flow door state detection" --> "set item door state (*_OpenState)" #orchid
+    "see flow window state detection" --> "set item window state (*_OpenState)" #orchid
+    "set item door state (*_OpenState)" --> "set gAussenTueren" #purple
+    "set item window state (*_OpenState)" --> "set gFenster" #purple
+
+    "set gAussenTueren" --> mp3_player_mode.py #lightcoral
+    "set gFenster" --> mp3_player_mode.py #lightcoral
+    "set gAussenTueren" --> notification.py #lightcoral
+    "set gFenster" --> notification.py #lightcoral
+
+    mp3_player_mode.py --> "set color" #orchid
+    notification.py --> "set item" #orchid
+  }
+}
+
+partition "Mobile" #lightyellow {
+  partition HabPanel #yellow {
+    "set item" --> "show notification" #gold
+  }
+}
+
+partition homematic-raspi #aqua{
+  "set color" --> "show color" #springgreen
+}
+
+"set color" --> (*)
+"show color" --> (*)
+@enduml

@@ -1,4 +1,4 @@
-@startuml
+@startuml windows
 (*) --> "window state changed"
 
 partition Tinkerforge #lightgreen {
@@ -19,9 +19,9 @@ partition raspi #pink {
   }
 
   partition OH3 #red {
-    tinkerforge_oh_.py --> "set item window state (*_Open_State)" #orchid
-    "set item window state (*_Open_State)" --> "set group gThermostate_WindowOpenStates" #purple
-    "set group gThermostate_WindowOpenStates" --> homematic_ip.py #purple
+    tinkerforge_oh_.py --> "set item window state (*_OpenState)" #orchid
+    "set item window state (*_OpenState)" --> "set group gThermostate_WindowOpenStates" #purple
+    "set group gThermostate_WindowOpenStates" --> homematic_ip.py #lightcoral
     homematic_ip.py --> "set thermostat (*_WindowState)" #orchid
   }
 
