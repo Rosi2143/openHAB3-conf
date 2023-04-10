@@ -18,7 +18,7 @@ partition Tinkerforge #lightgreen {
 partition raspi #pink {
 
   partition habapp #red {
-     "send signal" --> tinkerforge_oh_.py #purple
+    "send signal" --> tinkerforge_oh_.py #purple
   }
 
   partition OH3 #red {
@@ -31,11 +31,32 @@ partition raspi #pink {
     "set item light" --> tinkerforge_oh_.py
   }
 
+  partition habapp #red {
+    "set item light" --> ikea.py #purple
+  }
+
 }
 
+partition "Philips Hue" #lightyellow {
+  partition HueApp #yellow {
+    "set item light" --> "set hue light"
+  }
+}
+
+partition volumio #lightblue {
+  partition mosquitto #blue {
+    ikea.py -> "set mqtt topic" #indigo
+  }
+
+  partition zigbee2mqtt #blue {
+    "set mqtt topic" -> "set mqtt light" #indigo
+  }
+}
 partition out4 #green {
   tinkerforge_oh_.py --> "set light" #olive
 }
 
+"set mqtt light" --> (*)
+"set hue light" --> (*)
 "set light" --> (*)
 @enduml

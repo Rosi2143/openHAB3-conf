@@ -1,3 +1,53 @@
-@startuml lock_state
-colors red
+@startuml door_lock
+(*) --> "change"
+
+partition homematic_ip #lightblue {
+  partition hmip_door_window {
+    change --> "detect door state"
+  }
+  partition hmip_lock {
+    change --> "detect lock state"
+  }
+  partition hmip_mp3 {
+  }
+  partition hmip_ring_detect {
+    change --> "detect ring state"
+  }
+
+  partition homematic-raspi #aqua{
+    "detect door state" --> "send change"
+    "detect lock state" --> "send change"
+    "detect ring state" --> "send change"
+  }
+}
+
+partition Tinkerforge #lightgreen {
+
+  partition io16 #green {
+    change --> "detect window state" #olive
+  }
+
+  partition brick #green {
+     "detect window state" --> "set window state" #olive
+  }
+}
+
+partition raspi #pink {
+
+  partition OH3 #red {
+    "send change" --> "set item(s)" #orchid
+    "set window state" --> "set item(s)" #orchid
+  }
+
+  partition habapp #red {
+    "set item(s)" --> thermostat_mode.py #purple
+    thermostat_mode.py -->  thermostat_statemachine.py #purple
+  }
+}
+
+partition homematic_ip #lightblue {
+  partition hmip_mp3 {
+    thermostat_mode.py --> "set color" #lightgreen/pink
+  }
+}
 @enduml

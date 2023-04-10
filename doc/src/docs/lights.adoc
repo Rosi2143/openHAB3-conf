@@ -23,7 +23,10 @@ and intended to be controlled via
 
 . https://www.tinkerforge.com/de/shop/bricklets/industrial/industrial-digital-out-4-v2-bricklet.html[tinkerforge industrial io]
 . hue
-. osram/IKEA/Paulmann -> zigbee
+. zigbee
+.. Osram
+.. IKEA
+.. Paulmann
 
 ## flow
 .flow for lights

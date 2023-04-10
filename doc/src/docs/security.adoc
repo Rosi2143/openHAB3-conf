@@ -20,6 +20,13 @@ see link:windows.adoc[windows] and link:doors.adoc[doors]
 * https://homematic-ip.com/en/product/lock[hmip-dld]
 
 ## flow doors and windows state
+Door and Window (open/close) state is set to a common *_OpenState item group.
+
+* all windows
+* all outer doors
+
+if any of the windows or outer doors are open the color of the MP3-Player as well as the notification item for HABPanel is set.
+
 .flow for security (doors/windows)
 [plantuml, "{plantUMLDir}doors_windows", png]
 ----
@@ -28,12 +35,16 @@ include::plantuml/act_security_doors_windows.puml[]
 
 ## flow presence simulation
 .flow for security presence simulation
+Presence simulation ??
+
 [plantuml, "{plantUMLDir}presence_simulation", png]
 ----
 include::plantuml/act_security_presence_simulation.puml[]
 ----
 
 ## flow presence detection
+Presence detection is done via the availability of the mobile phones or all residents in the Wifi network - assuming that nobody leaves their phones home :-).
+
 .flow for security presence detection
 [plantuml, "{plantUMLDir}presence_detection", png]
 ----
@@ -41,6 +52,8 @@ include::plantuml/act_security_presence_detection.puml[]
 ----
 
 ## flow lock state
+The lock state is to be shown in the MP3-Player color as well as in a notification item.
+
 .flow for security lock state
 [plantuml, "{plantUMLDir}lock_state", png]
 ----
