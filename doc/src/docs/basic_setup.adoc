@@ -1,0 +1,14 @@
+# Basic setup
+
+the basic setup of HW and deployment of SW is shown in diagram <<basicsetup>>.
+
+.basic setup
+
+[[basicsetup]]
+[plantuml, "{plantUMLDir}basic setup", png]
+----
+include::plantuml/cmp_basic_setup.puml[]
+----
+
+## naming conventions
+There are a couple of naming conventions defined in https://github.com/Rosi2143/openHAB3-userdata/blob/master/README.md[naming conventions]

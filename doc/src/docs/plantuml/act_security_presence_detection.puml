@@ -1,0 +1,16 @@
+@startuml presence_detection
+partition "Mobile" #lightyellow {
+  partition mobile1 #yellow {
+      (*) --> "connect Wifi" #gold
+  }
+}
+
+partition raspi #pink {
+
+  partition OH3 #red {
+    "connect Wifi" --> "set item presence mobile(x)" #orchid
+    "set item presence mobile(x)"  --> "set gAnwesenheit" #purple
+    "set gAnwesenheit" --> (*)
+  }
+}
+@enduml
