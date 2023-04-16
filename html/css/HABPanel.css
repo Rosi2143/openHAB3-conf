@@ -1,0 +1,5 @@
+/* https://www.laub-home.de/wiki/OpenHAB_HABPanel_Tipps_und_Tricks#Datum_/_Uhrzeit_Format */
+/* Changes the Color of the Clock */
+.header-clock {
+    color: #f00db7;
+}

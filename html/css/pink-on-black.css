@@ -1,0 +1,84 @@
+@import "HABPanel.css";
+
+:root {
+    --box-bg: transparent;
+    --widget-text-color: #FF00FF;
+    /* https://isotropic.co/tool/hex-color-to-css-filter/ */
+    --icon-color-filter: invert(20%) sepia(100%) saturate(1952%) hue-rotate(283deg) brightness(127%) contrast(143%);
+    --icon-color-off-filter: invert(43%) sepia(0%) saturate(1%) hue-rotate(172deg) brightness(92%) contrast(92%);
+    --webkit-filter: var(--icon-color-filter, invert(60%) sepia(100%) hue-rotate(185deg) saturate(1000%));
+}
+
+@font-face {
+    font-family: "orbitron";
+    src: url('Orbitron-Regular.ttf');
+}
+
+.rzslider {
+    margin: auto;
+}
+
+.rzslider .rz-pointer {
+    background-color: var(--widget-text-color)
+}
+
+.rzslider .rz-bar.rz-selection {
+    background: var(--widget-text-color)
+}
+
+.widget-clock .second {
+    stroke: var(--widget-text-color)
+}
+
+.widget-clock .second-counterweight {
+    stroke: var(--widget-text-color)
+}
+
+.widget-clock .time {
+    font-family: 'orbitron', sans-serif;
+    font-weight: 100;
+}
+
+.value {
+    color: var(--widget-text-color)
+}
+
+.image-content img {
+    width: 70%;
+}
+
+.dummy img {
+    filter: var(--icon-color-filter);
+}
+
+.dummy img.off {
+    filter: var(--icon-color-off-filter);
+}
+
+.dummy img.closed {
+    filter: var(--icon-color-off-filter);
+}
+
+.dummy {
+    font-family: 'orbitron', sans-serif;
+    font-weight: 100;
+}
+
+.div-left {
+    float: left;
+}
+
+.div-center {
+    float: center;
+    font-family: 'orbitron', sans-serif;
+    font-weight: 100;
+    font-size: 20px;
+}
+
+.div-right {
+    float: right;
+}
+
+.switch-content {
+    font-family: 'orbitron', sans-serif;
+}
