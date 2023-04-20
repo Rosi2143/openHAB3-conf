@@ -35,7 +35,7 @@ class BrickletIo16V2Switch(BrickletIo16V2):
                 press = "Short"
 
             oh_item_name = self.port_mapping[port] + "_" + press
-            self.logger.info(press + " Press detected for " + oh_item_name)
+            self.logger.info(press + " Press detected for " + oh_item_name + "(" + str(timediff.total_seconds()) + ")ms")
             if self.port_mapping[port] != "":
                 self.set_oh_item_state(oh_item_name, "CLOSED", "Contact")
             else:
