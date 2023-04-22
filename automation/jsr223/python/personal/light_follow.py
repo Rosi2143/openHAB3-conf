@@ -5,27 +5,29 @@ makes other light(s) follow a leading light
 from core.rules import rule
 from core.triggers import when
 
+light_follow_map = {"LichtBuero_State": "LichtBuero_Lampe_State",
+                    "LichtWerkstatt_State": "SteckdoseWerkstatt_State",
+                    "LichtSchlafzimmer_State": "SteckdoseSchlafzimmer_State",
+                    "LichtEsszimmer_State": "SteckdoseHighboard_State",
+                    "LichtKuecheDecke_State": "LichtKuecheToaster_State",
+                    }
 
-@rule("LightFollow: Office",
+
+@rule("LightFollow: Generic",
       description="handle office lights",
       tags=["itemchange", "light follow", "office"])
-@when("Item LichtBuero_State changed")
-def office_light_following(event):
+@when("Member of gHauptLichter changed")
+def generic_light_following(event):
     """make all office lights follow the main light"""
 
-    office_light_following.log.info(
+    generic_light_following.log.info(
         "rule fired because of %s", event.itemName)
 
-    events.sendCommand("LichtBuero_Lampe_State", str(event.itemState))
-
-
-@rule("LightFollow: Workshop",
-      description="handle workshop lights",
-      tags=["itemchange", "light follow", "workshop"])
-@when("Item LichtWerkstatt_State changed")
-def workshop_light_following(event):
-    """handle daylight start event"""
-
-    workshop_light_following.log.info(
-        "rule fired because of %s", event.itemName)
-    events.sendCommand("SteckdoseWerkstatt_State", str(event.itemState))
+    if not event.itemName in light_follow_map:
+        generic_light_following.log.error(
+            "element %s not found in %s", event.itemName, light_follow_map)
+    else:
+        generic_light_following.log.info(
+            "setting %s to %s", event.itemName, event.itemState)
+        events.sendCommand(
+            light_follow_map[event.itemName], str(event.itemState))
