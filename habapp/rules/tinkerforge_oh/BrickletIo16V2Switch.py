@@ -4,6 +4,7 @@
 import json
 import sys
 import logging  # required for extended logging
+from datetime import timedelta
 
 sys.path.append('/etc/openhab/habapp/rules/')
 from tinkerforge_oh.BrickletIo16V2 import BrickletIo16V2
@@ -35,7 +36,7 @@ class BrickletIo16V2Switch(BrickletIo16V2):
                 press = "Short"
 
             oh_item_name = self.port_mapping[port] + "_" + press
-            self.logger.info(press + " Press detected for " + oh_item_name + "(" + str(timediff.total_seconds()) + ")ms")
+            self.logger.info(press + " Press detected for " + oh_item_name + "(" + str(timediff/timedelta(milliseconds=1)) + ")ms")
             if self.port_mapping[port] != "":
                 self.set_oh_item_state(oh_item_name, "CLOSED", "Contact")
             else:
