@@ -1,7 +1,7 @@
 **/*$py.class
 habapp/log/
-**/__pycache__/*
-*.pyc
+**/__pycache__/**
+**/*.pyc
 
 # generated images
 automation/jsr223/python/personal/images/*
