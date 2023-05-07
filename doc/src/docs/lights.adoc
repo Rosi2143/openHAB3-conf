@@ -1,3 +1,4 @@
+:path_to_root: ../../..
 # Lights
 
 ## requirements
@@ -34,3 +35,9 @@ and intended to be controlled via
 ----
 include::plantuml/act_lights.puml[]
 ----
+
+## follow lights
+
+* add mainlight to `gHauptLichter`
+* this will trigger the rule link:{path_to_root}automation\jsr223\python\personal\light_follow.py["LightFollow: Generic"]
+* add the sublight to the map light_follow_map

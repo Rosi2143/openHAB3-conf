@@ -33,5 +33,6 @@
         "**/automation/**/python/core/**/*.py",
         "**/automation/**/python/community/**/*.py"
     ],
-    "python.formatting.provider": "autopep8"
+    "python.formatting.provider": "autopep8",
+    "openhab.useRestApi": false
 }

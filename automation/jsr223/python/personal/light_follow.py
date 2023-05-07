@@ -10,6 +10,7 @@ light_follow_map = {"LichtBuero_State": "LichtBuero_Lampe_State",
                     "LichtSchlafzimmer_State": "SteckdoseSchlafzimmer_State",
                     "LichtEsszimmer_State": "SteckdoseHighboard_State",
                     "LichtKuecheDecke_State": "LichtKuecheToaster_State",
+                    "LichtTerrasseUnten_State": "LichtGrillbereich_Helligkeit"
                     }
 
 
