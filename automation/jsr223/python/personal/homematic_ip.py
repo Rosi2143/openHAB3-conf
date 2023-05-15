@@ -142,5 +142,4 @@ def homematic_window_open_state_handling(event):
             "WindowOpenStateItem: " + windowstate_item_name + " does not exist.")
     else:
         events.sendCommand(itemRegistry.getItem(
-            windowstate_item_name), event.itemState)
-
+            windowstate_item_name), str(event.itemState))
