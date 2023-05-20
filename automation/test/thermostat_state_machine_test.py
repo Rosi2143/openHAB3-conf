@@ -30,7 +30,10 @@ log.addHandler(ch)
 def test_state(state_machine, state):
     """make testing of states with logging easier"""
     log.debug(
-        f"assert: {state_machine.get_name()} {state_machine.current_state.name} == {state}")
+        "assert: %s %s == %s",
+        state_machine.get_name(),
+        state_machine.current_state.name,
+        state)
     assert state_machine.current_state.name == state
 
 
@@ -38,7 +41,7 @@ def test_default_state():
     """Test if default (initial) state is OK
     """
     function_name = inspect.currentframe().f_code.co_name
-    print(f"\n########## {function_name} #########")
+    print("\n########## %s #########", function_name)
 
     state_machine = thermostat_statemachine(
         name="TestMachine", logger=log)
@@ -50,7 +53,7 @@ def test_auto_manual_vacation_state():
     """Test if auto, manual and vacation state is OK
     """
     function_name = inspect.currentframe().f_code.co_name
-    print(f"\n########## {function_name} #########")
+    print("\n########## %s #########", function_name)
 
     state_machine = thermostat_statemachine(
         name=function_name, logger=log)
@@ -84,7 +87,7 @@ def test_config_change():
     """Test config state change transitions
     """
     function_name = inspect.currentframe().f_code.co_name
-    print(f"\n########## {function_name} #########")
+    print("\n########## %s #########", function_name)
 
     state_machine = thermostat_statemachine(
         name=function_name, logger=log)
@@ -126,7 +129,7 @@ def test_window_change():
     """Test window state change transitions
     """
     function_name = inspect.currentframe().f_code.co_name
-    print(f"\n########## {function_name} #########")
+    print("\n########## %s #########", function_name)
 
     state_machine = thermostat_statemachine(
         name=function_name, logger=log)

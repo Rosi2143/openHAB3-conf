@@ -35,6 +35,7 @@ def test_state(state_machine, state):
         f"assert: {state_machine.get_name()} [current]{state_machine.current_state.name} == [expect]{state}")
     assert state_machine.current_state.name == state
 
+
 def run_tests(event, test_set, state_machine):
 
     event_function = getattr(state_machine, "set_" + event)
@@ -67,7 +68,7 @@ def test_default_state():
     """Test if default (initial) state is OK
     """
     function_name = inspect.currentframe().f_code.co_name
-    print(f"\n########## {function_name} #########")
+    print("\n########## %s #########", function_name)
 
     state_machine = security_door_window_statemachine(
         name="TestMachine", logger=log)
@@ -78,7 +79,7 @@ def test_default_state():
 def test_bell_rang_state():
     """Test if bell_rang state is OK"""
     function_name = inspect.currentframe().f_code.co_name
-    print(f"\n########## {function_name} #########")
+    print("\n########## %s #########", function_name)
 
     state_machine = security_door_window_statemachine(
         name=function_name, logger=log)
@@ -88,35 +89,35 @@ def test_bell_rang_state():
     state_machine.send("tr_bell_rang")
     test_state(state_machine, "yellow")
 
-    test_set = {"lock_error": {"ON": "red",\
+    test_set = {"lock_error": {"ON": "red",
                                "ON_OFF": "red",
                                "ON_ON": "red",
                                "OFF": "yellow"
-                              },
+                               },
                 "outer_door_open": {"ON": "yellow",
                                     "ON_OFF": "purple",
                                     "ON_ON": "yellow",
                                     "OFF": "yellow"
-                                   },
+                                    },
                 "window_open": {"ON": "yellow",
                                 "ON_OFF": "blue",
                                 "ON_ON": "yellow",
                                 "OFF": "yellow"
-                               },
+                                },
                 "timeout": {"ON": "green",
                             "ON_OFF": "green",
                             "ON_ON": "yellow",
                             "OFF": "green"
-                           }
+                            }
                 }
 
-    run_tests("bell_rang", test_set,state_machine)
+    run_tests("bell_rang", test_set, state_machine)
 
 
 def test_lock_error_state():
     """Test if lock_error state is OK"""
     function_name = inspect.currentframe().f_code.co_name
-    print(f"\n########## {function_name} #########")
+    print("\n########## %s #########", function_name)
 
     state_machine = security_door_window_statemachine(
         name=function_name, logger=log)
@@ -130,31 +131,31 @@ def test_lock_error_state():
                               "ON_OFF": "yellow",
                               "ON_ON": "red",
                               "OFF": "red"
-                             },
+                              },
                 "outer_door_open": {"ON": "red",
                                     "ON_OFF": "purple",
                                     "ON_ON": "red",
                                     "OFF": "red"
-                                   },
+                                    },
                 "window_open": {"ON": "red",
                                 "ON_OFF": "blue",
                                 "ON_ON": "red",
                                 "OFF": "red"
-                               },
+                                },
                 "timeout": {"ON": "red",
                             "ON_OFF": "green",
                             "ON_ON": "red",
                             "OFF": "red"
-                           }
+                            }
                 }
 
-    run_tests("lock_error", test_set,state_machine)
+    run_tests("lock_error", test_set, state_machine)
 
 
 def test_outer_door_state():
     """Test if outer_door_open state is OK"""
     function_name = inspect.currentframe().f_code.co_name
-    print(f"\n########## {function_name} #########")
+    print("\n########## %s #########", function_name)
 
     state_machine = security_door_window_statemachine(
         name=function_name, logger=log)
@@ -168,31 +169,31 @@ def test_outer_door_state():
                               "ON_OFF": "yellow",
                               "ON_ON": "yellow",
                               "OFF": "purple"
-                             },
+                              },
                 "lock_error": {"ON": "red",
                                "ON_OFF": "red",
                                "ON_ON": "red",
                                "OFF": "purple"
-                              },
+                               },
                 "window_open": {"ON": "purple",
                                 "ON_OFF": "blue",
                                 "ON_ON": "purple",
                                 "OFF": "purple"
-                               },
+                                },
                 "timeout": {"ON": "purple",
                             "ON_OFF": "green",
                             "ON_ON": "purple",
                             "OFF": "purple"
-                           }
+                            }
                 }
 
-    run_tests("outer_door_open", test_set,state_machine)
+    run_tests("outer_door_open", test_set, state_machine)
 
 
 def test_window_state():
     """Test if window_open state is OK"""
     function_name = inspect.currentframe().f_code.co_name
-    print(f"\n########## {function_name} #########")
+    print("\n########## %s #########", function_name)
 
     state_machine = security_door_window_statemachine(
         name=function_name, logger=log)
@@ -206,31 +207,31 @@ def test_window_state():
                               "ON_OFF": "yellow",
                               "ON_ON": "yellow",
                               "OFF": "blue"
-                             },
+                              },
                 "lock_error": {"ON": "red",
                                "ON_OFF": "red",
                                "ON_ON": "red",
                                "OFF": "blue"
-                              },
+                               },
                 "outer_door_open": {"ON": "purple",
                                     "ON_OFF": "purple",
                                     "ON_ON": "purple",
                                     "OFF": "blue"
-                                   },
+                                    },
                 "timeout": {"ON": "blue",
                             "ON_OFF": "green",
                             "ON_ON": "blue",
                             "OFF": "blue"
-                           }
+                            }
                 }
 
-    run_tests("window_open", test_set,state_machine)
+    run_tests("window_open", test_set, state_machine)
 
 
 def test_timeout_state():
     """Test if timeout_open state is OK"""
     function_name = inspect.currentframe().f_code.co_name
-    print(f"\n########## {function_name} #########")
+    print("\n########## %s #########", function_name)
 
     state_machine = security_door_window_statemachine(
         name=function_name, logger=log)
@@ -244,30 +245,31 @@ def test_timeout_state():
                               "ON_OFF": "green",
                               "ON_ON": "black",
                               "OFF": "black"
-                             },
+                              },
                 "lock_error": {"ON": "red",
                                "ON_OFF": "red",
                                "ON_ON": "red",
                                "OFF": "green"
-                              },
+                               },
                 "outer_door_open": {"ON": "purple",
                                     "ON_OFF": "purple",
                                     "ON_ON": "purple",
                                     "OFF": "green"
-                                   },
+                                    },
                 "window_open": {"ON": "blue",
                                 "ON_OFF": "blue",
                                 "ON_ON": "blue",
                                 "OFF": "green"
-                               }
+                                }
                 }
 
     run_tests("timeout", test_set, state_machine)
 
+
 def test_light_level():
     """Test if if light level is correctly set"""
     function_name = inspect.currentframe().f_code.co_name
-    print(f"\n########## {function_name} #########")
+    print("\n########## %s #########", function_name)
 
     state_machine = security_door_window_statemachine(
         name=function_name, logger=log)
@@ -283,6 +285,7 @@ def test_light_level():
     assert state_machine.get_light_level() != 0
     state_machine.send("tr_timeout")
     assert state_machine.get_light_level() == 0
+
 
 test_default_state()
 test_bell_rang_state()

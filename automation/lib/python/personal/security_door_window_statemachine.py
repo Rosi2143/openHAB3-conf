@@ -30,7 +30,10 @@ def get_state_machine_graph(sm):
 
     # also accepts instances
     graph = DotGraphMachine(sm)
-    graph().write_png(os.path.join(scriptpath, "images",
+    imagepath = os.path.join(scriptpath, "images")
+    if not os.path.exists(imagepath):
+        os.makedirs(imagepath)
+    graph().write_png(os.path.join(imagepath,
                                    sm.get_name() + "_door_window_color_sm.png"))
 
 
@@ -74,7 +77,7 @@ class security_door_window_statemachine(StateMachine):
                     st_yellow.to(st_blue, cond="cond_window_open") |
                     st_yellow.to(st_green) |
                     st_black.to.itself()
-                   )
+                    )
 
     tr_lock_error = (st_black.to(st_red, cond="cond_lock_error") |
                      st_blue.to(st_red, cond="cond_lock_error") |
@@ -87,7 +90,7 @@ class security_door_window_statemachine(StateMachine):
                      st_red.to(st_blue, cond="cond_window_open") |
                      st_red.to(st_green) |
                      st_black.to.itself()
-                    )
+                     )
 
     tr_outer_door_open = (st_black.to(st_purple, cond="cond_outer_door_open") |
                           st_blue.to(st_purple, cond="cond_outer_door_open") |
@@ -98,7 +101,7 @@ class security_door_window_statemachine(StateMachine):
                           st_purple.to(st_blue, cond="cond_window_open") |
                           st_purple.to(st_green) |
                           st_black.to.itself()
-                         )
+                          )
 
     tr_window_open = (st_black.to(st_blue, cond="cond_window_open") |
                       st_blue.to(st_blue, cond="cond_window_open") |
@@ -108,7 +111,7 @@ class security_door_window_statemachine(StateMachine):
                       st_yellow.to.itself() |
                       st_blue.to(st_green) |
                       st_black.to.itself()
-                     )
+                      )
 
     tr_timeout = (st_black.to.itself() |
                   st_blue.to.itself(cond="cond_window_open") |
@@ -119,7 +122,7 @@ class security_door_window_statemachine(StateMachine):
                   st_yellow.to(st_purple, cond="cond_outer_door_open") |
                   st_yellow.to(st_blue, cond="cond_window_open") |
                   st_yellow.to(st_green)
-                 )
+                  )
 
     def __init__(self, name="unnamed", logger=None):
         # variables
@@ -241,7 +244,8 @@ class security_door_window_statemachine(StateMachine):
             state (bool): state of light
         """
         self._window_open = state
-        self._logger.info(self.get_name() + ": - window open is: " + str(self._window_open))
+        self._logger.info(self.get_name() +
+                          ": - window open is: " + str(self._window_open))
 
     # Conditions
     def cond_bell_rang(self):
@@ -249,7 +253,8 @@ class security_door_window_statemachine(StateMachine):
         Returns:
             boolean: True/False
         """
-        self._logger.debug(self.get_name() + ": bell_rang = '{}'.".format(str(self._bell_rang)))
+        self._logger.debug(self.get_name() +
+                           ": bell_rang = '{}'.".format(str(self._bell_rang)))
         return self._bell_rang
 
     def cond_outer_door_open(self):
@@ -257,16 +262,18 @@ class security_door_window_statemachine(StateMachine):
         Returns:
             boolean: True/False
         """
-        self._logger.debug(self.get_name() + ": outer_door_open = '{}'.".format(str(self._outer_door_open)))
+        self._logger.debug(
+            self.get_name() + ": outer_door_open = '{}'.".format(str(self._outer_door_open)))
         return self._outer_door_open
 
-    def cond_lock_error (self):
+    def cond_lock_error(self):
         """rule to decide if the lock is in an "error" state
         Returns:
             boolean: True/False
         """
 
-        self._logger.debug(self.get_name() + ": lock_error = '{}'.".format(str(self._lock_error)))
+        self._logger.debug(
+            self.get_name() + ": lock_error = '{}'.".format(str(self._lock_error)))
 
         return self._lock_error
 
@@ -275,11 +282,12 @@ class security_door_window_statemachine(StateMachine):
         Returns:
             boolean: True/False
         """
-        self._logger.debug(self.get_name() + ": light = '" + str(self._window_open) + "'.")
+        self._logger.debug(self.get_name() + ": light = '" +
+                           str(self._window_open) + "'.")
         return self._window_open
 
-
     # see https://python-statemachine.readthedocs.io/en/latest/actions.html#ordering
+
     def before_transition(self, event, state):
         """events received for any state """
         self._logger.debug(self.get_name() + "(" + str(id(self)) +

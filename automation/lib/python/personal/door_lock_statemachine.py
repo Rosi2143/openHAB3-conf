@@ -29,7 +29,10 @@ def get_state_machine_graph(sm):
 
     # also accepts instances
     graph = DotGraphMachine(sm)
-    graph().write_png(os.path.join(scriptpath, "images",
+    imagepath = os.path.join(scriptpath, "images")
+    if not os.path.exists(imagepath):
+        os.makedirs(imagepath)
+    graph().write_png(os.path.join(imagepath,
                                    sm.get_name() + "_doolock_sm.png"))
 
 

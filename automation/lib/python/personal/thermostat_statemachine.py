@@ -41,7 +41,10 @@ def get_state_machine(item_name, logger):
         if (platform.system() != "Windows"):
             # also accepts instances
             graph = DotGraphMachine(thermostate_list[thing_name])
-            graph().write_png(os.path.join(scriptpath, "images",
+            imagepath = os.path.join(scriptpath, "images")
+            if not os.path.exists(imagepath):
+                os.makedirs(imagepath)
+            graph().write_png(os.path.join(imagepath,
                                            thermostate_list[thing_name].get_name() + "_thermostate_sm.png"))
     else:
         logger.info("Use existing ThermostatSm (" + str(id(thermostate_list[thing_name])) + "): " +

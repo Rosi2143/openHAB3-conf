@@ -37,7 +37,7 @@ def test_single_sm():
     """Test if default (initial) state is OK
     """
     function_name = inspect.currentframe().f_code.co_name
-    print(f"\n########## {function_name} #########")
+    print("\n########## %s #########", function_name)
 
     state_machine = get_state_machine("TestMachine", logger=log)
 
@@ -48,7 +48,7 @@ def test_multiple_sm():
     """Test if default (initial) state is OK
     """
     function_name = inspect.currentframe().f_code.co_name
-    print(f"\n########## {function_name} #########")
+    print("\n########## %s #########", function_name)
 
     for sm_name in ["Test1", "Test-2", "Test--3", "Test--3", "Test-2", "Test1"]:
         print("########################")

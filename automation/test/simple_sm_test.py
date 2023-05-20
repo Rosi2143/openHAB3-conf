@@ -92,7 +92,7 @@ def test_default_state():
     """Test if default (initial) state is OK
     """
     function_name = inspect.currentframe().f_code.co_name
-    print(f"\n########## {function_name} #########")
+    print("\n########## %s #########", function_name)
 
     state_machine = TestStateMachine(log)
     log.debug(state_machine.current_state.id)
@@ -105,7 +105,7 @@ def test_conditions_state_true():
     """Test if default (initial) state is OK
     """
     function_name = inspect.currentframe().f_code.co_name
-    print(f"\n########## {function_name} #########")
+    print("\n########## %s #########", function_name)
 
     state_machine = TestStateMachine(log)
     log.debug(state_machine.current_state.id)
@@ -120,7 +120,7 @@ def test_conditions_state_false():
     """Test if default (initial) state is OK
     """
     function_name = inspect.currentframe().f_code.co_name
-    print(f"\n########## {function_name} #########")
+    print("\n########## %s #########", function_name)
 
     state_machine = TestStateMachine(log)
     log.debug(state_machine.current_state.id)
@@ -135,7 +135,7 @@ def test_missing_transition():
     """Test if default (initial) state is OK
     """
     function_name = inspect.currentframe().f_code.co_name
-    print(f"\n########## {function_name} #########")
+    print("\n########## %s #########", function_name)
 
     state_machine = TestStateMachine(log)
     log.debug(state_machine.current_state.id)
