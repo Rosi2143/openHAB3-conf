@@ -38,7 +38,7 @@ def hue_offline_handler(event):
         event (_type_): triggering event
     """
 
-    EinfahrtDunkel = items["eLichtSensorEinfahrt_Dunkel"]
+    EinfahrtDunkel = items["LichtSensorEinfahrt_Dunkel"]
     EinfahrtBewegung = items["BewegungsmelderErkerweg_MotionLong"]
     EinfahrtMax = items["Hue_Raum_Einfahrt_Max"].intValue()
     EinfahrtMin = items["Hue_Raum_Einfahrt_Min"].intValue()
