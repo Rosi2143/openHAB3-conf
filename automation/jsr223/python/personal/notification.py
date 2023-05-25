@@ -62,8 +62,8 @@ def habpanel_notifications_basement_lights(event):
 @rule("HABPanelNotification: security issue",
       description="handle security issues of home",
       tags=["itemchange", "habpanel", "notifications", "security"])
-@when("Item gOuterDoors changed")
-@when("Item gWindows changed")
+@when("Item gAussenTuerenen changed")
+@when("Item gFenster changed")
 @when("Item TuerWaschkueche_OpenState changed")
 def habpanel_notifications_security_state(event):
     """
@@ -75,8 +75,8 @@ def habpanel_notifications_security_state(event):
     habpanel_notifications_security_state.log.info(
         "rule fired because of %s %s --> %s", event.itemName, event.oldItemState, event.itemState)
 
-    if ((items["gOuterDoors"] != "OPEN")
-        and (items["gWindows"] != "OPEN")
+    if ((items["gAussenTueren"] != "OPEN")
+        and (items["gFenster"] != "OPEN")
         and (items["TuerWaschkueche_OpenState"] != "OPEN")
         ):
         events.sendCommand("SomeExternalWindowsDoorsOpen", "OFF")
