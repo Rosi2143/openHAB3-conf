@@ -1,5 +1,6 @@
 directories:
-  logging: /etc/openhab/habapp/log # Folder where the logs will be written to
+  logging: /mnt/usb/habapp/log # Folder where the logs will be written to
+  #  logging: /etc/openhab/habapp/log # Folder where the logs will be written to
   rules: /etc/openhab/habapp/rules # Folder from which the rule files will be loaded
   param: /etc/openhab/habapp/param # Folder from which the parameter files will be loaded
   config: /etc/openhab/habapp/config # Folder from which configuration files (e.g. for textual thing configuration) will be loaded

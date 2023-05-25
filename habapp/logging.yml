@@ -20,7 +20,7 @@ handlers:
 
   HABApp_default:
     class: HABApp.config.logging.MidnightRotatingFileHandler
-    filename: "/etc/openhab/habapp/log/HABApp.log"
+    filename: "HABApp.log"
     maxBytes: 1_048_576
     backupCount: 3
 
@@ -29,7 +29,7 @@ handlers:
 
   EventFile:
     class: HABApp.config.logging.MidnightRotatingFileHandler
-    filename: "/etc/openhab/habapp/log/HABApp_events.log"
+    filename: "HABApp_events.log"
     maxBytes: 1_048_576
     backupCount: 3
 
@@ -38,7 +38,7 @@ handlers:
 
   MyRuleHandler:
     class: HABApp.config.logging.MidnightRotatingFileHandler
-    filename: "/etc/openhab/habapp/log/MyRule.log" # absolute filename is recommended
+    filename: "MyRule.log" # absolute filename is recommended
     maxBytes: 10_000_000
     backupCount: 3
 
@@ -47,7 +47,7 @@ handlers:
 
   AstralHandler:
     class: HABApp.config.logging.MidnightRotatingFileHandler
-    filename: "/etc/openhab/habapp/log/Astral.log"
+    filename: "Astral.log"
     maxBytes: 10_000_000
     backupCount: 3
 
@@ -56,7 +56,7 @@ handlers:
 
   ContactSwitchMapping:
     class: HABApp.config.logging.MidnightRotatingFileHandler
-    filename: "/etc/openhab/habapp/log/ContactSwitch.log"
+    filename: "ContactSwitch.log"
     maxBytes: 10_000_000
     backupCount: 3
 
@@ -65,7 +65,7 @@ handlers:
 
   TinkerforgeHandler:
     class: HABApp.config.logging.MidnightRotatingFileHandler
-    filename: "/etc/openhab/habapp/log/Tinkerforge.log" # absolute filename is recommended
+    filename: "Tinkerforge.log" # absolute filename is recommended
     maxBytes: 10_000_000
     backupCount: 3
 
@@ -74,7 +74,7 @@ handlers:
 
   IkeaHandler:
     class: HABApp.config.logging.MidnightRotatingFileHandler
-    filename: "/etc/openhab/habapp/log/Ikea.log" # absolute filename is recommended
+    filename: "Ikea.log" # absolute filename is recommended
     maxBytes: 10_000_000
     backupCount: 3
 
@@ -83,7 +83,7 @@ handlers:
 
   MqttHandler:
     class: HABApp.config.logging.MidnightRotatingFileHandler
-    filename: "/etc/openhab/habapp/log/Mqtt.log" # absolute filename is recommended
+    filename: "Mqtt.log" # absolute filename is recommended
     maxBytes: 10_000_000
     backupCount: 3
 
