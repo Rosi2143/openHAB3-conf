@@ -16,6 +16,7 @@ inputFiles = [
         [file: 'basic_setup.adoc',      formats: ['html','pdf']],
         [file: 'doors.adoc',            formats: ['html','pdf']],
         [file: 'lights.adoc',           formats: ['html','pdf']],
+        [file: 'motion_detect.adoc',    formats: ['html','pdf']],
         [file: 'security.adoc',         formats: ['html','pdf']],
         [file: 'windows.adoc',          formats: ['html','pdf']],
 ]

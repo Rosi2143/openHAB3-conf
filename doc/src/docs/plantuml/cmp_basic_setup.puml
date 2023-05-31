@@ -1,34 +1,37 @@
 @startuml basic_setup
 legend top left
     |Color| Type |
-    |<#lightgreen> lightgreen | Tinkerforge HW|
-    |<#green> green | bricklet or brick|
-    |<#olive> olive | activity on tinkerforge|
+    |<#LightGreen> LightGreen | Tinkerforge HW|
+    |<#Green> Green | bricklet or brick|
+    |<#Olive> Olive | activity on tinkerforge|
 
-    |<#pink> pink | RaspberryPi HW|
-    |<#red> red | Process on RaspberryPi|
-    |<#orchid> orchid | activity on RaspberryPi|
-    |<#purple> purple | group changes on RaspberryPi|
-    |<#lightcoral> lightcoral | scripty run on RaspberryPi|
+    |<#Pink> Pink | RaspberryPi HW|
+    |<#Red> Red | Process on RaspberryPi|
+    |<#Orchid> Orchid | activity on RaspberryPi|
+    |<#Purple> Purple | group changes on RaspberryPi|
+    |<#LightCoral> LightCoral | scripty run on RaspberryPi|
 
-    |<#aqua> aqua | homematic-raspi HW|
-    |<#springgreen> springgreen | activity on homematic-raspi HW|
+    |<#Aqua> Aqua | homematic-raspi HW|
+    |<#SpringGreen> SpringGreen | activity on homematic-raspi HW|
 
-    |<#lightyellow> lightyellow | cloud / mobile device|
-    |<#yellow> yellow | App running on mobile device|
+    |<#LightYellow> LightYellow | cloud / mobile device|
+    |<#Yellow> Yellow | App running on mobile device|
+
+    |<#LightBlue> LightBlue | MQTT|
+    |<#Blue> Blue | App running on MQTT|
 endlegend
 
-package tinkerforge {
-  node "Tinkerforge" #lightgreen {
-    component brick #green {
+package tinkerforge #LightCyan {
+  node "Tinkerforge" #LightGreen {
+    component brick #Green {
     }
-    component io16 #green {
+    component io16 #Green {
     }
-    component out4 #green {
+    component out4 #Green {
     }
 
     port USB as usb
-    interface brickd #green
+    interface brickd #Green
 
     brick - brickd
     brick - usb
@@ -45,15 +48,15 @@ package tinkerforge {
   bricklet_out4 --> usb
 }
 
-node raspi #pink {
-  component habapp #red {
+node raspi #Pink {
+  component habapp #Red {
   }
-  component OH3 as oh #red {
+  component OH3 as oh #Red {
   }
-  component grafana #red {
+  component grafana #Red {
   }
 
-  interface OH_Rest_API as oh_rest #red
+  interface OH_Rest_API as oh_rest #Red
   oh -up- oh_rest
 
   habapp ..> oh_rest : use
@@ -61,36 +64,36 @@ node raspi #pink {
 }
 
 package MQTT {
-  node volumio #lightblue {
-    component zigbee2mqtt #blue {
+  node volumio #LightBlue {
+    component zigbee2mqtt #Blue {
     }
-    component mosquitto #blue {
+    component mosquitto #Blue {
     }
 
-    port zigbee #blue
-    interface MQTT as mqtt #blue
+    port zigbee #Blue
+    interface MQTT as mqtt #Blue
 
     mosquitto -left- mqtt
     zigbee2mqtt - zigbee
     zigbee2mqtt ..> mqtt
   }
-  node zigbee_lamp{
+  node IKEA_lamp{
   }
-  node zigbee_motion_detect{
+  node IKEA_motion_detect{
   }
-  node zigbee_remote{
+  node IKEA_remote{
   }
 
-  zigbee_lamp --> zigbee
-  zigbee_motion_detect --> zigbee
-  zigbee_remote --> zigbee
+  IKEA_lamp --> zigbee
+  IKEA_motion_detect --> zigbee
+  IKEA_remote --> zigbee
 }
 
 package homematic_ip {
-  node homematic-raspi #aqua{
-    component CCU3 #springgreen{
+  node homematic-raspi #Aqua{
+    component CCU3 #SpringGreen{
     }
-    interface homematic #springgreen
+    interface homematic #SpringGreen
     port "RPI-RF-MOD" as rf
 
     CCU3 - homematic
@@ -121,18 +124,18 @@ package homematic_ip {
 }
 
 package cloud {
-  node "Google Assistent" #lightyellow {
-    component googleassistent as google #yellow
+  node "Google Assistent" #LightYellow {
+    component googleassistent as google #Yellow
   }
-  node "Alexa" #lightyellow {
-    component alexa #yellow
+  node "Alexa" #LightYellow {
+    component alexa #Yellow
   }
-  node "Philips Hue" #lightyellow {
-    component HueApp as hueApp #yellow
+  node "Philips Hue" #LightYellow {
+    component HueApp as hueApp #Yellow
   }
-  node "Mobile" #lightyellow {
-    component HabPanel as habpanel #yellow
-    component App as app #yellow
+  node "Mobile" #LightYellow {
+    component HabPanel as habpanel #Yellow
+    component App as app #Yellow
   }
   cloud myOpenhab #sienna {
     component myopenhab #brown
@@ -156,21 +159,38 @@ package hue {
 
     hueApp ..> HueRest : use
   }
-  node hue_light {
+  package zigbee_hue {
+      node hue_light {
+      }
+      node hue_motion_sensor {
+      }
+      node hue_plug {
+      }
+      hue_light --> zigbeeHue
+      hue_motion_sensor --> zigbeeHue
+      hue_plug --> zigbeeHue
   }
-  node hue_motion_sensor {
+
+  package zigbee_osram {
+      node osram_light {
+      }
+      node osram_plug {
+      }
+      osram_light --> zigbeeHue
+      osram_plug --> zigbeeHue
   }
-  node hue_plug {
+
+  package zigbee_paulmann {
+      node paulmann_light {
+      }
+      paulmann_light --> zigbeeHue
   }
-  hue_light --> zigbeeHue
-  hue_motion_sensor --> zigbeeHue
-  hue_plug --> zigbeeHue
 }
 
 habapp ..> mqtt : use
 habapp ..> brickd : use
 myopenhab ..> oh_rest : use
-hue ..> oh_rest : use
+hueBridge ..> oh_rest : use
 habpanel ..> oh_rest : use
 
 google ..> myOH_Rest : use
@@ -180,4 +200,5 @@ habpanel ..> myOH_Rest : use
 app ..> myOH_Rest : use
 
 oh ..> homematic : use
+oh ..> HueRest : use
 @enduml

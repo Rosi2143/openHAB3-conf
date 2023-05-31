@@ -1,0 +1,45 @@
+@startuml doors
+(*) --> "motion state changed" as new_motion
+
+partition hue #LightGoldenRodYellow {
+
+  new_motion --> HUE_outdoor_motion
+}
+
+partition MQTT #LightBlue {
+
+  new_motion --> IKEA_motion_detect
+}
+
+partition homematic-raspi #aqua {
+  new_motion --> HMIP_outdoor_motion
+  new_motion --> HMIP_indoor_motion
+}
+
+partition raspi #pink {
+
+  partition habapp #red {
+     IKEA_motion_detect --> ikea.py #LightCoral
+  }
+
+  partition OH3 #red {
+    HMIP_indoor_motion --> "set item *_MotionState" #Orchid
+    HMIP_outdoor_motion --> "set item *_MotionState"
+    ikea.py --> "set item *_MotionState"
+
+    "set item *_MotionState" --> "group gBewegungsmelder_MotionState" #Purple
+
+    "group gBewegungsmelder_MotionState" -> motion_detector.py #LightCoral
+
+    HUE_outdoor_motion --> "set item *_Motion" #Orchid
+    "set item *_Motion" --> "hue.py (Hue BewegungsmelderLang)" #Purple
+    "hue.py (Hue BewegungsmelderLang)" --> "set item *_MotionLong (expire)" #Orchid
+
+
+    motion_detector.py -> "set light" #Orchid
+    "set item *_MotionLong (expire)" -> "set light"
+  }
+
+}
+
+@enduml

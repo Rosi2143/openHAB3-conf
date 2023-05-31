@@ -15,3 +15,6 @@ include::doors.adoc[]
 
 <<<
 include::security.adoc[]
+
+<<<
+include::motion_detect.adoc[]

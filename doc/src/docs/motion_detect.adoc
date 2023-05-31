@@ -1,0 +1,25 @@
+# Motion detectors
+
+## requirements
+
+* turn lights ON/OFF when motion is detected
+** define an additional timeout for turning lights OFF again to be independent from feature of motion detectors
+* if absence is set - change in presense shall create a message to mobile app
+
+## used HW
+
+### Indoor
+
+* https://homematic-ip.com/de/produkt/bewegungsmelder-mit-daemmerungssensor-innen[HmIP-SMI]
+* https://www.ikea.com/de/de/p/tradfri-funk-bewegungsmelder-smart-weiss-70429913/[IKEA Tradfri]
+
+### Outdoor
+* https://homematic-ip.com/de/produkt/bewegungsmelder-mit-daemmerungssensor-aussen[HmIP-SMO]
+* https://www.philips-hue.com/de-de/p/hue-outdoor-sensor/8719514342262[Hue Outdoor Sensor]
+
+## flow
+.flow for window states
+[plantuml, "{plantUMLDir}windows", png]
+----
+include::plantuml/act_motion_sensors.puml[]
+----
