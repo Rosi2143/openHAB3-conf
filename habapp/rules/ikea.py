@@ -188,7 +188,7 @@ class IkeaZigbeeDevices(HABApp.Rule):
         logger.info("send - %s: %s", mqtt_topic, mqtt_topic_value)
         self.mqtt.publish(mqtt_topic, mqtt_topic_value)
 
-    def numberitem_update(self, event):
+    def number_item_update(self, event):
         """callback function for changes in number items"""
 
         assert isinstance(event, ValueUpdateEvent)
@@ -224,7 +224,7 @@ class IkeaZigbeeDevices(HABApp.Rule):
         logger.info("send - %s: %s", mqtt_topic, mqtt_topic_value)
         self.mqtt.publish(mqtt_topic, mqtt_topic_value)
 
-    def stringitem_update(self, event):
+    def string_item_update(self, event):
         """callback function for changes in string items"""
 
         assert isinstance(event, ValueUpdateEvent)
@@ -311,7 +311,7 @@ class IkeaZigbeeDevices(HABApp.Rule):
                 color_temp_string_item = StringItem.get_item(
                     color_temp_string_item_name)
                 color_temp_string_item.listen_event(
-                    self.stringitem_update, ItemStateEventFilter())
+                    self.string_item_update, ItemStateEventFilter())
             else:
                 logger.error("%s does not exist", color_temp_string_item_name)
 
@@ -337,7 +337,7 @@ class IkeaZigbeeDevices(HABApp.Rule):
             if self.openhab.item_exists(effect_item_name):
                 effect_item = StringItem.get_item(effect_item_name)
                 effect_item.listen_event(
-                    self.stringitem_update, ItemStateEventFilter())
+                    self.string_item_update, ItemStateEventFilter())
             else:
                 logger.error("%s does not exist", effect_item_name)
 
