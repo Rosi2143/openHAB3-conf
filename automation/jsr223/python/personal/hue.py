@@ -13,6 +13,7 @@ from core.triggers import when
       tags=["itemchange", "Hue", "motion"])
 @when("Item BewegungsmelderErkerweg_Motion changed to ON")
 @when("Item BewegungsmelderEinfahrt_Motion changed to ON")
+@when("Item BewegungsmelderBrunnen_Bewegung changed to ON")
 def hue_motion_long(event):
     """
     start timeout for motion detect
