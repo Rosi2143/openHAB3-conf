@@ -62,7 +62,7 @@ def habpanel_notifications_basement_lights(event):
 @rule("HABPanelNotification: security issue",
       description="handle security issues of home",
       tags=["itemchange", "habpanel", "notifications", "security"])
-@when("Item gAussenTuerenen changed")
+@when("Item gAussenTueren changed")
 @when("Item gFenster changed")
 @when("Item TuerWaschkueche_OpenState changed")
 def habpanel_notifications_security_state(event):
