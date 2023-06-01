@@ -44,13 +44,8 @@ def hue_offline_handler(event):
     EinfahrtMax = items["Hue_Raum_Einfahrt_Max"].intValue()
     EinfahrtMin = items["Hue_Raum_Einfahrt_Min"].intValue()
 
-    ErkerWegDunkel = items["LichtSensorErkerWeg_Dunkel"]
-    ErkerWegBewegung = items["BewegungsmelderErkerweg_MotionLong"]
-    ErkerWegMax = items["Hue_Raum_Erkerweg_Max"].intValue()
-    ErkerWegMin = items["Hue_Raum_Erkerweg_Min"].intValue()
-
-    hue_offline_handler.log.info("rule fired: \n Einfahrt: Dunkel %s; Bewegung %s; Min %s; Max %s\nErkerWeg: Dunkel %s; Bewegung %s; Min %s; Max %s",
-                                 EinfahrtDunkel, EinfahrtBewegung, EinfahrtMin, EinfahrtMax, ErkerWegDunkel, ErkerWegBewegung, ErkerWegMin, ErkerWegMax)
+    hue_offline_handler.log.info("rule fired: Einfahrt: Dunkel %s; Bewegung %s; Min %s; Max %s",
+                                 EinfahrtDunkel, EinfahrtBewegung, EinfahrtMin, EinfahrtMax)
 
     if (EinfahrtMax - EinfahrtMin) > 5:
         hue_offline_handler.log.error(
@@ -68,6 +63,14 @@ def hue_offline_handler(event):
     else:
         events.sendCommand("Hue_Raum_Einfahrt_Betrieb", "OFF")
 
+    ErkerWegDunkel = items["LichtSensorErkerWeg_Dunkel"]
+    ErkerWegBewegung = items["BewegungsmelderErkerweg_MotionLong"]
+    ErkerWegMax = items["Hue_Raum_Erkerweg_Max"].intValue()
+    ErkerWegMin = items["Hue_Raum_Erkerweg_Min"].intValue()
+
+    hue_offline_handler.log.info("rule fired: ErkerWeg: Dunkel %s; Bewegung %s; Min %s; Max %s",
+                                 ErkerWegDunkel, ErkerWegBewegung, ErkerWegMin, ErkerWegMax)
+
     if (ErkerWegMax - ErkerWegMin) > 5:
         hue_offline_handler.log.error(
             "Diff in ErkerWegLights = %d", (ErkerWegMax - ErkerWegMin))
@@ -79,6 +82,30 @@ def hue_offline_handler(event):
                                "n4M-9bfD2CIN3Zi")  # Konzentrieren
         else:
             hue_offline_handler.log.info("ErkerWegLights de-activate Light")
+            events.sendCommand("Hue_Raum_Erkerweg_Szene",
+                               "bx5CWjHdoLZPZYV")  # Nachtlicht
+    else:
+        events.sendCommand("Hue_Raum_Erkerweg_Betrieb", "OFF")
+
+    BrunnenDunkel = items["LichtSensorBrunnen_Dunkel"]
+    BrunnenBewegung = items["BewegungsmelderBrunnen_BewegungLong"]
+    BrunnenMax = items["Hue_Raum_Brunnen_Max"].intValue()
+    BrunnenMin = items["Hue_Raum_Brunnen_Min"].intValue()
+
+    hue_offline_handler.log.info("rule fired: Brunnen : Dunkel %s; Bewegung %s; Min %s; Max %s",
+                                 BrunnenDunkel, BrunnenBewegung, BrunnenMin, BrunnenMax)
+
+    if (BrunnenMax - BrunnenMin) > 5:
+        hue_offline_handler.log.error(
+            "Diff in BrunnenLights = %d", (BrunnenMax - BrunnenMin))
+    if BrunnenDunkel == "ON":
+        events.sendCommand("Hue_Raum_Erkerweg_Betrieb", "ON")
+        if BrunnenBewegung == "ON":
+            hue_offline_handler.log.info("BrunnenLights activate Light")
+            events.sendCommand("Hue_Raum_Erkerweg_Szene",
+                               "n4M-9bfD2CIN3Zi")  # Konzentrieren
+        else:
+            hue_offline_handler.log.info("BrunnenLights de-activate Light")
             events.sendCommand("Hue_Raum_Erkerweg_Szene",
                                "bx5CWjHdoLZPZYV")  # Nachtlicht
     else:

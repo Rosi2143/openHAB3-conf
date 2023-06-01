@@ -5,12 +5,12 @@ makes other light(s) follow a leading light
 from core.rules import rule
 from core.triggers import when
 
-light_follow_map = {"LichtBuero_State": "LichtBuero_Lampe_State",
-                    "LichtWerkstatt_State": "SteckdoseWerkstatt_State",
-                    "LichtSchlafzimmer_State": "SteckdoseSchlafzimmer_State",
-                    "LichtEsszimmer_State": "SteckdoseHighboard_State",
-                    "LichtKuecheDecke_State": "LichtKuecheToaster_State",
-                    "LichtTerrasseUnten_State": "LichtGrillbereich_Helligkeit"
+light_follow_map = {"LichtBuero_State": ["LichtBuero_Lampe_State"],
+                    "LichtWerkstatt_State": ["SteckdoseWerkstatt_State"],
+                    "LichtSchlafzimmer_State": ["SteckdoseSchlafzimmer_State"],
+                    "LichtEsszimmer_State": ["SteckdoseHighboard_State"],
+                    "LichtKuecheDecke_State": ["LichtKuecheToaster_State"],
+                    "LichtTerrasseUnten_State": ["LichtGrillbereich_Helligkeit", "Brunnen_Brightness"]
                     }
 
 
@@ -28,7 +28,8 @@ def generic_light_following(event):
         generic_light_following.log.error(
             "element %s not found in %s", event.itemName, light_follow_map)
     else:
-        generic_light_following.log.info(
-            "setting %s to %s", event.itemName, event.itemState)
-        events.sendCommand(
-            light_follow_map[event.itemName], str(event.itemState))
+        for light in light_follow_map[event.itemName]:
+            generic_light_following.log.info(
+                "setting %s to %s", light, event.itemState)
+            events.sendCommand(
+                light, str(event.itemState))
