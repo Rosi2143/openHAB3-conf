@@ -207,7 +207,7 @@ class IkeaZigbeeDevices(HABApp.Rule):
                 value = int(value * 2.04)
             else:
                 logger.error(
-                    "wrong callback numberitem_update for %s", event.name)
+                    "wrong callback number_item_update for %s", event.name)
                 return
 
         if "_Step" in event.name:
@@ -217,7 +217,7 @@ class IkeaZigbeeDevices(HABApp.Rule):
                 mqtt_topic_value = mqtt_topic_value + "_move"
             else:
                 logger.error(
-                    "wrong callback numberitem_update for %s", event.name)
+                    "wrong callback number_item_update for %s", event.name)
                 return
 
         mqtt_topic_value = mqtt_topic_value + "\": " + str(value) + "}"
@@ -284,7 +284,7 @@ class IkeaZigbeeDevices(HABApp.Rule):
                 dimmer_move_item_light = NumberItem.get_item(
                     dimmer_move_item_name)
                 dimmer_move_item_light.listen_event(
-                    self.numberitem_update, ItemStateEventFilter())
+                    self.number_item_update, ItemStateEventFilter())
             else:
                 logger.error("%s does not exist", dimmer_move_item_name)
 
@@ -293,7 +293,7 @@ class IkeaZigbeeDevices(HABApp.Rule):
                 dimmer_step_item_light = NumberItem.get_item(
                     dimmer_step_item_name)
                 dimmer_step_item_light.listen_event(
-                    self.numberitem_update, ItemStateEventFilter())
+                    self.number_item_update, ItemStateEventFilter())
             else:
                 logger.error("%s does not exist", dimmer_step_item_name)
 
@@ -320,7 +320,7 @@ class IkeaZigbeeDevices(HABApp.Rule):
                 color_temp_move_item = NumberItem.get_item(
                     color_temp_move_item_name)
                 color_temp_move_item.listen_event(
-                    self.numberitem_update, ItemStateEventFilter())
+                    self.number_item_update, ItemStateEventFilter())
             else:
                 logger.error("%s does not exist", color_temp_move_item_name)
 
@@ -329,7 +329,7 @@ class IkeaZigbeeDevices(HABApp.Rule):
                 color_temp_step_item = NumberItem.get_item(
                     color_temp_step_item_name)
                 color_temp_step_item.listen_event(
-                    self.numberitem_update, ItemStateEventFilter())
+                    self.number_item_update, ItemStateEventFilter())
             else:
                 logger.error("%s does not exist", color_temp_step_item_name)
 
@@ -345,7 +345,7 @@ class IkeaZigbeeDevices(HABApp.Rule):
             if self.openhab.item_exists(transition_item_name):
                 transition_item = NumberItem.get_item(transition_item_name)
                 transition_item.listen_event(
-                    self.numberitem_update, ItemStateEventFilter())
+                    self.number_item_update, ItemStateEventFilter())
             else:
                 logger.error("%s does not exist", transition_item_name)
 
