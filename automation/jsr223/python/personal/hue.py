@@ -24,7 +24,7 @@ def hue_motion_long(event):
     hue_motion_long.log.info(
         "rule fired because of %s %s --> %s", event.itemName, event.oldItemState, event.itemState)
 
-    events.postUpdate(event.itemName + "Long", "ON")
+    events.sendCommand(event.itemName + "Long", "ON")
 
 
 @rule("Hue: handle outside lights offline problems",

@@ -23,9 +23,9 @@ def homematic_ip_shed_door(event):
         "rule fired because of %s %s --> %s", event.itemName, event.oldItemState, event.itemState)
 
     if str(event.itemState) == "OPEN":
-        events.postUpdate("Schuppen_State", "ON")
+        events.sendCommand("Schuppen_State", "ON")
     else:
-        events.postUpdate("Schuppen_State", "OFF")
+        events.sendCommand("Schuppen_State", "OFF")
 
 
 @rule("HomematicIP: ring detection",

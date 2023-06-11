@@ -40,12 +40,12 @@ def homematic_comm_wd_timeout(event):
     """
     events.sendCommand("RaspiMaticGatewayExtras_Commcounter_Openhab", "0")
     homematic_comm_wd_timeout.log.debug("Timer has executed")
-    events.postUpdate("RaspiMaticGatewayExtras_Commcounter_Error",
-                      str(items["RaspiMaticGatewayExtras_Commcounter_Error"].intValue() + 1))
-    events.postUpdate("openHab_Binding_Restart_String", "none")
+    events.sendCommand("RaspiMaticGatewayExtras_Commcounter_Error",
+                       str(items["RaspiMaticGatewayExtras_Commcounter_Error"].intValue() + 1))
+    events.sendCommand("openHab_Binding_Restart_String", "none")
     sleep(50 / 1000)
-    events.postUpdate("openHab_Binding_Restart_String",
-                      "org.openhab.binding.homematic")
+    events.sendCommand("openHab_Binding_Restart_String",
+                       "org.openhab.binding.homematic")
 
 
 @rule("HomematicCCU: Check Comm Watchdog",
@@ -64,4 +64,4 @@ def homematic_comm_wd(event):
     homematic_comm_wd.log.info(
         "rule fired")
 
-    events.postUpdate("Homematic_CommWd_Timeout", "OFF")
+    events.sendCommand("Homematic_CommWd_Timeout", "OFF")

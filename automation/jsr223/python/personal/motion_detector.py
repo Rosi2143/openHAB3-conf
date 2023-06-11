@@ -25,4 +25,4 @@ def motiondetect_generic(event):
     if light_item_name in light_item_name_map:
         light_item_name = light_item_name_map[light_item_name]
 
-    events.postUpdate(light_item_name, str(event.itemState))
+    events.sendCommand(light_item_name, str(event.itemState))
