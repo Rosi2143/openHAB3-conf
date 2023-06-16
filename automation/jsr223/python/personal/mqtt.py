@@ -24,10 +24,29 @@ def mqtt_sleeping_remote(event):
         "rule fired because of %s %s --> %s", event.itemName, event.oldItemState, event.itemState)
 
     if "_Long" in event.itemName:
-        events.sendCommand("gLichterKeller_State", "OFF")
+        longItem = "gLichterKeller_State"
+        longItem2 = "gLichterHaus_State"
+        if items[longItem] == "ON":
+            mqtt_sleeping_remote.log.info(
+                "turn %s OFF", longItem)
+            events.sendCommand(longItem, "OFF")
+        elif items[longItem2] == "ON":
+            mqtt_sleeping_remote.log.info(
+                "turn %s OFF", longItem2)
+            events.sendCommand(longItem2, "OFF")
+        else:
+            alternativeItem = "LichtFlurKeller_State"
+            mqtt_sleeping_remote.log.info(
+                "toggle %s", alternativeItem)
+            events.postUpdate(alternativeItem,
+                              toggle_map[str(items[alternativeItem])])
+
     else:
-        events.postUpdate("LichtGaestezimmer_State",
-                          toggle_map[str(items["LichtGaestezimmer_State"])])
+        shortItem = "LichtGaestezimmer_State"
+        mqtt_sleeping_remote.log.info(
+            "toggle %s", shortItem)
+        events.postUpdate(shortItem,
+                          toggle_map[str(items[shortItem])])
 
 
 @rule("MQTT: Terrasse remote",
