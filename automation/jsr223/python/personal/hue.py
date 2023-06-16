@@ -102,11 +102,11 @@ def hue_offline_handler(event):
         events.sendCommand("Hue_Raum_Erkerweg_Betrieb", "ON")
         if BrunnenBewegung == "ON":
             hue_offline_handler.log.info("BrunnenLights activate Light")
-            events.sendCommand("Hue_Raum_Erkerweg_Szene",
-                               "n4M-9bfD2CIN3Zi")  # Konzentrieren
+            events.sendCommand("Hue_Raum_Brunnen_Szene",
+                               "j4flmuigigiSiGG")  # Konzentrieren
         else:
             hue_offline_handler.log.info("BrunnenLights de-activate Light")
-            events.sendCommand("Hue_Raum_Erkerweg_Szene",
-                               "bx5CWjHdoLZPZYV")  # Nachtlicht
+            events.sendCommand("Hue_Raum_Brunnen_Szene",
+                               "j39IwnLFDuxqkEk")  # Nachtlicht
     else:
         events.sendCommand("Hue_Raum_Erkerweg_Betrieb", "OFF")

@@ -10,12 +10,17 @@
 // hue:group:ecb5fa2c8738:1
 // none
 
+// Brunnen
+// hue:group:ecb5fa2c8738:2 scenes
+raumBrunnen_Nachtlicht=j39IwnLFDuxqkEk
+raumBrunnen_Konzentrieren=j4flmuigigiSiGG
+
 // Einfahrt
 // hue:group:ecb5fa2c8738:2 scenes
 raumEinfahrt_Konzentrieren=akuv4O2zWTt1k7q
 raumEinfahrt_Nachtlicht=FPGIlAJEH-pLe0N
 
-// Einfahrt
+// Erkerweg
 // hue:group:ecb5fa2c8738:3 scenes
 raumErkerWeg_Konzentrieren=ff2CQ6NZ7H-rQCc
 raumErkerWeg_Nachtlicht=7D4NmmRW8OnA-yO
