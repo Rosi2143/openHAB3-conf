@@ -1,0 +1,11 @@
+sitemap Haus label="My home automation" {
+    Frame label="GartenLicht" {
+        Switch item=Hue_Zone_Garten_Betrieb label="Garten"
+        Switch item=LichtTerrasse_Pergola_Alle_State label="Pergola"
+        Slider item=LichtTerrasse_Brightness label="Terrasse"
+        Slider item=Brunnen_Brightness label="Brunnen"
+        Slider item=LichtGrillbereich_Helligkeit label="Grill"
+        Switch item=Hue_Raum_Einfahrt_Betrieb label="Einfahrt"
+        Switch item=Hue_Raum_Erkerweg_Betrieb label="Erkerweg"
+    }
+}
