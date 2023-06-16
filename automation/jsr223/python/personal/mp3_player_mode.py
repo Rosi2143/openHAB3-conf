@@ -22,7 +22,7 @@ MP3_PLAYER_STATE_MACHINE = security_door_window_statemachine(
 
 
 def set_mode_item(state, level):
-    """set the mp3_player_mode item """
+    """set the mp3_player_mode item"""
     events.sendCommand("Mp3Spieler_Color", state)
     events.sendCommand("Mp3Spieler_Level", str(level))
 
@@ -50,7 +50,6 @@ def initialize_mp3_player_statemachine(event):
     MP3_PLAYER_STATE_MACHINE.send("tr_lock_error")
 
 
-gAussenTueren
 # Outer_Door_Open
 outer_door_state = itemRegistry.getItem("gAussenTueren").state
 initialize_mp3_player_statemachine.log.info(
