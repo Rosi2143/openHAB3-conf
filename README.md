@@ -59,6 +59,7 @@ config for the openHAB3 setup
   * sudo chgrp openhab openhab
   * sudo chmod g+w openhab
   * git clone git@github.com:Rosi2143/openHAB3-conf.git openhab
+  * cd openhab
   * sudo chown -R openhab .
 * copy user
   * cd /var/lib
