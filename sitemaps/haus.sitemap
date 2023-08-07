@@ -1,4 +1,4 @@
-sitemap Haus label="My home automation" {
+sitemap haus label="My home automation" {
     Frame label="GartenLicht" {
         Switch item=Hue_Zone_Garten_Betrieb label="Garten"
         Switch item=LichtTerrasse_Pergola_Alle_State label="Pergola"
