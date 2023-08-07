@@ -34,5 +34,7 @@
         "**/automation/**/python/community/**/*.py"
     ],
     "python.formatting.provider": "autopep8",
-    "openhab.useRestApi": false
+    "openhab.useRestApi": false,
+    "python.linting.flake8Enabled": false,
+    "restructuredtext.preview.docutils.disabled": true
 }

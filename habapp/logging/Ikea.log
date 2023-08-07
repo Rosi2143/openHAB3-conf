@@ -1,0 +1,85 @@
+[2023-08-07 19:20:35,751] [                     Ikea]     INFO | added listener for zigbee2mqtt/IKEA/Bewegungsmelder/Buero
+[2023-08-07 19:20:35,752] [                     Ikea]     INFO | added listener for zigbee2mqtt/IKEA/Bewegungsmelder/Gaestezimmer
+[2023-08-07 19:20:35,752] [                     Ikea]     INFO | added listener for zigbee2mqtt/IKEA/Bewegungsmelder/Abstellraum
+[2023-08-07 19:20:35,752] [                     Ikea]     INFO | added listener for zigbee2mqtt/IKEA/Bewegungsmelder/Werkstatt
+[2023-08-07 19:20:35,752] [                     Ikea]     INFO | added listener for zigbee2mqtt/IKEA/Bewegungsmelder/GastWC
+[2023-08-07 19:20:35,753] [                     Ikea]     INFO | added listener for zigbee2mqtt/IKEA/Fernbedienung/Schlafzimmer
+[2023-08-07 19:20:35,753] [                     Ikea]     INFO | added listener for zigbee2mqtt/IKEA/Fernbedienung/Terrasse
+[2023-08-07 19:20:35,843] [                     Ikea]     INFO | added listener for zigbee2mqtt/IKEA/Lampe/Terrasse_Pergola_Rechts
+[2023-08-07 19:20:35,843] [                     Ikea]     INFO | added listener for Light Terrasse_Pergola_Rechts
+[2023-08-07 19:20:35,929] [                     Ikea]     INFO | added listener for zigbee2mqtt/IKEA/Lampe/Terrasse_Pergola_Links
+[2023-08-07 19:20:35,929] [                     Ikea]     INFO | added listener for Light Terrasse_Pergola_Links
+[2023-08-07 19:20:36,018] [                     Ikea]     INFO | added listener for zigbee2mqtt/IKEA/Lampe/Buero_Lampe
+[2023-08-07 19:20:36,018] [                     Ikea]     INFO | added listener for Light Buero_Lampe
+[2023-08-07 19:20:36,103] [                     Ikea]     INFO | added listener for zigbee2mqtt/IKEA/Lampe/Terrasse_Pergola_Alle
+[2023-08-07 19:20:36,104] [                     Ikea]     INFO | added listener for Light Terrasse_Pergola_Alle
+[2023-08-07 19:20:36,104] [                     Ikea]     INFO | lights are setup
+[2023-08-07 19:20:36,104] [                     Ikea]     INFO | rule IkeaZigbeeDevices started
+[2023-08-07 19:20:50,618] [                     Ikea]     INFO | send - zigbee2mqtt/IKEA/Lampe/Buero_Lampe/set: { "state": "ON"}
+[2023-08-07 19:20:50,753] [                     Ikea]     INFO | mqtt topic zigbee2mqtt/IKEA/Lampe/Buero_Lampe updated to {'brightness': 187, 'color_mode': 'color_temp', 'color_temp': 366, 'linkquality': 147, 'state': 'ON', 'update': {'installed_version': 537040419, 'latest_version': 537040419, 'state': 'idle'}}
+[2023-08-07 19:20:50,809] [                     Ikea]     INFO | state     : ON
+[2023-08-07 19:20:50,842] [                     Ikea]     INFO | brightness: 73
+[2023-08-07 19:20:50,892] [                     Ikea]     INFO | color_temp : 56
+[2023-08-07 19:20:50,927] [                     Ikea]     INFO | update    : OFF
+[2023-08-07 19:20:53,086] [                     Ikea]     INFO | send - zigbee2mqtt/IKEA/Lampe/Buero_Lampe/set: { "state": "OFF"}
+[2023-08-07 19:20:53,217] [                     Ikea]     INFO | mqtt topic zigbee2mqtt/IKEA/Lampe/Buero_Lampe updated to {'brightness': 187, 'color_mode': 'color_temp', 'color_temp': 366, 'linkquality': 144, 'state': 'OFF', 'update': {'installed_version': 537040419, 'latest_version': 537040419, 'state': 'idle'}}
+[2023-08-07 19:20:53,237] [                     Ikea]     INFO | state     : OFF
+[2023-08-07 19:20:53,263] [                     Ikea]     INFO | brightness: 73
+[2023-08-07 19:20:53,284] [                     Ikea]     INFO | color_temp : 56
+[2023-08-07 19:20:53,299] [                     Ikea]     INFO | update    : OFF
+[2023-08-07 20:19:06,194] [                     Ikea]     INFO | Item       : BewegungsmelderGastWC
+[2023-08-07 20:19:06,196] [                     Ikea]     INFO | MotionState: True
+[2023-08-07 20:19:06,197] [                     Ikea]     INFO | Battery    : 21
+[2023-08-07 20:19:06,198] [                     Ikea]     INFO | BatteryWeak: False
+[2023-08-07 20:19:06,199] [                     Ikea]     INFO | LinkQuality: 0
+[2023-08-07 20:19:06,200] [                     Ikea]     INFO | LightState : False
+[2023-08-07 20:19:06,201] [                     Ikea]     INFO | FW Update  : False
+[2023-08-07 20:20:52,726] [                     Ikea]     INFO | Item       : BewegungsmelderGastWC
+[2023-08-07 20:20:52,728] [                     Ikea]     INFO | MotionState: True
+[2023-08-07 20:20:52,730] [                     Ikea]     INFO | Battery    : 21
+[2023-08-07 20:20:52,731] [                     Ikea]     INFO | BatteryWeak: False
+[2023-08-07 20:20:52,732] [                     Ikea]     INFO | LinkQuality: 0
+[2023-08-07 20:20:52,733] [                     Ikea]     INFO | LightState : True
+[2023-08-07 20:20:52,734] [                     Ikea]     INFO | FW Update  : False
+[2023-08-07 20:22:37,445] [                     Ikea]     INFO | Item       : BewegungsmelderGastWC
+[2023-08-07 20:22:37,446] [                     Ikea]     INFO | MotionState: True
+[2023-08-07 20:22:37,447] [                     Ikea]     INFO | Battery    : 21
+[2023-08-07 20:22:37,449] [                     Ikea]     INFO | BatteryWeak: False
+[2023-08-07 20:22:37,450] [                     Ikea]     INFO | LinkQuality: 0
+[2023-08-07 20:22:37,451] [                     Ikea]     INFO | LightState : True
+[2023-08-07 20:22:37,452] [                     Ikea]     INFO | FW Update  : False
+[2023-08-07 20:25:04,271] [                     Ikea]     INFO | Item       : BewegungsmelderGastWC
+[2023-08-07 20:25:04,272] [                     Ikea]     INFO | MotionState: True
+[2023-08-07 20:25:04,272] [                     Ikea]     INFO | Battery    : 21
+[2023-08-07 20:25:04,273] [                     Ikea]     INFO | BatteryWeak: False
+[2023-08-07 20:25:04,273] [                     Ikea]     INFO | LinkQuality: 0
+[2023-08-07 20:25:04,274] [                     Ikea]     INFO | LightState : True
+[2023-08-07 20:25:04,274] [                     Ikea]     INFO | FW Update  : False
+[2023-08-07 20:27:02,993] [                     Ikea]     INFO | Item       : BewegungsmelderGastWC
+[2023-08-07 20:27:02,994] [                     Ikea]     INFO | MotionState: True
+[2023-08-07 20:27:02,994] [                     Ikea]     INFO | Battery    : 21
+[2023-08-07 20:27:02,995] [                     Ikea]     INFO | BatteryWeak: False
+[2023-08-07 20:27:02,995] [                     Ikea]     INFO | LinkQuality: 0
+[2023-08-07 20:27:02,996] [                     Ikea]     INFO | LightState : True
+[2023-08-07 20:27:02,996] [                     Ikea]     INFO | FW Update  : False
+[2023-08-07 20:37:02,995] [                     Ikea]     INFO | Item       : BewegungsmelderGastWC
+[2023-08-07 20:37:02,995] [                     Ikea]     INFO | MotionState: False
+[2023-08-07 20:37:02,996] [                     Ikea]     INFO | Battery    : 21
+[2023-08-07 20:37:02,996] [                     Ikea]     INFO | BatteryWeak: False
+[2023-08-07 20:37:02,997] [                     Ikea]     INFO | LinkQuality: 0
+[2023-08-07 20:37:02,997] [                     Ikea]     INFO | LightState : True
+[2023-08-07 20:37:02,998] [                     Ikea]     INFO | FW Update  : False
+[2023-08-07 20:41:17,174] [                     Ikea]     INFO | Item       : BewegungsmelderGastWC
+[2023-08-07 20:41:17,175] [                     Ikea]     INFO | MotionState: True
+[2023-08-07 20:41:17,177] [                     Ikea]     INFO | Battery    : 21
+[2023-08-07 20:41:17,179] [                     Ikea]     INFO | BatteryWeak: False
+[2023-08-07 20:41:17,180] [                     Ikea]     INFO | LinkQuality: 0
+[2023-08-07 20:41:17,181] [                     Ikea]     INFO | LightState : False
+[2023-08-07 20:41:17,182] [                     Ikea]     INFO | FW Update  : False
+[2023-08-07 20:51:17,172] [                     Ikea]     INFO | Item       : BewegungsmelderGastWC
+[2023-08-07 20:51:17,173] [                     Ikea]     INFO | MotionState: False
+[2023-08-07 20:51:17,173] [                     Ikea]     INFO | Battery    : 21
+[2023-08-07 20:51:17,174] [                     Ikea]     INFO | BatteryWeak: False
+[2023-08-07 20:51:17,174] [                     Ikea]     INFO | LinkQuality: 0
+[2023-08-07 20:51:17,175] [                     Ikea]     INFO | LightState : False
+[2023-08-07 20:51:17,175] [                     Ikea]     INFO | FW Update  : False

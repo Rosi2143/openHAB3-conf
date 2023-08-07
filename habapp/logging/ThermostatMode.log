@@ -1,0 +1,1185 @@
+handling item: HeizungKlavier_ControlMode
+HeizungKlavier(4017249080): Entering 'st_auto' state triggered by '__initial__' event.
+Created ThermostatSm: (4017249080):HeizungKlavier
+skip handling item: HeizungKlavier_ControlMode state is None
+handling item: HeizungFinnja_BoostMode
+HeizungFinnja(4003553088): Entering 'st_auto' state triggered by '__initial__' event.
+Created ThermostatSm: (4003553088):HeizungFinnja
+handling BoostMode: HeizungFinnja_BoostMode (OFF)
+HeizungFinnja(4003553088): - Boost is: False
+HeizungFinnja(4003553088): boost = 'False'.
+HeizungFinnja(4003553088): Before   'tr_boost_change' in 'st_auto' state.
+HeizungFinnja(4003553088): Entering 'st_auto' state triggered by 'tr_boost_change' event.
+HeizungFinnja(4003553088): is in state st_auto.
+handling item: HeizungKlavier_OperatingVoltage
+Use existing ThermostatSm (4017249080): HeizungKlavier
+handling item: HeizungErker_SetPointMode
+HeizungErker(4019890544): Entering 'st_auto' state triggered by '__initial__' event.
+Created ThermostatSm: (4019890544):HeizungErker
+handling SetPointMode: HeizungErker_SetPointMode (auto)
+HeizungErker(4019890544): - Mode is: auto
+HeizungErker(4019890544): mode = 'auto'.
+HeizungErker(4019890544): mode = 'auto'.
+HeizungErker(4019890544): Before   'tr_mode_change' in 'st_auto' state.
+HeizungErker(4019890544): Entering 'st_auto' state triggered by 'tr_mode_change' event.
+HeizungErker(4019890544): is in state st_auto.
+handling item: HeizungGastWC
+HeizungGastWC(4011599952): Entering 'st_auto' state triggered by '__initial__' event.
+Created ThermostatSm: (4011599952):HeizungGastWC
+skip handling item: HeizungGastWC state is None
+handling item: HeizungMika_PartySetPointTemperature
+HeizungMika(4003139416): Entering 'st_auto' state triggered by '__initial__' event.
+Created ThermostatSm: (4003139416):HeizungMika
+skip handling item: HeizungMika_PartySetPointTemperature state is None
+handling item: HeizungMika_UpdatePending
+Use existing ThermostatSm (4003139416): HeizungMika
+handling item: HeizungMika_BoostMode
+Use existing ThermostatSm (4003139416): HeizungMika
+handling BoostMode: HeizungMika_BoostMode (OFF)
+HeizungMika(4003139416): - Boost is: False
+HeizungMika(4003139416): boost = 'False'.
+HeizungMika(4003139416): Before   'tr_boost_change' in 'st_auto' state.
+HeizungMika(4003139416): Entering 'st_auto' state triggered by 'tr_boost_change' event.
+HeizungMika(4003139416): is in state st_auto.
+handling item: HeizungBad_ConfigPending
+HeizungBad(4006174856): Entering 'st_auto' state triggered by '__initial__' event.
+Created ThermostatSm: (4006174856):HeizungBad
+handling ConfigPending: HeizungBad_ConfigPending (OFF)
+HeizungBad(4006174856): - Config is: False
+HeizungBad(4006174856): config = 'False'.
+HeizungBad(4006174856): Before   'tr_config_change' in 'st_auto' state.
+HeizungBad(4006174856): Entering 'st_auto' state triggered by 'tr_config_change' event.
+HeizungBad(4006174856): is in state st_auto.
+handling item: HeizungFinnja_PartyMode
+Use existing ThermostatSm (4003553088): HeizungFinnja
+handling PartyMode: HeizungFinnja_PartyMode (OFF)
+HeizungFinnja(4003553088): - Boost is: False
+HeizungFinnja(4003553088): party = 'False'.
+HeizungFinnja(4003553088): Before   'tr_party_change' in 'st_auto' state.
+HeizungFinnja(4003553088): Entering 'st_auto' state triggered by 'tr_party_change' event.
+HeizungFinnja(4003553088): is in state st_auto.
+handling item: HeizungSofaSued_Mode
+HeizungSofaSued(4002499672): Entering 'st_auto' state triggered by '__initial__' event.
+Created ThermostatSm: (4002499672):HeizungSofaSued
+handling item: HeizungGastWC_Level
+Use existing ThermostatSm (4011599952): HeizungGastWC
+handling item: HeizungKlavier_ActualTemperature
+Use existing ThermostatSm (4017249080): HeizungKlavier
+handling item: gHeizungenBad_UpdatePending
+gHeizungenBad(4002405632): Entering 'st_auto' state triggered by '__initial__' event.
+Created ThermostatSm: (4002405632):gHeizungenBad
+handling item: HeizungSchlafzimmer_PartySetPointTemperature
+HeizungSchlafzimmer(4011446408): Entering 'st_auto' state triggered by '__initial__' event.
+Created ThermostatSm: (4011446408):HeizungSchlafzimmer
+handling item: HeizungBad_WindowState
+Use existing ThermostatSm (4006174856): HeizungBad
+handling WindowState: HeizungBad_WindowState (CLOSED)
+HeizungBad(4006174856): - Boost is: False
+HeizungBad(4006174856): window_open = 'False'.
+HeizungBad(4006174856): Before   'tr_window_change' in 'st_auto' state.
+HeizungBad(4006174856): Entering 'st_auto' state triggered by 'tr_window_change' event.
+HeizungBad(4006174856): is in state st_auto.
+handling item: gHeizungenEsszimmer_ConfigPending
+gHeizungenEsszimmer(4005518424): Entering 'st_auto' state triggered by '__initial__' event.
+Created ThermostatSm: (4005518424):gHeizungenEsszimmer
+handling ConfigPending: gHeizungenEsszimmer_ConfigPending (OFF)
+gHeizungenEsszimmer(4005518424): - Config is: False
+gHeizungenEsszimmer(4005518424): config = 'False'.
+gHeizungenEsszimmer(4005518424): Before   'tr_config_change' in 'st_auto' state.
+gHeizungenEsszimmer(4005518424): Entering 'st_auto' state triggered by 'tr_config_change' event.
+gHeizungenEsszimmer(4005518424): is in state st_auto.
+handling item: gHeizungenBad_SetPointMode
+Use existing ThermostatSm (4002405632): gHeizungenBad
+handling SetPointMode: gHeizungenBad_SetPointMode (auto)
+gHeizungenBad(4002405632): - Mode is: auto
+gHeizungenBad(4002405632): mode = 'auto'.
+gHeizungenBad(4002405632): mode = 'auto'.
+gHeizungenBad(4002405632): Before   'tr_mode_change' in 'st_auto' state.
+gHeizungenBad(4002405632): Entering 'st_auto' state triggered by 'tr_mode_change' event.
+gHeizungenBad(4002405632): is in state st_auto.
+handling item: HeizungSofa_Level
+HeizungSofa(4011458464): Entering 'st_auto' state triggered by '__initial__' event.
+Created ThermostatSm: (4011458464):HeizungSofa
+handling item: gHeizungenSofa_Mode
+gHeizungenSofa(4002606120): Entering 'st_auto' state triggered by '__initial__' event.
+Created ThermostatSm: (4002606120):gHeizungenSofa
+handling item: HeizungSofa_ControlMode
+Use existing ThermostatSm (4011458464): HeizungSofa
+skip handling item: HeizungSofa_ControlMode state is None
+handling item: HeizungSofaSued_SetPointMode
+Use existing ThermostatSm (4002499672): HeizungSofaSued
+handling SetPointMode: HeizungSofaSued_SetPointMode (auto)
+HeizungSofaSued(4002499672): - Mode is: auto
+HeizungSofaSued(4002499672): mode = 'auto'.
+HeizungSofaSued(4002499672): mode = 'auto'.
+HeizungSofaSued(4002499672): Before   'tr_mode_change' in 'st_auto' state.
+HeizungSofaSued(4002499672): Entering 'st_auto' state triggered by 'tr_mode_change' event.
+HeizungSofaSued(4002499672): is in state st_auto.
+handling item: HeizungBad_OperatingVoltage
+Use existing ThermostatSm (4006174856): HeizungBad
+handling item: HeizungSara_SetPointTemperature
+HeizungSara(4005737808): Entering 'st_auto' state triggered by '__initial__' event.
+Created ThermostatSm: (4005737808):HeizungSara
+handling item: HeizungSchlafzimmer_SetPointMode
+Use existing ThermostatSm (4011446408): HeizungSchlafzimmer
+handling SetPointMode: HeizungSchlafzimmer_SetPointMode (auto)
+HeizungSchlafzimmer(4011446408): - Mode is: auto
+HeizungSchlafzimmer(4011446408): mode = 'auto'.
+HeizungSchlafzimmer(4011446408): mode = 'auto'.
+HeizungSchlafzimmer(4011446408): Before   'tr_mode_change' in 'st_auto' state.
+HeizungSchlafzimmer(4011446408): Entering 'st_auto' state triggered by 'tr_mode_change' event.
+HeizungSchlafzimmer(4011446408): is in state st_auto.
+handling item: HeizungMika_Mode
+Use existing ThermostatSm (4003139416): HeizungMika
+handling item: gHeizungenBad_ActualTemperature
+Use existing ThermostatSm (4002405632): gHeizungenBad
+handling item: HeizungErker
+Use existing ThermostatSm (4019890544): HeizungErker
+skip handling item: HeizungErker state is None
+handling item: HeizungMika_LowBattery
+Use existing ThermostatSm (4003139416): HeizungMika
+handling item: HeizungSara_ControlMode
+Use existing ThermostatSm (4005737808): HeizungSara
+skip handling item: HeizungSara_ControlMode state is None
+handling item: gHeizungenEsszimmer_ControlMode
+Use existing ThermostatSm (4005518424): gHeizungenEsszimmer
+handling item: gHeizungenEsszimmer_BoostMode
+Use existing ThermostatSm (4005518424): gHeizungenEsszimmer
+handling BoostMode: gHeizungenEsszimmer_BoostMode (OFF)
+gHeizungenEsszimmer(4005518424): - Boost is: False
+gHeizungenEsszimmer(4005518424): boost = 'False'.
+gHeizungenEsszimmer(4005518424): Before   'tr_boost_change' in 'st_auto' state.
+gHeizungenEsszimmer(4005518424): Entering 'st_auto' state triggered by 'tr_boost_change' event.
+gHeizungenEsszimmer(4005518424): is in state st_auto.
+handling item: gHeizungenBad_LowBattery
+Use existing ThermostatSm (4002405632): gHeizungenBad
+handling item: gHeizungenEsszimmer_SetPointTemperature
+Use existing ThermostatSm (4005518424): gHeizungenEsszimmer
+handling item: HeizungErker_UpdatePending
+Use existing ThermostatSm (4019890544): HeizungErker
+handling item: gHeizungenEsszimmer_PartySetPointTemperature
+Use existing ThermostatSm (4005518424): gHeizungenEsszimmer
+handling item: gHeizungenEsszimmer_Humidity
+Use existing ThermostatSm (4005518424): gHeizungenEsszimmer
+handling item: HeizungFinnja_WindowOpenState
+Use existing ThermostatSm (4003553088): HeizungFinnja
+handling item: gHeizungenEsszimmer_PartyMode
+Use existing ThermostatSm (4005518424): gHeizungenEsszimmer
+handling PartyMode: gHeizungenEsszimmer_PartyMode (OFF)
+gHeizungenEsszimmer(4005518424): - Boost is: False
+gHeizungenEsszimmer(4005518424): party = 'False'.
+gHeizungenEsszimmer(4005518424): Before   'tr_party_change' in 'st_auto' state.
+gHeizungenEsszimmer(4005518424): Entering 'st_auto' state triggered by 'tr_party_change' event.
+gHeizungenEsszimmer(4005518424): is in state st_auto.
+handling item: HeizungSofaSued_OperatingVoltage
+Use existing ThermostatSm (4002499672): HeizungSofaSued
+handling item: gHeizungenBad
+Use existing ThermostatSm (4002405632): gHeizungenBad
+skip handling item: gHeizungenBad state is None
+handling item: gHeizungenSofa_PartySetPointTemperature
+Use existing ThermostatSm (4002606120): gHeizungenSofa
+handling item: HeizungSofaSued_LowBattery
+Use existing ThermostatSm (4002499672): HeizungSofaSued
+handling item: gHeizungenBad_PartyMode
+Use existing ThermostatSm (4002405632): gHeizungenBad
+handling PartyMode: gHeizungenBad_PartyMode (OFF)
+gHeizungenBad(4002405632): - Boost is: False
+gHeizungenBad(4002405632): party = 'False'.
+gHeizungenBad(4002405632): Before   'tr_party_change' in 'st_auto' state.
+gHeizungenBad(4002405632): Entering 'st_auto' state triggered by 'tr_party_change' event.
+gHeizungenBad(4002405632): is in state st_auto.
+handling item: HeizungKlavier_ConfigPending
+Use existing ThermostatSm (4017249080): HeizungKlavier
+handling ConfigPending: HeizungKlavier_ConfigPending (OFF)
+HeizungKlavier(4017249080): - Config is: False
+HeizungKlavier(4017249080): config = 'False'.
+HeizungKlavier(4017249080): Before   'tr_config_change' in 'st_auto' state.
+HeizungKlavier(4017249080): Entering 'st_auto' state triggered by 'tr_config_change' event.
+HeizungKlavier(4017249080): is in state st_auto.
+handling item: HeizungMika_PartyMode
+Use existing ThermostatSm (4003139416): HeizungMika
+handling PartyMode: HeizungMika_PartyMode (OFF)
+HeizungMika(4003139416): - Boost is: False
+HeizungMika(4003139416): party = 'False'.
+HeizungMika(4003139416): Before   'tr_party_change' in 'st_auto' state.
+HeizungMika(4003139416): Entering 'st_auto' state triggered by 'tr_party_change' event.
+HeizungMika(4003139416): is in state st_auto.
+handling item: gHeizungenBad_Humidity
+Use existing ThermostatSm (4002405632): gHeizungenBad
+handling item: TemperaturHeizung
+TemperaturHeizung(4015384824): Entering 'st_auto' state triggered by '__initial__' event.
+Created ThermostatSm: (4015384824):TemperaturHeizung
+skip handling item: TemperaturHeizung state is None
+handling item: HeizungGastWC_SetPointMode
+Use existing ThermostatSm (4011599952): HeizungGastWC
+handling SetPointMode: HeizungGastWC_SetPointMode (auto)
+HeizungGastWC(4011599952): - Mode is: auto
+HeizungGastWC(4011599952): mode = 'auto'.
+HeizungGastWC(4011599952): mode = 'auto'.
+HeizungGastWC(4011599952): Before   'tr_mode_change' in 'st_auto' state.
+HeizungGastWC(4011599952): Entering 'st_auto' state triggered by 'tr_mode_change' event.
+HeizungGastWC(4011599952): is in state st_auto.
+handling item: HeizungFinnja_SetPointTemperature
+Use existing ThermostatSm (4003553088): HeizungFinnja
+handling item: HeizungSchlafzimmer_ConfigPending
+Use existing ThermostatSm (4011446408): HeizungSchlafzimmer
+handling ConfigPending: HeizungSchlafzimmer_ConfigPending (OFF)
+HeizungSchlafzimmer(4011446408): - Config is: False
+HeizungSchlafzimmer(4011446408): config = 'False'.
+HeizungSchlafzimmer(4011446408): Before   'tr_config_change' in 'st_auto' state.
+HeizungSchlafzimmer(4011446408): Entering 'st_auto' state triggered by 'tr_config_change' event.
+HeizungSchlafzimmer(4011446408): is in state st_auto.
+handling item: HeizungBad_UpdatePending
+Use existing ThermostatSm (4006174856): HeizungBad
+handling item: HeizungMika_ConfigPending
+Use existing ThermostatSm (4003139416): HeizungMika
+handling ConfigPending: HeizungMika_ConfigPending (OFF)
+HeizungMika(4003139416): - Config is: False
+HeizungMika(4003139416): config = 'False'.
+HeizungMika(4003139416): Before   'tr_config_change' in 'st_auto' state.
+HeizungMika(4003139416): Entering 'st_auto' state triggered by 'tr_config_change' event.
+HeizungMika(4003139416): is in state st_auto.
+handling item: TemperaturHeizung_LowBattery
+Use existing ThermostatSm (4015384824): TemperaturHeizung
+handling item: gHeizungenSofa_SetPointTemperature_HitzeSchutzTimer
+Use existing ThermostatSm (4002606120): gHeizungenSofa
+skip handling item: gHeizungenSofa_SetPointTemperature_HitzeSchutzTimer state is None
+handling item: HeizungFinnja_Level
+Use existing ThermostatSm (4003553088): HeizungFinnja
+handling item: HeizungGastWC_PartySetPointTemperature
+Use existing ThermostatSm (4011599952): HeizungGastWC
+handling item: HeizungBad
+Use existing ThermostatSm (4006174856): HeizungBad
+skip handling item: HeizungBad state is None
+handling item: HeizungSara_Mode
+Use existing ThermostatSm (4005737808): HeizungSara
+handling item: HeizungSara_PartyMode
+Use existing ThermostatSm (4005737808): HeizungSara
+handling PartyMode: HeizungSara_PartyMode (OFF)
+HeizungSara(4005737808): - Boost is: False
+HeizungSara(4005737808): party = 'False'.
+HeizungSara(4005737808): Before   'tr_party_change' in 'st_auto' state.
+HeizungSara(4005737808): Entering 'st_auto' state triggered by 'tr_party_change' event.
+HeizungSara(4005737808): is in state st_auto.
+handling item: HeizungSchlafzimmer_BoostMode
+Use existing ThermostatSm (4011446408): HeizungSchlafzimmer
+handling BoostMode: HeizungSchlafzimmer_BoostMode (OFF)
+HeizungSchlafzimmer(4011446408): - Boost is: False
+HeizungSchlafzimmer(4011446408): boost = 'False'.
+HeizungSchlafzimmer(4011446408): Before   'tr_boost_change' in 'st_auto' state.
+HeizungSchlafzimmer(4011446408): Entering 'st_auto' state triggered by 'tr_boost_change' event.
+HeizungSchlafzimmer(4011446408): is in state st_auto.
+handling item: HeizungKlavier_WindowState
+Use existing ThermostatSm (4017249080): HeizungKlavier
+handling WindowState: HeizungKlavier_WindowState (OPEN)
+HeizungKlavier(4017249080): - Boost is: False
+HeizungKlavier(4017249080): window_open = 'False'.
+HeizungKlavier(4017249080): Before   'tr_window_change' in 'st_auto' state.
+HeizungKlavier(4017249080): Entering 'st_auto' state triggered by 'tr_window_change' event.
+HeizungKlavier(4017249080): is in state st_auto.
+handling item: gHeizungenSofa_SetPointMode
+Use existing ThermostatSm (4002606120): gHeizungenSofa
+handling SetPointMode: gHeizungenSofa_SetPointMode (auto)
+gHeizungenSofa(4002606120): - Mode is: auto
+gHeizungenSofa(4002606120): mode = 'auto'.
+gHeizungenSofa(4002606120): mode = 'auto'.
+gHeizungenSofa(4002606120): Before   'tr_mode_change' in 'st_auto' state.
+gHeizungenSofa(4002606120): Entering 'st_auto' state triggered by 'tr_mode_change' event.
+gHeizungenSofa(4002606120): is in state st_auto.
+handling item: HeizungSofaSued_UpdatePending
+Use existing ThermostatSm (4002499672): HeizungSofaSued
+handling item: HeizungMika_SetPointMode
+Use existing ThermostatSm (4003139416): HeizungMika
+handling SetPointMode: HeizungMika_SetPointMode (auto)
+HeizungMika(4003139416): - Mode is: auto
+HeizungMika(4003139416): mode = 'auto'.
+HeizungMika(4003139416): mode = 'auto'.
+HeizungMika(4003139416): Before   'tr_mode_change' in 'st_auto' state.
+HeizungMika(4003139416): Entering 'st_auto' state triggered by 'tr_mode_change' event.
+HeizungMika(4003139416): is in state st_auto.
+handling item: HeizungKlavier_SetPointMode
+Use existing ThermostatSm (4017249080): HeizungKlavier
+handling SetPointMode: HeizungKlavier_SetPointMode (auto)
+HeizungKlavier(4017249080): - Mode is: auto
+HeizungKlavier(4017249080): mode = 'auto'.
+HeizungKlavier(4017249080): mode = 'auto'.
+HeizungKlavier(4017249080): Before   'tr_mode_change' in 'st_auto' state.
+HeizungKlavier(4017249080): Entering 'st_auto' state triggered by 'tr_mode_change' event.
+HeizungKlavier(4017249080): is in state st_auto.
+handling item: HeizungSofaSued_Level
+Use existing ThermostatSm (4002499672): HeizungSofaSued
+handling item: gHeizungenBad_Mode
+Use existing ThermostatSm (4002405632): gHeizungenBad
+handling item: HeizungKlavier_UpdatePending
+Use existing ThermostatSm (4017249080): HeizungKlavier
+handling item: gHeizungenSofa
+Use existing ThermostatSm (4002606120): gHeizungenSofa
+skip handling item: gHeizungenSofa state is None
+handling item: gHeizungenSofa_BoostMode
+Use existing ThermostatSm (4002606120): gHeizungenSofa
+handling BoostMode: gHeizungenSofa_BoostMode (OFF)
+gHeizungenSofa(4002606120): - Boost is: False
+gHeizungenSofa(4002606120): boost = 'False'.
+gHeizungenSofa(4002606120): Before   'tr_boost_change' in 'st_auto' state.
+gHeizungenSofa(4002606120): Entering 'st_auto' state triggered by 'tr_boost_change' event.
+gHeizungenSofa(4002606120): is in state st_auto.
+handling item: HeizungKlavier_Mode
+Use existing ThermostatSm (4017249080): HeizungKlavier
+handling item: HeizungSchlafzimmer_Level
+Use existing ThermostatSm (4011446408): HeizungSchlafzimmer
+handling item: HeizungBad_ActualTemperature
+Use existing ThermostatSm (4006174856): HeizungBad
+handling item: HeizungGastWC_OperatingVoltage
+Use existing ThermostatSm (4011599952): HeizungGastWC
+handling item: gHeizungenSofa_LowBattery
+Use existing ThermostatSm (4002606120): gHeizungenSofa
+handling item: gHeizungenSofa_ConfigPending
+Use existing ThermostatSm (4002606120): gHeizungenSofa
+skip handling item: gHeizungenSofa_ConfigPending state is None
+handling item: HeizungSofa_ConfigPending
+Use existing ThermostatSm (4011458464): HeizungSofa
+handling ConfigPending: HeizungSofa_ConfigPending (OFF)
+HeizungSofa(4011458464): - Config is: False
+HeizungSofa(4011458464): config = 'False'.
+HeizungSofa(4011458464): Before   'tr_config_change' in 'st_auto' state.
+HeizungSofa(4011458464): Entering 'st_auto' state triggered by 'tr_config_change' event.
+HeizungSofa(4011458464): is in state st_auto.
+handling item: HeizungBad_ControlMode
+Use existing ThermostatSm (4006174856): HeizungBad
+handling item: HeizungSofa_SetPointMode
+Use existing ThermostatSm (4011458464): HeizungSofa
+handling SetPointMode: HeizungSofa_SetPointMode (auto)
+HeizungSofa(4011458464): - Mode is: auto
+HeizungSofa(4011458464): mode = 'auto'.
+HeizungSofa(4011458464): mode = 'auto'.
+HeizungSofa(4011458464): Before   'tr_mode_change' in 'st_auto' state.
+HeizungSofa(4011458464): Entering 'st_auto' state triggered by 'tr_mode_change' event.
+HeizungSofa(4011458464): is in state st_auto.
+handling item: gHeizungenEsszimmer_LowBattery
+Use existing ThermostatSm (4005518424): gHeizungenEsszimmer
+handling item: HeizungBad_PartyMode
+Use existing ThermostatSm (4006174856): HeizungBad
+handling PartyMode: HeizungBad_PartyMode (OFF)
+HeizungBad(4006174856): - Boost is: False
+HeizungBad(4006174856): party = 'False'.
+HeizungBad(4006174856): Before   'tr_party_change' in 'st_auto' state.
+HeizungBad(4006174856): Entering 'st_auto' state triggered by 'tr_party_change' event.
+HeizungBad(4006174856): is in state st_auto.
+handling item: gHeizungenEsszimmer_Level
+Use existing ThermostatSm (4005518424): gHeizungenEsszimmer
+handling item: HeizungMika_OperatingVoltage
+Use existing ThermostatSm (4003139416): HeizungMika
+handling item: gHeizungenSofa_ControlMode
+Use existing ThermostatSm (4002606120): gHeizungenSofa
+handling item: HeizungSara_UpdatePending
+Use existing ThermostatSm (4005737808): HeizungSara
+handling item: gHeizungenBad_ConfigPending
+Use existing ThermostatSm (4002405632): gHeizungenBad
+handling ConfigPending: gHeizungenBad_ConfigPending (OFF)
+gHeizungenBad(4002405632): - Config is: False
+gHeizungenBad(4002405632): config = 'False'.
+gHeizungenBad(4002405632): Before   'tr_config_change' in 'st_auto' state.
+gHeizungenBad(4002405632): Entering 'st_auto' state triggered by 'tr_config_change' event.
+gHeizungenBad(4002405632): is in state st_auto.
+handling item: HeizungSara_PartySetPointTemperature
+Use existing ThermostatSm (4005737808): HeizungSara
+skip handling item: HeizungSara_PartySetPointTemperature state is None
+handling item: gHeizungenEsszimmer_SetPointMode
+Use existing ThermostatSm (4005518424): gHeizungenEsszimmer
+handling SetPointMode: gHeizungenEsszimmer_SetPointMode (auto)
+gHeizungenEsszimmer(4005518424): - Mode is: auto
+gHeizungenEsszimmer(4005518424): mode = 'auto'.
+gHeizungenEsszimmer(4005518424): mode = 'auto'.
+gHeizungenEsszimmer(4005518424): Before   'tr_mode_change' in 'st_auto' state.
+gHeizungenEsszimmer(4005518424): Entering 'st_auto' state triggered by 'tr_mode_change' event.
+gHeizungenEsszimmer(4005518424): is in state st_auto.
+handling item: HeizungFinnja_SetPointMode
+Use existing ThermostatSm (4003553088): HeizungFinnja
+handling SetPointMode: HeizungFinnja_SetPointMode (auto)
+HeizungFinnja(4003553088): - Mode is: auto
+HeizungFinnja(4003553088): mode = 'auto'.
+HeizungFinnja(4003553088): mode = 'auto'.
+HeizungFinnja(4003553088): Before   'tr_mode_change' in 'st_auto' state.
+HeizungFinnja(4003553088): Entering 'st_auto' state triggered by 'tr_mode_change' event.
+HeizungFinnja(4003553088): is in state st_auto.
+handling item: HeizungSchlafzimmer_Niedriger_Batteriestatus
+Use existing ThermostatSm (4011446408): HeizungSchlafzimmer
+handling item: gHeizungenBad_ControlMode
+Use existing ThermostatSm (4002405632): gHeizungenBad
+handling item: HeizungGastWC_ActualTemperature
+Use existing ThermostatSm (4011599952): HeizungGastWC
+handling item: HeizungSara_OperatingVoltage
+Use existing ThermostatSm (4005737808): HeizungSara
+handling item: HeizungSofa_LowBattery
+Use existing ThermostatSm (4011458464): HeizungSofa
+handling item: HeizungSara_SetPointMode_HitzeSchutzTimer
+Use existing ThermostatSm (4005737808): HeizungSara
+skip handling item: HeizungSara_SetPointMode_HitzeSchutzTimer state is None
+handling item: HeizungGastWC_SetPointTemperature
+Use existing ThermostatSm (4011599952): HeizungGastWC
+handling item: HeizungSofa_PartyMode
+Use existing ThermostatSm (4011458464): HeizungSofa
+handling PartyMode: HeizungSofa_PartyMode (OFF)
+HeizungSofa(4011458464): - Boost is: False
+HeizungSofa(4011458464): party = 'False'.
+HeizungSofa(4011458464): Before   'tr_party_change' in 'st_auto' state.
+HeizungSofa(4011458464): Entering 'st_auto' state triggered by 'tr_party_change' event.
+HeizungSofa(4011458464): is in state st_auto.
+handling item: HeizungFinnja_ActualTemperature
+Use existing ThermostatSm (4003553088): HeizungFinnja
+handling item: HeizungMika_WindowState
+Use existing ThermostatSm (4003139416): HeizungMika
+handling WindowState: HeizungMika_WindowState (CLOSED)
+HeizungMika(4003139416): - Boost is: False
+HeizungMika(4003139416): window_open = 'False'.
+HeizungMika(4003139416): Before   'tr_window_change' in 'st_auto' state.
+HeizungMika(4003139416): Entering 'st_auto' state triggered by 'tr_window_change' event.
+HeizungMika(4003139416): is in state st_auto.
+handling item: HeizungFinnja_ConfigPending
+Use existing ThermostatSm (4003553088): HeizungFinnja
+handling ConfigPending: HeizungFinnja_ConfigPending (OFF)
+HeizungFinnja(4003553088): - Config is: False
+HeizungFinnja(4003553088): config = 'False'.
+HeizungFinnja(4003553088): Before   'tr_config_change' in 'st_auto' state.
+HeizungFinnja(4003553088): Entering 'st_auto' state triggered by 'tr_config_change' event.
+HeizungFinnja(4003553088): is in state st_auto.
+handling item: HeizungSofaSued_PartySetPointTemperature
+Use existing ThermostatSm (4002499672): HeizungSofaSued
+skip handling item: HeizungSofaSued_PartySetPointTemperature state is None
+handling item: HeizungSofa_Mode
+Use existing ThermostatSm (4011458464): HeizungSofa
+handling item: HeizungErker_Level
+Use existing ThermostatSm (4019890544): HeizungErker
+handling item: gHeizungenBad_SetPointTemperature
+Use existing ThermostatSm (4002405632): gHeizungenBad
+handling item: HeizungErker_ConfigPending
+Use existing ThermostatSm (4019890544): HeizungErker
+handling ConfigPending: HeizungErker_ConfigPending (OFF)
+HeizungErker(4019890544): - Config is: False
+HeizungErker(4019890544): config = 'False'.
+HeizungErker(4019890544): Before   'tr_config_change' in 'st_auto' state.
+HeizungErker(4019890544): Entering 'st_auto' state triggered by 'tr_config_change' event.
+HeizungErker(4019890544): is in state st_auto.
+handling item: gHeizungenBad_Level
+Use existing ThermostatSm (4002405632): gHeizungenBad
+handling item: HeizungKlavier_BoostMode
+Use existing ThermostatSm (4017249080): HeizungKlavier
+handling BoostMode: HeizungKlavier_BoostMode (OFF)
+HeizungKlavier(4017249080): - Boost is: False
+HeizungKlavier(4017249080): boost = 'False'.
+HeizungKlavier(4017249080): Before   'tr_boost_change' in 'st_auto' state.
+HeizungKlavier(4017249080): Entering 'st_auto' state triggered by 'tr_boost_change' event.
+HeizungKlavier(4017249080): is in state st_auto.
+handling item: HeizungSara_Level
+Use existing ThermostatSm (4005737808): HeizungSara
+handling item: HeizungFinnja_ControlMode
+Use existing ThermostatSm (4003553088): HeizungFinnja
+skip handling item: HeizungFinnja_ControlMode state is None
+handling item: HeizungErker_SetPointTemperature
+Use existing ThermostatSm (4019890544): HeizungErker
+handling item: HeizungGastWC_LowBattery
+Use existing ThermostatSm (4011599952): HeizungGastWC
+handling item: HeizungMika_Level
+Use existing ThermostatSm (4003139416): HeizungMika
+handling item: HeizungFinnja_Mode
+Use existing ThermostatSm (4003553088): HeizungFinnja
+handling item: HeizungKlavier_LowBattery
+Use existing ThermostatSm (4017249080): HeizungKlavier
+handling item: HeizungSofa_UpdatePending
+Use existing ThermostatSm (4011458464): HeizungSofa
+handling item: TemperaturHeizung_TemperaturUnterschied
+Use existing ThermostatSm (4015384824): TemperaturHeizung
+handling item: gHeizungenSofa_WindowOpenState
+Use existing ThermostatSm (4002606120): gHeizungenSofa
+handling item: HeizungSofaSued_ActualTemperature
+Use existing ThermostatSm (4002499672): HeizungSofaSued
+handling item: TemperaturHeizung_VorlaufTemperatur
+Use existing ThermostatSm (4015384824): TemperaturHeizung
+handling item: HeizungBad_SetPointTemperature
+Use existing ThermostatSm (4006174856): HeizungBad
+handling item: gHeizungenEsszimmer
+Use existing ThermostatSm (4005518424): gHeizungenEsszimmer
+skip handling item: gHeizungenEsszimmer state is None
+handling item: gHeizungenSofa_SetPointTemperature
+Use existing ThermostatSm (4002606120): gHeizungenSofa
+handling item: HeizungErker_ControlMode
+Use existing ThermostatSm (4019890544): HeizungErker
+skip handling item: HeizungErker_ControlMode state is None
+handling item: HeizungSofaSued_ControlMode
+Use existing ThermostatSm (4002499672): HeizungSofaSued
+skip handling item: HeizungSofaSued_ControlMode state is None
+handling item: HeizungSara_LowBattery
+Use existing ThermostatSm (4005737808): HeizungSara
+handling item: HeizungGastWC_ControlMode
+Use existing ThermostatSm (4011599952): HeizungGastWC
+handling item: HeizungErker_OperatingVoltage
+Use existing ThermostatSm (4019890544): HeizungErker
+handling item: HeizungGastWC_BoostMode
+Use existing ThermostatSm (4011599952): HeizungGastWC
+handling BoostMode: HeizungGastWC_BoostMode (OFF)
+HeizungGastWC(4011599952): - Boost is: False
+HeizungGastWC(4011599952): boost = 'False'.
+HeizungGastWC(4011599952): Before   'tr_boost_change' in 'st_auto' state.
+HeizungGastWC(4011599952): Entering 'st_auto' state triggered by 'tr_boost_change' event.
+HeizungGastWC(4011599952): is in state st_auto.
+handling item: HeizungSofa_ActualTemperature
+Use existing ThermostatSm (4011458464): HeizungSofa
+handling item: HeizungMika_ControlMode
+Use existing ThermostatSm (4003139416): HeizungMika
+skip handling item: HeizungMika_ControlMode state is None
+handling item: HeizungErker_PartySetPointTemperature
+Use existing ThermostatSm (4019890544): HeizungErker
+skip handling item: HeizungErker_PartySetPointTemperature state is None
+handling item: HeizungSara_WindowOpenState
+Use existing ThermostatSm (4005737808): HeizungSara
+handling item: HeizungGastWC_PartyMode
+Use existing ThermostatSm (4011599952): HeizungGastWC
+handling PartyMode: HeizungGastWC_PartyMode (OFF)
+HeizungGastWC(4011599952): - Boost is: False
+HeizungGastWC(4011599952): party = 'False'.
+HeizungGastWC(4011599952): Before   'tr_party_change' in 'st_auto' state.
+HeizungGastWC(4011599952): Entering 'st_auto' state triggered by 'tr_party_change' event.
+HeizungGastWC(4011599952): is in state st_auto.
+handling item: HeizungErker_PartyMode
+Use existing ThermostatSm (4019890544): HeizungErker
+handling PartyMode: HeizungErker_PartyMode (OFF)
+HeizungErker(4019890544): - Boost is: False
+HeizungErker(4019890544): party = 'False'.
+HeizungErker(4019890544): Before   'tr_party_change' in 'st_auto' state.
+HeizungErker(4019890544): Entering 'st_auto' state triggered by 'tr_party_change' event.
+HeizungErker(4019890544): is in state st_auto.
+handling item: HeizungMika_WindowOpenState
+Use existing ThermostatSm (4003139416): HeizungMika
+handling item: HeizungSofaSued_BoostMode
+Use existing ThermostatSm (4002499672): HeizungSofaSued
+handling BoostMode: HeizungSofaSued_BoostMode (OFF)
+HeizungSofaSued(4002499672): - Boost is: False
+HeizungSofaSued(4002499672): boost = 'False'.
+HeizungSofaSued(4002499672): Before   'tr_boost_change' in 'st_auto' state.
+HeizungSofaSued(4002499672): Entering 'st_auto' state triggered by 'tr_boost_change' event.
+HeizungSofaSued(4002499672): is in state st_auto.
+handling item: HeizungSara
+Use existing ThermostatSm (4005737808): HeizungSara
+skip handling item: HeizungSara state is None
+handling item: gHeizungenSofa_WindowState
+Use existing ThermostatSm (4002606120): gHeizungenSofa
+handling WindowState: gHeizungenSofa_WindowState (OPEN)
+gHeizungenSofa(4002606120): - Boost is: False
+gHeizungenSofa(4002606120): window_open = 'False'.
+gHeizungenSofa(4002606120): Before   'tr_window_change' in 'st_auto' state.
+gHeizungenSofa(4002606120): Entering 'st_auto' state triggered by 'tr_window_change' event.
+gHeizungenSofa(4002606120): is in state st_auto.
+handling item: HeizungBad_WindowOpenState
+Use existing ThermostatSm (4006174856): HeizungBad
+handling item: HeizungSofaSued_PartyMode
+Use existing ThermostatSm (4002499672): HeizungSofaSued
+handling PartyMode: HeizungSofaSued_PartyMode (OFF)
+HeizungSofaSued(4002499672): - Boost is: False
+HeizungSofaSued(4002499672): party = 'False'.
+HeizungSofaSued(4002499672): Before   'tr_party_change' in 'st_auto' state.
+HeizungSofaSued(4002499672): Entering 'st_auto' state triggered by 'tr_party_change' event.
+HeizungSofaSued(4002499672): is in state st_auto.
+handling item: HeizungKlavier_PartySetPointTemperature
+Use existing ThermostatSm (4017249080): HeizungKlavier
+skip handling item: HeizungKlavier_PartySetPointTemperature state is None
+handling item: HeizungErker_BoostMode
+Use existing ThermostatSm (4019890544): HeizungErker
+handling BoostMode: HeizungErker_BoostMode (OFF)
+HeizungErker(4019890544): - Boost is: False
+HeizungErker(4019890544): boost = 'False'.
+HeizungErker(4019890544): Before   'tr_boost_change' in 'st_auto' state.
+HeizungErker(4019890544): Entering 'st_auto' state triggered by 'tr_boost_change' event.
+HeizungErker(4019890544): is in state st_auto.
+handling item: gHeizungenSofa_UpdatePending
+Use existing ThermostatSm (4002606120): gHeizungenSofa
+handling item: HeizungBad_LowBattery
+Use existing ThermostatSm (4006174856): HeizungBad
+handling item: HeizungGastWC_UpdatePending
+Use existing ThermostatSm (4011599952): HeizungGastWC
+handling item: HeizungErker_LowBattery
+Use existing ThermostatSm (4019890544): HeizungErker
+handling item: HeizungSchlafzimmer_SetPointTemperature
+Use existing ThermostatSm (4011446408): HeizungSchlafzimmer
+handling item: HeizungFinnja_LowBattery
+Use existing ThermostatSm (4003553088): HeizungFinnja
+handling item: HeizungSofaSued_ConfigPending
+Use existing ThermostatSm (4002499672): HeizungSofaSued
+handling ConfigPending: HeizungSofaSued_ConfigPending (OFF)
+HeizungSofaSued(4002499672): - Config is: False
+HeizungSofaSued(4002499672): config = 'False'.
+HeizungSofaSued(4002499672): Before   'tr_config_change' in 'st_auto' state.
+HeizungSofaSued(4002499672): Entering 'st_auto' state triggered by 'tr_config_change' event.
+HeizungSofaSued(4002499672): is in state st_auto.
+handling item: gHeizungenBad_PartySetPointTemperature
+Use existing ThermostatSm (4002405632): gHeizungenBad
+handling item: HeizungSofa_PartySetPointTemperature
+Use existing ThermostatSm (4011458464): HeizungSofa
+skip handling item: HeizungSofa_PartySetPointTemperature state is None
+handling item: HeizungSofaSued_SetPointTemperature
+Use existing ThermostatSm (4002499672): HeizungSofaSued
+handling item: gHeizungenBad_WindowState
+Use existing ThermostatSm (4002405632): gHeizungenBad
+handling WindowState: gHeizungenBad_WindowState (CLOSED)
+gHeizungenBad(4002405632): - Boost is: False
+gHeizungenBad(4002405632): window_open = 'False'.
+gHeizungenBad(4002405632): Before   'tr_window_change' in 'st_auto' state.
+gHeizungenBad(4002405632): Entering 'st_auto' state triggered by 'tr_window_change' event.
+gHeizungenBad(4002405632): is in state st_auto.
+handling item: HeizungSara_SetPointMode
+Use existing ThermostatSm (4005737808): HeizungSara
+handling SetPointMode: HeizungSara_SetPointMode (auto)
+HeizungSara(4005737808): - Mode is: auto
+HeizungSara(4005737808): mode = 'auto'.
+HeizungSara(4005737808): mode = 'auto'.
+HeizungSara(4005737808): Before   'tr_mode_change' in 'st_auto' state.
+HeizungSara(4005737808): Entering 'st_auto' state triggered by 'tr_mode_change' event.
+HeizungSara(4005737808): is in state st_auto.
+handling item: HeizungGastWC_WindowOpenState
+Use existing ThermostatSm (4011599952): HeizungGastWC
+handling item: HeizungSchlafzimmer_ControlMode
+Use existing ThermostatSm (4011446408): HeizungSchlafzimmer
+handling item: HeizungSofa
+Use existing ThermostatSm (4011458464): HeizungSofa
+skip handling item: HeizungSofa state is None
+handling item: HeizungFinnja_WindowState
+Use existing ThermostatSm (4003553088): HeizungFinnja
+handling WindowState: HeizungFinnja_WindowState (CLOSED)
+HeizungFinnja(4003553088): - Boost is: False
+HeizungFinnja(4003553088): window_open = 'False'.
+HeizungFinnja(4003553088): Before   'tr_window_change' in 'st_auto' state.
+HeizungFinnja(4003553088): Entering 'st_auto' state triggered by 'tr_window_change' event.
+HeizungFinnja(4003553088): is in state st_auto.
+handling item: HeizungSara_BoostMode
+Use existing ThermostatSm (4005737808): HeizungSara
+handling BoostMode: HeizungSara_BoostMode (OFF)
+HeizungSara(4005737808): - Boost is: False
+HeizungSara(4005737808): boost = 'False'.
+HeizungSara(4005737808): Before   'tr_boost_change' in 'st_auto' state.
+HeizungSara(4005737808): Entering 'st_auto' state triggered by 'tr_boost_change' event.
+HeizungSara(4005737808): is in state st_auto.
+handling item: gHeizungenSofa_PartyMode
+Use existing ThermostatSm (4002606120): gHeizungenSofa
+handling PartyMode: gHeizungenSofa_PartyMode (OFF)
+gHeizungenSofa(4002606120): - Boost is: False
+gHeizungenSofa(4002606120): party = 'False'.
+gHeizungenSofa(4002606120): Before   'tr_party_change' in 'st_auto' state.
+gHeizungenSofa(4002606120): Entering 'st_auto' state triggered by 'tr_party_change' event.
+gHeizungenSofa(4002606120): is in state st_auto.
+handling item: gHeizungenSofa_ActualTemperature
+Use existing ThermostatSm (4002606120): gHeizungenSofa
+handling item: HeizungMika
+Use existing ThermostatSm (4003139416): HeizungMika
+skip handling item: HeizungMika state is None
+handling item: gHeizungenBad_BoostMode
+Use existing ThermostatSm (4002405632): gHeizungenBad
+handling BoostMode: gHeizungenBad_BoostMode (OFF)
+gHeizungenBad(4002405632): - Boost is: False
+gHeizungenBad(4002405632): boost = 'False'.
+gHeizungenBad(4002405632): Before   'tr_boost_change' in 'st_auto' state.
+gHeizungenBad(4002405632): Entering 'st_auto' state triggered by 'tr_boost_change' event.
+gHeizungenBad(4002405632): is in state st_auto.
+handling item: HeizungKlavier
+Use existing ThermostatSm (4017249080): HeizungKlavier
+skip handling item: HeizungKlavier state is None
+handling item: gHeizungenEsszimmer_ActualTemperature
+Use existing ThermostatSm (4005518424): gHeizungenEsszimmer
+handling item: HeizungSara_WindowState
+Use existing ThermostatSm (4005737808): HeizungSara
+handling WindowState: HeizungSara_WindowState (OPEN)
+HeizungSara(4005737808): - Boost is: False
+HeizungSara(4005737808): window_open = 'False'.
+HeizungSara(4005737808): Before   'tr_window_change' in 'st_auto' state.
+HeizungSara(4005737808): Entering 'st_auto' state triggered by 'tr_window_change' event.
+HeizungSara(4005737808): is in state st_auto.
+handling item: gHeizungenSofa_Level
+Use existing ThermostatSm (4002606120): gHeizungenSofa
+handling item: HeizungKlavier_Level
+Use existing ThermostatSm (4017249080): HeizungKlavier
+handling item: gHeizungenEsszimmer_UpdatePending
+Use existing ThermostatSm (4005518424): gHeizungenEsszimmer
+handling item: HeizungSofaSued_WindowState
+Use existing ThermostatSm (4002499672): HeizungSofaSued
+handling WindowState: HeizungSofaSued_WindowState (OPEN)
+HeizungSofaSued(4002499672): - Boost is: False
+HeizungSofaSued(4002499672): window_open = 'False'.
+HeizungSofaSued(4002499672): Before   'tr_window_change' in 'st_auto' state.
+HeizungSofaSued(4002499672): Entering 'st_auto' state triggered by 'tr_window_change' event.
+HeizungSofaSued(4002499672): is in state st_auto.
+handling item: HeizungBad_Mode
+Use existing ThermostatSm (4006174856): HeizungBad
+handling item: HeizungSofa_SetPointTemperature
+Use existing ThermostatSm (4011458464): HeizungSofa
+handling item: HeizungFinnja_UpdatePending
+Use existing ThermostatSm (4003553088): HeizungFinnja
+handling item: HeizungBad_BoostMode
+Use existing ThermostatSm (4006174856): HeizungBad
+handling BoostMode: HeizungBad_BoostMode (OFF)
+HeizungBad(4006174856): - Boost is: False
+HeizungBad(4006174856): boost = 'False'.
+HeizungBad(4006174856): Before   'tr_boost_change' in 'st_auto' state.
+HeizungBad(4006174856): Entering 'st_auto' state triggered by 'tr_boost_change' event.
+HeizungBad(4006174856): is in state st_auto.
+handling item: HeizungKlavier_SetPointTemperature
+Use existing ThermostatSm (4017249080): HeizungKlavier
+handling item: HeizungBad_SetPointMode
+Use existing ThermostatSm (4006174856): HeizungBad
+handling SetPointMode: HeizungBad_SetPointMode (auto)
+HeizungBad(4006174856): - Mode is: auto
+HeizungBad(4006174856): mode = 'auto'.
+HeizungBad(4006174856): mode = 'auto'.
+HeizungBad(4006174856): Before   'tr_mode_change' in 'st_auto' state.
+HeizungBad(4006174856): Entering 'st_auto' state triggered by 'tr_mode_change' event.
+HeizungBad(4006174856): is in state st_auto.
+handling item: HeizungGastWC_WindowState
+Use existing ThermostatSm (4011599952): HeizungGastWC
+handling WindowState: HeizungGastWC_WindowState (OPEN)
+HeizungGastWC(4011599952): - Boost is: False
+HeizungGastWC(4011599952): window_open = 'False'.
+HeizungGastWC(4011599952): Before   'tr_window_change' in 'st_auto' state.
+HeizungGastWC(4011599952): Entering 'st_auto' state triggered by 'tr_window_change' event.
+HeizungGastWC(4011599952): is in state st_auto.
+handling item: gHeizungenEsszimmer_WindowOpenState
+Use existing ThermostatSm (4005518424): gHeizungenEsszimmer
+handling item: HeizungFinnja_PartySetPointTemperature
+Use existing ThermostatSm (4003553088): HeizungFinnja
+skip handling item: HeizungFinnja_PartySetPointTemperature state is None
+handling item: HeizungMika_SetPointTemperature
+Use existing ThermostatSm (4003139416): HeizungMika
+handling item: HeizungBad_Level
+Use existing ThermostatSm (4006174856): HeizungBad
+handling item: HeizungSchlafzimmer
+Use existing ThermostatSm (4011446408): HeizungSchlafzimmer
+skip handling item: HeizungSchlafzimmer state is None
+handling item: HeizungErker_Mode
+Use existing ThermostatSm (4019890544): HeizungErker
+handling item: HeizungSofaSued
+Use existing ThermostatSm (4002499672): HeizungSofaSued
+skip handling item: HeizungSofaSued state is None
+handling item: HeizungSofa_WindowState
+Use existing ThermostatSm (4011458464): HeizungSofa
+handling WindowState: HeizungSofa_WindowState (OPEN)
+HeizungSofa(4011458464): - Boost is: False
+HeizungSofa(4011458464): window_open = 'False'.
+HeizungSofa(4011458464): Before   'tr_window_change' in 'st_auto' state.
+HeizungSofa(4011458464): Entering 'st_auto' state triggered by 'tr_window_change' event.
+HeizungSofa(4011458464): is in state st_auto.
+handling item: HeizungErker_WindowState
+Use existing ThermostatSm (4019890544): HeizungErker
+handling WindowState: HeizungErker_WindowState (OPEN)
+HeizungErker(4019890544): - Boost is: False
+HeizungErker(4019890544): window_open = 'False'.
+HeizungErker(4019890544): Before   'tr_window_change' in 'st_auto' state.
+HeizungErker(4019890544): Entering 'st_auto' state triggered by 'tr_window_change' event.
+HeizungErker(4019890544): is in state st_auto.
+handling item: HeizungFinnja
+Use existing ThermostatSm (4003553088): HeizungFinnja
+skip handling item: HeizungFinnja state is None
+handling item: HeizungErker_ActualTemperature
+Use existing ThermostatSm (4019890544): HeizungErker
+handling item: gHeizungenEsszimmer_WindowState
+Use existing ThermostatSm (4005518424): gHeizungenEsszimmer
+handling WindowState: gHeizungenEsszimmer_WindowState (OPEN)
+gHeizungenEsszimmer(4005518424): - Boost is: False
+gHeizungenEsszimmer(4005518424): window_open = 'False'.
+gHeizungenEsszimmer(4005518424): Before   'tr_window_change' in 'st_auto' state.
+gHeizungenEsszimmer(4005518424): Entering 'st_auto' state triggered by 'tr_window_change' event.
+gHeizungenEsszimmer(4005518424): is in state st_auto.
+handling item: HeizungBad_PartySetPointTemperature
+Use existing ThermostatSm (4006174856): HeizungBad
+handling item: HeizungMika_ActualTemperature
+Use existing ThermostatSm (4003139416): HeizungMika
+handling item: HeizungSchlafzimmer_ActualTemperature
+Use existing ThermostatSm (4011446408): HeizungSchlafzimmer
+handling item: HeizungSofa_OperatingVoltage
+Use existing ThermostatSm (4011458464): HeizungSofa
+handling item: HeizungSara_ActualTemperature
+Use existing ThermostatSm (4005737808): HeizungSara
+handling item: HeizungGastWC_Mode
+Use existing ThermostatSm (4011599952): HeizungGastWC
+handling item: HeizungKlavier_PartyMode
+Use existing ThermostatSm (4017249080): HeizungKlavier
+handling PartyMode: HeizungKlavier_PartyMode (OFF)
+HeizungKlavier(4017249080): - Boost is: False
+HeizungKlavier(4017249080): party = 'False'.
+HeizungKlavier(4017249080): Before   'tr_party_change' in 'st_auto' state.
+HeizungKlavier(4017249080): Entering 'st_auto' state triggered by 'tr_party_change' event.
+HeizungKlavier(4017249080): is in state st_auto.
+handling item: HeizungGastWC_ConfigPending
+Use existing ThermostatSm (4011599952): HeizungGastWC
+handling ConfigPending: HeizungGastWC_ConfigPending (OFF)
+HeizungGastWC(4011599952): - Config is: False
+HeizungGastWC(4011599952): config = 'False'.
+HeizungGastWC(4011599952): Before   'tr_config_change' in 'st_auto' state.
+HeizungGastWC(4011599952): Entering 'st_auto' state triggered by 'tr_config_change' event.
+HeizungGastWC(4011599952): is in state st_auto.
+handling item: HeizungSchlafzimmer_Operating_Voltage
+Use existing ThermostatSm (4011446408): HeizungSchlafzimmer
+handling item: HeizungSchlafzimmer_PartyMode
+Use existing ThermostatSm (4011446408): HeizungSchlafzimmer
+handling PartyMode: HeizungSchlafzimmer_PartyMode (OFF)
+HeizungSchlafzimmer(4011446408): - Boost is: False
+HeizungSchlafzimmer(4011446408): party = 'False'.
+HeizungSchlafzimmer(4011446408): Before   'tr_party_change' in 'st_auto' state.
+HeizungSchlafzimmer(4011446408): Entering 'st_auto' state triggered by 'tr_party_change' event.
+HeizungSchlafzimmer(4011446408): is in state st_auto.
+handling item: gHeizungenEsszimmer_Mode
+Use existing ThermostatSm (4005518424): gHeizungenEsszimmer
+handling item: HeizungFinnja_OperatingVoltage
+Use existing ThermostatSm (4003553088): HeizungFinnja
+handling item: HeizungSchlafzimmer_WindowState
+Use existing ThermostatSm (4011446408): HeizungSchlafzimmer
+handling WindowState: HeizungSchlafzimmer_WindowState (CLOSED)
+HeizungSchlafzimmer(4011446408): - Boost is: False
+HeizungSchlafzimmer(4011446408): window_open = 'False'.
+HeizungSchlafzimmer(4011446408): Before   'tr_window_change' in 'st_auto' state.
+HeizungSchlafzimmer(4011446408): Entering 'st_auto' state triggered by 'tr_window_change' event.
+HeizungSchlafzimmer(4011446408): is in state st_auto.
+handling item: HeizungSofa_BoostMode
+Use existing ThermostatSm (4011458464): HeizungSofa
+handling BoostMode: HeizungSofa_BoostMode (OFF)
+HeizungSofa(4011458464): - Boost is: False
+HeizungSofa(4011458464): boost = 'False'.
+HeizungSofa(4011458464): Before   'tr_boost_change' in 'st_auto' state.
+HeizungSofa(4011458464): Entering 'st_auto' state triggered by 'tr_boost_change' event.
+HeizungSofa(4011458464): is in state st_auto.
+handling item: TemperaturHeizung_RuecklaufTemperatur
+Use existing ThermostatSm (4015384824): TemperaturHeizung
+StateMachine HeizungKlavier(4017249080): is in state auto
+HeizungKlavier(4017249080): boost = 'False'.
+HeizungKlavier(4017249080): config = 'False'.
+HeizungKlavier(4017249080): party = 'False'.
+HeizungKlavier(4017249080): window_open = 'False'.
+Internal machine states (HeizungKlavier):
+   state        = auto
+   _boost       = False
+   _config      = False
+   _mode        = auto
+   _party       = False
+   _window_open = False
+StateMachine HeizungFinnja(4003553088): is in state auto
+HeizungFinnja(4003553088): boost = 'False'.
+HeizungFinnja(4003553088): config = 'False'.
+HeizungFinnja(4003553088): party = 'False'.
+HeizungFinnja(4003553088): window_open = 'False'.
+Internal machine states (HeizungFinnja):
+   state        = auto
+   _boost       = False
+   _config      = False
+   _mode        = auto
+   _party       = False
+   _window_open = False
+StateMachine HeizungErker(4019890544): is in state auto
+HeizungErker(4019890544): boost = 'False'.
+HeizungErker(4019890544): config = 'False'.
+HeizungErker(4019890544): party = 'False'.
+HeizungErker(4019890544): window_open = 'False'.
+Internal machine states (HeizungErker):
+   state        = auto
+   _boost       = False
+   _config      = False
+   _mode        = auto
+   _party       = False
+   _window_open = False
+StateMachine HeizungGastWC(4011599952): is in state auto
+HeizungGastWC(4011599952): boost = 'False'.
+HeizungGastWC(4011599952): config = 'False'.
+HeizungGastWC(4011599952): party = 'False'.
+HeizungGastWC(4011599952): window_open = 'False'.
+Internal machine states (HeizungGastWC):
+   state        = auto
+   _boost       = False
+   _config      = False
+   _mode        = auto
+   _party       = False
+   _window_open = False
+StateMachine HeizungMika(4003139416): is in state auto
+HeizungMika(4003139416): boost = 'False'.
+HeizungMika(4003139416): config = 'False'.
+HeizungMika(4003139416): party = 'False'.
+HeizungMika(4003139416): window_open = 'False'.
+Internal machine states (HeizungMika):
+   state        = auto
+   _boost       = False
+   _config      = False
+   _mode        = auto
+   _party       = False
+   _window_open = False
+StateMachine HeizungBad(4006174856): is in state auto
+HeizungBad(4006174856): boost = 'False'.
+HeizungBad(4006174856): config = 'False'.
+HeizungBad(4006174856): party = 'False'.
+HeizungBad(4006174856): window_open = 'False'.
+Internal machine states (HeizungBad):
+   state        = auto
+   _boost       = False
+   _config      = False
+   _mode        = auto
+   _party       = False
+   _window_open = False
+StateMachine HeizungSofaSued(4002499672): is in state auto
+HeizungSofaSued(4002499672): boost = 'False'.
+HeizungSofaSued(4002499672): config = 'False'.
+HeizungSofaSued(4002499672): party = 'False'.
+HeizungSofaSued(4002499672): window_open = 'False'.
+Internal machine states (HeizungSofaSued):
+   state        = auto
+   _boost       = False
+   _config      = False
+   _mode        = auto
+   _party       = False
+   _window_open = False
+StateMachine gHeizungenBad(4002405632): is in state auto
+gHeizungenBad(4002405632): boost = 'False'.
+gHeizungenBad(4002405632): config = 'False'.
+gHeizungenBad(4002405632): party = 'False'.
+gHeizungenBad(4002405632): window_open = 'False'.
+Internal machine states (gHeizungenBad):
+   state        = auto
+   _boost       = False
+   _config      = False
+   _mode        = auto
+   _party       = False
+   _window_open = False
+StateMachine HeizungSchlafzimmer(4011446408): is in state auto
+HeizungSchlafzimmer(4011446408): boost = 'False'.
+HeizungSchlafzimmer(4011446408): config = 'False'.
+HeizungSchlafzimmer(4011446408): party = 'False'.
+HeizungSchlafzimmer(4011446408): window_open = 'False'.
+Internal machine states (HeizungSchlafzimmer):
+   state        = auto
+   _boost       = False
+   _config      = False
+   _mode        = auto
+   _party       = False
+   _window_open = False
+ModeItem: HeizungSchlafzimmer_Mode does not exist
+StateMachine gHeizungenEsszimmer(4005518424): is in state auto
+gHeizungenEsszimmer(4005518424): boost = 'False'.
+gHeizungenEsszimmer(4005518424): config = 'False'.
+gHeizungenEsszimmer(4005518424): party = 'False'.
+gHeizungenEsszimmer(4005518424): window_open = 'False'.
+Internal machine states (gHeizungenEsszimmer):
+   state        = auto
+   _boost       = False
+   _config      = False
+   _mode        = auto
+   _party       = False
+   _window_open = False
+StateMachine HeizungSofa(4011458464): is in state auto
+HeizungSofa(4011458464): boost = 'False'.
+HeizungSofa(4011458464): config = 'False'.
+HeizungSofa(4011458464): party = 'False'.
+HeizungSofa(4011458464): window_open = 'False'.
+Internal machine states (HeizungSofa):
+   state        = auto
+   _boost       = False
+   _config      = False
+   _mode        = auto
+   _party       = False
+   _window_open = False
+StateMachine gHeizungenSofa(4002606120): is in state auto
+gHeizungenSofa(4002606120): boost = 'False'.
+gHeizungenSofa(4002606120): config = 'False'.
+gHeizungenSofa(4002606120): party = 'False'.
+gHeizungenSofa(4002606120): window_open = 'False'.
+Internal machine states (gHeizungenSofa):
+   state        = auto
+   _boost       = False
+   _config      = False
+   _mode        = auto
+   _party       = False
+   _window_open = False
+StateMachine HeizungSara(4005737808): is in state auto
+HeizungSara(4005737808): boost = 'False'.
+HeizungSara(4005737808): config = 'False'.
+HeizungSara(4005737808): party = 'False'.
+HeizungSara(4005737808): window_open = 'False'.
+Internal machine states (HeizungSara):
+   state        = auto
+   _boost       = False
+   _config      = False
+   _mode        = auto
+   _party       = False
+   _window_open = False
+StateMachine TemperaturHeizung(4015384824): is in state auto
+TemperaturHeizung(4015384824): boost = 'False'.
+TemperaturHeizung(4015384824): config = 'False'.
+TemperaturHeizung(4015384824): party = 'False'.
+TemperaturHeizung(4015384824): window_open = 'False'.
+Internal machine states (TemperaturHeizung):
+   state        = auto
+   _boost       = False
+   _config      = False
+   _mode        = auto
+   _party       = False
+   _window_open = False
+ModeItem: TemperaturHeizung_Mode does not exist
+Done
+rule fired because of gHeizungenSofa_WindowState OPEN --> CLOSED
+Use existing ThermostatSm (4002606120): gHeizungenSofa
+gHeizungenSofa: - WindowOpen is: False
+gHeizungenSofa(4002606120): window_open = 'False'.
+gHeizungenSofa(4002606120): Before   'tr_window_change' in 'st_auto' state.
+gHeizungenSofa(4002606120): Entering 'st_auto' state triggered by 'tr_window_change' event.
+gHeizungenSofa(4002606120): is in state st_auto.
+rule fired because of gHeizungenEsszimmer_WindowState OPEN --> CLOSED
+Use existing ThermostatSm (4005518424): gHeizungenEsszimmer
+gHeizungenEsszimmer: - WindowOpen is: False
+gHeizungenEsszimmer(4005518424): window_open = 'False'.
+gHeizungenEsszimmer(4005518424): Before   'tr_window_change' in 'st_auto' state.
+gHeizungenEsszimmer(4005518424): Entering 'st_auto' state triggered by 'tr_window_change' event.
+gHeizungenEsszimmer(4005518424): is in state st_auto.
+rule fired because of HeizungSofaSued_WindowState OPEN --> CLOSED
+Use existing ThermostatSm (4002499672): HeizungSofaSued
+HeizungSofaSued: - WindowOpen is: False
+HeizungSofaSued(4002499672): window_open = 'False'.
+HeizungSofaSued(4002499672): Before   'tr_window_change' in 'st_auto' state.
+HeizungSofaSued(4002499672): Entering 'st_auto' state triggered by 'tr_window_change' event.
+HeizungSofaSued(4002499672): is in state st_auto.
+rule fired because of gHeizungenSofa_WindowState CLOSED --> OPEN
+Use existing ThermostatSm (4002606120): gHeizungenSofa
+gHeizungenSofa: - WindowOpen is: False
+gHeizungenSofa(4002606120): window_open = 'False'.
+gHeizungenSofa(4002606120): Before   'tr_window_change' in 'st_auto' state.
+gHeizungenSofa(4002606120): Entering 'st_auto' state triggered by 'tr_window_change' event.
+gHeizungenSofa(4002606120): is in state st_auto.
+rule fired because of HeizungSofa_WindowState OPEN --> CLOSED
+Use existing ThermostatSm (4011458464): HeizungSofa
+HeizungSofa: - WindowOpen is: False
+HeizungSofa(4011458464): window_open = 'False'.
+HeizungSofa(4011458464): Before   'tr_window_change' in 'st_auto' state.
+HeizungSofa(4011458464): Entering 'st_auto' state triggered by 'tr_window_change' event.
+HeizungSofa(4011458464): is in state st_auto.
+rule fired because of gHeizungenSofa_WindowState OPEN --> CLOSED
+Use existing ThermostatSm (4002606120): gHeizungenSofa
+gHeizungenSofa: - WindowOpen is: False
+gHeizungenSofa(4002606120): window_open = 'False'.
+gHeizungenSofa(4002606120): Before   'tr_window_change' in 'st_auto' state.
+gHeizungenSofa(4002606120): Entering 'st_auto' state triggered by 'tr_window_change' event.
+gHeizungenSofa(4002606120): is in state st_auto.
+rule fired because of HeizungKlavier_WindowState OPEN --> CLOSED
+Use existing ThermostatSm (4017249080): HeizungKlavier
+HeizungKlavier: - WindowOpen is: False
+HeizungKlavier(4017249080): window_open = 'False'.
+HeizungKlavier(4017249080): Before   'tr_window_change' in 'st_auto' state.
+HeizungKlavier(4017249080): Entering 'st_auto' state triggered by 'tr_window_change' event.
+HeizungKlavier(4017249080): is in state st_auto.
+rule fired because of gHeizungenEsszimmer_WindowState CLOSED --> OPEN
+Use existing ThermostatSm (4005518424): gHeizungenEsszimmer
+gHeizungenEsszimmer: - WindowOpen is: False
+gHeizungenEsszimmer(4005518424): window_open = 'False'.
+gHeizungenEsszimmer(4005518424): Before   'tr_window_change' in 'st_auto' state.
+gHeizungenEsszimmer(4005518424): Entering 'st_auto' state triggered by 'tr_window_change' event.
+gHeizungenEsszimmer(4005518424): is in state st_auto.
+rule fired because of HeizungErker_WindowState OPEN --> CLOSED
+Use existing ThermostatSm (4019890544): HeizungErker
+HeizungErker: - WindowOpen is: False
+HeizungErker(4019890544): window_open = 'False'.
+HeizungErker(4019890544): Before   'tr_window_change' in 'st_auto' state.
+HeizungErker(4019890544): Entering 'st_auto' state triggered by 'tr_window_change' event.
+HeizungErker(4019890544): is in state st_auto.
+rule fired because of gHeizungenEsszimmer_WindowState OPEN --> CLOSED
+Use existing ThermostatSm (4005518424): gHeizungenEsszimmer
+gHeizungenEsszimmer: - WindowOpen is: False
+gHeizungenEsszimmer(4005518424): window_open = 'False'.
+gHeizungenEsszimmer(4005518424): Before   'tr_window_change' in 'st_auto' state.
+gHeizungenEsszimmer(4005518424): Entering 'st_auto' state triggered by 'tr_window_change' event.
+gHeizungenEsszimmer(4005518424): is in state st_auto.
+rule fired because of gHeizungenSofa_WindowState CLOSED --> OPEN
+Use existing ThermostatSm (4002606120): gHeizungenSofa
+gHeizungenSofa: - WindowOpen is: False
+gHeizungenSofa(4002606120): window_open = 'False'.
+gHeizungenSofa(4002606120): Before   'tr_window_change' in 'st_auto' state.
+gHeizungenSofa(4002606120): Entering 'st_auto' state triggered by 'tr_window_change' event.
+gHeizungenSofa(4002606120): is in state st_auto.
+rule fired because of gHeizungenEsszimmer_WindowState CLOSED --> OPEN
+Use existing ThermostatSm (4005518424): gHeizungenEsszimmer
+gHeizungenEsszimmer: - WindowOpen is: False
+gHeizungenEsszimmer(4005518424): window_open = 'False'.
+gHeizungenEsszimmer(4005518424): Before   'tr_window_change' in 'st_auto' state.
+gHeizungenEsszimmer(4005518424): Entering 'st_auto' state triggered by 'tr_window_change' event.
+gHeizungenEsszimmer(4005518424): is in state st_auto.
+rule fired because of HeizungSofaSued_WindowState CLOSED --> OPEN
+Use existing ThermostatSm (4002499672): HeizungSofaSued
+HeizungSofaSued: - WindowOpen is: False
+HeizungSofaSued(4002499672): window_open = 'False'.
+HeizungSofaSued(4002499672): Before   'tr_window_change' in 'st_auto' state.
+HeizungSofaSued(4002499672): Entering 'st_auto' state triggered by 'tr_window_change' event.
+HeizungSofaSued(4002499672): is in state st_auto.
+rule fired because of HeizungSofa_WindowState CLOSED --> OPEN
+Use existing ThermostatSm (4011458464): HeizungSofa
+HeizungSofa: - WindowOpen is: False
+HeizungSofa(4011458464): window_open = 'False'.
+HeizungSofa(4011458464): Before   'tr_window_change' in 'st_auto' state.
+HeizungSofa(4011458464): Entering 'st_auto' state triggered by 'tr_window_change' event.
+HeizungSofa(4011458464): is in state st_auto.
+rule fired because of HeizungErker_WindowState CLOSED --> OPEN
+Use existing ThermostatSm (4019890544): HeizungErker
+HeizungErker: - WindowOpen is: False
+HeizungErker(4019890544): window_open = 'False'.
+HeizungErker(4019890544): Before   'tr_window_change' in 'st_auto' state.
+HeizungErker(4019890544): Entering 'st_auto' state triggered by 'tr_window_change' event.
+HeizungErker(4019890544): is in state st_auto.
+rule fired because of HeizungKlavier_WindowState CLOSED --> OPEN
+Use existing ThermostatSm (4017249080): HeizungKlavier
+HeizungKlavier: - WindowOpen is: False
+HeizungKlavier(4017249080): window_open = 'False'.
+HeizungKlavier(4017249080): Before   'tr_window_change' in 'st_auto' state.
+HeizungKlavier(4017249080): Entering 'st_auto' state triggered by 'tr_window_change' event.
+HeizungKlavier(4017249080): is in state st_auto.
+rule fired because of gHeizungenEsszimmer_WindowState OPEN --> CLOSED
+Use existing ThermostatSm (4005518424): gHeizungenEsszimmer
+gHeizungenEsszimmer: - WindowOpen is: False
+gHeizungenEsszimmer(4005518424): window_open = 'False'.
+gHeizungenEsszimmer(4005518424): Before   'tr_window_change' in 'st_auto' state.
+gHeizungenEsszimmer(4005518424): Entering 'st_auto' state triggered by 'tr_window_change' event.
+gHeizungenEsszimmer(4005518424): is in state st_auto.
+rule fired because of gHeizungenSofa_WindowState OPEN --> CLOSED
+Use existing ThermostatSm (4002606120): gHeizungenSofa
+gHeizungenSofa: - WindowOpen is: False
+gHeizungenSofa(4002606120): window_open = 'False'.
+gHeizungenSofa(4002606120): Before   'tr_window_change' in 'st_auto' state.
+gHeizungenSofa(4002606120): Entering 'st_auto' state triggered by 'tr_window_change' event.
+gHeizungenSofa(4002606120): is in state st_auto.
+rule fired because of HeizungKlavier_WindowState OPEN --> CLOSED
+Use existing ThermostatSm (4017249080): HeizungKlavier
+HeizungKlavier: - WindowOpen is: False
+HeizungKlavier(4017249080): window_open = 'False'.
+HeizungKlavier(4017249080): Before   'tr_window_change' in 'st_auto' state.
+HeizungKlavier(4017249080): Entering 'st_auto' state triggered by 'tr_window_change' event.
+HeizungKlavier(4017249080): is in state st_auto.
+rule fired because of gHeizungenEsszimmer_WindowState CLOSED --> OPEN
+Use existing ThermostatSm (4005518424): gHeizungenEsszimmer
+gHeizungenEsszimmer: - WindowOpen is: False
+gHeizungenEsszimmer(4005518424): window_open = 'False'.
+gHeizungenEsszimmer(4005518424): Before   'tr_window_change' in 'st_auto' state.
+gHeizungenEsszimmer(4005518424): Entering 'st_auto' state triggered by 'tr_window_change' event.
+gHeizungenEsszimmer(4005518424): is in state st_auto.
+rule fired because of HeizungErker_WindowState OPEN --> CLOSED
+Use existing ThermostatSm (4019890544): HeizungErker
+HeizungErker: - WindowOpen is: False
+HeizungErker(4019890544): window_open = 'False'.
+HeizungErker(4019890544): Before   'tr_window_change' in 'st_auto' state.
+HeizungErker(4019890544): Entering 'st_auto' state triggered by 'tr_window_change' event.
+HeizungErker(4019890544): is in state st_auto.
+rule fired because of gHeizungenEsszimmer_WindowState OPEN --> CLOSED
+Use existing ThermostatSm (4005518424): gHeizungenEsszimmer
+gHeizungenEsszimmer: - WindowOpen is: False
+gHeizungenEsszimmer(4005518424): window_open = 'False'.
+gHeizungenEsszimmer(4005518424): Before   'tr_window_change' in 'st_auto' state.
+gHeizungenEsszimmer(4005518424): Entering 'st_auto' state triggered by 'tr_window_change' event.
+gHeizungenEsszimmer(4005518424): is in state st_auto.
+rule fired because of HeizungSofa_WindowState OPEN --> CLOSED
+Use existing ThermostatSm (4011458464): HeizungSofa
+HeizungSofa: - WindowOpen is: False
+HeizungSofa(4011458464): window_open = 'False'.
+HeizungSofa(4011458464): Before   'tr_window_change' in 'st_auto' state.
+HeizungSofa(4011458464): Entering 'st_auto' state triggered by 'tr_window_change' event.
+HeizungSofa(4011458464): is in state st_auto.
+rule fired because of gHeizungenSofa_WindowState CLOSED --> OPEN
+Use existing ThermostatSm (4002606120): gHeizungenSofa
+gHeizungenSofa: - WindowOpen is: False
+gHeizungenSofa(4002606120): window_open = 'False'.
+gHeizungenSofa(4002606120): Before   'tr_window_change' in 'st_auto' state.
+gHeizungenSofa(4002606120): Entering 'st_auto' state triggered by 'tr_window_change' event.
+gHeizungenSofa(4002606120): is in state st_auto.

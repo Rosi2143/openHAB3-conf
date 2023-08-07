@@ -1,0 +1,270 @@
+[2023-08-07 19:22:48,791] [            MP3PlayerMode]    DEBUG | Kueche(4004277216): Entering 'st_black' state triggered by '__initial__' event.
+[2023-08-07 19:22:48,792] [            MP3PlayerMode]    DEBUG | Kueche: set light level to 0
+[2023-08-07 19:22:49,223] [            MP3PlayerMode]     INFO | handling BellRang: (None)
+[2023-08-07 19:22:49,223] [            MP3PlayerMode]     INFO | Kueche: - bell rang is: False
+[2023-08-07 19:22:49,224] [            MP3PlayerMode]    DEBUG | Kueche: bell_rang = 'False'.
+[2023-08-07 19:22:49,224] [            MP3PlayerMode]    DEBUG | Kueche(4004277216): Before   'tr_bell_rang' in 'st_black' state.
+[2023-08-07 19:22:49,224] [            MP3PlayerMode]    DEBUG | Kueche: internal transition
+[2023-08-07 19:22:49,225] [            MP3PlayerMode]    DEBUG | Kueche(4004277216): Entering 'st_black' state triggered by 'tr_bell_rang' event.
+[2023-08-07 19:22:49,225] [            MP3PlayerMode]    DEBUG | Kueche: internal transition
+[2023-08-07 19:22:49,225] [            MP3PlayerMode]    DEBUG | Kueche: is in state st_black.
+[2023-08-07 19:22:49,225] [            MP3PlayerMode]     INFO | handling window open: (None)
+[2023-08-07 19:22:49,225] [            MP3PlayerMode]     INFO | Kueche: - lock error is: False
+[2023-08-07 19:22:49,225] [            MP3PlayerMode]    DEBUG | Kueche: lock_error = 'False'.
+[2023-08-07 19:22:49,226] [            MP3PlayerMode]    DEBUG | Kueche(4004277216): Before   'tr_lock_error' in 'st_black' state.
+[2023-08-07 19:22:49,226] [            MP3PlayerMode]    DEBUG | Kueche: internal transition
+[2023-08-07 19:22:49,226] [            MP3PlayerMode]    DEBUG | Kueche(4004277216): Entering 'st_black' state triggered by 'tr_lock_error' event.
+[2023-08-07 19:22:49,226] [            MP3PlayerMode]    DEBUG | Kueche: internal transition
+[2023-08-07 19:22:49,227] [            MP3PlayerMode]    DEBUG | Kueche: is in state st_black.
+[2023-08-07 19:23:49,408] [            MP3PlayerMode]    DEBUG | Kueche(4019875384): Entering 'st_black' state triggered by '__initial__' event.
+[2023-08-07 19:23:49,408] [            MP3PlayerMode]    DEBUG | Kueche: set light level to 0
+[2023-08-07 19:23:49,832] [            MP3PlayerMode]     INFO | handling BellRang: (None)
+[2023-08-07 19:23:49,832] [            MP3PlayerMode]     INFO | Kueche: - bell rang is: False
+[2023-08-07 19:23:49,833] [            MP3PlayerMode]    DEBUG | Kueche: bell_rang = 'False'.
+[2023-08-07 19:23:49,833] [            MP3PlayerMode]    DEBUG | Kueche(4019875384): Before   'tr_bell_rang' in 'st_black' state.
+[2023-08-07 19:23:49,833] [            MP3PlayerMode]    DEBUG | Kueche: internal transition
+[2023-08-07 19:23:49,834] [            MP3PlayerMode]    DEBUG | Kueche(4019875384): Entering 'st_black' state triggered by 'tr_bell_rang' event.
+[2023-08-07 19:23:49,834] [            MP3PlayerMode]    DEBUG | Kueche: internal transition
+[2023-08-07 19:23:49,835] [            MP3PlayerMode]    DEBUG | Kueche: is in state st_black.
+[2023-08-07 19:23:49,835] [            MP3PlayerMode]     INFO | handling window open: (None)
+[2023-08-07 19:23:49,835] [            MP3PlayerMode]     INFO | Kueche: - lock error is: False
+[2023-08-07 19:23:49,835] [            MP3PlayerMode]    DEBUG | Kueche: lock_error = 'False'.
+[2023-08-07 19:23:49,836] [            MP3PlayerMode]    DEBUG | Kueche(4019875384): Before   'tr_lock_error' in 'st_black' state.
+[2023-08-07 19:23:49,836] [            MP3PlayerMode]    DEBUG | Kueche: internal transition
+[2023-08-07 19:23:49,836] [            MP3PlayerMode]    DEBUG | Kueche(4019875384): Entering 'st_black' state triggered by 'tr_lock_error' event.
+[2023-08-07 19:23:49,836] [            MP3PlayerMode]    DEBUG | Kueche: internal transition
+[2023-08-07 19:23:49,836] [            MP3PlayerMode]    DEBUG | Kueche: is in state st_black.
+[2023-08-07 19:23:49,836] [            MP3PlayerMode]     INFO | handling DoorOpen: (None)
+[2023-08-07 19:23:49,837] [            MP3PlayerMode]     INFO | Kueche: - outer door open is: False
+[2023-08-07 19:23:49,837] [            MP3PlayerMode]    DEBUG | Kueche: outer_door_open = 'False'.
+[2023-08-07 19:23:49,837] [            MP3PlayerMode]    DEBUG | Kueche(4019875384): Before   'tr_outer_door_open' in 'st_black' state.
+[2023-08-07 19:23:49,837] [            MP3PlayerMode]    DEBUG | Kueche: internal transition
+[2023-08-07 19:23:49,838] [            MP3PlayerMode]    DEBUG | Kueche(4019875384): Entering 'st_black' state triggered by 'tr_outer_door_open' event.
+[2023-08-07 19:23:49,838] [            MP3PlayerMode]    DEBUG | Kueche: internal transition
+[2023-08-07 19:23:49,838] [            MP3PlayerMode]    DEBUG | Kueche: is in state st_black.
+[2023-08-07 19:24:30,698] [            MP3PlayerMode]    DEBUG | Kueche(4004533704): Entering 'st_black' state triggered by '__initial__' event.
+[2023-08-07 19:24:30,699] [            MP3PlayerMode]    DEBUG | Kueche: set light level to 0
+[2023-08-07 19:24:31,134] [            MP3PlayerMode]     INFO | handling BellRang: (None)
+[2023-08-07 19:24:31,134] [            MP3PlayerMode]     INFO | Kueche: - bell rang is: False
+[2023-08-07 19:24:31,135] [            MP3PlayerMode]    DEBUG | Kueche: bell_rang = 'False'.
+[2023-08-07 19:24:31,135] [            MP3PlayerMode]    DEBUG | Kueche(4004533704): Before   'tr_bell_rang' in 'st_black' state.
+[2023-08-07 19:24:31,135] [            MP3PlayerMode]    DEBUG | Kueche: internal transition
+[2023-08-07 19:24:31,136] [            MP3PlayerMode]    DEBUG | Kueche(4004533704): Entering 'st_black' state triggered by 'tr_bell_rang' event.
+[2023-08-07 19:24:31,136] [            MP3PlayerMode]    DEBUG | Kueche: internal transition
+[2023-08-07 19:24:31,136] [            MP3PlayerMode]    DEBUG | Kueche: is in state st_black.
+[2023-08-07 19:24:31,137] [            MP3PlayerMode]     INFO | handling window open: (None)
+[2023-08-07 19:24:31,137] [            MP3PlayerMode]     INFO | Kueche: - lock error is: False
+[2023-08-07 19:24:31,137] [            MP3PlayerMode]    DEBUG | Kueche: lock_error = 'False'.
+[2023-08-07 19:24:31,137] [            MP3PlayerMode]    DEBUG | Kueche(4004533704): Before   'tr_lock_error' in 'st_black' state.
+[2023-08-07 19:24:31,137] [            MP3PlayerMode]    DEBUG | Kueche: internal transition
+[2023-08-07 19:24:31,138] [            MP3PlayerMode]    DEBUG | Kueche(4004533704): Entering 'st_black' state triggered by 'tr_lock_error' event.
+[2023-08-07 19:24:31,138] [            MP3PlayerMode]    DEBUG | Kueche: internal transition
+[2023-08-07 19:24:31,138] [            MP3PlayerMode]    DEBUG | Kueche: is in state st_black.
+[2023-08-07 19:24:31,138] [            MP3PlayerMode]     INFO | handling DoorOpen: (None)
+[2023-08-07 19:24:31,138] [            MP3PlayerMode]     INFO | Kueche: - outer door open is: False
+[2023-08-07 19:24:31,139] [            MP3PlayerMode]    DEBUG | Kueche: outer_door_open = 'False'.
+[2023-08-07 19:24:31,139] [            MP3PlayerMode]    DEBUG | Kueche(4004533704): Before   'tr_outer_door_open' in 'st_black' state.
+[2023-08-07 19:24:31,139] [            MP3PlayerMode]    DEBUG | Kueche: internal transition
+[2023-08-07 19:24:31,139] [            MP3PlayerMode]    DEBUG | Kueche(4004533704): Entering 'st_black' state triggered by 'tr_outer_door_open' event.
+[2023-08-07 19:24:31,140] [            MP3PlayerMode]    DEBUG | Kueche: internal transition
+[2023-08-07 19:24:31,140] [            MP3PlayerMode]    DEBUG | Kueche: is in state st_black.
+[2023-08-07 19:24:31,140] [            MP3PlayerMode]     INFO | handling open Windows: (None)
+[2023-08-07 19:24:31,140] [            MP3PlayerMode]     INFO | Kueche: - window open is: False
+[2023-08-07 19:24:31,140] [            MP3PlayerMode]    DEBUG | Kueche: light = 'False'.
+[2023-08-07 19:24:31,141] [            MP3PlayerMode]    DEBUG | Kueche(4004533704): Before   'tr_window_open' in 'st_black' state.
+[2023-08-07 19:24:31,141] [            MP3PlayerMode]    DEBUG | Kueche: internal transition
+[2023-08-07 19:24:31,141] [            MP3PlayerMode]    DEBUG | Kueche(4004533704): Entering 'st_black' state triggered by 'tr_window_open' event.
+[2023-08-07 19:24:31,141] [            MP3PlayerMode]    DEBUG | Kueche: internal transition
+[2023-08-07 19:24:31,141] [            MP3PlayerMode]    DEBUG | Kueche: is in state st_black.
+[2023-08-07 19:24:31,596] [            MP3PlayerMode]     INFO | Done
+[2023-08-07 19:26:44,050] [            MP3PlayerMode]    DEBUG | Kueche(4006242600): Entering 'st_black' state triggered by '__initial__' event.
+[2023-08-07 19:26:44,050] [            MP3PlayerMode]    DEBUG | Kueche: set light level to 0
+[2023-08-07 19:26:44,479] [            MP3PlayerMode]     INFO | handling BellRang: (None)
+[2023-08-07 19:26:44,479] [            MP3PlayerMode]     INFO | Kueche: - bell rang is: False
+[2023-08-07 19:26:44,480] [            MP3PlayerMode]    DEBUG | Kueche: bell_rang = 'False'.
+[2023-08-07 19:26:44,480] [            MP3PlayerMode]    DEBUG | Kueche(4006242600): Before   'tr_bell_rang' in 'st_black' state.
+[2023-08-07 19:26:44,480] [            MP3PlayerMode]    DEBUG | Kueche: internal transition
+[2023-08-07 19:26:44,481] [            MP3PlayerMode]    DEBUG | Kueche(4006242600): Entering 'st_black' state triggered by 'tr_bell_rang' event.
+[2023-08-07 19:26:44,481] [            MP3PlayerMode]    DEBUG | Kueche: internal transition
+[2023-08-07 19:26:44,481] [            MP3PlayerMode]    DEBUG | Kueche: is in state st_black.
+[2023-08-07 19:26:44,481] [            MP3PlayerMode]     INFO | handling window open: (None)
+[2023-08-07 19:26:44,482] [            MP3PlayerMode]     INFO | Kueche: - lock error is: False
+[2023-08-07 19:26:44,482] [            MP3PlayerMode]    DEBUG | Kueche: lock_error = 'False'.
+[2023-08-07 19:26:44,482] [            MP3PlayerMode]    DEBUG | Kueche(4006242600): Before   'tr_lock_error' in 'st_black' state.
+[2023-08-07 19:26:44,482] [            MP3PlayerMode]    DEBUG | Kueche: internal transition
+[2023-08-07 19:26:44,483] [            MP3PlayerMode]    DEBUG | Kueche(4006242600): Entering 'st_black' state triggered by 'tr_lock_error' event.
+[2023-08-07 19:26:44,483] [            MP3PlayerMode]    DEBUG | Kueche: internal transition
+[2023-08-07 19:26:44,483] [            MP3PlayerMode]    DEBUG | Kueche: is in state st_black.
+[2023-08-07 19:26:44,483] [            MP3PlayerMode]     INFO | handling DoorOpen: (None)
+[2023-08-07 19:26:44,483] [            MP3PlayerMode]     INFO | Kueche: - outer door open is: False
+[2023-08-07 19:26:44,484] [            MP3PlayerMode]    DEBUG | Kueche: outer_door_open = 'False'.
+[2023-08-07 19:26:44,484] [            MP3PlayerMode]    DEBUG | Kueche(4006242600): Before   'tr_outer_door_open' in 'st_black' state.
+[2023-08-07 19:26:44,484] [            MP3PlayerMode]    DEBUG | Kueche: internal transition
+[2023-08-07 19:26:44,484] [            MP3PlayerMode]    DEBUG | Kueche(4006242600): Entering 'st_black' state triggered by 'tr_outer_door_open' event.
+[2023-08-07 19:26:44,484] [            MP3PlayerMode]    DEBUG | Kueche: internal transition
+[2023-08-07 19:26:44,485] [            MP3PlayerMode]    DEBUG | Kueche: is in state st_black.
+[2023-08-07 19:26:44,485] [            MP3PlayerMode]     INFO | handling open Windows: (None)
+[2023-08-07 19:26:44,485] [            MP3PlayerMode]     INFO | Kueche: - window open is: False
+[2023-08-07 19:26:44,485] [            MP3PlayerMode]    DEBUG | Kueche: light = 'False'.
+[2023-08-07 19:26:44,486] [            MP3PlayerMode]    DEBUG | Kueche(4006242600): Before   'tr_window_open' in 'st_black' state.
+[2023-08-07 19:26:44,486] [            MP3PlayerMode]    DEBUG | Kueche: internal transition
+[2023-08-07 19:26:44,486] [            MP3PlayerMode]    DEBUG | Kueche(4006242600): Entering 'st_black' state triggered by 'tr_window_open' event.
+[2023-08-07 19:26:44,486] [            MP3PlayerMode]    DEBUG | Kueche: internal transition
+[2023-08-07 19:26:44,486] [            MP3PlayerMode]    DEBUG | Kueche: is in state st_black.
+[2023-08-07 19:26:44,944] [            MP3PlayerMode]     INFO | Done
+[2023-08-07 19:28:22,192] [            MP3PlayerMode]    DEBUG | Kueche(4014135208): Entering 'st_black' state triggered by '__initial__' event.
+[2023-08-07 19:28:22,192] [            MP3PlayerMode]    DEBUG | Kueche: set light level to 0
+[2023-08-07 19:28:22,620] [            MP3PlayerMode]     INFO | ##############################
+handling BellRang: (None)
+[2023-08-07 19:28:22,621] [            MP3PlayerMode]     INFO | Kueche: - bell rang is: False
+[2023-08-07 19:28:22,621] [            MP3PlayerMode]    DEBUG | Kueche: bell_rang = 'False'.
+[2023-08-07 19:28:22,621] [            MP3PlayerMode]    DEBUG | Kueche(4014135208): Before   'tr_bell_rang' in 'st_black' state.
+[2023-08-07 19:28:22,622] [            MP3PlayerMode]    DEBUG | Kueche: internal transition
+[2023-08-07 19:28:22,622] [            MP3PlayerMode]    DEBUG | Kueche(4014135208): Entering 'st_black' state triggered by 'tr_bell_rang' event.
+[2023-08-07 19:28:22,622] [            MP3PlayerMode]    DEBUG | Kueche: internal transition
+[2023-08-07 19:28:22,622] [            MP3PlayerMode]    DEBUG | Kueche: is in state st_black.
+[2023-08-07 19:28:22,623] [            MP3PlayerMode]     INFO | ##############################
+handling window open: (None)
+[2023-08-07 19:28:22,623] [            MP3PlayerMode]     INFO | Kueche: - lock error is: False
+[2023-08-07 19:28:22,623] [            MP3PlayerMode]    DEBUG | Kueche: lock_error = 'False'.
+[2023-08-07 19:28:22,624] [            MP3PlayerMode]    DEBUG | Kueche(4014135208): Before   'tr_lock_error' in 'st_black' state.
+[2023-08-07 19:28:22,624] [            MP3PlayerMode]    DEBUG | Kueche: internal transition
+[2023-08-07 19:28:22,624] [            MP3PlayerMode]    DEBUG | Kueche(4014135208): Entering 'st_black' state triggered by 'tr_lock_error' event.
+[2023-08-07 19:28:22,624] [            MP3PlayerMode]    DEBUG | Kueche: internal transition
+[2023-08-07 19:28:22,624] [            MP3PlayerMode]    DEBUG | Kueche: is in state st_black.
+[2023-08-07 19:28:22,625] [            MP3PlayerMode]     INFO | ##############################
+handling DoorOpen: (None)
+[2023-08-07 19:28:22,625] [            MP3PlayerMode]     INFO | Kueche: - outer door open is: False
+[2023-08-07 19:28:22,625] [            MP3PlayerMode]    DEBUG | Kueche: outer_door_open = 'False'.
+[2023-08-07 19:28:22,626] [            MP3PlayerMode]    DEBUG | Kueche(4014135208): Before   'tr_outer_door_open' in 'st_black' state.
+[2023-08-07 19:28:22,626] [            MP3PlayerMode]    DEBUG | Kueche: internal transition
+[2023-08-07 19:28:22,626] [            MP3PlayerMode]    DEBUG | Kueche(4014135208): Entering 'st_black' state triggered by 'tr_outer_door_open' event.
+[2023-08-07 19:28:22,626] [            MP3PlayerMode]    DEBUG | Kueche: internal transition
+[2023-08-07 19:28:22,627] [            MP3PlayerMode]    DEBUG | Kueche: is in state st_black.
+[2023-08-07 19:28:22,627] [            MP3PlayerMode]     INFO | ##############################
+handling open Windows: (None)
+[2023-08-07 19:28:22,627] [            MP3PlayerMode]     INFO | Kueche: - window open is: False
+[2023-08-07 19:28:22,627] [            MP3PlayerMode]    DEBUG | Kueche: light = 'False'.
+[2023-08-07 19:28:22,628] [            MP3PlayerMode]    DEBUG | Kueche(4014135208): Before   'tr_window_open' in 'st_black' state.
+[2023-08-07 19:28:22,628] [            MP3PlayerMode]    DEBUG | Kueche: internal transition
+[2023-08-07 19:28:22,628] [            MP3PlayerMode]    DEBUG | Kueche(4014135208): Entering 'st_black' state triggered by 'tr_window_open' event.
+[2023-08-07 19:28:22,628] [            MP3PlayerMode]    DEBUG | Kueche: internal transition
+[2023-08-07 19:28:22,629] [            MP3PlayerMode]    DEBUG | Kueche: is in state st_black.
+[2023-08-07 19:28:23,083] [            MP3PlayerMode]     INFO | Done
+[2023-08-07 19:28:47,847] [            MP3PlayerMode]    DEBUG | Kueche(4014996592): Entering 'st_black' state triggered by '__initial__' event.
+[2023-08-07 19:28:47,848] [            MP3PlayerMode]    DEBUG | Kueche: set light level to 0
+[2023-08-07 19:28:48,274] [            MP3PlayerMode]     INFO | ##############################
+handling BellRang: (None)
+[2023-08-07 19:28:48,275] [            MP3PlayerMode]     INFO | Kueche: - bell rang is: False
+[2023-08-07 19:28:48,275] [            MP3PlayerMode]    DEBUG | Kueche: bell_rang = 'False'.
+[2023-08-07 19:28:48,275] [            MP3PlayerMode]    DEBUG | Kueche(4014996592): Before   'tr_bell_rang' in 'st_black' state.
+[2023-08-07 19:28:48,276] [            MP3PlayerMode]    DEBUG | Kueche: internal transition
+[2023-08-07 19:28:48,276] [            MP3PlayerMode]    DEBUG | Kueche(4014996592): Entering 'st_black' state triggered by 'tr_bell_rang' event.
+[2023-08-07 19:28:48,276] [            MP3PlayerMode]    DEBUG | Kueche: internal transition
+[2023-08-07 19:28:48,276] [            MP3PlayerMode]    DEBUG | Kueche: is in state st_black.
+[2023-08-07 19:28:48,277] [            MP3PlayerMode]     INFO | ##############################
+handling window open: (None)
+[2023-08-07 19:28:48,277] [            MP3PlayerMode]     INFO | Kueche: - lock error is: False
+[2023-08-07 19:28:48,277] [            MP3PlayerMode]    DEBUG | Kueche: lock_error = 'False'.
+[2023-08-07 19:28:48,277] [            MP3PlayerMode]    DEBUG | Kueche(4014996592): Before   'tr_lock_error' in 'st_black' state.
+[2023-08-07 19:28:48,278] [            MP3PlayerMode]    DEBUG | Kueche: internal transition
+[2023-08-07 19:28:48,278] [            MP3PlayerMode]    DEBUG | Kueche(4014996592): Entering 'st_black' state triggered by 'tr_lock_error' event.
+[2023-08-07 19:28:48,278] [            MP3PlayerMode]    DEBUG | Kueche: internal transition
+[2023-08-07 19:28:48,278] [            MP3PlayerMode]    DEBUG | Kueche: is in state st_black.
+[2023-08-07 19:28:48,279] [            MP3PlayerMode]     INFO | ##############################
+handling DoorOpen: (None)
+[2023-08-07 19:28:48,279] [            MP3PlayerMode]     INFO | Kueche: - outer door open is: False
+[2023-08-07 19:28:48,279] [            MP3PlayerMode]    DEBUG | Kueche: outer_door_open = 'False'.
+[2023-08-07 19:28:48,279] [            MP3PlayerMode]    DEBUG | Kueche(4014996592): Before   'tr_outer_door_open' in 'st_black' state.
+[2023-08-07 19:28:48,279] [            MP3PlayerMode]    DEBUG | Kueche: internal transition
+[2023-08-07 19:28:48,280] [            MP3PlayerMode]    DEBUG | Kueche(4014996592): Entering 'st_black' state triggered by 'tr_outer_door_open' event.
+[2023-08-07 19:28:48,280] [            MP3PlayerMode]    DEBUG | Kueche: internal transition
+[2023-08-07 19:28:48,280] [            MP3PlayerMode]    DEBUG | Kueche: is in state st_black.
+[2023-08-07 19:28:48,280] [            MP3PlayerMode]     INFO | ##############################
+handling open Windows: (None)
+[2023-08-07 19:28:48,280] [            MP3PlayerMode]     INFO | Kueche: - window open is: False
+[2023-08-07 19:28:48,281] [            MP3PlayerMode]    DEBUG | Kueche: light = 'False'.
+[2023-08-07 19:28:48,281] [            MP3PlayerMode]    DEBUG | Kueche(4014996592): Before   'tr_window_open' in 'st_black' state.
+[2023-08-07 19:28:48,281] [            MP3PlayerMode]    DEBUG | Kueche: internal transition
+[2023-08-07 19:28:48,281] [            MP3PlayerMode]    DEBUG | Kueche(4014996592): Entering 'st_black' state triggered by 'tr_window_open' event.
+[2023-08-07 19:28:48,282] [            MP3PlayerMode]    DEBUG | Kueche: internal transition
+[2023-08-07 19:28:48,282] [            MP3PlayerMode]    DEBUG | Kueche: is in state st_black.
+[2023-08-07 19:28:48,732] [            MP3PlayerMode]     INFO | Done
+[2023-08-07 19:42:45,107] [            MP3PlayerMode]    DEBUG | Kueche(4014847888): Entering 'st_black' state triggered by '__initial__' event.
+[2023-08-07 19:42:45,107] [            MP3PlayerMode]    DEBUG | Kueche: set light level to 0
+[2023-08-07 19:42:45,531] [            MP3PlayerMode]     INFO | ##############################
+handling BellRang: (None)
+[2023-08-07 19:42:45,532] [            MP3PlayerMode]     INFO | Kueche: - bell rang is: False
+[2023-08-07 19:42:45,532] [            MP3PlayerMode]    DEBUG | Kueche: bell_rang = 'False'.
+[2023-08-07 19:42:45,532] [            MP3PlayerMode]    DEBUG | Kueche(4014847888): Before   'tr_bell_rang' in 'st_black' state.
+[2023-08-07 19:42:45,533] [            MP3PlayerMode]    DEBUG | Kueche: internal transition
+[2023-08-07 19:42:45,533] [            MP3PlayerMode]    DEBUG | Kueche(4014847888): Entering 'st_black' state triggered by 'tr_bell_rang' event.
+[2023-08-07 19:42:45,533] [            MP3PlayerMode]    DEBUG | Kueche: internal transition
+[2023-08-07 19:42:45,534] [            MP3PlayerMode]    DEBUG | Kueche: is in state st_black.
+[2023-08-07 19:42:45,535] [            MP3PlayerMode]     INFO | ##############################
+handling window open: (None)
+[2023-08-07 19:42:45,535] [            MP3PlayerMode]     INFO | Kueche: - lock error is: False
+[2023-08-07 19:42:45,535] [            MP3PlayerMode]    DEBUG | Kueche: lock_error = 'False'.
+[2023-08-07 19:42:45,535] [            MP3PlayerMode]    DEBUG | Kueche(4014847888): Before   'tr_lock_error' in 'st_black' state.
+[2023-08-07 19:42:45,536] [            MP3PlayerMode]    DEBUG | Kueche: internal transition
+[2023-08-07 19:42:45,536] [            MP3PlayerMode]    DEBUG | Kueche(4014847888): Entering 'st_black' state triggered by 'tr_lock_error' event.
+[2023-08-07 19:42:45,536] [            MP3PlayerMode]    DEBUG | Kueche: internal transition
+[2023-08-07 19:42:45,536] [            MP3PlayerMode]    DEBUG | Kueche: is in state st_black.
+[2023-08-07 19:42:45,537] [            MP3PlayerMode]     INFO | ##############################
+handling DoorOpen: (CLOSED)
+[2023-08-07 19:42:45,537] [            MP3PlayerMode]     INFO | Kueche: - outer door open is: False
+[2023-08-07 19:42:45,537] [            MP3PlayerMode]    DEBUG | Kueche: outer_door_open = 'False'.
+[2023-08-07 19:42:45,537] [            MP3PlayerMode]    DEBUG | Kueche(4014847888): Before   'tr_outer_door_open' in 'st_black' state.
+[2023-08-07 19:42:45,537] [            MP3PlayerMode]    DEBUG | Kueche: internal transition
+[2023-08-07 19:42:45,538] [            MP3PlayerMode]    DEBUG | Kueche(4014847888): Entering 'st_black' state triggered by 'tr_outer_door_open' event.
+[2023-08-07 19:42:45,538] [            MP3PlayerMode]    DEBUG | Kueche: internal transition
+[2023-08-07 19:42:45,538] [            MP3PlayerMode]    DEBUG | Kueche: is in state st_black.
+[2023-08-07 19:42:45,538] [            MP3PlayerMode]     INFO | ##############################
+handling open Windows: (None)
+[2023-08-07 19:42:45,538] [            MP3PlayerMode]     INFO | Kueche: - window open is: False
+[2023-08-07 19:42:45,539] [            MP3PlayerMode]    DEBUG | Kueche: light = 'False'.
+[2023-08-07 19:42:45,539] [            MP3PlayerMode]    DEBUG | Kueche(4014847888): Before   'tr_window_open' in 'st_black' state.
+[2023-08-07 19:42:45,539] [            MP3PlayerMode]    DEBUG | Kueche: internal transition
+[2023-08-07 19:42:45,539] [            MP3PlayerMode]    DEBUG | Kueche(4014847888): Entering 'st_black' state triggered by 'tr_window_open' event.
+[2023-08-07 19:42:45,540] [            MP3PlayerMode]    DEBUG | Kueche: internal transition
+[2023-08-07 19:42:45,540] [            MP3PlayerMode]    DEBUG | Kueche: is in state st_black.
+[2023-08-07 19:42:45,996] [            MP3PlayerMode]     INFO | Done
+[2023-08-07 19:48:31,827] [            MP3PlayerMode]    DEBUG | Kueche(4014604856): Entering 'st_black' state triggered by '__initial__' event.
+[2023-08-07 19:48:31,828] [            MP3PlayerMode]    DEBUG | Kueche: set light level to 0
+[2023-08-07 19:48:32,258] [            MP3PlayerMode]     INFO | ##############################
+handling BellRang: (None)
+[2023-08-07 19:48:32,259] [            MP3PlayerMode]     INFO | Kueche: - bell rang is: False
+[2023-08-07 19:48:32,259] [            MP3PlayerMode]    DEBUG | Kueche: bell_rang = 'False'.
+[2023-08-07 19:48:32,259] [            MP3PlayerMode]    DEBUG | Kueche(4014604856): Before   'tr_bell_rang' in 'st_black' state.
+[2023-08-07 19:48:32,260] [            MP3PlayerMode]    DEBUG | Kueche: internal transition
+[2023-08-07 19:48:32,260] [            MP3PlayerMode]    DEBUG | Kueche(4014604856): Entering 'st_black' state triggered by 'tr_bell_rang' event.
+[2023-08-07 19:48:32,260] [            MP3PlayerMode]    DEBUG | Kueche: internal transition
+[2023-08-07 19:48:32,260] [            MP3PlayerMode]    DEBUG | Kueche: is in state st_black.
+[2023-08-07 19:48:32,261] [            MP3PlayerMode]     INFO | ##############################
+handling lock error: (None)
+[2023-08-07 19:48:32,261] [            MP3PlayerMode]     INFO | Kueche: - lock error is: False
+[2023-08-07 19:48:32,261] [            MP3PlayerMode]    DEBUG | Kueche: lock_error = 'False'.
+[2023-08-07 19:48:32,261] [            MP3PlayerMode]    DEBUG | Kueche(4014604856): Before   'tr_lock_error' in 'st_black' state.
+[2023-08-07 19:48:32,262] [            MP3PlayerMode]    DEBUG | Kueche: internal transition
+[2023-08-07 19:48:32,262] [            MP3PlayerMode]    DEBUG | Kueche(4014604856): Entering 'st_black' state triggered by 'tr_lock_error' event.
+[2023-08-07 19:48:32,262] [            MP3PlayerMode]    DEBUG | Kueche: internal transition
+[2023-08-07 19:48:32,262] [            MP3PlayerMode]    DEBUG | Kueche: is in state st_black.
+[2023-08-07 19:48:32,263] [            MP3PlayerMode]     INFO | ##############################
+handling DoorOpen: (CLOSED)
+[2023-08-07 19:48:32,263] [            MP3PlayerMode]     INFO | Kueche: - outer door open is: False
+[2023-08-07 19:48:32,263] [            MP3PlayerMode]    DEBUG | Kueche: outer_door_open = 'False'.
+[2023-08-07 19:48:32,263] [            MP3PlayerMode]    DEBUG | Kueche(4014604856): Before   'tr_outer_door_open' in 'st_black' state.
+[2023-08-07 19:48:32,264] [            MP3PlayerMode]    DEBUG | Kueche: internal transition
+[2023-08-07 19:48:32,264] [            MP3PlayerMode]    DEBUG | Kueche(4014604856): Entering 'st_black' state triggered by 'tr_outer_door_open' event.
+[2023-08-07 19:48:32,264] [            MP3PlayerMode]    DEBUG | Kueche: internal transition
+[2023-08-07 19:48:32,264] [            MP3PlayerMode]    DEBUG | Kueche: is in state st_black.
+[2023-08-07 19:48:32,264] [            MP3PlayerMode]     INFO | ##############################
+handling open Windows: (OPEN)
+[2023-08-07 19:48:32,265] [            MP3PlayerMode]     INFO | Kueche: - window open is: False
+[2023-08-07 19:48:32,265] [            MP3PlayerMode]    DEBUG | Kueche: light = 'False'.
+[2023-08-07 19:48:32,265] [            MP3PlayerMode]    DEBUG | Kueche(4014604856): Before   'tr_window_open' in 'st_black' state.
+[2023-08-07 19:48:32,265] [            MP3PlayerMode]    DEBUG | Kueche: internal transition
+[2023-08-07 19:48:32,265] [            MP3PlayerMode]    DEBUG | Kueche(4014604856): Entering 'st_black' state triggered by 'tr_window_open' event.
+[2023-08-07 19:48:32,266] [            MP3PlayerMode]    DEBUG | Kueche: internal transition
+[2023-08-07 19:48:32,266] [            MP3PlayerMode]    DEBUG | Kueche: is in state st_black.
+[2023-08-07 19:48:32,742] [            MP3PlayerMode]     INFO | Done

@@ -1,0 +1,257 @@
+2023-08-07 19:04:01.835 [INFO ] [HABApp                              ] - HABApp Version 1.1.2
+2023-08-07 19:04:04.994 [ERROR] [HABApp.Rules                        ] - Error "name 'logging' is not defined" in load:
+2023-08-07 19:04:04.994 [ERROR] [HABApp.Rules                        ] - Could not load /etc/openhab/habapp/rules/mp3_player_mode.py!
+2023-08-07 19:04:04.994 [ERROR] [HABApp.Rules                        ] - File "/etc/openhab/habapp/rules/mp3_player_mode.py", line 14 in mp3_player_mode.py
+2023-08-07 19:04:04.995 [ERROR] [HABApp.Rules                        ] - --------------------------------------------------------------------------------
+2023-08-07 19:04:04.995 [ERROR] [HABApp.Rules                        ] -      10 | import HABApp
+2023-08-07 19:04:04.995 [ERROR] [HABApp.Rules                        ] -      11 | from HABApp.core.events import ValueChangeEvent, ValueChangeEventFilter
+2023-08-07 19:04:04.995 [ERROR] [HABApp.Rules                        ] -      12 | from HABApp.openhab.items import StringItem, OpenhabItem
+2023-08-07 19:04:04.995 [ERROR] [HABApp.Rules                        ] - -->  14 | log = logging.getLogger('MP3PlayerMode')
+2023-08-07 19:04:04.995 [ERROR] [HABApp.Rules                        ] -      16 | OH_CONF = os.getenv('OPENHAB_CONF')
+2023-08-07 19:04:04.995 [ERROR] [HABApp.Rules                        ] -    ------------------------------------------------------------
+2023-08-07 19:04:04.995 [ERROR] [HABApp.Rules                        ] -      sys.path = ['/opt/habapp/bin', '/usr/lib/python39.zip', '/usr/lib/python3.9', '/usr/lib/python3.9/lib-dynload', '/opt/habapp/lib/python3.9/site-packages', '/etc/openhab/habapp/rules/', '/usr/lib/python3/dist-packages', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/usr/lib/python3/dist-packages', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/usr/lib/python3/dist-packages', '/etc/openhab/habapp/rules/', '/usr/lib/python3/dist-packages/', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/usr/lib/python3/dist-packages', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/']
+2023-08-07 19:04:04.996 [ERROR] [HABApp.Rules                        ] -    ------------------------------------------------------------
+2023-08-07 19:04:04.996 [ERROR] [HABApp.Rules                        ] - 
+2023-08-07 19:04:04.996 [ERROR] [HABApp.Rules                        ] - --------------------------------------------------------------------------------
+2023-08-07 19:04:04.996 [ERROR] [HABApp.Rules                        ] - Traceback (most recent call last):
+2023-08-07 19:04:04.996 [ERROR] [HABApp.Rules                        ] -   File "/opt/habapp/lib/python3.9/site-packages/HABApp/rule_manager/rule_file.py", line 78, in load
+2023-08-07 19:04:04.996 [ERROR] [HABApp.Rules                        ] -     self.create_rules(created_rules)
+2023-08-07 19:04:04.996 [ERROR] [HABApp.Rules                        ] -   File "/opt/habapp/lib/python3.9/site-packages/HABApp/rule_manager/rule_file.py", line 68, in create_rules
+2023-08-07 19:04:04.996 [ERROR] [HABApp.Rules                        ] -     runpy.run_path(str(self.path), run_name=str(self.path), init_globals=rule_hook.in_dict())
+2023-08-07 19:04:04.996 [ERROR] [HABApp.Rules                        ] -   File "/usr/lib/python3.9/runpy.py", line 268, in run_path
+2023-08-07 19:04:04.996 [ERROR] [HABApp.Rules                        ] -     return _run_module_code(code, init_globals, run_name,
+2023-08-07 19:04:04.997 [ERROR] [HABApp.Rules                        ] -   File "/usr/lib/python3.9/runpy.py", line 97, in _run_module_code
+2023-08-07 19:04:04.997 [ERROR] [HABApp.Rules                        ] -     _run_code(code, mod_globals, init_globals,
+2023-08-07 19:04:04.997 [ERROR] [HABApp.Rules                        ] -   File "/usr/lib/python3.9/runpy.py", line 87, in _run_code
+2023-08-07 19:04:04.997 [ERROR] [HABApp.Rules                        ] -     exec(code, run_globals)
+2023-08-07 19:04:04.997 [ERROR] [HABApp.Rules                        ] -   File "/etc/openhab/habapp/rules/mp3_player_mode.py", line 14, in mp3_player_mode.py
+2023-08-07 19:04:04.997 [ERROR] [HABApp.Rules                        ] -     log = logging.getLogger('MP3PlayerMode')
+2023-08-07 19:04:04.997 [ERROR] [HABApp.Rules                        ] - NameError: name 'logging' is not defined
+2023-08-07 19:04:04.998 [WARN ] [HABApp.Rules                        ] - Failed to load /etc/openhab/habapp/rules/mp3_player_mode.py!
+2023-08-07 19:04:27.825 [ERROR] [HABApp.Rules                        ] - Error "expected str, bytes or os.PathLike object, not NoneType" in load:
+2023-08-07 19:04:27.826 [ERROR] [HABApp.Rules                        ] - Could not load /etc/openhab/habapp/rules/mp3_player_mode.py!
+2023-08-07 19:04:27.826 [ERROR] [HABApp.Rules                        ] - File "/etc/openhab/habapp/rules/mp3_player_mode.py", line 19 in mp3_player_mode.py
+2023-08-07 19:04:27.826 [ERROR] [HABApp.Rules                        ] - --------------------------------------------------------------------------------
+2023-08-07 19:04:27.826 [ERROR] [HABApp.Rules                        ] -      13 | from HABApp.openhab.items import StringItem, OpenhabItem
+2023-08-07 19:04:27.826 [ERROR] [HABApp.Rules                        ] -      15 | log = logging.getLogger('MP3PlayerMode')
+2023-08-07 19:04:27.826 [ERROR] [HABApp.Rules                        ] -      17 | OH_CONF = os.getenv('OPENHAB_CONF')
+2023-08-07 19:04:27.826 [ERROR] [HABApp.Rules                        ] - -->  19 | sys.path.append(os.path.join(OH_CONF, "automation/lib/python/personal"))
+2023-08-07 19:04:27.826 [ERROR] [HABApp.Rules                        ] -      20 | from SecurityDoorWindowStatemachine import SecurityDoorWindowStatemachine, get_state_machine_graph
+2023-08-07 19:04:27.827 [ERROR] [HABApp.Rules                        ] -    ------------------------------------------------------------
+2023-08-07 19:04:27.827 [ERROR] [HABApp.Rules                        ] -      sys.path = ['/opt/habapp/bin', '/usr/lib/python39.zip', '/usr/lib/python3.9', '/usr/lib/python3.9/lib-dynload', '/opt/habapp/lib/python3.9/site-packages', '/etc/openhab/habapp/rules/', '/usr/lib/python3/dist-packages', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/usr/lib/python3/dist-packages', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/usr/lib/python3/dist-packages', '/etc/openhab/habapp/rules/', '/usr/lib/python3/dist-packages/', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/usr/lib/python3/dist-packages', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/']
+2023-08-07 19:04:27.827 [ERROR] [HABApp.Rules                        ] -      log = <Logger MP3PlayerMode (DEBUG)>
+2023-08-07 19:04:27.827 [ERROR] [HABApp.Rules                        ] -      OH_CONF = None
+2023-08-07 19:04:27.827 [ERROR] [HABApp.Rules                        ] -    ------------------------------------------------------------
+2023-08-07 19:04:27.827 [ERROR] [HABApp.Rules                        ] - 
+2023-08-07 19:04:27.827 [ERROR] [HABApp.Rules                        ] - --------------------------------------------------------------------------------
+2023-08-07 19:04:27.827 [ERROR] [HABApp.Rules                        ] - Traceback (most recent call last):
+2023-08-07 19:04:27.827 [ERROR] [HABApp.Rules                        ] -   File "/opt/habapp/lib/python3.9/site-packages/HABApp/rule_manager/rule_file.py", line 78, in load
+2023-08-07 19:04:27.828 [ERROR] [HABApp.Rules                        ] -     self.create_rules(created_rules)
+2023-08-07 19:04:27.828 [ERROR] [HABApp.Rules                        ] -   File "/opt/habapp/lib/python3.9/site-packages/HABApp/rule_manager/rule_file.py", line 68, in create_rules
+2023-08-07 19:04:27.828 [ERROR] [HABApp.Rules                        ] -     runpy.run_path(str(self.path), run_name=str(self.path), init_globals=rule_hook.in_dict())
+2023-08-07 19:04:27.828 [ERROR] [HABApp.Rules                        ] -   File "/usr/lib/python3.9/runpy.py", line 268, in run_path
+2023-08-07 19:04:27.828 [ERROR] [HABApp.Rules                        ] -     return _run_module_code(code, init_globals, run_name,
+2023-08-07 19:04:27.828 [ERROR] [HABApp.Rules                        ] -   File "/usr/lib/python3.9/runpy.py", line 97, in _run_module_code
+2023-08-07 19:04:27.828 [ERROR] [HABApp.Rules                        ] -     _run_code(code, mod_globals, init_globals,
+2023-08-07 19:04:27.828 [ERROR] [HABApp.Rules                        ] -   File "/usr/lib/python3.9/runpy.py", line 87, in _run_code
+2023-08-07 19:04:27.828 [ERROR] [HABApp.Rules                        ] -     exec(code, run_globals)
+2023-08-07 19:04:27.828 [ERROR] [HABApp.Rules                        ] -   File "/etc/openhab/habapp/rules/mp3_player_mode.py", line 19, in mp3_player_mode.py
+2023-08-07 19:04:27.828 [ERROR] [HABApp.Rules                        ] -     sys.path.append(os.path.join(OH_CONF, "automation/lib/python/personal"))
+2023-08-07 19:04:27.829 [ERROR] [HABApp.Rules                        ] -   File "/usr/lib/python3.9/posixpath.py", line 76, in join
+2023-08-07 19:04:27.829 [ERROR] [HABApp.Rules                        ] -     a = os.fspath(a)
+2023-08-07 19:04:27.829 [ERROR] [HABApp.Rules                        ] - TypeError: expected str, bytes or os.PathLike object, not NoneType
+2023-08-07 19:04:27.830 [WARN ] [HABApp.Rules                        ] - Failed to load /etc/openhab/habapp/rules/mp3_player_mode.py!
+2023-08-07 19:12:53.279 [ERROR] [HABApp.Rules                        ] - Error "No module named 'SecurityDoorWindowStatemachine'" in load:
+2023-08-07 19:12:53.279 [ERROR] [HABApp.Rules                        ] - Could not load /etc/openhab/habapp/rules/mp3_player_mode.py!
+2023-08-07 19:12:53.279 [ERROR] [HABApp.Rules                        ] - File "/etc/openhab/habapp/rules/mp3_player_mode.py", line 20 in mp3_player_mode.py
+2023-08-07 19:12:53.279 [ERROR] [HABApp.Rules                        ] - --------------------------------------------------------------------------------
+2023-08-07 19:12:53.279 [ERROR] [HABApp.Rules                        ] -      15 | log = logging.getLogger('MP3PlayerMode')
+2023-08-07 19:12:53.280 [ERROR] [HABApp.Rules                        ] -      17 | OH_CONF = "/etc/openhab/"  # os.getenv('OPENHAB_CONF')
+2023-08-07 19:12:53.280 [ERROR] [HABApp.Rules                        ] -      19 | sys.path.append(os.path.join(OH_CONF, "automation/lib/python/personal"))
+2023-08-07 19:12:53.280 [ERROR] [HABApp.Rules                        ] - -->  20 | from SecurityDoorWindowStatemachine import SecurityDoorWindowStatemachine, get_state_machine_graph
+2023-08-07 19:12:53.280 [ERROR] [HABApp.Rules                        ] -      22 | MP3_PLAYER_STATE_MACHINE = SecurityDoorWindowStatemachine(
+2023-08-07 19:12:53.280 [ERROR] [HABApp.Rules                        ] -      23 |     "Kueche", log)
+2023-08-07 19:12:53.280 [ERROR] [HABApp.Rules                        ] -    ------------------------------------------------------------
+2023-08-07 19:12:53.280 [ERROR] [HABApp.Rules                        ] -      sys.path = ['/opt/habapp/bin', '/usr/lib/python39.zip', '/usr/lib/python3.9', '/usr/lib/python3.9/lib-dynload', '/opt/habapp/lib/python3.9/site-packages', '/etc/openhab/habapp/rules/', '/usr/lib/python3/dist-packages', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/usr/lib/python3/dist-packages', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/usr/lib/python3/dist-packages', '/etc/openhab/habapp/rules/', '/usr/lib/python3/dist-packages/', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/usr/lib/python3/dist-packages', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/etc/openhab/automation/lib/python/personal']
+2023-08-07 19:12:53.280 [ERROR] [HABApp.Rules                        ] -      log = <Logger MP3PlayerMode (DEBUG)>
+2023-08-07 19:12:53.280 [ERROR] [HABApp.Rules                        ] -      OH_CONF = '/etc/openhab/'
+2023-08-07 19:12:53.281 [ERROR] [HABApp.Rules                        ] -    ------------------------------------------------------------
+2023-08-07 19:12:53.281 [ERROR] [HABApp.Rules                        ] - 
+2023-08-07 19:12:53.281 [ERROR] [HABApp.Rules                        ] - --------------------------------------------------------------------------------
+2023-08-07 19:12:53.281 [ERROR] [HABApp.Rules                        ] - Traceback (most recent call last):
+2023-08-07 19:12:53.281 [ERROR] [HABApp.Rules                        ] -   File "/opt/habapp/lib/python3.9/site-packages/HABApp/rule_manager/rule_file.py", line 78, in load
+2023-08-07 19:12:53.281 [ERROR] [HABApp.Rules                        ] -     self.create_rules(created_rules)
+2023-08-07 19:12:53.281 [ERROR] [HABApp.Rules                        ] -   File "/opt/habapp/lib/python3.9/site-packages/HABApp/rule_manager/rule_file.py", line 68, in create_rules
+2023-08-07 19:12:53.281 [ERROR] [HABApp.Rules                        ] -     runpy.run_path(str(self.path), run_name=str(self.path), init_globals=rule_hook.in_dict())
+2023-08-07 19:12:53.281 [ERROR] [HABApp.Rules                        ] -   File "/usr/lib/python3.9/runpy.py", line 268, in run_path
+2023-08-07 19:12:53.281 [ERROR] [HABApp.Rules                        ] -     return _run_module_code(code, init_globals, run_name,
+2023-08-07 19:12:53.282 [ERROR] [HABApp.Rules                        ] -   File "/usr/lib/python3.9/runpy.py", line 97, in _run_module_code
+2023-08-07 19:12:53.282 [ERROR] [HABApp.Rules                        ] -     _run_code(code, mod_globals, init_globals,
+2023-08-07 19:12:53.282 [ERROR] [HABApp.Rules                        ] -   File "/usr/lib/python3.9/runpy.py", line 87, in _run_code
+2023-08-07 19:12:53.282 [ERROR] [HABApp.Rules                        ] -     exec(code, run_globals)
+2023-08-07 19:12:53.282 [ERROR] [HABApp.Rules                        ] -   File "/etc/openhab/habapp/rules/mp3_player_mode.py", line 20, in mp3_player_mode.py
+2023-08-07 19:12:53.282 [ERROR] [HABApp.Rules                        ] -     from SecurityDoorWindowStatemachine import SecurityDoorWindowStatemachine, get_state_machine_graph
+2023-08-07 19:12:53.282 [ERROR] [HABApp.Rules                        ] - ModuleNotFoundError: No module named 'SecurityDoorWindowStatemachine'
+2023-08-07 19:12:53.284 [WARN ] [HABApp.Rules                        ] - Failed to load /etc/openhab/habapp/rules/mp3_player_mode.py!
+2023-08-07 19:13:06.032 [ERROR] [HABApp.Rules                        ] - Error "No module named 'SecurityDoorWindowStatemachine'" in load:
+2023-08-07 19:13:06.032 [ERROR] [HABApp.Rules                        ] - Could not load /etc/openhab/habapp/rules/mp3_player_mode.py!
+2023-08-07 19:13:06.032 [ERROR] [HABApp.Rules                        ] - File "/etc/openhab/habapp/rules/mp3_player_mode.py", line 20 in mp3_player_mode.py
+2023-08-07 19:13:06.032 [ERROR] [HABApp.Rules                        ] - --------------------------------------------------------------------------------
+2023-08-07 19:13:06.032 [ERROR] [HABApp.Rules                        ] -      15 | log = logging.getLogger('MP3PlayerMode')
+2023-08-07 19:13:06.032 [ERROR] [HABApp.Rules                        ] -      17 | OH_CONF = "/etc/openhab/"  # os.getenv('OPENHAB_CONF')
+2023-08-07 19:13:06.033 [ERROR] [HABApp.Rules                        ] -      19 | sys.path.append(os.path.join(OH_CONF, "automation/lib/python/personal"))
+2023-08-07 19:13:06.033 [ERROR] [HABApp.Rules                        ] - -->  20 | from SecurityDoorWindowStatemachine import SecurityDoorWindowStatemachine, get_state_machine_graph
+2023-08-07 19:13:06.033 [ERROR] [HABApp.Rules                        ] -      22 | MP3_PLAYER_STATE_MACHINE = SecurityDoorWindowStatemachine(
+2023-08-07 19:13:06.033 [ERROR] [HABApp.Rules                        ] -      23 |     "Kueche", log)
+2023-08-07 19:13:06.033 [ERROR] [HABApp.Rules                        ] -    ------------------------------------------------------------
+2023-08-07 19:13:06.033 [ERROR] [HABApp.Rules                        ] -      sys.path = ['/opt/habapp/bin', '/usr/lib/python39.zip', '/usr/lib/python3.9', '/usr/lib/python3.9/lib-dynload', '/opt/habapp/lib/python3.9/site-packages', '/etc/openhab/habapp/rules/', '/usr/lib/python3/dist-packages', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/usr/lib/python3/dist-packages', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/usr/lib/python3/dist-packages', '/etc/openhab/habapp/rules/', '/usr/lib/python3/dist-packages/', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/usr/lib/python3/dist-packages', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/etc/openhab/automation/lib/python/personal', '/etc/openhab/automation/lib/python/personal']
+2023-08-07 19:13:06.033 [ERROR] [HABApp.Rules                        ] -      log = <Logger MP3PlayerMode (DEBUG)>
+2023-08-07 19:13:06.033 [ERROR] [HABApp.Rules                        ] -      OH_CONF = '/etc/openhab/'
+2023-08-07 19:13:06.033 [ERROR] [HABApp.Rules                        ] -    ------------------------------------------------------------
+2023-08-07 19:13:06.034 [ERROR] [HABApp.Rules                        ] - 
+2023-08-07 19:13:06.034 [ERROR] [HABApp.Rules                        ] - --------------------------------------------------------------------------------
+2023-08-07 19:13:06.034 [ERROR] [HABApp.Rules                        ] - Traceback (most recent call last):
+2023-08-07 19:13:06.034 [ERROR] [HABApp.Rules                        ] -   File "/opt/habapp/lib/python3.9/site-packages/HABApp/rule_manager/rule_file.py", line 78, in load
+2023-08-07 19:13:06.034 [ERROR] [HABApp.Rules                        ] -     self.create_rules(created_rules)
+2023-08-07 19:13:06.034 [ERROR] [HABApp.Rules                        ] -   File "/opt/habapp/lib/python3.9/site-packages/HABApp/rule_manager/rule_file.py", line 68, in create_rules
+2023-08-07 19:13:06.034 [ERROR] [HABApp.Rules                        ] -     runpy.run_path(str(self.path), run_name=str(self.path), init_globals=rule_hook.in_dict())
+2023-08-07 19:13:06.034 [ERROR] [HABApp.Rules                        ] -   File "/usr/lib/python3.9/runpy.py", line 268, in run_path
+2023-08-07 19:13:06.034 [ERROR] [HABApp.Rules                        ] -     return _run_module_code(code, init_globals, run_name,
+2023-08-07 19:13:06.034 [ERROR] [HABApp.Rules                        ] -   File "/usr/lib/python3.9/runpy.py", line 97, in _run_module_code
+2023-08-07 19:13:06.035 [ERROR] [HABApp.Rules                        ] -     _run_code(code, mod_globals, init_globals,
+2023-08-07 19:13:06.035 [ERROR] [HABApp.Rules                        ] -   File "/usr/lib/python3.9/runpy.py", line 87, in _run_code
+2023-08-07 19:13:06.035 [ERROR] [HABApp.Rules                        ] -     exec(code, run_globals)
+2023-08-07 19:13:06.035 [ERROR] [HABApp.Rules                        ] -   File "/etc/openhab/habapp/rules/mp3_player_mode.py", line 20, in mp3_player_mode.py
+2023-08-07 19:13:06.035 [ERROR] [HABApp.Rules                        ] -     from SecurityDoorWindowStatemachine import SecurityDoorWindowStatemachine, get_state_machine_graph
+2023-08-07 19:13:06.035 [ERROR] [HABApp.Rules                        ] - ModuleNotFoundError: No module named 'SecurityDoorWindowStatemachine'
+2023-08-07 19:13:06.036 [WARN ] [HABApp.Rules                        ] - Failed to load /etc/openhab/habapp/rules/mp3_player_mode.py!
+2023-08-07 19:16:20.219 [ERROR] [HABApp.Rules                        ] - Error "No module named 'SecurityDoorWindowStatemachine'" in load:
+2023-08-07 19:16:20.219 [ERROR] [HABApp.Rules                        ] - Could not load /etc/openhab/habapp/rules/mp3_player_mode.py!
+2023-08-07 19:16:20.220 [ERROR] [HABApp.Rules                        ] - File "/etc/openhab/habapp/rules/mp3_player_mode.py", line 20 in mp3_player_mode.py
+2023-08-07 19:16:20.220 [ERROR] [HABApp.Rules                        ] - --------------------------------------------------------------------------------
+2023-08-07 19:16:20.220 [ERROR] [HABApp.Rules                        ] -      15 | log = logging.getLogger('MP3PlayerMode')
+2023-08-07 19:16:20.220 [ERROR] [HABApp.Rules                        ] -      17 | OH_CONF = "/etc/openhab/"  # os.getenv('OPENHAB_CONF')
+2023-08-07 19:16:20.220 [ERROR] [HABApp.Rules                        ] -      19 | sys.path.append(os.path.join(OH_CONF, "automation/lib/python/personal"))
+2023-08-07 19:16:20.221 [ERROR] [HABApp.Rules                        ] - -->  20 | from SecurityDoorWindowStatemachine import SecurityDoorWindowStatemachine, get_state_machine_graph
+2023-08-07 19:16:20.221 [ERROR] [HABApp.Rules                        ] -      22 | MP3_PLAYER_STATE_MACHINE = SecurityDoorWindowStatemachine(
+2023-08-07 19:16:20.221 [ERROR] [HABApp.Rules                        ] -      23 |     "Kueche", log)
+2023-08-07 19:16:20.221 [ERROR] [HABApp.Rules                        ] -    ------------------------------------------------------------
+2023-08-07 19:16:20.221 [ERROR] [HABApp.Rules                        ] -      sys.path = ['/opt/habapp/bin', '/usr/lib/python39.zip', '/usr/lib/python3.9', '/usr/lib/python3.9/lib-dynload', '/opt/habapp/lib/python3.9/site-packages', '/etc/openhab/habapp/rules/', '/usr/lib/python3/dist-packages', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/usr/lib/python3/dist-packages', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/usr/lib/python3/dist-packages', '/etc/openhab/habapp/rules/', '/usr/lib/python3/dist-packages/', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/usr/lib/python3/dist-packages', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/etc/openhab/automation/lib/python/personal', '/etc/openhab/automation/lib/python/personal', '/etc/openhab/automation/lib/python/personal']
+2023-08-07 19:16:20.221 [ERROR] [HABApp.Rules                        ] -      log = <Logger MP3PlayerMode (DEBUG)>
+2023-08-07 19:16:20.222 [ERROR] [HABApp.Rules                        ] -      OH_CONF = '/etc/openhab/'
+2023-08-07 19:16:20.222 [ERROR] [HABApp.Rules                        ] -    ------------------------------------------------------------
+2023-08-07 19:16:20.222 [ERROR] [HABApp.Rules                        ] - 
+2023-08-07 19:16:20.222 [ERROR] [HABApp.Rules                        ] - --------------------------------------------------------------------------------
+2023-08-07 19:16:20.222 [ERROR] [HABApp.Rules                        ] - Traceback (most recent call last):
+2023-08-07 19:16:20.222 [ERROR] [HABApp.Rules                        ] -   File "/opt/habapp/lib/python3.9/site-packages/HABApp/rule_manager/rule_file.py", line 78, in load
+2023-08-07 19:16:20.223 [ERROR] [HABApp.Rules                        ] -     self.create_rules(created_rules)
+2023-08-07 19:16:20.223 [ERROR] [HABApp.Rules                        ] -   File "/opt/habapp/lib/python3.9/site-packages/HABApp/rule_manager/rule_file.py", line 68, in create_rules
+2023-08-07 19:16:20.223 [ERROR] [HABApp.Rules                        ] -     runpy.run_path(str(self.path), run_name=str(self.path), init_globals=rule_hook.in_dict())
+2023-08-07 19:16:20.223 [ERROR] [HABApp.Rules                        ] -   File "/usr/lib/python3.9/runpy.py", line 268, in run_path
+2023-08-07 19:16:20.223 [ERROR] [HABApp.Rules                        ] -     return _run_module_code(code, init_globals, run_name,
+2023-08-07 19:16:20.223 [ERROR] [HABApp.Rules                        ] -   File "/usr/lib/python3.9/runpy.py", line 97, in _run_module_code
+2023-08-07 19:16:20.224 [ERROR] [HABApp.Rules                        ] -     _run_code(code, mod_globals, init_globals,
+2023-08-07 19:16:20.224 [ERROR] [HABApp.Rules                        ] -   File "/usr/lib/python3.9/runpy.py", line 87, in _run_code
+2023-08-07 19:16:20.224 [ERROR] [HABApp.Rules                        ] -     exec(code, run_globals)
+2023-08-07 19:16:20.224 [ERROR] [HABApp.Rules                        ] -   File "/etc/openhab/habapp/rules/mp3_player_mode.py", line 20, in mp3_player_mode.py
+2023-08-07 19:16:20.224 [ERROR] [HABApp.Rules                        ] -     from SecurityDoorWindowStatemachine import SecurityDoorWindowStatemachine, get_state_machine_graph
+2023-08-07 19:16:20.224 [ERROR] [HABApp.Rules                        ] - ModuleNotFoundError: No module named 'SecurityDoorWindowStatemachine'
+2023-08-07 19:16:20.226 [WARN ] [HABApp.Rules                        ] - Failed to load /etc/openhab/habapp/rules/mp3_player_mode.py!
+2023-08-07 19:16:43.240 [ERROR] [HABApp.Rules                        ] - Error "No module named 'SecurityDoorWindowStatemachine'" in load:
+2023-08-07 19:16:43.240 [ERROR] [HABApp.Rules                        ] - Could not load /etc/openhab/habapp/rules/mp3_player_mode.py!
+2023-08-07 19:16:43.240 [ERROR] [HABApp.Rules                        ] - File "/etc/openhab/habapp/rules/mp3_player_mode.py", line 20 in mp3_player_mode.py
+2023-08-07 19:16:43.240 [ERROR] [HABApp.Rules                        ] - --------------------------------------------------------------------------------
+2023-08-07 19:16:43.240 [ERROR] [HABApp.Rules                        ] -      15 | log = logging.getLogger('MP3PlayerMode')
+2023-08-07 19:16:43.240 [ERROR] [HABApp.Rules                        ] -      17 | OH_CONF = "/etc/openhab/"  # os.getenv('OPENHAB_CONF')
+2023-08-07 19:16:43.240 [ERROR] [HABApp.Rules                        ] -      19 | sys.path.append(os.path.join(OH_CONF, "automation/lib/python/personal"))
+2023-08-07 19:16:43.241 [ERROR] [HABApp.Rules                        ] - -->  20 | from SecurityDoorWindowStatemachine import SecurityDoorWindowStatemachine, get_state_machine_graph
+2023-08-07 19:16:43.241 [ERROR] [HABApp.Rules                        ] -      22 | MP3_PLAYER_STATE_MACHINE = SecurityDoorWindowStatemachine(
+2023-08-07 19:16:43.241 [ERROR] [HABApp.Rules                        ] -      23 |     "Kueche", log)
+2023-08-07 19:16:43.241 [ERROR] [HABApp.Rules                        ] -    ------------------------------------------------------------
+2023-08-07 19:16:43.241 [ERROR] [HABApp.Rules                        ] -      sys.path = ['/opt/habapp/bin', '/usr/lib/python39.zip', '/usr/lib/python3.9', '/usr/lib/python3.9/lib-dynload', '/opt/habapp/lib/python3.9/site-packages', '/etc/openhab/habapp/rules/', '/usr/lib/python3/dist-packages', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/usr/lib/python3/dist-packages', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/usr/lib/python3/dist-packages', '/etc/openhab/habapp/rules/', '/usr/lib/python3/dist-packages/', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/usr/lib/python3/dist-packages', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/etc/openhab/automation/lib/python/personal', '/etc/openhab/automation/lib/python/personal', '/etc/openhab/automation/lib/python/personal', '/etc/openhab/automation/lib/python/personal']
+2023-08-07 19:16:43.241 [ERROR] [HABApp.Rules                        ] -      log = <Logger MP3PlayerMode (DEBUG)>
+2023-08-07 19:16:43.241 [ERROR] [HABApp.Rules                        ] -      OH_CONF = '/etc/openhab/'
+2023-08-07 19:16:43.241 [ERROR] [HABApp.Rules                        ] -    ------------------------------------------------------------
+2023-08-07 19:16:43.242 [ERROR] [HABApp.Rules                        ] - 
+2023-08-07 19:16:43.242 [ERROR] [HABApp.Rules                        ] - --------------------------------------------------------------------------------
+2023-08-07 19:16:43.242 [ERROR] [HABApp.Rules                        ] - Traceback (most recent call last):
+2023-08-07 19:16:43.242 [ERROR] [HABApp.Rules                        ] -   File "/opt/habapp/lib/python3.9/site-packages/HABApp/rule_manager/rule_file.py", line 78, in load
+2023-08-07 19:16:43.242 [ERROR] [HABApp.Rules                        ] -     self.create_rules(created_rules)
+2023-08-07 19:16:43.243 [ERROR] [HABApp.Rules                        ] -   File "/opt/habapp/lib/python3.9/site-packages/HABApp/rule_manager/rule_file.py", line 68, in create_rules
+2023-08-07 19:16:43.243 [ERROR] [HABApp.Rules                        ] -     runpy.run_path(str(self.path), run_name=str(self.path), init_globals=rule_hook.in_dict())
+2023-08-07 19:16:43.243 [ERROR] [HABApp.Rules                        ] -   File "/usr/lib/python3.9/runpy.py", line 268, in run_path
+2023-08-07 19:16:43.243 [ERROR] [HABApp.Rules                        ] -     return _run_module_code(code, init_globals, run_name,
+2023-08-07 19:16:43.243 [ERROR] [HABApp.Rules                        ] -   File "/usr/lib/python3.9/runpy.py", line 97, in _run_module_code
+2023-08-07 19:16:43.243 [ERROR] [HABApp.Rules                        ] -     _run_code(code, mod_globals, init_globals,
+2023-08-07 19:16:43.243 [ERROR] [HABApp.Rules                        ] -   File "/usr/lib/python3.9/runpy.py", line 87, in _run_code
+2023-08-07 19:16:43.243 [ERROR] [HABApp.Rules                        ] -     exec(code, run_globals)
+2023-08-07 19:16:43.243 [ERROR] [HABApp.Rules                        ] -   File "/etc/openhab/habapp/rules/mp3_player_mode.py", line 20, in mp3_player_mode.py
+2023-08-07 19:16:43.244 [ERROR] [HABApp.Rules                        ] -     from SecurityDoorWindowStatemachine import SecurityDoorWindowStatemachine, get_state_machine_graph
+2023-08-07 19:16:43.244 [ERROR] [HABApp.Rules                        ] - ModuleNotFoundError: No module named 'SecurityDoorWindowStatemachine'
+2023-08-07 19:16:43.245 [WARN ] [HABApp.Rules                        ] - Failed to load /etc/openhab/habapp/rules/mp3_player_mode.py!
+2023-08-07 19:18:38.457 [ERROR] [HABApp.Rules                        ] - Error "No module named 'SecurityDoorWindowStatemachine'" in load:
+2023-08-07 19:18:38.458 [ERROR] [HABApp.Rules                        ] - Could not load /etc/openhab/habapp/rules/mp3_player_mode.py!
+2023-08-07 19:18:38.458 [ERROR] [HABApp.Rules                        ] - File "/etc/openhab/habapp/rules/mp3_player_mode.py", line 20 in mp3_player_mode.py
+2023-08-07 19:18:38.458 [ERROR] [HABApp.Rules                        ] - --------------------------------------------------------------------------------
+2023-08-07 19:18:38.458 [ERROR] [HABApp.Rules                        ] -      15 | log = logging.getLogger('MP3PlayerMode')
+2023-08-07 19:18:38.458 [ERROR] [HABApp.Rules                        ] -      17 | OH_CONF = "/etc/openhab/"  # os.getenv('OPENHAB_CONF')
+2023-08-07 19:18:38.458 [ERROR] [HABApp.Rules                        ] -      19 | sys.path.append(os.path.join(OH_CONF, "automation/lib/python/personal"))
+2023-08-07 19:18:38.458 [ERROR] [HABApp.Rules                        ] - -->  20 | from SecurityDoorWindowStatemachine import SecurityDoorWindowStatemachine, get_state_machine_graph
+2023-08-07 19:18:38.459 [ERROR] [HABApp.Rules                        ] -      22 | MP3_PLAYER_STATE_MACHINE = SecurityDoorWindowStatemachine(
+2023-08-07 19:18:38.459 [ERROR] [HABApp.Rules                        ] -      23 |     "Kueche", log)
+2023-08-07 19:18:38.459 [ERROR] [HABApp.Rules                        ] -    ------------------------------------------------------------
+2023-08-07 19:18:38.460 [ERROR] [HABApp.Rules                        ] -      sys.path = ['/opt/habapp/bin', '/usr/lib/python39.zip', '/usr/lib/python3.9', '/usr/lib/python3.9/lib-dynload', '/opt/habapp/lib/python3.9/site-packages', '/etc/openhab/habapp/rules/', '/usr/lib/python3/dist-packages', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/usr/lib/python3/dist-packages', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/usr/lib/python3/dist-packages', '/etc/openhab/habapp/rules/', '/usr/lib/python3/dist-packages/', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/usr/lib/python3/dist-packages', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/etc/openhab/automation/lib/python/personal', '/etc/openhab/automation/lib/python/personal', '/etc/openhab/automation/lib/python/personal', '/etc/openhab/automation/lib/python/personal', '/etc/openhab/automation/lib/python/personal']
+2023-08-07 19:18:38.460 [ERROR] [HABApp.Rules                        ] -      log = <Logger MP3PlayerMode (DEBUG)>
+2023-08-07 19:18:38.460 [ERROR] [HABApp.Rules                        ] -      OH_CONF = '/etc/openhab/'
+2023-08-07 19:18:38.460 [ERROR] [HABApp.Rules                        ] -    ------------------------------------------------------------
+2023-08-07 19:18:38.460 [ERROR] [HABApp.Rules                        ] - 
+2023-08-07 19:18:38.460 [ERROR] [HABApp.Rules                        ] - --------------------------------------------------------------------------------
+2023-08-07 19:18:38.460 [ERROR] [HABApp.Rules                        ] - Traceback (most recent call last):
+2023-08-07 19:18:38.460 [ERROR] [HABApp.Rules                        ] -   File "/opt/habapp/lib/python3.9/site-packages/HABApp/rule_manager/rule_file.py", line 78, in load
+2023-08-07 19:18:38.460 [ERROR] [HABApp.Rules                        ] -     self.create_rules(created_rules)
+2023-08-07 19:18:38.460 [ERROR] [HABApp.Rules                        ] -   File "/opt/habapp/lib/python3.9/site-packages/HABApp/rule_manager/rule_file.py", line 68, in create_rules
+2023-08-07 19:18:38.461 [ERROR] [HABApp.Rules                        ] -     runpy.run_path(str(self.path), run_name=str(self.path), init_globals=rule_hook.in_dict())
+2023-08-07 19:18:38.461 [ERROR] [HABApp.Rules                        ] -   File "/usr/lib/python3.9/runpy.py", line 268, in run_path
+2023-08-07 19:18:38.461 [ERROR] [HABApp.Rules                        ] -     return _run_module_code(code, init_globals, run_name,
+2023-08-07 19:18:38.461 [ERROR] [HABApp.Rules                        ] -   File "/usr/lib/python3.9/runpy.py", line 97, in _run_module_code
+2023-08-07 19:18:38.461 [ERROR] [HABApp.Rules                        ] -     _run_code(code, mod_globals, init_globals,
+2023-08-07 19:18:38.461 [ERROR] [HABApp.Rules                        ] -   File "/usr/lib/python3.9/runpy.py", line 87, in _run_code
+2023-08-07 19:18:38.461 [ERROR] [HABApp.Rules                        ] -     exec(code, run_globals)
+2023-08-07 19:18:38.461 [ERROR] [HABApp.Rules                        ] -   File "/etc/openhab/habapp/rules/mp3_player_mode.py", line 20, in mp3_player_mode.py
+2023-08-07 19:18:38.461 [ERROR] [HABApp.Rules                        ] -     from SecurityDoorWindowStatemachine import SecurityDoorWindowStatemachine, get_state_machine_graph
+2023-08-07 19:18:38.461 [ERROR] [HABApp.Rules                        ] - ModuleNotFoundError: No module named 'SecurityDoorWindowStatemachine'
+2023-08-07 19:18:38.463 [WARN ] [HABApp.Rules                        ] - Failed to load /etc/openhab/habapp/rules/mp3_player_mode.py!
+2023-08-07 19:19:06.103 [ERROR] [HABApp.Rules                        ] - Error "No module named 'SecurityDoorWindowStatemachine'" in load:
+2023-08-07 19:19:06.103 [ERROR] [HABApp.Rules                        ] - Could not load /etc/openhab/habapp/rules/mp3_player_mode.py!
+2023-08-07 19:19:06.104 [ERROR] [HABApp.Rules                        ] - File "/etc/openhab/habapp/rules/mp3_player_mode.py", line 20 in mp3_player_mode.py
+2023-08-07 19:19:06.104 [ERROR] [HABApp.Rules                        ] - --------------------------------------------------------------------------------
+2023-08-07 19:19:06.104 [ERROR] [HABApp.Rules                        ] -      15 | log = logging.getLogger('MP3PlayerMode')
+2023-08-07 19:19:06.104 [ERROR] [HABApp.Rules                        ] -      17 | OH_CONF = "/etc/openhab/"  # os.getenv('OPENHAB_CONF')
+2023-08-07 19:19:06.104 [ERROR] [HABApp.Rules                        ] -      19 | sys.path.append(os.path.join(OH_CONF, "automation/lib/python/personal"))
+2023-08-07 19:19:06.105 [ERROR] [HABApp.Rules                        ] - -->  20 | from SecurityDoorWindowStatemachine import SecurityDoorWindowStatemachine, get_state_machine_graph
+2023-08-07 19:19:06.105 [ERROR] [HABApp.Rules                        ] -      22 | MP3_PLAYER_STATE_MACHINE = SecurityDoorWindowStatemachine(
+2023-08-07 19:19:06.105 [ERROR] [HABApp.Rules                        ] -      23 |     "Kueche", log)
+2023-08-07 19:19:06.105 [ERROR] [HABApp.Rules                        ] -    ------------------------------------------------------------
+2023-08-07 19:19:06.105 [ERROR] [HABApp.Rules                        ] -      sys.path = ['/opt/habapp/bin', '/usr/lib/python39.zip', '/usr/lib/python3.9', '/usr/lib/python3.9/lib-dynload', '/opt/habapp/lib/python3.9/site-packages', '/etc/openhab/habapp/rules/', '/usr/lib/python3/dist-packages', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/usr/lib/python3/dist-packages', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/usr/lib/python3/dist-packages', '/etc/openhab/habapp/rules/', '/usr/lib/python3/dist-packages/', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/usr/lib/python3/dist-packages', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/etc/openhab/automation/lib/python/personal', '/etc/openhab/automation/lib/python/personal', '/etc/openhab/automation/lib/python/personal', '/etc/openhab/automation/lib/python/personal', '/etc/openhab/automation/lib/python/personal', '/etc/openhab/automation/lib/python/personal']
+2023-08-07 19:19:06.105 [ERROR] [HABApp.Rules                        ] -      log = <Logger MP3PlayerMode (DEBUG)>
+2023-08-07 19:19:06.105 [ERROR] [HABApp.Rules                        ] -      OH_CONF = '/etc/openhab/'
+2023-08-07 19:19:06.105 [ERROR] [HABApp.Rules                        ] -    ------------------------------------------------------------
+2023-08-07 19:19:06.105 [ERROR] [HABApp.Rules                        ] - 
+2023-08-07 19:19:06.106 [ERROR] [HABApp.Rules                        ] - --------------------------------------------------------------------------------
+2023-08-07 19:19:06.106 [ERROR] [HABApp.Rules                        ] - Traceback (most recent call last):
+2023-08-07 19:19:06.106 [ERROR] [HABApp.Rules                        ] -   File "/opt/habapp/lib/python3.9/site-packages/HABApp/rule_manager/rule_file.py", line 78, in load
+2023-08-07 19:19:06.106 [ERROR] [HABApp.Rules                        ] -     self.create_rules(created_rules)
+2023-08-07 19:19:06.106 [ERROR] [HABApp.Rules                        ] -   File "/opt/habapp/lib/python3.9/site-packages/HABApp/rule_manager/rule_file.py", line 68, in create_rules
+2023-08-07 19:19:06.106 [ERROR] [HABApp.Rules                        ] -     runpy.run_path(str(self.path), run_name=str(self.path), init_globals=rule_hook.in_dict())
+2023-08-07 19:19:06.106 [ERROR] [HABApp.Rules                        ] -   File "/usr/lib/python3.9/runpy.py", line 268, in run_path
+2023-08-07 19:19:06.106 [ERROR] [HABApp.Rules                        ] -     return _run_module_code(code, init_globals, run_name,
+2023-08-07 19:19:06.106 [ERROR] [HABApp.Rules                        ] -   File "/usr/lib/python3.9/runpy.py", line 97, in _run_module_code
+2023-08-07 19:19:06.106 [ERROR] [HABApp.Rules                        ] -     _run_code(code, mod_globals, init_globals,
+2023-08-07 19:19:06.107 [ERROR] [HABApp.Rules                        ] -   File "/usr/lib/python3.9/runpy.py", line 87, in _run_code
+2023-08-07 19:19:06.107 [ERROR] [HABApp.Rules                        ] -     exec(code, run_globals)
+2023-08-07 19:19:06.107 [ERROR] [HABApp.Rules                        ] -   File "/etc/openhab/habapp/rules/mp3_player_mode.py", line 20, in mp3_player_mode.py
+2023-08-07 19:19:06.107 [ERROR] [HABApp.Rules                        ] -     from SecurityDoorWindowStatemachine import SecurityDoorWindowStatemachine, get_state_machine_graph
+2023-08-07 19:19:06.107 [ERROR] [HABApp.Rules                        ] - ModuleNotFoundError: No module named 'SecurityDoorWindowStatemachine'
+2023-08-07 19:19:06.108 [WARN ] [HABApp.Rules                        ] - Failed to load /etc/openhab/habapp/rules/mp3_player_mode.py!
+2023-08-07 19:20:27.221 [INFO ] [HABApp.mqtt.connection              ] - Disconnect: No error. (0)
+2023-08-07 19:20:27.286 [WARN ] [HABApp.Rule                         ] - /opt/habapp/lib/python3.9/site-packages/HABApp/runtime/shutdown.py:71: ResourceWarning:unclosed file <_io.TextIOWrapper name='/etc/openhab/habapp/logging/HABApp_events.log' mode='a' encoding='utf-8'>

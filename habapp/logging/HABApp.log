@@ -1,0 +1,681 @@
+2023-08-07 19:20:30.280 [INFO ] [HABApp                              ] - HABApp Version 1.1.2
+2023-08-07 19:20:30.322 [INFO ] [HABApp.Config                       ] - Manual thing configuration disabled! Folder /etc/openhab/habapp/config does not exist!
+2023-08-07 19:20:30.336 [INFO ] [HABApp.mqtt.connection              ] - Connecting to 192.168.178.37:1883
+2023-08-07 19:20:30.347 [INFO ] [HABApp.mqtt.connection              ] - Connection Accepted.
+2023-08-07 19:20:30.495 [INFO ] [HABApp.openhab.connection           ] - Connected to OpenHAB version 3.4.4 (Release Build)
+2023-08-07 19:20:31.225 [WARN ] [HABApp.openhab.items                ] - Item HeizungKlavier_OperatingVoltage is a UoM item but "unit" is not found in item metadata
+2023-08-07 19:20:31.226 [WARN ] [HABApp.openhab.items                ] - Item openWeatherVorhersage_ForecastHours18_PrecipitationAmount is a UoM item but "unit" is not found in item metadata
+2023-08-07 19:20:31.226 [WARN ] [HABApp.openhab.items                ] - Item HeizungMika_PartySetPointTemperature is a UoM item but "unit" is not found in item metadata
+2023-08-07 19:20:31.227 [WARN ] [HABApp.openhab.items                ] - Item openWeatherVorhersage_Current_Windspeed is a UoM item but "unit" is not found in item metadata
+2023-08-07 19:20:31.229 [WARN ] [HABApp.openhab.items                ] - Item HeizungKlavier_ActualTemperature is a UoM item but "unit" is not found in item metadata
+2023-08-07 19:20:31.229 [WARN ] [HABApp.openhab.items                ] - Item HeizungSchlafzimmer_PartySetPointTemperature is a UoM item but "unit" is not found in item metadata
+2023-08-07 19:20:31.229 [WARN ] [HABApp.openhab.items                ] - Item openWeatherVorhersage_Current_PrecipitationAmount is a UoM item but "unit" is not found in item metadata
+2023-08-07 19:20:31.230 [WARN ] [HABApp.openhab.items                ] - Item openWeatherVorhersage_GefuehlteTemperatur is a UoM item but "unit" is not found in item metadata
+2023-08-07 19:20:31.232 [WARN ] [HABApp.openhab.items                ] - Item BewegungsmelderBuero_ChargingLevel is a UoM item but "unit" is not found in item metadata
+2023-08-07 19:20:31.233 [WARN ] [HABApp.openhab.items                ] - Item TempSensorErkerWeg_ChargeLevel is a UoM item but "unit" is not found in item metadata
+2023-08-07 19:20:31.233 [WARN ] [HABApp.openhab.items                ] - Item HeizungBad_OperatingVoltage is a UoM item but "unit" is not found in item metadata
+2023-08-07 19:20:31.234 [WARN ] [HABApp.openhab.items                ] - Item Sonnendaten_DiffuseStrahlung is a UoM item but "unit" is not found in item metadata
+2023-08-07 19:20:31.234 [WARN ] [HABApp.openhab.items                ] - Item HeizungSara_SetPointTemperature is a UoM item but "unit" is not found in item metadata
+2023-08-07 19:20:31.234 [WARN ] [HABApp.openhab.items                ] - Item FernbedienungTerrasse_ChargingLevel is a UoM item but "unit" is not found in item metadata
+2023-08-07 19:20:31.235 [WARN ] [HABApp.openhab.items                ] - Item WandThermostatKueche_SetPointTemperature is a UoM item but "unit" is not found in item metadata
+2023-08-07 19:20:31.236 [WARN ] [HABApp.openhab.items                ] - Item KlingelerkennungFlur_OperatingVoltage is a UoM item but "unit" is not found in item metadata
+2023-08-07 19:20:31.236 [WARN ] [HABApp.openhab.items                ] - Item gHeizungenBad_ActualTemperature is a UoM item but "unit" is not found in item metadata
+2023-08-07 19:20:31.238 [WARN ] [HABApp.openhab.items                ] - Item Sonnendaten_Set_Duration is a UoM item but "unit" is not found in item metadata
+2023-08-07 19:20:31.239 [WARN ] [HABApp.openhab.items                ] - Item HABPanel_Battery_Level is a UoM item but "unit" is not found in item metadata
+2023-08-07 19:20:31.240 [WARN ] [HABApp.openhab.items                ] - Item gHeizungenEsszimmer_SetPointTemperature is a UoM item but "unit" is not found in item metadata
+2023-08-07 19:20:31.240 [WARN ] [HABApp.openhab.items                ] - Item openWeatherVorhersage_Luftfeuchtigkeit is a UoM item but "unit" is not found in item metadata
+2023-08-07 19:20:31.241 [WARN ] [HABApp.openhab.items                ] - Item WandThermostatBad_SetPointTemperature is a UoM item but "unit" is not found in item metadata
+2023-08-07 19:20:31.243 [WARN ] [HABApp.openhab.items                ] - Item gHeizungenEsszimmer_PartySetPointTemperature is a UoM item but "unit" is not found in item metadata
+2023-08-07 19:20:31.245 [WARN ] [HABApp.openhab.items                ] - Item HeizungSofaSued_OperatingVoltage is a UoM item but "unit" is not found in item metadata
+2023-08-07 19:20:31.246 [WARN ] [HABApp.openhab.items                ] - Item gHeizungenSofa_PartySetPointTemperature is a UoM item but "unit" is not found in item metadata
+2023-08-07 19:20:31.248 [WARN ] [HABApp.openhab.items                ] - Item FernbedienungSchlafzimmer_ChargingLevel is a UoM item but "unit" is not found in item metadata
+2023-08-07 19:20:31.250 [WARN ] [HABApp.openhab.items                ] - Item HeizungFinnja_SetPointTemperature is a UoM item but "unit" is not found in item metadata
+2023-08-07 19:20:31.251 [WARN ] [HABApp.openhab.items                ] - Item MessSteckdose_Power is a UoM item but "unit" is not found in item metadata
+2023-08-07 19:20:31.253 [WARN ] [HABApp.openhab.items                ] - Item openWeatherVorhersage_ForecastHours06_PrecipitationAmount is a UoM item but "unit" is not found in item metadata
+2023-08-07 19:20:31.254 [WARN ] [HABApp.openhab.items                ] - Item Sonnendaten_Rise_Duration is a UoM item but "unit" is not found in item metadata
+2023-08-07 19:20:31.254 [WARN ] [HABApp.openhab.items                ] - Item TempSensorErkerWeg_ActualTemperature is a UoM item but "unit" is not found in item metadata
+2023-08-07 19:20:31.255 [WARN ] [HABApp.openhab.items                ] - Item WandThermostatKueche_PartySetPointTemperature is a UoM item but "unit" is not found in item metadata
+2023-08-07 19:20:31.255 [WARN ] [HABApp.openhab.items                ] - Item WandThermostatBad_ActualTemperature is a UoM item but "unit" is not found in item metadata
+2023-08-07 19:20:31.256 [WARN ] [HABApp.openhab.items                ] - Item openWeatherVorhersage_ForecastHours03_Temperature is a UoM item but "unit" is not found in item metadata
+2023-08-07 19:20:31.260 [WARN ] [HABApp.openhab.items                ] - Item HeizungGastWC_PartySetPointTemperature is a UoM item but "unit" is not found in item metadata
+2023-08-07 19:20:31.261 [WARN ] [HABApp.openhab.items                ] - Item openWeatherVorhersage_Current_Humidity is a UoM item but "unit" is not found in item metadata
+2023-08-07 19:20:31.265 [WARN ] [HABApp.openhab.items                ] - Item openWeatherVorhersage_ForecastHours12_PrecipitationAmount is a UoM item but "unit" is not found in item metadata
+2023-08-07 19:20:31.267 [WARN ] [HABApp.openhab.items                ] - Item HeizungBad_ActualTemperature is a UoM item but "unit" is not found in item metadata
+2023-08-07 19:20:31.267 [WARN ] [HABApp.openhab.items                ] - Item HeizungGastWC_OperatingVoltage is a UoM item but "unit" is not found in item metadata
+2023-08-07 19:20:31.269 [WARN ] [HABApp.openhab.items                ] - Item WandThermostatBad_OperatingVoltage is a UoM item but "unit" is not found in item metadata
+2023-08-07 19:20:31.271 [WARN ] [HABApp.openhab.items                ] - Item HeizungMika_OperatingVoltage is a UoM item but "unit" is not found in item metadata
+2023-08-07 19:20:31.273 [WARN ] [HABApp.openhab.items                ] - Item WandThermostatFlur_OperatingVoltage is a UoM item but "unit" is not found in item metadata
+2023-08-07 19:20:31.273 [WARN ] [HABApp.openhab.items                ] - Item HeizungSara_PartySetPointTemperature is a UoM item but "unit" is not found in item metadata
+2023-08-07 19:20:31.274 [WARN ] [HABApp.openhab.items                ] - Item WandThermostatBad_PartySetPointTemperature is a UoM item but "unit" is not found in item metadata
+2023-08-07 19:20:31.275 [WARN ] [HABApp.openhab.items                ] - Item openWeatherVorhersage_Windgeschwindigkeit is a UoM item but "unit" is not found in item metadata
+2023-08-07 19:20:31.275 [WARN ] [HABApp.openhab.items                ] - Item openWeatherVorhersage_Schnee is a UoM item but "unit" is not found in item metadata
+2023-08-07 19:20:31.276 [WARN ] [HABApp.openhab.items                ] - Item HeizungGastWC_ActualTemperature is a UoM item but "unit" is not found in item metadata
+2023-08-07 19:20:31.277 [WARN ] [HABApp.openhab.items                ] - Item HeizungSara_OperatingVoltage is a UoM item but "unit" is not found in item metadata
+2023-08-07 19:20:31.278 [WARN ] [HABApp.openhab.items                ] - Item openWeatherVorhersage_Current_Temperature is a UoM item but "unit" is not found in item metadata
+2023-08-07 19:20:31.278 [WARN ] [HABApp.openhab.items                ] - Item HeizungGastWC_SetPointTemperature is a UoM item but "unit" is not found in item metadata
+2023-08-07 19:20:31.278 [WARN ] [HABApp.openhab.items                ] - Item HeizungFinnja_ActualTemperature is a UoM item but "unit" is not found in item metadata
+2023-08-07 19:20:31.279 [WARN ] [HABApp.openhab.items                ] - Item Monddaten_BeleuchtungsStaerkeDesMondes is a UoM item but "unit" is not found in item metadata
+2023-08-07 19:20:31.280 [WARN ] [HABApp.openhab.items                ] - Item HeizungSofaSued_PartySetPointTemperature is a UoM item but "unit" is not found in item metadata
+2023-08-07 19:20:31.280 [WARN ] [HABApp.openhab.items                ] - Item BewegungsmelderAbstellraum_ChargingLevel is a UoM item but "unit" is not found in item metadata
+2023-08-07 19:20:31.280 [WARN ] [HABApp.openhab.items                ] - Item BewegungsmelderHaustuer_OperatingVoltage is a UoM item but "unit" is not found in item metadata
+2023-08-07 19:20:31.281 [WARN ] [HABApp.openhab.items                ] - Item MessSteckdose_Voltage is a UoM item but "unit" is not found in item metadata
+2023-08-07 19:20:31.282 [WARN ] [HABApp.openhab.items                ] - Item LichtSensorBrunnen_Beleuchtungsstarke is a UoM item but "unit" is not found in item metadata
+2023-08-07 19:20:31.283 [WARN ] [HABApp.openhab.items                ] - Item gHeizungenBad_SetPointTemperature is a UoM item but "unit" is not found in item metadata
+2023-08-07 19:20:31.283 [WARN ] [HABApp.openhab.items                ] - Item openWeatherVorhersage_ForecastHours03_PrecipitationAmount is a UoM item but "unit" is not found in item metadata
+2023-08-07 19:20:31.283 [WARN ] [HABApp.openhab.items                ] - Item TempSensorBrunnen_Temperatur is a UoM item but "unit" is not found in item metadata
+2023-08-07 19:20:31.284 [WARN ] [HABApp.openhab.items                ] - Item Mp3Spieler_OperatingVoltage is a UoM item but "unit" is not found in item metadata
+2023-08-07 19:20:31.285 [WARN ] [HABApp.openhab.items                ] - Item HeizungErker_SetPointTemperature is a UoM item but "unit" is not found in item metadata
+2023-08-07 19:20:31.286 [WARN ] [HABApp.openhab.items                ] - Item BewegungsmelderGaestezimmer_ChargingLevel is a UoM item but "unit" is not found in item metadata
+2023-08-07 19:20:31.288 [WARN ] [HABApp.openhab.items                ] - Item TemperaturHeizung_TemperaturUnterschied is a UoM item but "unit" is not found in item metadata
+2023-08-07 19:20:31.290 [WARN ] [HABApp.openhab.items                ] - Item BewegungsmelderWerkstatt_ChargingLevel is a UoM item but "unit" is not found in item metadata
+2023-08-07 19:20:31.291 [WARN ] [HABApp.openhab.items                ] - Item WandThermostatKueche_ActualTemperature is a UoM item but "unit" is not found in item metadata
+2023-08-07 19:20:31.292 [WARN ] [HABApp.openhab.items                ] - Item WandThermostatFlur_Humidity is a UoM item but "unit" is not found in item metadata
+2023-08-07 19:20:31.292 [WARN ] [HABApp.openhab.items                ] - Item HeizungSofaSued_ActualTemperature is a UoM item but "unit" is not found in item metadata
+2023-08-07 19:20:31.293 [WARN ] [HABApp.openhab.items                ] - Item Sonnendaten_Gesamtstrahlung is a UoM item but "unit" is not found in item metadata
+2023-08-07 19:20:31.294 [WARN ] [HABApp.openhab.items                ] - Item TemperaturHeizung_VorlaufTemperatur is a UoM item but "unit" is not found in item metadata
+2023-08-07 19:20:31.294 [WARN ] [HABApp.openhab.items                ] - Item HeizungBad_SetPointTemperature is a UoM item but "unit" is not found in item metadata
+2023-08-07 19:20:31.296 [WARN ] [HABApp.openhab.items                ] - Item WandThermostatFlur_PartySetPointTemperature is a UoM item but "unit" is not found in item metadata
+2023-08-07 19:20:31.296 [WARN ] [HABApp.openhab.items                ] - Item gHeizungenSofa_SetPointTemperature is a UoM item but "unit" is not found in item metadata
+2023-08-07 19:20:31.297 [WARN ] [HABApp.openhab.items                ] - Item openWeatherVorhersage_ForecastHours09_PrecipitationAmount is a UoM item but "unit" is not found in item metadata
+2023-08-07 19:20:31.297 [WARN ] [HABApp.openhab.items                ] - Item TempSensorEinfahrt_ActualTemperature is a UoM item but "unit" is not found in item metadata
+2023-08-07 19:20:31.298 [WARN ] [HABApp.openhab.items                ] - Item openWeatherVorhersage_Luftdruck is a UoM item but "unit" is not found in item metadata
+2023-08-07 19:20:31.298 [WARN ] [HABApp.openhab.items                ] - Item HeizungErker_OperatingVoltage is a UoM item but "unit" is not found in item metadata
+2023-08-07 19:20:31.299 [WARN ] [HABApp.openhab.items                ] - Item HeizungSofa_ActualTemperature is a UoM item but "unit" is not found in item metadata
+2023-08-07 19:20:31.299 [WARN ] [HABApp.openhab.items                ] - Item BewegungsmelderEinfahrt_ChargeLevel is a UoM item but "unit" is not found in item metadata
+2023-08-07 19:20:31.299 [WARN ] [HABApp.openhab.items                ] - Item LichtSensorErkerWeg_Beleuchtungsstaerke is a UoM item but "unit" is not found in item metadata
+2023-08-07 19:20:31.300 [WARN ] [HABApp.openhab.items                ] - Item HeizungErker_PartySetPointTemperature is a UoM item but "unit" is not found in item metadata
+2023-08-07 19:20:31.308 [WARN ] [HABApp.openhab.items                ] - Item HeizungKlavier_PartySetPointTemperature is a UoM item but "unit" is not found in item metadata
+2023-08-07 19:20:31.309 [WARN ] [HABApp.openhab.items                ] - Item WandThermostatFlur_SetPointTemperature is a UoM item but "unit" is not found in item metadata
+2023-08-07 19:20:31.310 [WARN ] [HABApp.openhab.items                ] - Item openWeatherVorhersage_ForecastHours15_PrecipitationAmount is a UoM item but "unit" is not found in item metadata
+2023-08-07 19:20:31.312 [WARN ] [HABApp.openhab.items                ] - Item SchlossWaschkueche_OperatingVoltage is a UoM item but "unit" is not found in item metadata
+2023-08-07 19:20:31.312 [WARN ] [HABApp.openhab.items                ] - Item MessSteckdose_Frequency is a UoM item but "unit" is not found in item metadata
+2023-08-07 19:20:31.313 [WARN ] [HABApp.openhab.items                ] - Item openWeatherVorhersage_ForecastHours21_PrecipitationAmount is a UoM item but "unit" is not found in item metadata
+2023-08-07 19:20:31.314 [WARN ] [HABApp.openhab.items                ] - Item HeizungSchlafzimmer_SetPointTemperature is a UoM item but "unit" is not found in item metadata
+2023-08-07 19:20:31.316 [WARN ] [HABApp.openhab.items                ] - Item gHeizungenBad_PartySetPointTemperature is a UoM item but "unit" is not found in item metadata
+2023-08-07 19:20:31.317 [WARN ] [HABApp.openhab.items                ] - Item HeizungSofa_PartySetPointTemperature is a UoM item but "unit" is not found in item metadata
+2023-08-07 19:20:31.317 [WARN ] [HABApp.openhab.items                ] - Item HeizungSofaSued_SetPointTemperature is a UoM item but "unit" is not found in item metadata
+2023-08-07 19:20:31.319 [WARN ] [HABApp.openhab.items                ] - Item openWeatherVorhersage_Windrichtung is a UoM item but "unit" is not found in item metadata
+2023-08-07 19:20:31.320 [WARN ] [HABApp.openhab.items                ] - Item openWeatherVorhersage_ForecastHours06_Temperature is a UoM item but "unit" is not found in item metadata
+2023-08-07 19:20:31.320 [WARN ] [HABApp.openhab.items                ] - Item openWeatherVorhersage_Sichtweite is a UoM item but "unit" is not found in item metadata
+2023-08-07 19:20:31.321 [WARN ] [HABApp.openhab.items                ] - Item BewegungsmelderErkerweg_ChargeLevel is a UoM item but "unit" is not found in item metadata
+2023-08-07 19:20:31.321 [WARN ] [HABApp.openhab.items                ] - Item gHeizungenSofa_ActualTemperature is a UoM item but "unit" is not found in item metadata
+2023-08-07 19:20:31.322 [WARN ] [HABApp.openhab.items                ] - Item openWeatherVorhersage_Bewoelkung is a UoM item but "unit" is not found in item metadata
+2023-08-07 19:20:31.324 [WARN ] [HABApp.openhab.items                ] - Item gHeizungenEsszimmer_ActualTemperature is a UoM item but "unit" is not found in item metadata
+2023-08-07 19:20:31.324 [WARN ] [HABApp.openhab.items                ] - Item openWeatherVorhersage_ForecastHours18_Temperature is a UoM item but "unit" is not found in item metadata
+2023-08-07 19:20:31.326 [WARN ] [HABApp.openhab.items                ] - Item LichtSensorEinfahrt_Beleuchtungsstaerke is a UoM item but "unit" is not found in item metadata
+2023-08-07 19:20:31.327 [WARN ] [HABApp.openhab.items                ] - Item HeizungSofa_SetPointTemperature is a UoM item but "unit" is not found in item metadata
+2023-08-07 19:20:31.328 [WARN ] [HABApp.openhab.items                ] - Item HeizungKlavier_SetPointTemperature is a UoM item but "unit" is not found in item metadata
+2023-08-07 19:20:31.329 [WARN ] [HABApp.openhab.items                ] - Item Sonnendaten_DirekteStrahlung is a UoM item but "unit" is not found in item metadata
+2023-08-07 19:20:31.329 [WARN ] [HABApp.openhab.items                ] - Item openWeatherVorhersage_ForecastHours12_Temperature is a UoM item but "unit" is not found in item metadata
+2023-08-07 19:20:31.331 [WARN ] [HABApp.openhab.items                ] - Item TuerSchuppen_OperatingVoltage is a UoM item but "unit" is not found in item metadata
+2023-08-07 19:20:31.331 [WARN ] [HABApp.openhab.items                ] - Item WandThermostatFlur_ActualTemperature is a UoM item but "unit" is not found in item metadata
+2023-08-07 19:20:31.332 [WARN ] [HABApp.openhab.items                ] - Item HeizungFinnja_PartySetPointTemperature is a UoM item but "unit" is not found in item metadata
+2023-08-07 19:20:31.332 [WARN ] [HABApp.openhab.items                ] - Item HeizungMika_SetPointTemperature is a UoM item but "unit" is not found in item metadata
+2023-08-07 19:20:31.333 [WARN ] [HABApp.openhab.items                ] - Item openWeatherVorhersage_ForecastHours09_Temperature is a UoM item but "unit" is not found in item metadata
+2023-08-07 19:20:31.334 [WARN ] [HABApp.openhab.items                ] - Item openWeatherVorhersage_ForecastToday_Mintemperature is a UoM item but "unit" is not found in item metadata
+2023-08-07 19:20:31.336 [WARN ] [HABApp.openhab.items                ] - Item WandThermostatBad_Humidity is a UoM item but "unit" is not found in item metadata
+2023-08-07 19:20:31.337 [WARN ] [HABApp.openhab.items                ] - Item openWeatherVorhersage_Current_Apparenttemperature is a UoM item but "unit" is not found in item metadata
+2023-08-07 19:20:31.337 [WARN ] [HABApp.openhab.items                ] - Item SchalterWohnzimmer_OperatingVoltage is a UoM item but "unit" is not found in item metadata
+2023-08-07 19:20:31.337 [WARN ] [HABApp.openhab.items                ] - Item HeizungErker_ActualTemperature is a UoM item but "unit" is not found in item metadata
+2023-08-07 19:20:31.338 [WARN ] [HABApp.openhab.items                ] - Item HeizungBad_PartySetPointTemperature is a UoM item but "unit" is not found in item metadata
+2023-08-07 19:20:31.339 [WARN ] [HABApp.openhab.items                ] - Item MessSteckdose_Energy_Counter is a UoM item but "unit" is not found in item metadata
+2023-08-07 19:20:31.340 [WARN ] [HABApp.openhab.items                ] - Item HeizungMika_ActualTemperature is a UoM item but "unit" is not found in item metadata
+2023-08-07 19:20:31.340 [WARN ] [HABApp.openhab.items                ] - Item HeizungSchlafzimmer_ActualTemperature is a UoM item but "unit" is not found in item metadata
+2023-08-07 19:20:31.341 [WARN ] [HABApp.openhab.items                ] - Item HeizungSofa_OperatingVoltage is a UoM item but "unit" is not found in item metadata
+2023-08-07 19:20:31.341 [WARN ] [HABApp.openhab.items                ] - Item HeizungSara_ActualTemperature is a UoM item but "unit" is not found in item metadata
+2023-08-07 19:20:31.341 [WARN ] [HABApp.openhab.items                ] - Item WandThermostatKueche_OperatingVoltage is a UoM item but "unit" is not found in item metadata
+2023-08-07 19:20:31.343 [WARN ] [HABApp.openhab.items                ] - Item openWeatherVorhersage_ForecastHours15_Temperature is a UoM item but "unit" is not found in item metadata
+2023-08-07 19:20:31.343 [WARN ] [HABApp.openhab.items                ] - Item HeizungSchlafzimmer_Operating_Voltage is a UoM item but "unit" is not found in item metadata
+2023-08-07 19:20:31.343 [WARN ] [HABApp.openhab.items                ] - Item HABPanel_Battery_Temp is a UoM item but "unit" is not found in item metadata
+2023-08-07 19:20:31.344 [WARN ] [HABApp.openhab.items                ] - Item openWeatherVorhersage_ForecastHours21_Temperature is a UoM item but "unit" is not found in item metadata
+2023-08-07 19:20:31.344 [WARN ] [HABApp.openhab.items                ] - Item BewegungsmelderGastWC_ChargingLevel is a UoM item but "unit" is not found in item metadata
+2023-08-07 19:20:31.345 [WARN ] [HABApp.openhab.items                ] - Item HeizungFinnja_OperatingVoltage is a UoM item but "unit" is not found in item metadata
+2023-08-07 19:20:31.346 [WARN ] [HABApp.openhab.items                ] - Item TemperaturHeizung_RuecklaufTemperatur is a UoM item but "unit" is not found in item metadata
+2023-08-07 19:20:31.347 [WARN ] [HABApp.openhab.items                ] - Item BewegungsmelderFlur_OperatingVoltage is a UoM item but "unit" is not found in item metadata
+2023-08-07 19:20:31.349 [INFO ] [HABApp.openhab.items                ] - Updated 1202 Items
+2023-08-07 19:20:33.170 [INFO ] [HABApp.openhab.items                ] - Updated 125 Things
+2023-08-07 19:20:34.408 [INFO ] [HABApp.Rules                        ] - Added rule "ContactSwitchMapper" from rules/ContactSwitchMapping.py
+2023-08-07 19:20:34.473 [INFO ] [HABApp.Rules                        ] - Added rule "AstralInfo" from rules/astral.py
+2023-08-07 19:20:35.734 [INFO ] [HABApp.Rules                        ] - Added rule "DoorLockStatemachineRule" from rules/doorlock_mode.py
+2023-08-07 19:20:36.104 [INFO ] [HABApp.Rules                        ] - Added rule "IkeaZigbeeDevices" from rules/ikea.py
+2023-08-07 19:20:36.105 [WARN ] [HABApp.Rule                         ] - Item "zigbee2mqtt/IKEA/Lampe/Terrasse_Pergola_Rechts" does not exist (yet)! self.listen_event in "IkeaZigbeeDevices" may not work as intended.
+2023-08-07 19:20:36.105 [WARN ] [HABApp.Rule                         ] - Item "zigbee2mqtt/IKEA/Lampe/Terrasse_Pergola_Alle" does not exist (yet)! self.listen_event in "IkeaZigbeeDevices" may not work as intended.
+2023-08-07 19:20:36.105 [WARN ] [HABApp.Rule                         ] - Item "zigbee2mqtt/IKEA/Bewegungsmelder/Gaestezimmer" does not exist (yet)! self.listen_event in "IkeaZigbeeDevices" may not work as intended.
+2023-08-07 19:20:36.106 [WARN ] [HABApp.Rule                         ] - Item "zigbee2mqtt/IKEA/Bewegungsmelder/Buero" does not exist (yet)! self.listen_event in "IkeaZigbeeDevices" may not work as intended.
+2023-08-07 19:20:36.106 [WARN ] [HABApp.Rule                         ] - Item "zigbee2mqtt/IKEA/Lampe/Terrasse_Pergola_Links" does not exist (yet)! self.listen_event in "IkeaZigbeeDevices" may not work as intended.
+2023-08-07 19:20:36.106 [WARN ] [HABApp.Rule                         ] - Item "zigbee2mqtt/IKEA/Lampe/Buero_Lampe" does not exist (yet)! self.listen_event in "IkeaZigbeeDevices" may not work as intended.
+2023-08-07 19:20:36.106 [WARN ] [HABApp.Rule                         ] - Item "zigbee2mqtt/IKEA/Fernbedienung/Terrasse" does not exist (yet)! self.listen_event in "IkeaZigbeeDevices" may not work as intended.
+2023-08-07 19:20:36.106 [WARN ] [HABApp.Rule                         ] - Item "zigbee2mqtt/IKEA/Fernbedienung/Schlafzimmer" does not exist (yet)! self.listen_event in "IkeaZigbeeDevices" may not work as intended.
+2023-08-07 19:20:36.106 [WARN ] [HABApp.Rule                         ] - Item "zigbee2mqtt/IKEA/Bewegungsmelder/GastWC" does not exist (yet)! self.listen_event in "IkeaZigbeeDevices" may not work as intended.
+2023-08-07 19:20:36.106 [WARN ] [HABApp.Rule                         ] - Item "zigbee2mqtt/IKEA/Bewegungsmelder/Werkstatt" does not exist (yet)! self.listen_event in "IkeaZigbeeDevices" may not work as intended.
+2023-08-07 19:20:36.106 [WARN ] [HABApp.Rule                         ] - Item "zigbee2mqtt/IKEA/Bewegungsmelder/Abstellraum" does not exist (yet)! self.listen_event in "IkeaZigbeeDevices" may not work as intended.
+2023-08-07 19:20:36.274 [ERROR] [HABApp.Rules                        ] - Error "No module named 'SecurityDoorWindowStatemachine'" in load:
+2023-08-07 19:20:36.274 [ERROR] [HABApp.Rules                        ] - Could not load /etc/openhab/habapp/rules/mp3_player_mode.py!
+2023-08-07 19:20:36.274 [ERROR] [HABApp.Rules                        ] - File "/etc/openhab/habapp/rules/mp3_player_mode.py", line 20 in mp3_player_mode.py
+2023-08-07 19:20:36.274 [ERROR] [HABApp.Rules                        ] - --------------------------------------------------------------------------------
+2023-08-07 19:20:36.274 [ERROR] [HABApp.Rules                        ] -      15 | log = logging.getLogger('MP3PlayerMode')
+2023-08-07 19:20:36.275 [ERROR] [HABApp.Rules                        ] -      17 | OH_CONF = "/etc/openhab/"  # os.getenv('OPENHAB_CONF')
+2023-08-07 19:20:36.275 [ERROR] [HABApp.Rules                        ] -      19 | sys.path.append(os.path.join(OH_CONF, "automation/lib/python/personal"))
+2023-08-07 19:20:36.275 [ERROR] [HABApp.Rules                        ] - -->  20 | from SecurityDoorWindowStatemachine import SecurityDoorWindowStatemachine, get_state_machine_graph
+2023-08-07 19:20:36.275 [ERROR] [HABApp.Rules                        ] -      22 | MP3_PLAYER_STATE_MACHINE = SecurityDoorWindowStatemachine(
+2023-08-07 19:20:36.275 [ERROR] [HABApp.Rules                        ] -      23 |     "Kueche", log)
+2023-08-07 19:20:36.275 [ERROR] [HABApp.Rules                        ] -    ------------------------------------------------------------
+2023-08-07 19:20:36.275 [ERROR] [HABApp.Rules                        ] -      sys.path = ['/opt/habapp/bin', '/usr/lib/python39.zip', '/usr/lib/python3.9', '/usr/lib/python3.9/lib-dynload', '/opt/habapp/lib/python3.9/site-packages', '/etc/openhab/habapp/rules/', '/etc/openhab/automation/lib/python/personal']
+2023-08-07 19:20:36.275 [ERROR] [HABApp.Rules                        ] -      log = <Logger MP3PlayerMode (DEBUG)>
+2023-08-07 19:20:36.275 [ERROR] [HABApp.Rules                        ] -      OH_CONF = '/etc/openhab/'
+2023-08-07 19:20:36.276 [ERROR] [HABApp.Rules                        ] -    ------------------------------------------------------------
+2023-08-07 19:20:36.276 [ERROR] [HABApp.Rules                        ] - 
+2023-08-07 19:20:36.276 [ERROR] [HABApp.Rules                        ] - --------------------------------------------------------------------------------
+2023-08-07 19:20:36.276 [ERROR] [HABApp.Rules                        ] - Traceback (most recent call last):
+2023-08-07 19:20:36.276 [ERROR] [HABApp.Rules                        ] -   File "/opt/habapp/lib/python3.9/site-packages/HABApp/rule_manager/rule_file.py", line 78, in load
+2023-08-07 19:20:36.276 [ERROR] [HABApp.Rules                        ] -     self.create_rules(created_rules)
+2023-08-07 19:20:36.276 [ERROR] [HABApp.Rules                        ] -   File "/opt/habapp/lib/python3.9/site-packages/HABApp/rule_manager/rule_file.py", line 68, in create_rules
+2023-08-07 19:20:36.276 [ERROR] [HABApp.Rules                        ] -     runpy.run_path(str(self.path), run_name=str(self.path), init_globals=rule_hook.in_dict())
+2023-08-07 19:20:36.276 [ERROR] [HABApp.Rules                        ] -   File "/usr/lib/python3.9/runpy.py", line 268, in run_path
+2023-08-07 19:20:36.276 [ERROR] [HABApp.Rules                        ] -     return _run_module_code(code, init_globals, run_name,
+2023-08-07 19:20:36.277 [ERROR] [HABApp.Rules                        ] -   File "/usr/lib/python3.9/runpy.py", line 97, in _run_module_code
+2023-08-07 19:20:36.277 [ERROR] [HABApp.Rules                        ] -     _run_code(code, mod_globals, init_globals,
+2023-08-07 19:20:36.277 [ERROR] [HABApp.Rules                        ] -   File "/usr/lib/python3.9/runpy.py", line 87, in _run_code
+2023-08-07 19:20:36.277 [ERROR] [HABApp.Rules                        ] -     exec(code, run_globals)
+2023-08-07 19:20:36.277 [ERROR] [HABApp.Rules                        ] -   File "/etc/openhab/habapp/rules/mp3_player_mode.py", line 20, in mp3_player_mode.py
+2023-08-07 19:20:36.277 [ERROR] [HABApp.Rules                        ] -     from SecurityDoorWindowStatemachine import SecurityDoorWindowStatemachine, get_state_machine_graph
+2023-08-07 19:20:36.277 [ERROR] [HABApp.Rules                        ] - ModuleNotFoundError: No module named 'SecurityDoorWindowStatemachine'
+2023-08-07 19:20:36.278 [WARN ] [HABApp.Rules                        ] - Failed to load /etc/openhab/habapp/rules/mp3_player_mode.py!
+2023-08-07 19:20:36.283 [WARN ] [HABApp.Rules                        ] - Found no instances of HABApp.Rule in /etc/openhab/habapp/rules/myFirstRule.py
+2023-08-07 19:20:36.287 [WARN ] [HABApp.Rules                        ] - Found no instances of HABApp.Rule in /etc/openhab/habapp/rules/myMqttRule.py
+2023-08-07 19:20:36.292 [WARN ] [HABApp.Rules                        ] - Found no instances of HABApp.Rule in /etc/openhab/habapp/rules/myOpenHABRule.py
+2023-08-07 19:20:36.406 [INFO ] [HABApp.Rules                        ] - Added rule "Zigbee2MqttBridge" from rules/myZigbeeToMqtt.py
+2023-08-07 19:20:36.420 [WARN ] [HABApp.Rules                        ] - Found no instances of HABApp.Rule in /etc/openhab/habapp/rules/statemachines/DoorLockStatemachine.py
+2023-08-07 19:20:36.431 [WARN ] [HABApp.Rules                        ] - Found no instances of HABApp.Rule in /etc/openhab/habapp/rules/statemachines/SecurityDoorWindowStatemachine.py
+2023-08-07 19:20:36.445 [WARN ] [HABApp.Rules                        ] - Found no instances of HABApp.Rule in /etc/openhab/habapp/rules/statemachines/ThermostatStatemachine.py
+2023-08-07 19:20:36.448 [WARN ] [HABApp.Rules                        ] - Found no instances of HABApp.Rule in /etc/openhab/habapp/rules/statemachines/__init__.py
+2023-08-07 19:20:36.456 [WARN ] [HABApp.Rules                        ] - Found no instances of HABApp.Rule in /etc/openhab/habapp/rules/statemachines/hue_offline_statemachine.py
+2023-08-07 19:20:50.257 [INFO ] [HABApp.Rules                        ] - Added rule "ThermostatStatemachineRule" from rules/thermostat_mode.py
+2023-08-07 19:20:50.279 [WARN ] [HABApp.Rules                        ] - Found no instances of HABApp.Rule in /etc/openhab/habapp/rules/tinkerforge_oh/BrickletIo16V2.py
+2023-08-07 19:20:50.285 [WARN ] [HABApp.Rules                        ] - Found no instances of HABApp.Rule in /etc/openhab/habapp/rules/tinkerforge_oh/BrickletIo16V2Switch.py
+2023-08-07 19:20:50.290 [WARN ] [HABApp.Rules                        ] - Found no instances of HABApp.Rule in /etc/openhab/habapp/rules/tinkerforge_oh/BrickletIo16V2Window.py
+2023-08-07 19:20:50.298 [WARN ] [HABApp.Rules                        ] - Found no instances of HABApp.Rule in /etc/openhab/habapp/rules/tinkerforge_oh/BrickletOut4.py
+2023-08-07 19:20:50.303 [WARN ] [HABApp.Rules                        ] - Found no instances of HABApp.Rule in /etc/openhab/habapp/rules/tinkerforge_oh/OhBase.py
+2023-08-07 19:20:50.307 [WARN ] [HABApp.Rules                        ] - Found no instances of HABApp.Rule in /etc/openhab/habapp/rules/tinkerforge_oh/TinkerforgeBase.py
+2023-08-07 19:20:50.311 [WARN ] [HABApp.Rules                        ] - Found no instances of HABApp.Rule in /etc/openhab/habapp/rules/tinkerforge_oh/__init__.py
+2023-08-07 19:20:53.925 [INFO ] [HABApp.Rules                        ] - Added rule "MyTinkerforgeRule" from rules/tinkerforge_oh_.py
+2023-08-07 19:20:53.925 [INFO ] [HABApp.Rules                        ] - Added rule "BrickletIo16V2Switch" from rules/tinkerforge_oh_.py
+2023-08-07 19:20:53.927 [INFO ] [HABApp.Rules                        ] - Added rule "BrickletIo16V2Switch.2" from rules/tinkerforge_oh_.py
+2023-08-07 19:20:53.927 [INFO ] [HABApp.Rules                        ] - Added rule "BrickletIo16V2Window" from rules/tinkerforge_oh_.py
+2023-08-07 19:20:53.927 [INFO ] [HABApp.Rules                        ] - Added rule "BrickletIo16V2Window.2" from rules/tinkerforge_oh_.py
+2023-08-07 19:20:53.927 [INFO ] [HABApp.Rules                        ] - Added rule "BrickletOut4" from rules/tinkerforge_oh_.py
+2023-08-07 19:20:53.927 [INFO ] [HABApp.Rules                        ] - Added rule "BrickletOut4.2" from rules/tinkerforge_oh_.py
+2023-08-07 19:20:53.928 [INFO ] [HABApp.Rules                        ] - Added rule "BrickletOut4.3" from rules/tinkerforge_oh_.py
+2023-08-07 19:20:53.928 [INFO ] [HABApp.Rules                        ] - Added rule "BrickletOut4.4" from rules/tinkerforge_oh_.py
+2023-08-07 19:20:53.928 [INFO ] [HABApp.Rules                        ] - Added rule "BrickletOut4.5" from rules/tinkerforge_oh_.py
+2023-08-07 19:20:53.928 [INFO ] [HABApp.Rules                        ] - Added rule "BrickletOut4.6" from rules/tinkerforge_oh_.py
+2023-08-07 19:20:53.929 [INFO ] [HABApp.Rules                        ] - Added rule "BrickletOut4.7" from rules/tinkerforge_oh_.py
+2023-08-07 19:20:53.929 [INFO ] [HABApp.Rules                        ] - Added rule "BrickletOut4.8" from rules/tinkerforge_oh_.py
+2023-08-07 19:20:53.930 [INFO ] [HABApp.Rules                        ] - Added rule "BrickletOut4.9" from rules/tinkerforge_oh_.py
+2023-08-07 19:20:53.930 [INFO ] [HABApp.Rules                        ] - Added rule "BrickletOut4.10" from rules/tinkerforge_oh_.py
+2023-08-07 19:21:31.862 [INFO ] [HABApp.openhab.things               ] - +--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+2023-08-07 19:21:31.863 [INFO ] [HABApp.openhab.things               ] - |                                                                                                          Things                                                                                                          |
+2023-08-07 19:21:31.863 [INFO ] [HABApp.openhab.things               ] - +-------------------------+--------------------------------+------------+-----------------------------------------------------+--------------------------------------------------------------------------------------------+
+2023-08-07 19:21:31.863 [INFO ] [HABApp.openhab.things               ] - |         Status          |             Label              |  Location  |                     Thing type                      |                                         Thing UID                                          |
+2023-08-07 19:21:31.863 [INFO ] [HABApp.openhab.things               ] - +-------------------------+--------------------------------+------------+-----------------------------------------------------+--------------------------------------------------------------------------------------------+
+2023-08-07 19:21:31.863 [INFO ] [HABApp.openhab.things               ] - |         ONLINE          | Monddaten                      | outside    | astro:moon                                          | astro:moon:local                                                                           |
+2023-08-07 19:21:31.863 [INFO ] [HABApp.openhab.things               ] - |         ONLINE          | Sonnendaten                    |            | astro:sun                                           | astro:sun:local                                                                            |
+2023-08-07 19:21:31.863 [INFO ] [HABApp.openhab.things               ] - |         ONLINE          | GATEWAY-EXTRAS                 |            | homematic:GATEWAY-EXTRAS-3014F711A061A7D70992B1AC   | homematic:GATEWAY-EXTRAS-3014F711A061A7D70992B1AC:3014F711A061A7D70992B1AC:GWE00000000     |
+2023-08-07 19:21:31.863 [INFO ] [HABApp.openhab.things               ] - |         ONLINE          | RaspiMaticGatewayExtras        |            | homematic:GATEWAY-EXTRAS-HOMEMATICBRIDGE-90F3312B69 | homematic:GATEWAY-EXTRAS-HOMEMATICBRIDGE-90F3312B69:homematicBridge-90f3312b69:GWE00000000 |
+2023-08-07 19:21:31.863 [INFO ] [HABApp.openhab.things               ] - |         ONLINE          | RaspiMaticVirtuelleTasten_HM   |            | homematic:HM-RCV-50                                 | homematic:HM-RCV-50:homematicBridge-90f3312b69:BidCoS-RF                                   |
+2023-08-07 19:21:31.864 [INFO ] [HABApp.openhab.things               ] - |         ONLINE          | SteckdoseHighboard             |            | homematic:HMIP-PS                                   | homematic:HMIP-PS:homematicBridge-90f3312b69:00021A498C85C0                                |
+2023-08-07 19:21:31.864 [INFO ] [HABApp.openhab.things               ] - |         ONLINE          | SteckdoseSchlafzimmer          |            | homematic:HMIP-PS                                   | homematic:HMIP-PS:homematicBridge-90f3312b69:00021A499BD90D                                |
+2023-08-07 19:21:31.864 [INFO ] [HABApp.openhab.things               ] - |         ONLINE          | MessSteckdose                  |            | homematic:HMIP-PSM                                  | homematic:HMIP-PSM:homematicBridge-90f3312b69:0001DBE9A61B20                               |
+2023-08-07 19:21:31.864 [INFO ] [HABApp.openhab.things               ] - |         OFFLINE         | TuerWerkstatt                  |            | homematic:HMIP-SWDO                                 | homematic:HMIP-SWDO:homematicBridge-90f3312b69:0000D7099A0DAE                              |
+2023-08-07 19:21:31.864 [INFO ] [HABApp.openhab.things               ] - |         OFFLINE         | TuerSchlafzimmer               |            | homematic:HMIP-SWDO                                 | homematic:HMIP-SWDO:homematicBridge-90f3312b69:0000D7099A0E53                              |
+2023-08-07 19:21:31.864 [INFO ] [HABApp.openhab.things               ] - |         ONLINE          | TuerGast                       |            | homematic:HMIP-SWDO                                 | homematic:HMIP-SWDO:homematicBridge-90f3312b69:0000D7099A0F25                              |
+2023-08-07 19:21:31.864 [INFO ] [HABApp.openhab.things               ] - |         OFFLINE         | TuerGastWC                     |            | homematic:HMIP-SWDO                                 | homematic:HMIP-SWDO:homematicBridge-90f3312b69:0000D7099A10DD                              |
+2023-08-07 19:21:31.864 [INFO ] [HABApp.openhab.things               ] - |         OFFLINE         | TuerHaustuer                   |            | homematic:HMIP-SWDO                                 | homematic:HMIP-SWDO:homematicBridge-90f3312b69:0000D7099A1117                              |
+2023-08-07 19:21:31.864 [INFO ] [HABApp.openhab.things               ] - |         OFFLINE         | TuerWaschkueche                |            | homematic:HMIP-SWDO                                 | homematic:HMIP-SWDO:homematicBridge-90f3312b69:0000D709A49B9F                              |
+2023-08-07 19:21:31.864 [INFO ] [HABApp.openhab.things               ] - |         OFFLINE         | DimmerMika                     |            | homematic:HmIP-BDT                                  | homematic:HmIP-BDT:homematicBridge-90f3312b69:0008DA498A1755                               |
+2023-08-07 19:21:31.865 [INFO ] [HABApp.openhab.things               ] - |         ONLINE          | SchlossWaschkueche             |            | homematic:HmIP-DLD                                  | homematic:HmIP-DLD:homematicBridge-90f3312b69:002A1BE9A79115                               |
+2023-08-07 19:21:31.865 [INFO ] [HABApp.openhab.things               ] - |         ONLINE          | KlingelerkennungFlur           |            | homematic:HmIP-DSD-PCB                              | homematic:HmIP-DSD-PCB:homematicBridge-90f3312b69:0026DBE998F796                           |
+2023-08-07 19:21:31.865 [INFO ] [HABApp.openhab.things               ] - |         ONLINE          | FussbodenHeizungAktor          |            | homematic:HmIP-FAL24-C6                             | homematic:HmIP-FAL24-C6:homematicBridge-90f3312b69:000615699CEC24                          |
+2023-08-07 19:21:31.865 [INFO ] [HABApp.openhab.things               ] - |         ONLINE          | RollladenSaraErker             |            | homematic:HmIP-FROLL                                | homematic:HmIP-FROLL:homematicBridge-90f3312b69:001157099AD940                             |
+2023-08-07 19:21:31.865 [INFO ] [HABApp.openhab.things               ] - |         ONLINE          | RollladenFinnjaOst             |            | homematic:HmIP-FROLL                                | homematic:HmIP-FROLL:homematicBridge-90f3312b69:001157099ADA08                             |
+2023-08-07 19:21:31.865 [INFO ] [HABApp.openhab.things               ] - |         ONLINE          | RollladenSaraWest              |            | homematic:HmIP-FROLL                                | homematic:HmIP-FROLL:homematicBridge-90f3312b69:001157099AE036                             |
+2023-08-07 19:21:31.865 [INFO ] [HABApp.openhab.things               ] - |         ONLINE          | RollladenMikaOst               |            | homematic:HmIP-FROLL                                | homematic:HmIP-FROLL:homematicBridge-90f3312b69:001158A98A51D6                             |
+2023-08-07 19:21:31.865 [INFO ] [HABApp.openhab.things               ] - |         ONLINE          | RollladenMikaErker             |            | homematic:HmIP-FROLL                                | homematic:HmIP-FROLL:homematicBridge-90f3312b69:001158A98A52B2                             |
+2023-08-07 19:21:31.865 [INFO ] [HABApp.openhab.things               ] - |         ONLINE          | RollladenBad                   | Bad        | homematic:HmIP-FROLL                                | homematic:HmIP-FROLL:homematicBridge-90f3312b69:001158A98A5325                             |
+2023-08-07 19:21:31.865 [INFO ] [HABApp.openhab.things               ] - |         ONLINE          | RollladenGastWC                | Gästebad   | homematic:HmIP-FROLL                                | homematic:HmIP-FROLL:homematicBridge-90f3312b69:001158A98A532B                             |
+2023-08-07 19:21:31.866 [INFO ] [HABApp.openhab.things               ] - |         ONLINE          | RollladenEsszimmerSued         |            | homematic:HmIP-FROLL                                | homematic:HmIP-FROLL:homematicBridge-90f3312b69:001158A98F1DE0                             |
+2023-08-07 19:21:31.866 [INFO ] [HABApp.openhab.things               ] - |         ONLINE          | RollladenSofaOst               |            | homematic:HmIP-FROLL                                | homematic:HmIP-FROLL:homematicBridge-90f3312b69:001158A98F1FBE                             |
+2023-08-07 19:21:31.866 [INFO ] [HABApp.openhab.things               ] - |         ONLINE          | RollladenWohnzimmerRechts      |            | homematic:HmIP-FROLL                                | homematic:HmIP-FROLL:homematicBridge-90f3312b69:001158A98F1FDF                             |
+2023-08-07 19:21:31.866 [INFO ] [HABApp.openhab.things               ] - |         ONLINE          | RollladenSofaSued              |            | homematic:HmIP-FROLL                                | homematic:HmIP-FROLL:homematicBridge-90f3312b69:001158A98F2032                             |
+2023-08-07 19:21:31.866 [INFO ] [HABApp.openhab.things               ] - |         ONLINE          | RollladenEsszimmerErker        |            | homematic:HmIP-FROLL                                | homematic:HmIP-FROLL:homematicBridge-90f3312b69:001158A98F22F7                             |
+2023-08-07 19:21:31.866 [INFO ] [HABApp.openhab.things               ] - |         ONLINE          | RollladenWohnzimmerLinks       |            | homematic:HmIP-FROLL                                | homematic:HmIP-FROLL:homematicBridge-90f3312b69:001158A98F23D0                             |
+2023-08-07 19:21:31.866 [INFO ] [HABApp.openhab.things               ] - |         ONLINE          | RollladenKuecheNord            |            | homematic:HmIP-FROLL                                | homematic:HmIP-FROLL:homematicBridge-90f3312b69:001158A9913764                             |
+2023-08-07 19:21:31.866 [INFO ] [HABApp.openhab.things               ] - |         ONLINE          | RollladenKuecheWest            |            | homematic:HmIP-FROLL                                | homematic:HmIP-FROLL:homematicBridge-90f3312b69:001158A991379B                             |
+2023-08-07 19:21:31.866 [INFO ] [HABApp.openhab.things               ] - |         ONLINE          | gHeizungenEsszimmer            |            | homematic:HmIP-HEATING                              | homematic:HmIP-HEATING:homematicBridge-90f3312b69:INT0000002                               |
+2023-08-07 19:21:31.866 [INFO ] [HABApp.openhab.things               ] - |         ONLINE          | gHeizungenBad                  |            | homematic:HmIP-HEATING                              | homematic:HmIP-HEATING:homematicBridge-90f3312b69:INT0000005                               |
+2023-08-07 19:21:31.867 [INFO ] [HABApp.openhab.things               ] - |         ONLINE          | gHeizungenSofa                 | Sofa       | homematic:HmIP-HEATING                              | homematic:HmIP-HEATING:homematicBridge-90f3312b69:INT0000006                               |
+2023-08-07 19:21:31.867 [INFO ] [HABApp.openhab.things               ] - |         ONLINE          | Mp3Spieler                     |            | homematic:HmIP-MP3P                                 | homematic:HmIP-MP3P:homematicBridge-90f3312b69:00151D899FFF00                              |
+2023-08-07 19:21:31.867 [INFO ] [HABApp.openhab.things               ] - |         ONLINE          | RaspiMaticVirtuelleTasten_HMIP |            | homematic:HmIP-RCV-50                               | homematic:HmIP-RCV-50:homematicBridge-90f3312b69:HmIP-RCV-1                                |
+2023-08-07 19:21:31.867 [INFO ] [HABApp.openhab.things               ] - |         ONLINE          | BewegungsmelderFlur            |            | homematic:HmIP-SMI                                  | homematic:HmIP-SMI:homematicBridge-90f3312b69:00091BE998EDBE                               |
+2023-08-07 19:21:31.867 [INFO ] [HABApp.openhab.things               ] - |         OFFLINE         | BewegungsmelderHaustuer        |            | homematic:HmIP-SMO                                  | homematic:HmIP-SMO:homematicBridge-90f3312b69:00095709933B13                               |
+2023-08-07 19:21:31.867 [INFO ] [HABApp.openhab.things               ] - |         ONLINE          | TemperaturHeizung              |            | homematic:HmIP-STE2-PCB                             | homematic:HmIP-STE2-PCB:homematicBridge-90f3312b69:00281F29963704                          |
+2023-08-07 19:21:31.867 [INFO ] [HABApp.openhab.things               ] - |         ONLINE          | WandThermostatBad              | Bad        | homematic:HmIP-STHD                                 | homematic:HmIP-STHD:homematicBridge-90f3312b69:000E9569A31746                              |
+2023-08-07 19:21:31.867 [INFO ] [HABApp.openhab.things               ] - |         ONLINE          | TuerSchuppen                   |            | homematic:HmIP-SWDM                                 | homematic:HmIP-SWDM:homematicBridge-90f3312b69:00155BE9907B1F                              |
+2023-08-07 19:21:31.867 [INFO ] [HABApp.openhab.things               ] - |         ONLINE          | SchalterWohnzimmer             |            | homematic:HmIP-WRC6                                 | homematic:HmIP-WRC6:homematicBridge-90f3312b69:000B57098ECE03                              |
+2023-08-07 19:21:31.867 [INFO ] [HABApp.openhab.things               ] - |         ONLINE          | WandThermostatFlur             | Flur       | homematic:HmIP-WTH-2                                | homematic:HmIP-WTH-2:homematicBridge-90f3312b69:000A9709A5FD99                             |
+2023-08-07 19:21:31.868 [INFO ] [HABApp.openhab.things               ] - |         ONLINE          | WandThermostatKueche           | Küche      | homematic:HmIP-WTH-2                                | homematic:HmIP-WTH-2:homematicBridge-90f3312b69:000A9709A5FE82                             |
+2023-08-07 19:21:31.868 [INFO ] [HABApp.openhab.things               ] - |         ONLINE          | HeizungKlavier                 |            | homematic:HmIP-eTRV-2                               | homematic:HmIP-eTRV-2:homematicBridge-90f3312b69:000A1709A1D513                            |
+2023-08-07 19:21:31.868 [INFO ] [HABApp.openhab.things               ] - |         ONLINE          | HeizungMika                    | Mika       | homematic:HmIP-eTRV-2                               | homematic:HmIP-eTRV-2:homematicBridge-90f3312b69:000A1709A1EF50                            |
+2023-08-07 19:21:31.868 [INFO ] [HABApp.openhab.things               ] - |         ONLINE          | HeizungSofa                    |            | homematic:HmIP-eTRV-2                               | homematic:HmIP-eTRV-2:homematicBridge-90f3312b69:000A1709A49FA1                            |
+2023-08-07 19:21:31.868 [INFO ] [HABApp.openhab.things               ] - |         ONLINE          | HeizungBad                     |            | homematic:HmIP-eTRV-2                               | homematic:HmIP-eTRV-2:homematicBridge-90f3312b69:000A1709A651A7                            |
+2023-08-07 19:21:31.868 [INFO ] [HABApp.openhab.things               ] - |         ONLINE          | HeizungSara                    | Sara       | homematic:HmIP-eTRV-2                               | homematic:HmIP-eTRV-2:homematicBridge-90f3312b69:000A1709A6557D                            |
+2023-08-07 19:21:31.868 [INFO ] [HABApp.openhab.things               ] - |         ONLINE          | HeizungErker                   |            | homematic:HmIP-eTRV-2                               | homematic:HmIP-eTRV-2:homematicBridge-90f3312b69:000A1709A65D72                            |
+2023-08-07 19:21:31.868 [INFO ] [HABApp.openhab.things               ] - |         ONLINE          | HeizungFinnja                  | Finnja     | homematic:HmIP-eTRV-2                               | homematic:HmIP-eTRV-2:homematicBridge-90f3312b69:000A1709A668C8                            |
+2023-08-07 19:21:31.868 [INFO ] [HABApp.openhab.things               ] - |         ONLINE          | HeizungSchlafzimmer            |            | homematic:HmIP-eTRV-B                               | homematic:HmIP-eTRV-B:3014F711A061A7D70992B1AC:00201A4997ADCF                              |
+2023-08-07 19:21:31.868 [INFO ] [HABApp.openhab.things               ] - |         ONLINE          | HeizungGastWC                  | GastWC     | homematic:HmIP-eTRV-C                               | homematic:HmIP-eTRV-C:homematicBridge-90f3312b69:001198A99FACE1                            |
+2023-08-07 19:21:31.869 [INFO ] [HABApp.openhab.things               ] - |         ONLINE          | HeizungSofaSued                | Sofa       | homematic:HmIP-eTRV-C                               | homematic:HmIP-eTRV-C:homematicBridge-90f3312b69:001198A9ABA753                            |
+2023-08-07 19:21:31.869 [INFO ] [HABApp.openhab.things               ] - |         ONLINE          | eQ3-HmIP-CCU3-App              |            | homematic:bridge                                    | homematic:bridge:3014F711A061A7D70992B1AC                                                  |
+2023-08-07 19:21:31.869 [INFO ] [HABApp.openhab.things               ] - |         ONLINE          | Homematic Bridge               | Büro       | homematic:bridge                                    | homematic:bridge:homematicBridge-90f3312b69                                                |
+2023-08-07 19:21:31.869 [INFO ] [HABApp.openhab.things               ] - |         OFFLINE         | SteckdoseWerkstatt             |            | hue:0010                                            | hue:0010:ecb5fa2c8738:10                                                                   |
+2023-08-07 19:21:31.869 [INFO ] [HABApp.openhab.things               ] - |         ONLINE          | SteckdoseSchwibbogen           |            | hue:0010                                            | hue:0010:ecb5fa2c8738:19                                                                   |
+2023-08-07 19:21:31.869 [INFO ] [HABApp.openhab.things               ] - |         ONLINE          | SteckdoseEsszimmer             |            | hue:0010                                            | hue:0010:ecb5fa2c8738:20                                                                   |
+2023-08-07 19:21:31.869 [INFO ] [HABApp.openhab.things               ] - |         ONLINE          | SteckdoseAußen                 |            | hue:0010                                            | hue:0010:ecb5fa2c8738:21                                                                   |
+2023-08-07 19:21:31.869 [INFO ] [HABApp.openhab.things               ] - |         ONLINE          | HABPanelLadung                 |            | hue:0010                                            | hue:0010:ecb5fa2c8738:9                                                                    |
+2023-08-07 19:21:31.869 [INFO ] [HABApp.openhab.things               ] - |         OFFLINE         | LichtTerrasse                  |            | hue:0100                                            | hue:0100:ecb5fa2c8738:17                                                                   |
+2023-08-07 19:21:31.869 [INFO ] [HABApp.openhab.things               ] - |         ONLINE          | LichtGrillbereich              |            | hue:0100                                            | hue:0100:ecb5fa2c8738:23                                                                   |
+2023-08-07 19:21:31.870 [INFO ] [HABApp.openhab.things               ] - |         ONLINE          | GartenTreppe                   |            | hue:0100                                            | hue:0100:ecb5fa2c8738:24                                                                   |
+2023-08-07 19:21:31.870 [INFO ] [HABApp.openhab.things               ] - |         ONLINE          | LichtSensorBrunnen             |            | hue:0106                                            | hue:0106:ecb5fa2c8738:106                                                                  |
+2023-08-07 19:21:31.870 [INFO ] [HABApp.openhab.things               ] - |         ONLINE          | LichtSensorEinfahrt            |            | hue:0106                                            | hue:0106:ecb5fa2c8738:3                                                                    |
+2023-08-07 19:21:31.870 [INFO ] [HABApp.openhab.things               ] - |         ONLINE          | LichtSensorErkerWeg            |            | hue:0106                                            | hue:0106:ecb5fa2c8738:32                                                                   |
+2023-08-07 19:21:31.870 [INFO ] [HABApp.openhab.things               ] - |         ONLINE          | BewegungsmelderBrunnen         |            | hue:0107                                            | hue:0107:ecb5fa2c8738:105                                                                  |
+2023-08-07 19:21:31.870 [INFO ] [HABApp.openhab.things               ] - |         ONLINE          | BewegungsmelderEinfahrt        |            | hue:0107                                            | hue:0107:ecb5fa2c8738:2                                                                    |
+2023-08-07 19:21:31.870 [INFO ] [HABApp.openhab.things               ] - |         ONLINE          | BewegungsmelderErkerweg        |            | hue:0107                                            | hue:0107:ecb5fa2c8738:31                                                                   |
+2023-08-07 19:21:31.870 [INFO ] [HABApp.openhab.things               ] - |         ONLINE          | Fernseher LEDStrip             |            | hue:0210                                            | hue:0210:ecb5fa2c8738:5                                                                    |
+2023-08-07 19:21:31.870 [INFO ] [HABApp.openhab.things               ] - |         ONLINE          | EinfahrtHue1                   |            | hue:0220                                            | hue:0220:ecb5fa2c8738:11                                                                   |
+2023-08-07 19:21:31.870 [INFO ] [HABApp.openhab.things               ] - |         ONLINE          | EinfahrtHue2                   | Einfahrt   | hue:0220                                            | hue:0220:ecb5fa2c8738:12                                                                   |
+2023-08-07 19:21:31.871 [INFO ] [HABApp.openhab.things               ] - |         ONLINE          | EinfahrtHue3                   |            | hue:0220                                            | hue:0220:ecb5fa2c8738:13                                                                   |
+2023-08-07 19:21:31.871 [INFO ] [HABApp.openhab.things               ] - |         ONLINE          | EinfahrtHue4                   | Einfahrt   | hue:0220                                            | hue:0220:ecb5fa2c8738:14                                                                   |
+2023-08-07 19:21:31.871 [INFO ] [HABApp.openhab.things               ] - |         ONLINE          | EinfahrtHueWand                | Einfahrt   | hue:0220                                            | hue:0220:ecb5fa2c8738:15                                                                   |
+2023-08-07 19:21:31.871 [INFO ] [HABApp.openhab.things               ] - |         ONLINE          | ErkerwegKueche                 |            | hue:0220                                            | hue:0220:ecb5fa2c8738:16                                                                   |
+2023-08-07 19:21:31.871 [INFO ] [HABApp.openhab.things               ] - |         OFFLINE         | Brunnen                        |            | hue:0220                                            | hue:0220:ecb5fa2c8738:18                                                                   |
+2023-08-07 19:21:31.871 [INFO ] [HABApp.openhab.things               ] - |         ONLINE          | Erkerweg1                      |            | hue:0220                                            | hue:0220:ecb5fa2c8738:3                                                                    |
+2023-08-07 19:21:31.871 [INFO ] [HABApp.openhab.things               ] - |         ONLINE          | Erkerweg3                      |            | hue:0220                                            | hue:0220:ecb5fa2c8738:4                                                                    |
+2023-08-07 19:21:31.871 [INFO ] [HABApp.openhab.things               ] - |         ONLINE          | Schuppen                       |            | hue:0220                                            | hue:0220:ecb5fa2c8738:6                                                                    |
+2023-08-07 19:21:31.871 [INFO ] [HABApp.openhab.things               ] - |         ONLINE          | Erkerweg2                      |            | hue:0220                                            | hue:0220:ecb5fa2c8738:7                                                                    |
+2023-08-07 19:21:31.871 [INFO ] [HABApp.openhab.things               ] - |         ONLINE          | Erkerweg4                      |            | hue:0220                                            | hue:0220:ecb5fa2c8738:8                                                                    |
+2023-08-07 19:21:31.872 [INFO ] [HABApp.openhab.things               ] - |         ONLINE          | TempSensorBrunnen              |            | hue:0302                                            | hue:0302:ecb5fa2c8738:107                                                                  |
+2023-08-07 19:21:31.872 [INFO ] [HABApp.openhab.things               ] - |         ONLINE          | TempSensorErkerWeg             |            | hue:0302                                            | hue:0302:ecb5fa2c8738:33                                                                   |
+2023-08-07 19:21:31.872 [INFO ] [HABApp.openhab.things               ] - |         ONLINE          | TempSensorEinfahrt             |            | hue:0302                                            | hue:0302:ecb5fa2c8738:4                                                                    |
+2023-08-07 19:21:31.872 [INFO ] [HABApp.openhab.things               ] - |         ONLINE          | PhilipsHue                     | Büro       | hue:bridge                                          | hue:bridge:ecb5fa2c8738                                                                    |
+2023-08-07 19:21:31.872 [INFO ] [HABApp.openhab.things               ] - |         ONLINE          | Hue Raum Wohnzimmer            |            | hue:group                                           | hue:group:ecb5fa2c8738:1                                                                   |
+2023-08-07 19:21:31.872 [INFO ] [HABApp.openhab.things               ] - |         ONLINE          | Hue Raum Brunnen               |            | hue:group                                           | hue:group:ecb5fa2c8738:10                                                                  |
+2023-08-07 19:21:31.872 [INFO ] [HABApp.openhab.things               ] - |         ONLINE          | Hue Raum Grillbereich          |            | hue:group                                           | hue:group:ecb5fa2c8738:11                                                                  |
+2023-08-07 19:21:31.872 [INFO ] [HABApp.openhab.things               ] - |         ONLINE          | Hue Zone Garten                |            | hue:group                                           | hue:group:ecb5fa2c8738:13                                                                  |
+2023-08-07 19:21:31.872 [INFO ] [HABApp.openhab.things               ] - |         ONLINE          | Hue Raum Hausecke              |            | hue:group                                           | hue:group:ecb5fa2c8738:14                                                                  |
+2023-08-07 19:21:31.872 [INFO ] [HABApp.openhab.things               ] - |         ONLINE          | Hue Zone Erdgeschoss           |            | hue:group                                           | hue:group:ecb5fa2c8738:15                                                                  |
+2023-08-07 19:21:31.873 [INFO ] [HABApp.openhab.things               ] - |         ONLINE          | Hue Zone Keller                |            | hue:group                                           | hue:group:ecb5fa2c8738:16                                                                  |
+2023-08-07 19:21:31.873 [INFO ] [HABApp.openhab.things               ] - |         ONLINE          | Hue Zone Sofa                  |            | hue:group                                           | hue:group:ecb5fa2c8738:18                                                                  |
+2023-08-07 19:21:31.873 [INFO ] [HABApp.openhab.things               ] - |         ONLINE          | Hue Zone TV                    |            | hue:group                                           | hue:group:ecb5fa2c8738:19                                                                  |
+2023-08-07 19:21:31.873 [INFO ] [HABApp.openhab.things               ] - |         ONLINE          | Hue Raum Einfahrt              |            | hue:group                                           | hue:group:ecb5fa2c8738:2                                                                   |
+2023-08-07 19:21:31.873 [INFO ] [HABApp.openhab.things               ] - |         ONLINE          | Hue Raum Erkerweg              |            | hue:group                                           | hue:group:ecb5fa2c8738:3                                                                   |
+2023-08-07 19:21:31.873 [INFO ] [HABApp.openhab.things               ] - |         ONLINE          | Hue Raum Werkstatt             |            | hue:group                                           | hue:group:ecb5fa2c8738:4                                                                   |
+2023-08-07 19:21:31.873 [INFO ] [HABApp.openhab.things               ] - |         ONLINE          | Hue Raum Küche                 |            | hue:group                                           | hue:group:ecb5fa2c8738:5                                                                   |
+2023-08-07 19:21:31.873 [INFO ] [HABApp.openhab.things               ] - |         ONLINE          | Hue Gruppe Lichter             |            | hue:group                                           | hue:group:ecb5fa2c8738:6                                                                   |
+2023-08-07 19:21:31.873 [INFO ] [HABApp.openhab.things               ] - |         ONLINE          | Hue Gruppe Steckdosen          |            | hue:group                                           | hue:group:ecb5fa2c8738:7                                                                   |
+2023-08-07 19:21:31.873 [INFO ] [HABApp.openhab.things               ] - |         ONLINE          | Hue Raum Schuppen              |            | hue:group                                           | hue:group:ecb5fa2c8738:8                                                                   |
+2023-08-07 19:21:31.874 [INFO ] [HABApp.openhab.things               ] - |         ONLINE          | Hue Raum Terrasse              |            | hue:group                                           | hue:group:ecb5fa2c8738:9                                                                   |
+2023-08-07 19:21:31.874 [INFO ] [HABApp.openhab.things               ] - |         ONLINE          | AbfallKalender                 |            | icalendar:calendar                                  | icalendar:calendar:GarbageCalender                                                         |
+2023-08-07 19:21:31.874 [INFO ] [HABApp.openhab.things               ] - |         ONLINE          | AbfallGelbeTonne               |            | icalendar:eventfilter                               | icalendar:eventfilter:GarbageCalender:1de10f492e                                           |
+2023-08-07 19:21:31.874 [INFO ] [HABApp.openhab.things               ] - |         ONLINE          | AbfallNächster                 |            | icalendar:eventfilter                               | icalendar:eventfilter:GarbageCalender:55d48e7e5f                                           |
+2023-08-07 19:21:31.874 [INFO ] [HABApp.openhab.things               ] - |         ONLINE          | AbfallRestmüll                 |            | icalendar:eventfilter                               | icalendar:eventfilter:GarbageCalender:5bbb342f9b                                           |
+2023-08-07 19:21:31.874 [INFO ] [HABApp.openhab.things               ] - |         ONLINE          | AbfallAltpapier                |            | icalendar:eventfilter                               | icalendar:eventfilter:GarbageCalender:d577d3f917                                           |
+2023-08-07 19:21:31.874 [INFO ] [HABApp.openhab.things               ] - |         ONLINE          | AbfallBiomüll                  |            | icalendar:eventfilter                               | icalendar:eventfilter:GarbageCalender:ee74bba5dd                                           |
+2023-08-07 19:21:31.874 [INFO ] [HABApp.openhab.things               ] - |         ONLINE          | Sara Handy iPhone              |            | network:pingdevice                                  | network:pingdevice:192_168_178_43                                                          |
+2023-08-07 19:21:31.874 [INFO ] [HABApp.openhab.things               ] - |         ONLINE          | Finnja Handy iPhone            |            | network:pingdevice                                  | network:pingdevice:192_168_178_59                                                          |
+2023-08-07 19:21:31.875 [INFO ] [HABApp.openhab.things               ] - |         ONLINE          | Kristiina Handy (S20-FE)       |            | network:pingdevice                                  | network:pingdevice:192_168_178_80                                                          |
+2023-08-07 19:21:31.875 [INFO ] [HABApp.openhab.things               ] - |         ONLINE          | Michael Handy (iPhone)         |            | network:pingdevice                                  | network:pingdevice:192_168_178_92                                                          |
+2023-08-07 19:21:31.875 [INFO ] [HABApp.openhab.things               ] - |         ONLINE          | Reolink Haustür                |            | network:pingdevice                                  | network:pingdevice:192_168_178_94                                                          |
+2023-08-07 19:21:31.875 [INFO ] [HABApp.openhab.things               ] - |         ONLINE          | Reolink WLAN                   |            | network:pingdevice                                  | network:pingdevice:192_168_178_95                                                          |
+2023-08-07 19:21:31.875 [INFO ] [HABApp.openhab.things               ] - |         ONLINE          | Reolink Terrasse               |            | network:pingdevice                                  | network:pingdevice:192_168_178_97                                                          |
+2023-08-07 19:21:31.875 [INFO ] [HABApp.openhab.things               ] - |         ONLINE          | Mika Handy iPhone              |            | network:pingdevice                                  | network:pingdevice:192_168_178_98                                                          |
+2023-08-07 19:21:31.875 [INFO ] [HABApp.openhab.things               ] - |         ONLINE          | Zeit                           |            | ntp:ntp                                             | ntp:ntp:local                                                                              |
+2023-08-07 19:21:31.875 [INFO ] [HABApp.openhab.things               ] - |         ONLINE          | openWeatherLuftverschmutzung   |            | openweathermap:air-pollution                        | openweathermap:air-pollution:openweatherBridge:local                                       |
+2023-08-07 19:21:31.875 [INFO ] [HABApp.openhab.things               ] - |         ONLINE          | openWeatherVorhersage          |            | openweathermap:weather-and-forecast                 | openweathermap:weather-and-forecast:openweatherBridge:local                                |
+2023-08-07 19:21:31.875 [INFO ] [HABApp.openhab.things               ] - |         ONLINE          | openWeatherMapBridge           |            | openweathermap:weather-api                          | openweathermap:weather-api:openWeatherMapBridge                                            |
+2023-08-07 19:21:31.876 [INFO ] [HABApp.openhab.things               ] - |         ONLINE          | FRITZ!Box 4040                 | Wohnzimmer | tr064:fritzbox                                      | tr064:fritzbox:firtzbox-4040-51bdd9de39                                                    |
+2023-08-07 19:21:31.876 [INFO ] [HABApp.openhab.things               ] - +-------------------------+--------------------------------+------------+-----------------------------------------------------+--------------------------------------------------------------------------------------------+
+2023-08-07 19:21:58.704 [ERROR] [HABApp.Rules                        ] - Error "No module named 'SecurityDoorWindowStatemachine'" in load:
+2023-08-07 19:21:58.705 [ERROR] [HABApp.Rules                        ] - Could not load /etc/openhab/habapp/rules/mp3_player_mode.py!
+2023-08-07 19:21:58.705 [ERROR] [HABApp.Rules                        ] - File "/etc/openhab/habapp/rules/mp3_player_mode.py", line 20 in mp3_player_mode.py
+2023-08-07 19:21:58.705 [ERROR] [HABApp.Rules                        ] - --------------------------------------------------------------------------------
+2023-08-07 19:21:58.705 [ERROR] [HABApp.Rules                        ] -      15 | log = logging.getLogger('MP3PlayerMode')
+2023-08-07 19:21:58.705 [ERROR] [HABApp.Rules                        ] -      17 | OH_CONF = "/etc/openhab/"  # os.getenv('OPENHAB_CONF')
+2023-08-07 19:21:58.706 [ERROR] [HABApp.Rules                        ] -      19 | sys.path.append(OH_CONF + 'habapp/rules/')
+2023-08-07 19:21:58.706 [ERROR] [HABApp.Rules                        ] - -->  20 | from SecurityDoorWindowStatemachine import SecurityDoorWindowStatemachine, get_state_machine_graph
+2023-08-07 19:21:58.706 [ERROR] [HABApp.Rules                        ] -      22 | MP3_PLAYER_STATE_MACHINE = SecurityDoorWindowStatemachine(
+2023-08-07 19:21:58.706 [ERROR] [HABApp.Rules                        ] -      23 |     "Kueche", log)
+2023-08-07 19:21:58.706 [ERROR] [HABApp.Rules                        ] -    ------------------------------------------------------------
+2023-08-07 19:21:58.706 [ERROR] [HABApp.Rules                        ] -      sys.path = ['/opt/habapp/bin', '/usr/lib/python39.zip', '/usr/lib/python3.9', '/usr/lib/python3.9/lib-dynload', '/opt/habapp/lib/python3.9/site-packages', '/etc/openhab/habapp/rules/', '/etc/openhab/automation/lib/python/personal', '/etc/openhab/habapp/rules/', '/usr/lib/python3/dist-packages', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/usr/lib/python3/dist-packages', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/usr/lib/python3/dist-packages', '/etc/openhab/habapp/rules/', '/usr/lib/python3/dist-packages/', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/usr/lib/python3/dist-packages', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/']
+2023-08-07 19:21:58.707 [ERROR] [HABApp.Rules                        ] -      log = <Logger MP3PlayerMode (DEBUG)>
+2023-08-07 19:21:58.707 [ERROR] [HABApp.Rules                        ] -      OH_CONF = '/etc/openhab/'
+2023-08-07 19:21:58.707 [ERROR] [HABApp.Rules                        ] -      OH_CONF + 'habapp/rules/' = '/etc/openhab/habapp/rules/'
+2023-08-07 19:21:58.707 [ERROR] [HABApp.Rules                        ] -    ------------------------------------------------------------
+2023-08-07 19:21:58.707 [ERROR] [HABApp.Rules                        ] - 
+2023-08-07 19:21:58.707 [ERROR] [HABApp.Rules                        ] - --------------------------------------------------------------------------------
+2023-08-07 19:21:58.708 [ERROR] [HABApp.Rules                        ] - Traceback (most recent call last):
+2023-08-07 19:21:58.708 [ERROR] [HABApp.Rules                        ] -   File "/opt/habapp/lib/python3.9/site-packages/HABApp/rule_manager/rule_file.py", line 78, in load
+2023-08-07 19:21:58.708 [ERROR] [HABApp.Rules                        ] -     self.create_rules(created_rules)
+2023-08-07 19:21:58.708 [ERROR] [HABApp.Rules                        ] -   File "/opt/habapp/lib/python3.9/site-packages/HABApp/rule_manager/rule_file.py", line 68, in create_rules
+2023-08-07 19:21:58.708 [ERROR] [HABApp.Rules                        ] -     runpy.run_path(str(self.path), run_name=str(self.path), init_globals=rule_hook.in_dict())
+2023-08-07 19:21:58.708 [ERROR] [HABApp.Rules                        ] -   File "/usr/lib/python3.9/runpy.py", line 268, in run_path
+2023-08-07 19:21:58.709 [ERROR] [HABApp.Rules                        ] -     return _run_module_code(code, init_globals, run_name,
+2023-08-07 19:21:58.709 [ERROR] [HABApp.Rules                        ] -   File "/usr/lib/python3.9/runpy.py", line 97, in _run_module_code
+2023-08-07 19:21:58.709 [ERROR] [HABApp.Rules                        ] -     _run_code(code, mod_globals, init_globals,
+2023-08-07 19:21:58.709 [ERROR] [HABApp.Rules                        ] -   File "/usr/lib/python3.9/runpy.py", line 87, in _run_code
+2023-08-07 19:21:58.709 [ERROR] [HABApp.Rules                        ] -     exec(code, run_globals)
+2023-08-07 19:21:58.709 [ERROR] [HABApp.Rules                        ] -   File "/etc/openhab/habapp/rules/mp3_player_mode.py", line 20, in mp3_player_mode.py
+2023-08-07 19:21:58.710 [ERROR] [HABApp.Rules                        ] -     from SecurityDoorWindowStatemachine import SecurityDoorWindowStatemachine, get_state_machine_graph
+2023-08-07 19:21:58.710 [ERROR] [HABApp.Rules                        ] - ModuleNotFoundError: No module named 'SecurityDoorWindowStatemachine'
+2023-08-07 19:21:58.712 [WARN ] [HABApp.Rules                        ] - Failed to load /etc/openhab/habapp/rules/mp3_player_mode.py!
+2023-08-07 19:22:49.338 [ERROR] [HABApp.Rules                        ] - Error "<class 'HABApp.openhab.items.switch_item.SwitchItem'> != <class 'HABApp.openhab.items.group_item.GroupItem'>" in load:
+2023-08-07 19:22:49.338 [ERROR] [HABApp.Rules                        ] - Could not load /etc/openhab/habapp/rules/mp3_player_mode.py!
+2023-08-07 19:22:49.338 [ERROR] [HABApp.Rules                        ] - File "/etc/openhab/habapp/rules/mp3_player_mode.py", line 155 in mp3_player_mode.py
+2023-08-07 19:22:49.339 [ERROR] [HABApp.Rules                        ] - --------------------------------------------------------------------------------
+2023-08-07 19:22:49.339 [ERROR] [HABApp.Rules                        ] -      149 |         MP3_PLAYER_STATE_MACHINE.set_timeout(True)
+2023-08-07 19:22:49.339 [ERROR] [HABApp.Rules                        ] -      150 |         MP3_PLAYER_STATE_MACHINE.send("tr_timeout")
+2023-08-07 19:22:49.339 [ERROR] [HABApp.Rules                        ] -      151 |         self.set_mode_item(MP3_PLAYER_STATE_MACHINE.get_state_name(),
+2023-08-07 19:22:49.339 [ERROR] [HABApp.Rules                        ] -      152 |                            MP3_PLAYER_STATE_MACHINE.get_light_level())
+2023-08-07 19:22:49.339 [ERROR] [HABApp.Rules                        ] - -->  155 | Mp3PlayerStatemachineRule()
+2023-08-07 19:22:49.339 [ERROR] [HABApp.Rules                        ] -    ------------------------------------------------------------
+2023-08-07 19:22:49.339 [ERROR] [HABApp.Rules                        ] -      SecurityDoorWindowStatemachine = <class 'statemachines.SecurityDoorWindowStatemachine.SecurityDoorWindowStatemachine'>
+2023-08-07 19:22:49.339 [ERROR] [HABApp.Rules                        ] -      sys.path = ['/opt/habapp/bin', '/usr/lib/python39.zip', '/usr/lib/python3.9', '/usr/lib/python3.9/lib-dynload', '/opt/habapp/lib/python3.9/site-packages', '/etc/openhab/habapp/rules/', '/etc/openhab/automation/lib/python/personal', '/etc/openhab/habapp/rules/', '/usr/lib/python3/dist-packages', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/usr/lib/python3/dist-packages', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/usr/lib/python3/dist-packages', '/etc/openhab/habapp/rules/', '/usr/lib/python3/dist-packages/', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/usr/lib/python3/dist-packages', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/']
+2023-08-07 19:22:49.339 [ERROR] [HABApp.Rules                        ] -      log = <Logger MP3PlayerMode (DEBUG)>
+2023-08-07 19:22:49.340 [ERROR] [HABApp.Rules                        ] -      MP3_PLAYER_STATE_MACHINE = SecurityDoorWindowStatemachine(model=Model(state=st_black), state_field='state', current_state='st_black')
+2023-08-07 19:22:49.340 [ERROR] [HABApp.Rules                        ] -      OH_CONF = '/etc/openhab/'
+2023-08-07 19:22:49.340 [ERROR] [HABApp.Rules                        ] -      OH_CONF + 'habapp/rules/' = '/etc/openhab/habapp/rules/'
+2023-08-07 19:22:49.340 [ERROR] [HABApp.Rules                        ] -    ------------------------------------------------------------
+2023-08-07 19:22:49.340 [ERROR] [HABApp.Rules                        ] - 
+2023-08-07 19:22:49.340 [ERROR] [HABApp.Rules                        ] - File "/etc/openhab/habapp/rules/mp3_player_mode.py", line 48 in __init__
+2023-08-07 19:22:49.340 [ERROR] [HABApp.Rules                        ] - --------------------------------------------------------------------------------
+2023-08-07 19:22:49.340 [ERROR] [HABApp.Rules                        ] -      29 | def __init__(self):
+2023-08-07 19:22:49.340 [ERROR] [HABApp.Rules                        ] -       (...)
+2023-08-07 19:22:49.341 [ERROR] [HABApp.Rules                        ] -      44 |     MP3_PLAYER_STATE_MACHINE.set_lock_error((lock_error_state == "ON"))
+2023-08-07 19:22:49.341 [ERROR] [HABApp.Rules                        ] -      45 |     MP3_PLAYER_STATE_MACHINE.send("tr_lock_error")
+2023-08-07 19:22:49.341 [ERROR] [HABApp.Rules                        ] -      47 |     # Outer_Door_Open
+2023-08-07 19:22:49.341 [ERROR] [HABApp.Rules                        ] - -->  48 |     outer_door_item = SwitchItem.get_item("gAussenTueren")
+2023-08-07 19:22:49.341 [ERROR] [HABApp.Rules                        ] -      49 |     outer_door_state = outer_door_item.get_value()
+2023-08-07 19:22:49.341 [ERROR] [HABApp.Rules                        ] -    ------------------------------------------------------------
+2023-08-07 19:22:49.341 [ERROR] [HABApp.Rules                        ] -      bell_rang_item = <SwitchItem name: KlingelerkennungFlur_StoreState, value: None, last_change: 2023-08-07T19:20:31.276272, last_update: 2023-08-07T19:20:31.276272>
+2023-08-07 19:22:49.341 [ERROR] [HABApp.Rules                        ] -      bell_rang_state = None
+2023-08-07 19:22:49.341 [ERROR] [HABApp.Rules                        ] -      lock_error_item = <SwitchItem name: SchlossWaschkueche_Fehler, value: None, last_change: 2023-08-07T19:20:31.348483, last_update: 2023-08-07T19:20:31.348483>
+2023-08-07 19:22:49.341 [ERROR] [HABApp.Rules                        ] -      lock_error_state = None
+2023-08-07 19:22:49.342 [ERROR] [HABApp.Rules                        ] -      log = <Logger MP3PlayerMode (DEBUG)>
+2023-08-07 19:22:49.342 [ERROR] [HABApp.Rules                        ] -      MP3_PLAYER_STATE_MACHINE = SecurityDoorWindowStatemachine(model=Model(state=st_black), state_field='state', current_state='st_black')
+2023-08-07 19:22:49.342 [ERROR] [HABApp.Rules                        ] -      self = <Mp3PlayerStatemachineRule>
+2023-08-07 19:22:49.342 [ERROR] [HABApp.Rules                        ] -      str(bell_rang_state) = 'None'
+2023-08-07 19:22:49.342 [ERROR] [HABApp.Rules                        ] -      str(lock_error_state) = 'None'
+2023-08-07 19:22:49.342 [ERROR] [HABApp.Rules                        ] -      bell_rang_state == "ON" = False
+2023-08-07 19:22:49.342 [ERROR] [HABApp.Rules                        ] -      lock_error_state == "ON" = False
+2023-08-07 19:22:49.342 [ERROR] [HABApp.Rules                        ] -    ------------------------------------------------------------
+2023-08-07 19:22:49.342 [ERROR] [HABApp.Rules                        ] - 
+2023-08-07 19:22:49.342 [ERROR] [HABApp.Rules                        ] - File "/opt/habapp/lib/python3.9/site-packages/HABApp/core/items/base_item.py", line 32 in get_item
+2023-08-07 19:22:49.343 [ERROR] [HABApp.Rules                        ] - --------------------------------------------------------------------------------
+2023-08-07 19:22:49.343 [ERROR] [HABApp.Rules                        ] -      24 | @classmethod
+2023-08-07 19:22:49.343 [ERROR] [HABApp.Rules                        ] -      25 | def get_item(cls, name: str):
+2023-08-07 19:22:49.343 [ERROR] [HABApp.Rules                        ] -      26 |     """Returns an already existing item. If it does not exist or has a different item type an exception will occur.
+2023-08-07 19:22:49.343 [ERROR] [HABApp.Rules                        ] -      27 | 
+2023-08-07 19:22:49.343 [ERROR] [HABApp.Rules                        ] -      28 |     :param name: Name of the item
+2023-08-07 19:22:49.343 [ERROR] [HABApp.Rules                        ] -      29 |     """
+2023-08-07 19:22:49.343 [ERROR] [HABApp.Rules                        ] -      30 |     assert isinstance(name, str), type(name)
+2023-08-07 19:22:49.343 [ERROR] [HABApp.Rules                        ] -      31 |     item = get_item(name)
+2023-08-07 19:22:49.343 [ERROR] [HABApp.Rules                        ] - -->  32 |     assert isinstance(item, cls), f'{cls} != {type(item)}'
+2023-08-07 19:22:49.344 [ERROR] [HABApp.Rules                        ] -      33 |     return item
+2023-08-07 19:22:49.344 [ERROR] [HABApp.Rules                        ] -    ------------------------------------------------------------
+2023-08-07 19:22:49.344 [ERROR] [HABApp.Rules                        ] -      cls = <class 'HABApp.openhab.items.switch_item.SwitchItem'>
+2023-08-07 19:22:49.344 [ERROR] [HABApp.Rules                        ] -      item = <GroupItem name: gAussenTueren, value: None, last_change: 2023-08-07T19:20:31.253831, last_update: 2023-08-07T19:20:31.253831>
+2023-08-07 19:22:49.344 [ERROR] [HABApp.Rules                        ] -      name = 'gAussenTueren'
+2023-08-07 19:22:49.344 [ERROR] [HABApp.Rules                        ] -    ------------------------------------------------------------
+2023-08-07 19:22:49.344 [ERROR] [HABApp.Rules                        ] - 
+2023-08-07 19:22:49.344 [ERROR] [HABApp.Rules                        ] - --------------------------------------------------------------------------------
+2023-08-07 19:22:49.344 [ERROR] [HABApp.Rules                        ] - Traceback (most recent call last):
+2023-08-07 19:22:49.344 [ERROR] [HABApp.Rules                        ] -   File "/opt/habapp/lib/python3.9/site-packages/HABApp/rule_manager/rule_file.py", line 78, in load
+2023-08-07 19:22:49.345 [ERROR] [HABApp.Rules                        ] -     self.create_rules(created_rules)
+2023-08-07 19:22:49.345 [ERROR] [HABApp.Rules                        ] -   File "/opt/habapp/lib/python3.9/site-packages/HABApp/rule_manager/rule_file.py", line 68, in create_rules
+2023-08-07 19:22:49.345 [ERROR] [HABApp.Rules                        ] -     runpy.run_path(str(self.path), run_name=str(self.path), init_globals=rule_hook.in_dict())
+2023-08-07 19:22:49.345 [ERROR] [HABApp.Rules                        ] -   File "/usr/lib/python3.9/runpy.py", line 268, in run_path
+2023-08-07 19:22:49.345 [ERROR] [HABApp.Rules                        ] -     return _run_module_code(code, init_globals, run_name,
+2023-08-07 19:22:49.345 [ERROR] [HABApp.Rules                        ] -   File "/usr/lib/python3.9/runpy.py", line 97, in _run_module_code
+2023-08-07 19:22:49.345 [ERROR] [HABApp.Rules                        ] -     _run_code(code, mod_globals, init_globals,
+2023-08-07 19:22:49.345 [ERROR] [HABApp.Rules                        ] -   File "/usr/lib/python3.9/runpy.py", line 87, in _run_code
+2023-08-07 19:22:49.345 [ERROR] [HABApp.Rules                        ] -     exec(code, run_globals)
+2023-08-07 19:22:49.345 [ERROR] [HABApp.Rules                        ] -   File "/etc/openhab/habapp/rules/mp3_player_mode.py", line 155, in mp3_player_mode.py
+2023-08-07 19:22:49.346 [ERROR] [HABApp.Rules                        ] -     Mp3PlayerStatemachineRule()
+2023-08-07 19:22:49.346 [ERROR] [HABApp.Rules                        ] -   File "/etc/openhab/habapp/rules/mp3_player_mode.py", line 48, in __init__
+2023-08-07 19:22:49.346 [ERROR] [HABApp.Rules                        ] -     outer_door_item = SwitchItem.get_item("gAussenTueren")
+2023-08-07 19:22:49.346 [ERROR] [HABApp.Rules                        ] -   File "/opt/habapp/lib/python3.9/site-packages/HABApp/core/items/base_item.py", line 32, in get_item
+2023-08-07 19:22:49.346 [ERROR] [HABApp.Rules                        ] -     assert isinstance(item, cls), f'{cls} != {type(item)}'
+2023-08-07 19:22:49.346 [ERROR] [HABApp.Rules                        ] - AssertionError: <class 'HABApp.openhab.items.switch_item.SwitchItem'> != <class 'HABApp.openhab.items.group_item.GroupItem'>
+2023-08-07 19:22:49.349 [WARN ] [HABApp.Rules                        ] - Failed to load /etc/openhab/habapp/rules/mp3_player_mode.py!
+2023-08-07 19:23:49.935 [ERROR] [HABApp.Rules                        ] - Error "<class 'HABApp.openhab.items.switch_item.SwitchItem'> != <class 'HABApp.openhab.items.group_item.GroupItem'>" in load:
+2023-08-07 19:23:49.936 [ERROR] [HABApp.Rules                        ] - Could not load /etc/openhab/habapp/rules/mp3_player_mode.py!
+2023-08-07 19:23:49.936 [ERROR] [HABApp.Rules                        ] - File "/etc/openhab/habapp/rules/mp3_player_mode.py", line 155 in mp3_player_mode.py
+2023-08-07 19:23:49.936 [ERROR] [HABApp.Rules                        ] - --------------------------------------------------------------------------------
+2023-08-07 19:23:49.936 [ERROR] [HABApp.Rules                        ] -      149 |         MP3_PLAYER_STATE_MACHINE.set_timeout(True)
+2023-08-07 19:23:49.937 [ERROR] [HABApp.Rules                        ] -      150 |         MP3_PLAYER_STATE_MACHINE.send("tr_timeout")
+2023-08-07 19:23:49.937 [ERROR] [HABApp.Rules                        ] -      151 |         self.set_mode_item(MP3_PLAYER_STATE_MACHINE.get_state_name(),
+2023-08-07 19:23:49.937 [ERROR] [HABApp.Rules                        ] -      152 |                            MP3_PLAYER_STATE_MACHINE.get_light_level())
+2023-08-07 19:23:49.937 [ERROR] [HABApp.Rules                        ] - -->  155 | Mp3PlayerStatemachineRule()
+2023-08-07 19:23:49.937 [ERROR] [HABApp.Rules                        ] -    ------------------------------------------------------------
+2023-08-07 19:23:49.938 [ERROR] [HABApp.Rules                        ] -      SecurityDoorWindowStatemachine = <class 'statemachines.SecurityDoorWindowStatemachine.SecurityDoorWindowStatemachine'>
+2023-08-07 19:23:49.938 [ERROR] [HABApp.Rules                        ] -      sys.path = ['/opt/habapp/bin', '/usr/lib/python39.zip', '/usr/lib/python3.9', '/usr/lib/python3.9/lib-dynload', '/opt/habapp/lib/python3.9/site-packages', '/etc/openhab/habapp/rules/', '/etc/openhab/automation/lib/python/personal', '/etc/openhab/habapp/rules/', '/usr/lib/python3/dist-packages', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/usr/lib/python3/dist-packages', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/usr/lib/python3/dist-packages', '/etc/openhab/habapp/rules/', '/usr/lib/python3/dist-packages/', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/usr/lib/python3/dist-packages', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/', '/etc/openhab/habapp/rules/']
+2023-08-07 19:23:49.938 [ERROR] [HABApp.Rules                        ] -      log = <Logger MP3PlayerMode (DEBUG)>
+2023-08-07 19:23:49.938 [ERROR] [HABApp.Rules                        ] -      MP3_PLAYER_STATE_MACHINE = SecurityDoorWindowStatemachine(model=Model(state=st_black), state_field='state', current_state='st_black')
+2023-08-07 19:23:49.938 [ERROR] [HABApp.Rules                        ] -      OH_CONF = '/etc/openhab/'
+2023-08-07 19:23:49.938 [ERROR] [HABApp.Rules                        ] -      OH_CONF + 'habapp/rules/' = '/etc/openhab/habapp/rules/'
+2023-08-07 19:23:49.938 [ERROR] [HABApp.Rules                        ] -    ------------------------------------------------------------
+2023-08-07 19:23:49.938 [ERROR] [HABApp.Rules                        ] - 
+2023-08-07 19:23:49.938 [ERROR] [HABApp.Rules                        ] - File "/etc/openhab/habapp/rules/mp3_player_mode.py", line 56 in __init__
+2023-08-07 19:23:49.939 [ERROR] [HABApp.Rules                        ] - --------------------------------------------------------------------------------
+2023-08-07 19:23:49.939 [ERROR] [HABApp.Rules                        ] -      29 | def __init__(self):
+2023-08-07 19:23:49.939 [ERROR] [HABApp.Rules                        ] -       (...)
+2023-08-07 19:23:49.939 [ERROR] [HABApp.Rules                        ] -      51 |     MP3_PLAYER_STATE_MACHINE.set_outer_door_open(
+2023-08-07 19:23:49.939 [ERROR] [HABApp.Rules                        ] -      52 |         (outer_door_state == "OPEN"))
+2023-08-07 19:23:49.939 [ERROR] [HABApp.Rules                        ] -      53 |     MP3_PLAYER_STATE_MACHINE.send("tr_outer_door_open")
+2023-08-07 19:23:49.939 [ERROR] [HABApp.Rules                        ] -      55 |     # Window_Open
+2023-08-07 19:23:49.939 [ERROR] [HABApp.Rules                        ] - -->  56 |     window_open_item = SwitchItem.get_item("gFenster")
+2023-08-07 19:23:49.939 [ERROR] [HABApp.Rules                        ] -      57 |     window_open_state = window_open_item.get_value()
+2023-08-07 19:23:49.939 [ERROR] [HABApp.Rules                        ] -    ------------------------------------------------------------
+2023-08-07 19:23:49.940 [ERROR] [HABApp.Rules                        ] -      bell_rang_item = <SwitchItem name: KlingelerkennungFlur_StoreState, value: None, last_change: 2023-08-07T19:20:31.276272, last_update: 2023-08-07T19:20:31.276272>
+2023-08-07 19:23:49.940 [ERROR] [HABApp.Rules                        ] -      bell_rang_state = None
+2023-08-07 19:23:49.940 [ERROR] [HABApp.Rules                        ] -      lock_error_item = <SwitchItem name: SchlossWaschkueche_Fehler, value: None, last_change: 2023-08-07T19:20:31.348483, last_update: 2023-08-07T19:20:31.348483>
+2023-08-07 19:23:49.940 [ERROR] [HABApp.Rules                        ] -      lock_error_state = None
+2023-08-07 19:23:49.941 [ERROR] [HABApp.Rules                        ] -      log = <Logger MP3PlayerMode (DEBUG)>
+2023-08-07 19:23:49.941 [ERROR] [HABApp.Rules                        ] -      MP3_PLAYER_STATE_MACHINE = SecurityDoorWindowStatemachine(model=Model(state=st_black), state_field='state', current_state='st_black')
+2023-08-07 19:23:49.941 [ERROR] [HABApp.Rules                        ] -      outer_door_item = <GroupItem name: gAussenTueren, value: None, last_change: 2023-08-07T19:20:31.253831, last_update: 2023-08-07T19:20:31.253831>
+2023-08-07 19:23:49.941 [ERROR] [HABApp.Rules                        ] -      outer_door_state = None
+2023-08-07 19:23:49.941 [ERROR] [HABApp.Rules                        ] -      self = <Mp3PlayerStatemachineRule>
+2023-08-07 19:23:49.942 [ERROR] [HABApp.Rules                        ] -      str(bell_rang_state) = 'None'
+2023-08-07 19:23:49.942 [ERROR] [HABApp.Rules                        ] -      str(lock_error_state) = 'None'
+2023-08-07 19:23:49.942 [ERROR] [HABApp.Rules                        ] -      str(outer_door_state) = 'None'
+2023-08-07 19:23:49.942 [ERROR] [HABApp.Rules                        ] -      bell_rang_state == "ON" = False
+2023-08-07 19:23:49.942 [ERROR] [HABApp.Rules                        ] -      lock_error_state == "ON" = False
+2023-08-07 19:23:49.942 [ERROR] [HABApp.Rules                        ] -      outer_door_state == "OPEN" = False
+2023-08-07 19:23:49.942 [ERROR] [HABApp.Rules                        ] -    ------------------------------------------------------------
+2023-08-07 19:23:49.942 [ERROR] [HABApp.Rules                        ] - 
+2023-08-07 19:23:49.943 [ERROR] [HABApp.Rules                        ] - File "/opt/habapp/lib/python3.9/site-packages/HABApp/core/items/base_item.py", line 32 in get_item
+2023-08-07 19:23:49.943 [ERROR] [HABApp.Rules                        ] - --------------------------------------------------------------------------------
+2023-08-07 19:23:49.943 [ERROR] [HABApp.Rules                        ] -      24 | @classmethod
+2023-08-07 19:23:49.943 [ERROR] [HABApp.Rules                        ] -      25 | def get_item(cls, name: str):
+2023-08-07 19:23:49.943 [ERROR] [HABApp.Rules                        ] -      26 |     """Returns an already existing item. If it does not exist or has a different item type an exception will occur.
+2023-08-07 19:23:49.943 [ERROR] [HABApp.Rules                        ] -      27 | 
+2023-08-07 19:23:49.943 [ERROR] [HABApp.Rules                        ] -      28 |     :param name: Name of the item
+2023-08-07 19:23:49.943 [ERROR] [HABApp.Rules                        ] -      29 |     """
+2023-08-07 19:23:49.943 [ERROR] [HABApp.Rules                        ] -      30 |     assert isinstance(name, str), type(name)
+2023-08-07 19:23:49.943 [ERROR] [HABApp.Rules                        ] -      31 |     item = get_item(name)
+2023-08-07 19:23:49.944 [ERROR] [HABApp.Rules                        ] - -->  32 |     assert isinstance(item, cls), f'{cls} != {type(item)}'
+2023-08-07 19:23:49.944 [ERROR] [HABApp.Rules                        ] -      33 |     return item
+2023-08-07 19:23:49.944 [ERROR] [HABApp.Rules                        ] -    ------------------------------------------------------------
+2023-08-07 19:23:49.944 [ERROR] [HABApp.Rules                        ] -      cls = <class 'HABApp.openhab.items.switch_item.SwitchItem'>
+2023-08-07 19:23:49.944 [ERROR] [HABApp.Rules                        ] -      item = <GroupItem name: gFenster, value: None, last_change: 2023-08-07T19:20:31.315311, last_update: 2023-08-07T19:20:31.315311>
+2023-08-07 19:23:49.944 [ERROR] [HABApp.Rules                        ] -      name = 'gFenster'
+2023-08-07 19:23:49.944 [ERROR] [HABApp.Rules                        ] -    ------------------------------------------------------------
+2023-08-07 19:23:49.944 [ERROR] [HABApp.Rules                        ] - 
+2023-08-07 19:23:49.944 [ERROR] [HABApp.Rules                        ] - --------------------------------------------------------------------------------
+2023-08-07 19:23:49.944 [ERROR] [HABApp.Rules                        ] - Traceback (most recent call last):
+2023-08-07 19:23:49.945 [ERROR] [HABApp.Rules                        ] -   File "/opt/habapp/lib/python3.9/site-packages/HABApp/rule_manager/rule_file.py", line 78, in load
+2023-08-07 19:23:49.945 [ERROR] [HABApp.Rules                        ] -     self.create_rules(created_rules)
+2023-08-07 19:23:49.945 [ERROR] [HABApp.Rules                        ] -   File "/opt/habapp/lib/python3.9/site-packages/HABApp/rule_manager/rule_file.py", line 68, in create_rules
+2023-08-07 19:23:49.945 [ERROR] [HABApp.Rules                        ] -     runpy.run_path(str(self.path), run_name=str(self.path), init_globals=rule_hook.in_dict())
+2023-08-07 19:23:49.945 [ERROR] [HABApp.Rules                        ] -   File "/usr/lib/python3.9/runpy.py", line 268, in run_path
+2023-08-07 19:23:49.945 [ERROR] [HABApp.Rules                        ] -     return _run_module_code(code, init_globals, run_name,
+2023-08-07 19:23:49.945 [ERROR] [HABApp.Rules                        ] -   File "/usr/lib/python3.9/runpy.py", line 97, in _run_module_code
+2023-08-07 19:23:49.945 [ERROR] [HABApp.Rules                        ] -     _run_code(code, mod_globals, init_globals,
+2023-08-07 19:23:49.945 [ERROR] [HABApp.Rules                        ] -   File "/usr/lib/python3.9/runpy.py", line 87, in _run_code
+2023-08-07 19:23:49.945 [ERROR] [HABApp.Rules                        ] -     exec(code, run_globals)
+2023-08-07 19:23:49.946 [ERROR] [HABApp.Rules                        ] -   File "/etc/openhab/habapp/rules/mp3_player_mode.py", line 155, in mp3_player_mode.py
+2023-08-07 19:23:49.946 [ERROR] [HABApp.Rules                        ] -     Mp3PlayerStatemachineRule()
+2023-08-07 19:23:49.946 [ERROR] [HABApp.Rules                        ] -   File "/etc/openhab/habapp/rules/mp3_player_mode.py", line 56, in __init__
+2023-08-07 19:23:49.946 [ERROR] [HABApp.Rules                        ] -     window_open_item = SwitchItem.get_item("gFenster")
+2023-08-07 19:23:49.947 [ERROR] [HABApp.Rules                        ] -   File "/opt/habapp/lib/python3.9/site-packages/HABApp/core/items/base_item.py", line 32, in get_item
+2023-08-07 19:23:49.947 [ERROR] [HABApp.Rules                        ] -     assert isinstance(item, cls), f'{cls} != {type(item)}'
+2023-08-07 19:23:49.947 [ERROR] [HABApp.Rules                        ] - AssertionError: <class 'HABApp.openhab.items.switch_item.SwitchItem'> != <class 'HABApp.openhab.items.group_item.GroupItem'>
+2023-08-07 19:23:49.949 [WARN ] [HABApp.Rules                        ] - Failed to load /etc/openhab/habapp/rules/mp3_player_mode.py!
+2023-08-07 19:24:31.597 [INFO ] [HABApp.Rules                        ] - Added rule "Mp3PlayerStatemachineRule" from rules/mp3_player_mode.py
+2023-08-07 19:26:44.945 [INFO ] [HABApp.Rules                        ] - Added rule "Mp3PlayerStatemachineRule" from rules/mp3_player_mode.py
+2023-08-07 19:28:23.084 [INFO ] [HABApp.Rules                        ] - Added rule "Mp3PlayerStatemachineRule" from rules/mp3_player_mode.py
+2023-08-07 19:28:48.733 [INFO ] [HABApp.Rules                        ] - Added rule "Mp3PlayerStatemachineRule" from rules/mp3_player_mode.py
+2023-08-07 19:42:45.997 [INFO ] [HABApp.Rules                        ] - Added rule "Mp3PlayerStatemachineRule" from rules/mp3_player_mode.py
+2023-08-07 19:44:04.470 [ERROR] [HABApp.Worker                       ] - Error in Mp3PlayerStatemachineRule.window_open: 'GroupStateChangedEvent' object has no attribute 'itemName'
+2023-08-07 19:44:04.471 [ERROR] [HABApp.Worker                       ] - File "/etc/openhab/habapp/rules/mp3_player_mode.py", line 143 in window_open
+2023-08-07 19:44:04.471 [ERROR] [HABApp.Worker                       ] - --------------------------------------------------------------------------------
+2023-08-07 19:44:04.472 [ERROR] [HABApp.Worker                       ] -      137 | def window_open(self, event: ValueChangeEvent):
+2023-08-07 19:44:04.472 [ERROR] [HABApp.Worker                       ] -      138 |     """
+2023-08-07 19:44:04.472 [ERROR] [HABApp.Worker                       ] -      139 |     send event to mp3 player statemachine if window_open changes
+2023-08-07 19:44:04.473 [ERROR] [HABApp.Worker                       ] -      140 |     Args:
+2023-08-07 19:44:04.473 [ERROR] [HABApp.Worker                       ] -      141 |         event (_type_): any window_open item
+2023-08-07 19:44:04.474 [ERROR] [HABApp.Worker                       ] -      142 |     """
+2023-08-07 19:44:04.474 [ERROR] [HABApp.Worker                       ] - -->  143 |     log.info("##############################\nrule fired because of %s %s --> %s", event.itemName,
+2023-08-07 19:44:04.474 [ERROR] [HABApp.Worker                       ] -      144 |              event.oldItemState, event.itemState)
+2023-08-07 19:44:04.475 [ERROR] [HABApp.Worker                       ] -      146 |     MP3_PLAYER_STATE_MACHINE.set_window_open(str(event.itemState) == "ON")
+2023-08-07 19:44:04.475 [ERROR] [HABApp.Worker                       ] -    ------------------------------------------------------------
+2023-08-07 19:44:04.475 [ERROR] [HABApp.Worker                       ] -      event = <GroupStateChangedEvent name: gFenster, item: gFensterEsszimmer_OpenState, value: OPEN, old_value: None>
+2023-08-07 19:44:04.476 [ERROR] [HABApp.Worker                       ] -      log = <Logger MP3PlayerMode (DEBUG)>
+2023-08-07 19:44:04.476 [ERROR] [HABApp.Worker                       ] -      MP3_PLAYER_STATE_MACHINE = SecurityDoorWindowStatemachine(model=Model(state=st_black), state_field='state', current_state='st_black')
+2023-08-07 19:44:04.477 [ERROR] [HABApp.Worker                       ] -      self = <Mp3PlayerStatemachineRule>
+2023-08-07 19:44:04.477 [ERROR] [HABApp.Worker                       ] -    ------------------------------------------------------------
+2023-08-07 19:44:04.477 [ERROR] [HABApp.Worker                       ] - 
+2023-08-07 19:44:04.478 [ERROR] [HABApp.Worker                       ] - --------------------------------------------------------------------------------
+2023-08-07 19:44:04.478 [ERROR] [HABApp.Worker                       ] - Traceback (most recent call last):
+2023-08-07 19:44:04.478 [ERROR] [HABApp.Worker                       ] -   File "/opt/habapp/lib/python3.9/site-packages/HABApp/core/internals/wrapped_function/wrapped_thread.py", line 94, in run
+2023-08-07 19:44:04.479 [ERROR] [HABApp.Worker                       ] -     self.func_obj(*self.func_args, **self.func_kwargs)
+2023-08-07 19:44:04.479 [ERROR] [HABApp.Worker                       ] -   File "/etc/openhab/habapp/rules/mp3_player_mode.py", line 143, in window_open
+2023-08-07 19:44:04.480 [ERROR] [HABApp.Worker                       ] -     log.info("##############################\nrule fired because of %s %s --> %s", event.itemName,
+2023-08-07 19:44:04.480 [ERROR] [HABApp.Worker                       ] - AttributeError: 'GroupStateChangedEvent' object has no attribute 'itemName'
+2023-08-07 19:48:32.742 [INFO ] [HABApp.Rules                        ] - Added rule "Mp3PlayerStatemachineRule" from rules/mp3_player_mode.py
+2023-08-07 19:49:14.639 [ERROR] [HABApp.Worker                       ] - Error in Mp3PlayerStatemachineRule.door_lock_error: 'ItemStateChangedEvent' object has no attribute 'itemName'
+2023-08-07 19:49:14.639 [ERROR] [HABApp.Worker                       ] - File "/etc/openhab/habapp/rules/mp3_player_mode.py", line 112 in door_lock_error
+2023-08-07 19:49:14.640 [ERROR] [HABApp.Worker                       ] - --------------------------------------------------------------------------------
+2023-08-07 19:49:14.640 [ERROR] [HABApp.Worker                       ] -      106 | def door_lock_error(self, event: ValueChangeEvent):
+2023-08-07 19:49:14.640 [ERROR] [HABApp.Worker                       ] -      107 |     """
+2023-08-07 19:49:14.641 [ERROR] [HABApp.Worker                       ] -      108 |     send event to mp3 player statemachine if Lock_Error changes
+2023-08-07 19:49:14.641 [ERROR] [HABApp.Worker                       ] -      109 |     Args:
+2023-08-07 19:49:14.642 [ERROR] [HABApp.Worker                       ] -      110 |         event (_type_): any Lock_Error item
+2023-08-07 19:49:14.642 [ERROR] [HABApp.Worker                       ] -      111 |     """
+2023-08-07 19:49:14.642 [ERROR] [HABApp.Worker                       ] - -->  112 |     log.info("##############################\nrule fired because of %s %s --> %s", event.itemName,
+2023-08-07 19:49:14.643 [ERROR] [HABApp.Worker                       ] -      113 |              event.oldItemState, event.itemState)
+2023-08-07 19:49:14.643 [ERROR] [HABApp.Worker                       ] -      115 |     MP3_PLAYER_STATE_MACHINE.set_lock_error(str(event.itemState) == "ON")
+2023-08-07 19:49:14.643 [ERROR] [HABApp.Worker                       ] -    ------------------------------------------------------------
+2023-08-07 19:49:14.644 [ERROR] [HABApp.Worker                       ] -      event = <ItemStateChangedEvent name: SchlossWaschkueche_Fehler, value: ON, old_value: None>
+2023-08-07 19:49:14.644 [ERROR] [HABApp.Worker                       ] -      log = <Logger MP3PlayerMode (DEBUG)>
+2023-08-07 19:49:14.645 [ERROR] [HABApp.Worker                       ] -      MP3_PLAYER_STATE_MACHINE = SecurityDoorWindowStatemachine(model=Model(state=st_black), state_field='state', current_state='st_black')
+2023-08-07 19:49:14.645 [ERROR] [HABApp.Worker                       ] -      self = <Mp3PlayerStatemachineRule>
+2023-08-07 19:49:14.645 [ERROR] [HABApp.Worker                       ] -    ------------------------------------------------------------
+2023-08-07 19:49:14.646 [ERROR] [HABApp.Worker                       ] - 
+2023-08-07 19:49:14.646 [ERROR] [HABApp.Worker                       ] - --------------------------------------------------------------------------------
+2023-08-07 19:49:14.646 [ERROR] [HABApp.Worker                       ] - Traceback (most recent call last):
+2023-08-07 19:49:14.647 [ERROR] [HABApp.Worker                       ] -   File "/opt/habapp/lib/python3.9/site-packages/HABApp/core/internals/wrapped_function/wrapped_thread.py", line 94, in run
+2023-08-07 19:49:14.647 [ERROR] [HABApp.Worker                       ] -     self.func_obj(*self.func_args, **self.func_kwargs)
+2023-08-07 19:49:14.647 [ERROR] [HABApp.Worker                       ] -   File "/etc/openhab/habapp/rules/mp3_player_mode.py", line 112, in door_lock_error
+2023-08-07 19:49:14.648 [ERROR] [HABApp.Worker                       ] -     log.info("##############################\nrule fired because of %s %s --> %s", event.itemName,
+2023-08-07 19:49:14.648 [ERROR] [HABApp.Worker                       ] - AttributeError: 'ItemStateChangedEvent' object has no attribute 'itemName'
+2023-08-07 19:49:35.391 [ERROR] [HABApp.Worker                       ] - Error in Mp3PlayerStatemachineRule.door_lock_error: 'ItemStateChangedEvent' object has no attribute 'itemName'
+2023-08-07 19:49:35.392 [ERROR] [HABApp.Worker                       ] - File "/etc/openhab/habapp/rules/mp3_player_mode.py", line 112 in door_lock_error
+2023-08-07 19:49:35.392 [ERROR] [HABApp.Worker                       ] - --------------------------------------------------------------------------------
+2023-08-07 19:49:35.393 [ERROR] [HABApp.Worker                       ] -      106 | def door_lock_error(self, event: ValueChangeEvent):
+2023-08-07 19:49:35.393 [ERROR] [HABApp.Worker                       ] -      107 |     """
+2023-08-07 19:49:35.394 [ERROR] [HABApp.Worker                       ] -      108 |     send event to mp3 player statemachine if Lock_Error changes
+2023-08-07 19:49:35.394 [ERROR] [HABApp.Worker                       ] -      109 |     Args:
+2023-08-07 19:49:35.394 [ERROR] [HABApp.Worker                       ] -      110 |         event (_type_): any Lock_Error item
+2023-08-07 19:49:35.395 [ERROR] [HABApp.Worker                       ] -      111 |     """
+2023-08-07 19:49:35.395 [ERROR] [HABApp.Worker                       ] - -->  112 |     log.info("##############################\nrule fired because of %s %s --> %s", event.itemName,
+2023-08-07 19:49:35.395 [ERROR] [HABApp.Worker                       ] -      113 |              event.oldItemState, event.itemState)
+2023-08-07 19:49:35.396 [ERROR] [HABApp.Worker                       ] -      115 |     MP3_PLAYER_STATE_MACHINE.set_lock_error(str(event.itemState) == "ON")
+2023-08-07 19:49:35.396 [ERROR] [HABApp.Worker                       ] -    ------------------------------------------------------------
+2023-08-07 19:49:35.397 [ERROR] [HABApp.Worker                       ] -      event = <ItemStateChangedEvent name: SchlossWaschkueche_Fehler, value: OFF, old_value: ON>
+2023-08-07 19:49:35.397 [ERROR] [HABApp.Worker                       ] -      log = <Logger MP3PlayerMode (DEBUG)>
+2023-08-07 19:49:35.397 [ERROR] [HABApp.Worker                       ] -      MP3_PLAYER_STATE_MACHINE = SecurityDoorWindowStatemachine(model=Model(state=st_black), state_field='state', current_state='st_black')
+2023-08-07 19:49:35.398 [ERROR] [HABApp.Worker                       ] -      self = <Mp3PlayerStatemachineRule>
+2023-08-07 19:49:35.398 [ERROR] [HABApp.Worker                       ] -    ------------------------------------------------------------
+2023-08-07 19:49:35.398 [ERROR] [HABApp.Worker                       ] - 
+2023-08-07 19:49:35.399 [ERROR] [HABApp.Worker                       ] - --------------------------------------------------------------------------------
+2023-08-07 19:49:35.399 [ERROR] [HABApp.Worker                       ] - Traceback (most recent call last):
+2023-08-07 19:49:35.400 [ERROR] [HABApp.Worker                       ] -   File "/opt/habapp/lib/python3.9/site-packages/HABApp/core/internals/wrapped_function/wrapped_thread.py", line 94, in run
+2023-08-07 19:49:35.400 [ERROR] [HABApp.Worker                       ] -     self.func_obj(*self.func_args, **self.func_kwargs)
+2023-08-07 19:49:35.400 [ERROR] [HABApp.Worker                       ] -   File "/etc/openhab/habapp/rules/mp3_player_mode.py", line 112, in door_lock_error
+2023-08-07 19:49:35.401 [ERROR] [HABApp.Worker                       ] -     log.info("##############################\nrule fired because of %s %s --> %s", event.itemName,
+2023-08-07 19:49:35.401 [ERROR] [HABApp.Worker                       ] - AttributeError: 'ItemStateChangedEvent' object has no attribute 'itemName'
+2023-08-07 20:01:16.166 [ERROR] [HABApp.Worker                       ] - Error in Mp3PlayerStatemachineRule.outer_door_open: 'GroupStateChangedEvent' object has no attribute 'itemName'
+2023-08-07 20:01:16.167 [ERROR] [HABApp.Worker                       ] - File "/etc/openhab/habapp/rules/mp3_player_mode.py", line 127 in outer_door_open
+2023-08-07 20:01:16.168 [ERROR] [HABApp.Worker                       ] - --------------------------------------------------------------------------------
+2023-08-07 20:01:16.169 [ERROR] [HABApp.Worker                       ] -      121 | def outer_door_open(self, event: ValueChangeEvent):
+2023-08-07 20:01:16.172 [ERROR] [HABApp.Worker                       ] -      122 |     """
+2023-08-07 20:01:16.174 [ERROR] [HABApp.Worker                       ] -      123 |     send event to mp3 player statemachine if outer_door_open changes
+2023-08-07 20:01:16.176 [ERROR] [HABApp.Worker                       ] -      124 |     Args:
+2023-08-07 20:01:16.177 [ERROR] [HABApp.Worker                       ] -      125 |         event (_type_): any Light item
+2023-08-07 20:01:16.179 [ERROR] [HABApp.Worker                       ] -      126 |     """
+2023-08-07 20:01:16.180 [ERROR] [HABApp.Worker                       ] - -->  127 |     log.info("##############################\nrule fired because of %s %s --> %s", event.itemName,
+2023-08-07 20:01:16.181 [ERROR] [HABApp.Worker                       ] -      128 |              event.oldItemState, event.itemState)
+2023-08-07 20:01:16.181 [ERROR] [HABApp.Worker                       ] -      130 |     MP3_PLAYER_STATE_MACHINE.set_outer_door_open(
+2023-08-07 20:01:16.183 [ERROR] [HABApp.Worker                       ] -      131 |         str(event.itemState) == "ON")
+2023-08-07 20:01:16.183 [ERROR] [HABApp.Worker                       ] -    ------------------------------------------------------------
+2023-08-07 20:01:16.184 [ERROR] [HABApp.Worker                       ] -      event = <GroupStateChangedEvent name: gAussenTueren, item: gFensterKaminzimmer_OpenState, value: OPEN, old_value: CLOSED>
+2023-08-07 20:01:16.184 [ERROR] [HABApp.Worker                       ] -      log = <Logger MP3PlayerMode (DEBUG)>
+2023-08-07 20:01:16.185 [ERROR] [HABApp.Worker                       ] -      MP3_PLAYER_STATE_MACHINE = SecurityDoorWindowStatemachine(model=Model(state=st_black), state_field='state', current_state='st_black')
+2023-08-07 20:01:16.185 [ERROR] [HABApp.Worker                       ] -      self = <Mp3PlayerStatemachineRule>
+2023-08-07 20:01:16.186 [ERROR] [HABApp.Worker                       ] -    ------------------------------------------------------------
+2023-08-07 20:01:16.189 [ERROR] [HABApp.Worker                       ] - 
+2023-08-07 20:01:16.191 [ERROR] [HABApp.Worker                       ] - --------------------------------------------------------------------------------
+2023-08-07 20:01:16.192 [ERROR] [HABApp.Worker                       ] - Traceback (most recent call last):
+2023-08-07 20:01:16.192 [ERROR] [HABApp.Worker                       ] -   File "/opt/habapp/lib/python3.9/site-packages/HABApp/core/internals/wrapped_function/wrapped_thread.py", line 94, in run
+2023-08-07 20:01:16.193 [ERROR] [HABApp.Worker                       ] -     self.func_obj(*self.func_args, **self.func_kwargs)
+2023-08-07 20:01:16.193 [ERROR] [HABApp.Worker                       ] -   File "/etc/openhab/habapp/rules/mp3_player_mode.py", line 127, in outer_door_open
+2023-08-07 20:01:16.194 [ERROR] [HABApp.Worker                       ] -     log.info("##############################\nrule fired because of %s %s --> %s", event.itemName,
+2023-08-07 20:01:16.194 [ERROR] [HABApp.Worker                       ] - AttributeError: 'GroupStateChangedEvent' object has no attribute 'itemName'
+2023-08-07 21:07:34.070 [INFO ] [HABApp.Rules                        ] - Added rule "DoorLockStatemachineRule" from rules/doorlock_mode.py
+2023-08-07 21:15:13.307 [ERROR] [HABApp.Worker                       ] - Error in Mp3PlayerStatemachineRule.outer_door_open: 'GroupStateChangedEvent' object has no attribute 'itemName'
+2023-08-07 21:15:13.309 [ERROR] [HABApp.Worker                       ] - File "/etc/openhab/habapp/rules/mp3_player_mode.py", line 127 in outer_door_open
+2023-08-07 21:15:13.309 [ERROR] [HABApp.Worker                       ] - --------------------------------------------------------------------------------
+2023-08-07 21:15:13.310 [ERROR] [HABApp.Worker                       ] -      121 | def outer_door_open(self, event: ValueChangeEvent):
+2023-08-07 21:15:13.312 [ERROR] [HABApp.Worker                       ] -      122 |     """
+2023-08-07 21:15:13.313 [ERROR] [HABApp.Worker                       ] -      123 |     send event to mp3 player statemachine if outer_door_open changes
+2023-08-07 21:15:13.315 [ERROR] [HABApp.Worker                       ] -      124 |     Args:
+2023-08-07 21:15:13.316 [ERROR] [HABApp.Worker                       ] -      125 |         event (_type_): any Light item
+2023-08-07 21:15:13.317 [ERROR] [HABApp.Worker                       ] -      126 |     """
+2023-08-07 21:15:13.318 [ERROR] [HABApp.Worker                       ] - -->  127 |     log.info("##############################\nrule fired because of %s %s --> %s", event.itemName,
+2023-08-07 21:15:13.320 [ERROR] [HABApp.Worker                       ] -      128 |              event.oldItemState, event.itemState)
+2023-08-07 21:15:13.323 [ERROR] [HABApp.Worker                       ] -      130 |     MP3_PLAYER_STATE_MACHINE.set_outer_door_open(
+2023-08-07 21:15:13.324 [ERROR] [HABApp.Worker                       ] -      131 |         str(event.itemState) == "ON")
+2023-08-07 21:15:13.326 [ERROR] [HABApp.Worker                       ] -    ------------------------------------------------------------
+2023-08-07 21:15:13.327 [ERROR] [HABApp.Worker                       ] -      event = <GroupStateChangedEvent name: gAussenTueren, item: gFensterKaminzimmer_OpenState, value: CLOSED, old_value: OPEN>
+2023-08-07 21:15:13.329 [ERROR] [HABApp.Worker                       ] -      log = <Logger MP3PlayerMode (DEBUG)>
+2023-08-07 21:15:13.330 [ERROR] [HABApp.Worker                       ] -      MP3_PLAYER_STATE_MACHINE = SecurityDoorWindowStatemachine(model=Model(state=st_black), state_field='state', current_state='st_black')
+2023-08-07 21:15:13.331 [ERROR] [HABApp.Worker                       ] -      self = <Mp3PlayerStatemachineRule>
+2023-08-07 21:15:13.331 [ERROR] [HABApp.Worker                       ] -    ------------------------------------------------------------
+2023-08-07 21:15:13.332 [ERROR] [HABApp.Worker                       ] - 
+2023-08-07 21:15:13.334 [ERROR] [HABApp.Worker                       ] - --------------------------------------------------------------------------------
+2023-08-07 21:15:13.335 [ERROR] [HABApp.Worker                       ] - Traceback (most recent call last):
+2023-08-07 21:15:13.339 [ERROR] [HABApp.Worker                       ] -   File "/opt/habapp/lib/python3.9/site-packages/HABApp/core/internals/wrapped_function/wrapped_thread.py", line 94, in run
+2023-08-07 21:15:13.340 [ERROR] [HABApp.Worker                       ] -     self.func_obj(*self.func_args, **self.func_kwargs)
+2023-08-07 21:15:13.340 [ERROR] [HABApp.Worker                       ] -   File "/etc/openhab/habapp/rules/mp3_player_mode.py", line 127, in outer_door_open
+2023-08-07 21:15:13.340 [ERROR] [HABApp.Worker                       ] -     log.info("##############################\nrule fired because of %s %s --> %s", event.itemName,
+2023-08-07 21:15:13.341 [ERROR] [HABApp.Worker                       ] - AttributeError: 'GroupStateChangedEvent' object has no attribute 'itemName'

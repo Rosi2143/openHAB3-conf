@@ -20,7 +20,7 @@ handlers:
 
   HABApp_default:
     class: HABApp.config.logging.MidnightRotatingFileHandler
-    filename: "/mnt/usb/habapp/log/HABApp.log"
+    filename: "/etc/openhab/habapp/logging/HABApp.log"
     maxBytes: 1_048_576
     backupCount: 3
 
@@ -29,7 +29,7 @@ handlers:
 
   EventFile:
     class: HABApp.config.logging.MidnightRotatingFileHandler
-    filename: "/mnt/usb/habapp/log/HABApp_events.log"
+    filename: "/etc/openhab/habapp/logging/HABApp_events.log"
     maxBytes: 1_048_576
     backupCount: 3
 
@@ -38,7 +38,7 @@ handlers:
 
   MyRuleHandler:
     class: HABApp.config.logging.MidnightRotatingFileHandler
-    filename: "/mnt/usb/habapp/log/MyRule.log" # absolute filename is recommended
+    filename: "/etc/openhab/habapp/logging/MyRule.log" # absolute filename is recommended
     maxBytes: 10_000_000
     backupCount: 3
 
@@ -47,7 +47,7 @@ handlers:
 
   AstralHandler:
     class: HABApp.config.logging.MidnightRotatingFileHandler
-    filename: "/mnt/usb/habapp/log/Astral.log"
+    filename: "/etc/openhab/habapp/logging/Astral.log"
     maxBytes: 10_000_000
     backupCount: 3
 
@@ -56,7 +56,7 @@ handlers:
 
   ContactSwitchMapping:
     class: HABApp.config.logging.MidnightRotatingFileHandler
-    filename: "/mnt/usb/habapp/log/ContactSwitch.log"
+    filename: "/etc/openhab/habapp/logging/ContactSwitch.log"
     maxBytes: 10_000_000
     backupCount: 3
 
@@ -65,7 +65,7 @@ handlers:
 
   TinkerforgeHandler:
     class: HABApp.config.logging.MidnightRotatingFileHandler
-    filename: "/mnt/usb/habapp/log/Tinkerforge.log" # absolute filename is recommended
+    filename: "/etc/openhab/habapp/logging/Tinkerforge.log" # absolute filename is recommended
     maxBytes: 10_000_000
     backupCount: 3
 
@@ -74,7 +74,7 @@ handlers:
 
   IkeaHandler:
     class: HABApp.config.logging.MidnightRotatingFileHandler
-    filename: "/mnt/usb/habapp/log/Ikea.log" # absolute filename is recommended
+    filename: "/etc/openhab/habapp/logging/Ikea.log" # absolute filename is recommended
     maxBytes: 10_000_000
     backupCount: 3
 
@@ -83,12 +83,36 @@ handlers:
 
   MqttHandler:
     class: HABApp.config.logging.MidnightRotatingFileHandler
-    filename: "/mnt/usb/habapp/log/Mqtt.log" # absolute filename is recommended
+    filename: "/etc/openhab/habapp/logging/Mqtt.log" # absolute filename is recommended
     maxBytes: 10_000_000
     backupCount: 3
 
     formatter: HABApp_format
     level: INFO
+
+  ThermostatModeHandler:
+    class: HABApp.config.logging.MidnightRotatingFileHandler
+    filename: "/etc/openhab/habapp/logging/ThermostatMode.log" # absolute filename is recommended
+    maxBytes: 10_000_000
+    backupCount: 3
+
+  DoorLockModeHandler:
+    class: HABApp.config.logging.MidnightRotatingFileHandler
+    filename: "/etc/openhab/habapp/logging/DoorLockMode.log" # absolute filename is recommended
+    maxBytes: 10_000_000
+    backupCount: 3
+
+    formatter: HABApp_format
+    level: DEBUG
+
+  MP3PlayerModeHandler:
+    class: HABApp.config.logging.MidnightRotatingFileHandler
+    filename: "/etc/openhab/habapp/logging/MP3PlayerMode.log" # absolute filename is recommended
+    maxBytes: 10_000_000
+    backupCount: 3
+
+    formatter: HABApp_format
+    level: DEBUG
 
 loggers:
   HABApp:
@@ -137,4 +161,22 @@ loggers:
     level: DEBUG
     handlers:
       - MqttHandler
+    propagate: False
+
+  ThermostatMode:
+    level: DEBUG
+    handlers:
+      - ThermostatModeHandler
+    propagate: False
+
+  DoorLockMode:
+    level: DEBUG
+    handlers:
+      - DoorLockModeHandler
+    propagate: False
+
+  MP3PlayerMode:
+    level: DEBUG
+    handlers:
+      - MP3PlayerModeHandler
     propagate: False
