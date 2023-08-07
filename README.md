@@ -40,10 +40,10 @@ config for the openHAB3 setup
     * Remote Console (43)
   * Backup (50)
     * Backup (50)
-    
+
 * [phytonstatemachine](https://github.com/Rosi2143/python-statemachine)
-  * system: pip install python-statemachine
-  * openHAB: see [doc](https://github.com/Rosi2143/openHAB3-conf/tree/master/automation/lib/python/personal) 
+  * system: see [Readme](.\habapp\README.md)
+  * openHAB: see [doc](https://github.com/Rosi2143/openHAB3-conf/tree/master/automation/lib/python/personal)
 * tinkerforge
   * [brickd](https://www.tinkerforge.com/de/doc/Software/Brickd_Install_Linux.html#brickd-install-linux)
   * [brick-flash](https://www.tinkerforge.com/de/doc/Software/Brickd_Install_Linux.html#brickd-install-linux)
@@ -51,6 +51,8 @@ config for the openHAB3 setup
 
 ## copying git repos
 * create ssh-key
+* install graphviz
+  * sudo apt install graphviz
 * copy conf
   * cd /etc
   * sudo mv openhab openhab_org
@@ -68,7 +70,12 @@ config for the openHAB3 setup
 ## other configs
 * mount USB-Stick
   * https://raspberrytips.com/mount-usb-drive-raspberry-pi/
-* change log directory to USB 
+* change log directory to USB
 * add aliases:
-  * cdgitconf:
-  * cdgituser: 
+  * `vi ~/.bash_aliases`
+  * `alias cdgitconf='cd $OPENHAB_CONF'`
+  * `alias cdgituser='cd $OPENHAB_USER'`
+* clone "public files"
+  * `mkdir ~/git`
+  * `cd ~/git`
+  * `git clone git@github.com:Rosi2143/public_files.git`
