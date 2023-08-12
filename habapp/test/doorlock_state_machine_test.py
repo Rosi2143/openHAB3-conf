@@ -10,9 +10,8 @@ OH_CONF = os.getenv('OPENHAB_CONF')
 
 print("OH_CONF = " + OH_CONF)
 
-sys.path.append(os.path.join(OH_CONF, "automation/lib/python/personal"))
-sys.path.append(os.path.join(OH_CONF, "automation/lib/python"))
-from door_lock_statemachine import door_lock_statemachine
+sys.path.append(OH_CONF + '/habapp/rules/')
+from statemachines.DoorLockStatemachine import DoorLockStatemachine
 
 log = logging.getLogger(__name__)
 log.setLevel(logging.DEBUG)
@@ -46,6 +45,7 @@ def test_state(state_machine, state):
 
 
 def run_tests(event, base_test, test_set, state_machine):
+    """Run all tests of the test_set"""
 
     event_function = getattr(state_machine, "set_" + event)
 
@@ -63,7 +63,7 @@ def run_tests(event, base_test, test_set, state_machine):
 
     event_function(True)
     state_machine.send("tr_" + event + "_change")
-    test_state(state_machine, base_test[0])
+    test_state(state_machine, base_test[2])
 
     for test, results in test_set.items():
         log.info("")
@@ -106,9 +106,9 @@ def test_default_state():
     """Test if default (initial) state is OK
     """
     function_name = inspect.currentframe().f_code.co_name
-    print("\n########## %s #########", function_name)
+    print(f"\n########## {function_name} #########")
 
-    state_machine = door_lock_statemachine(
+    state_machine = DoorLockStatemachine(
         name="TestMachine", logger=log)
 
     test_state(state_machine, "unlocked")
@@ -117,9 +117,9 @@ def test_default_state():
 def test_dark_outside_state():
     """Test if dark outside state is OK"""
     function_name = inspect.currentframe().f_code.co_name
-    print("\n########## %s #########", function_name)
+    print(f"\n########## {function_name} #########")
 
-    state_machine = door_lock_statemachine(
+    state_machine = DoorLockStatemachine(
         name=function_name, logger=log)
 
     test_set = {"door_open": {"ON": "error",
@@ -139,15 +139,16 @@ def test_dark_outside_state():
                              }
                 }
 
-    run_tests("dark_outside", ["locked", "locked"], test_set, state_machine)
+    run_tests("dark_outside", ["locked", "locked",
+              "locked"], test_set, state_machine)
 
 
 def test_door_open_state():
     """Test if door open state is OK"""
     function_name = inspect.currentframe().f_code.co_name
-    print("\n########## %s #########", function_name)
+    print(f"\n########## {function_name} #########")
 
-    state_machine = door_lock_statemachine(
+    state_machine = DoorLockStatemachine(
         name=function_name, logger=log)
 
     test_set = {"dark_outside": {"ON": "error",
@@ -167,15 +168,16 @@ def test_door_open_state():
                              }
                 }
 
-    run_tests("door_open", ["unlocked", "unlocked"], test_set, state_machine)
+    run_tests("door_open", ["unlocked", "unlocked",
+              "unlocked"], test_set, state_machine)
 
 
 def test_error_state():
     """Test if error handling is OK"""
     function_name = inspect.currentframe().f_code.co_name
-    print("\n########## %s #########", function_name)
+    print(f"\n########## {function_name} #########")
 
-    state_machine = door_lock_statemachine(
+    state_machine = DoorLockStatemachine(
         name=function_name, logger=log)
 
     # check error map
@@ -258,9 +260,9 @@ def test_error_state():
 def test_light_state():
     """Test if light state is OK"""
     function_name = inspect.currentframe().f_code.co_name
-    print("\n########## %s #########", function_name)
+    print(f"\n########## {function_name} #########")
 
-    state_machine = door_lock_statemachine(
+    state_machine = DoorLockStatemachine(
         name=function_name, logger=log)
 
     test_set = {"dark_outside": {"ON": "unlocked",
@@ -280,15 +282,16 @@ def test_light_state():
                              }
                 }
 
-    run_tests("light", ["unlocked", "unlocked"], test_set, state_machine)
+    run_tests("light", ["unlocked", "unlocked",
+              "unlocked"], test_set, state_machine)
 
 
 def test_presence_state():
     """Test if presence state is OK"""
     function_name = inspect.currentframe().f_code.co_name
-    print("\n########## %s #########", function_name)
+    print(f"\n########## {function_name} #########")
 
-    state_machine = door_lock_statemachine(
+    state_machine = DoorLockStatemachine(
         name=function_name, logger=log)
 
     test_set = {"dark_outside": {"ON": "locked",
@@ -303,30 +306,32 @@ def test_presence_state():
                               },
                 "light": {"ON": "unlocked",
                           "ON_OFF": "locked",
-                          "ON_ON": "unlocked",
+                          "ON_ON": "locked",
                           "OFF": "unlocked"
                           },
                 }
 
-    run_tests("presence", ["unlocked", "locked"], test_set, state_machine)
+    run_tests("presence", ["unlocked", "locked",
+              "locked"], test_set, state_machine)
 
     test_set = {  # use this twice to start checking door_open in unlocked state
-        "door_open": {"ON": "unlocked",
+        "door_open": {"ON": "error",
                       "ON_OFF": "error",
                       "ON_ON": "unlocked",
                       "OFF": "unlocked"
                       },
     }
 
-    run_tests("presence", ["unlocked", "locked"], test_set, state_machine)
+    run_tests("presence", ["unlocked", "locked",
+              "locked"], test_set, state_machine)
 
 
 def test_reported_lock_state():
     """Test if reported lock state handling is OK"""
     function_name = inspect.currentframe().f_code.co_name
-    print("\n########## %s #########", function_name)
+    print(f"\n########## {function_name} #########")
 
-    state_machine = door_lock_statemachine(
+    state_machine = DoorLockStatemachine(
         name=function_name, logger=log)
 
     # check error map
@@ -349,6 +354,30 @@ def test_reported_lock_state():
     test_state(state_machine, "unlocked")
 
 
+def check_special_presence_lock_state():
+    """Test reaction to "presence change" is as expected """
+    function_name = inspect.currentframe().f_code.co_name
+    print(f"\n########## {function_name} #########")
+
+    state_machine = DoorLockStatemachine(
+        name=function_name, logger=log)
+
+    # set the scene
+    state_machine.set_dark_outside(False)
+    state_machine.send("tr_dark_outside_change")
+    state_machine.set_door_open(False)
+    state_machine.send("tr_door_open_change")
+    state_machine.set_light(False)
+    state_machine.send("tr_light_change")
+    state_machine.set_presence(False)
+    state_machine.send("tr_presence_change")
+    test_state(state_machine, "locked")
+
+    state_machine.set_presence(True)
+    state_machine.send("tr_presence_change")
+    test_state(state_machine, "locked")
+
+
 test_default_state()
 test_dark_outside_state()
 test_door_open_state()
@@ -356,3 +385,4 @@ test_error_state()
 test_reported_lock_state()
 test_light_state()
 test_presence_state()
+check_special_presence_lock_state()

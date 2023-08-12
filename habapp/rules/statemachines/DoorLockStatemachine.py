@@ -122,7 +122,7 @@ class DoorLockStatemachine(StateMachine):
                           st_unlocked.to(st_locked, cond="cond_lock_required") |
                           st_unlocked.to.itself() |
                           st_locked.to(st_error, cond="cond_error") |
-                          st_locked.to(st_unlocked, unless="cond_lock_required") |
+                          # st_locked.to(st_unlocked, unless="cond_lock_required") |
                           st_locked.to.itself() |
                           st_error.to(st_unlocked, unless=[
                               "cond_error", "cond_lock_required"]) |

@@ -30,16 +30,16 @@ def check_charging_state(event):
 
     if items["HABPanel_Battery_Level"] != "NULL":
         battery_level = int(str(items["HABPanel_Battery_Level"]))
-    if items["HABPanelLadung_Betrieb"] != "NULL":
-        charging_state = items["HABPanelLadung_Betrieb"] == "ON"
+    if items["HABPanel_Battery_Charging"] != "NULL":
+        charging_state = items["HABPanel_Battery_Charging"] == "OPEN"
 
     check_charging_state.log.debug(
         "HABPanel_Battery_Level = %s --> LowBat = %s", battery_level, (battery_level < BATTERY_MIN_CHARGE))
 
     check_charging_state.log.debug(
-        "HABPanelLadung_Betrieb = %s", charging_state)
+        "HABPanel_Battery_Charging = %s", charging_state)
 
-    if ((battery_level < BATTERY_MIN_CHARGE) and charging_state):
+    if ((battery_level < BATTERY_MIN_CHARGE) and not charging_state):
         events.sendCommand("HABPanelLadung_Betrieb", "ON")
         check_charging_state.log.info("start charging")
     elif ((battery_level > BATTERY_MAX_CHARGE) and charging_state):

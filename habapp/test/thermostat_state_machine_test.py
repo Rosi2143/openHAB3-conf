@@ -8,9 +8,8 @@ import inspect
 
 OH_CONF = os.getenv('OPENHAB_CONF')
 
-sys.path.append(os.path.join(OH_CONF, "automation/lib/python/personal"))
-sys.path.append(os.path.join(OH_CONF, "automation/lib/python"))
-from thermostat_statemachine import thermostat_statemachine
+sys.path.append(OH_CONF + '/habapp/rules/')
+from statemachines.ThermostatStatemachine import ThermostatStatemachine
 
 log = logging.getLogger(__name__)
 log.setLevel(logging.INFO)
@@ -43,7 +42,7 @@ def test_default_state():
     function_name = inspect.currentframe().f_code.co_name
     print("\n########## %s #########", function_name)
 
-    state_machine = thermostat_statemachine(
+    state_machine = ThermostatStatemachine(
         name="TestMachine", logger=log)
 
     test_state(state_machine, "auto")
@@ -55,7 +54,7 @@ def test_auto_manual_vacation_state():
     function_name = inspect.currentframe().f_code.co_name
     print("\n########## %s #########", function_name)
 
-    state_machine = thermostat_statemachine(
+    state_machine = ThermostatStatemachine(
         name=function_name, logger=log)
 
     state_machine.set_mode(state_machine.MANUAL)
@@ -89,7 +88,7 @@ def test_config_change():
     function_name = inspect.currentframe().f_code.co_name
     print("\n########## %s #########", function_name)
 
-    state_machine = thermostat_statemachine(
+    state_machine = ThermostatStatemachine(
         name=function_name, logger=log)
 
     state_machine.set_config(True)
@@ -131,7 +130,7 @@ def test_window_change():
     function_name = inspect.currentframe().f_code.co_name
     print("\n########## %s #########", function_name)
 
-    state_machine = thermostat_statemachine(
+    state_machine = ThermostatStatemachine(
         name=function_name, logger=log)
 
     state_machine.set_window_open(True)

@@ -121,7 +121,7 @@ class DoorLockStatemachineRule(HABApp.Rule):
 
     def set_mode_item(self, state):
         """set the door_lock_mode item """
-#        self.openhab.send_command("SchlossWaschkueche_LockTargetLevel", state)
+        self.openhab.send_command("SchlossWaschkueche_LockTargetLevel", state)
 #        self.openhab.send_command("SchlossWaschkueche_Mode", state)
 
     def is_dark_outside(self, sun_phase):

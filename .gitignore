@@ -5,6 +5,6 @@ habapp/logging
 **/*.pyc
 
 # generated images
-automation/jsr223/python/personal/images/*
+habapp/images/
 
 doc/build

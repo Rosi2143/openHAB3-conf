@@ -10,9 +10,8 @@ OH_CONF = os.getenv('OPENHAB_CONF')
 
 print("OH_CONF = " + OH_CONF)
 
-sys.path.append(os.path.join(OH_CONF, "automation/lib/python/personal"))
-sys.path.append(os.path.join(OH_CONF, "automation/lib/python"))
-from security_door_window_statemachine import security_door_window_statemachine
+sys.path.append(OH_CONF + '/habapp/rules/')
+from statemachines.SecurityDoorWindowStatemachine import SecurityDoorWindowStatemachine
 
 log = logging.getLogger(__name__)
 log.setLevel(logging.INFO)
@@ -70,7 +69,7 @@ def test_default_state():
     function_name = inspect.currentframe().f_code.co_name
     print("\n########## %s #########", function_name)
 
-    state_machine = security_door_window_statemachine(
+    state_machine = SecurityDoorWindowStatemachine(
         name="TestMachine", logger=log)
 
     test_state(state_machine, "black")
@@ -81,7 +80,7 @@ def test_bell_rang_state():
     function_name = inspect.currentframe().f_code.co_name
     print("\n########## %s #########", function_name)
 
-    state_machine = security_door_window_statemachine(
+    state_machine = SecurityDoorWindowStatemachine(
         name=function_name, logger=log)
 
     # bell_rang is active
@@ -119,7 +118,7 @@ def test_lock_error_state():
     function_name = inspect.currentframe().f_code.co_name
     print("\n########## %s #########", function_name)
 
-    state_machine = security_door_window_statemachine(
+    state_machine = SecurityDoorWindowStatemachine(
         name=function_name, logger=log)
 
     # bell_rang is active
@@ -157,7 +156,7 @@ def test_outer_door_state():
     function_name = inspect.currentframe().f_code.co_name
     print("\n########## %s #########", function_name)
 
-    state_machine = security_door_window_statemachine(
+    state_machine = SecurityDoorWindowStatemachine(
         name=function_name, logger=log)
 
     # outer_door_open is active
@@ -195,7 +194,7 @@ def test_window_state():
     function_name = inspect.currentframe().f_code.co_name
     print("\n########## %s #########", function_name)
 
-    state_machine = security_door_window_statemachine(
+    state_machine = SecurityDoorWindowStatemachine(
         name=function_name, logger=log)
 
     # window_open is active
@@ -233,7 +232,7 @@ def test_timeout_state():
     function_name = inspect.currentframe().f_code.co_name
     print("\n########## %s #########", function_name)
 
-    state_machine = security_door_window_statemachine(
+    state_machine = SecurityDoorWindowStatemachine(
         name=function_name, logger=log)
 
     # timeout_open is active
@@ -271,7 +270,7 @@ def test_light_level():
     function_name = inspect.currentframe().f_code.co_name
     print("\n########## %s #########", function_name)
 
-    state_machine = security_door_window_statemachine(
+    state_machine = SecurityDoorWindowStatemachine(
         name=function_name, logger=log)
 
     assert state_machine.get_light_level() == 0

@@ -8,9 +8,8 @@ import inspect
 
 OH_CONF = os.getenv('OPENHAB_CONF')
 
-sys.path.append(os.path.join(OH_CONF, "automation/lib/python/personal"))
-sys.path.append(os.path.join(OH_CONF, "automation/lib/python"))
-from hue_offline_statemachine import get_state_machine, HueOfflineStatemachine
+sys.path.append(OH_CONF + '/habapp/rules/')
+from statemachines.hue_offline_statemachine import get_state_machine, HueOfflineStatemachine
 
 log = logging.getLogger(__name__)
 log.setLevel(logging.DEBUG)
