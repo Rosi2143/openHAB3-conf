@@ -70,6 +70,35 @@ config for the openHAB3 setup
 ## other configs
 * mount USB-Stick
   * https://raspberrytips.com/mount-usb-drive-raspberry-pi/
+  * add new location to samba
+    * `sudo nano /etc/samba/smb.conf`
+    *
+        ```
+          [openHAB-USB]
+          comment=USBDrive
+          path=/mnt/usb1
+          writeable=yes
+          public=no
+          create mask=0664
+          directory mask=0775
+          veto files = /Thumbs.db/.DS_Store/._.DS_Store/.apdisk/._*/
+          delete veto files = yes
+        ```
+
+  * allow OH to write logs
+    * `sudo chmod -R g+w /mnt/usb1/log/`
+    * `sudo chgrp -R openhab /mnt/usb1/log/`
+    * `sudo chown -r openhab /mnt/usb1/log/`
+  * change log location
+    * `sudo systemctl edit openhab.service`
+    *
+        ```
+        [Service]
+        Environment=OPENHAB_LOGDIR=
+        Environment=OPENHAB_LOGDIR=/mnt/usb1/log/openhab
+        ```
+
+    * restart openhab
 * change log directory to USB
 * add aliases:
   * `vi ~/.bash_aliases`
