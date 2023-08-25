@@ -46,7 +46,8 @@ def get_internal_state_machine_state(state_machine):
     info += "\n   _lock_error      = " + str(state_machine.get_lock_error())
     info += "\n   _outer_door_open = " + \
         str(state_machine.get_outer_door_open())
-    info += "\n   _timeout         = " + str(state_machine.get_timeout())
+    info += "\n   _timeout_state   = " + str(state_machine.get_timeout_state())
+    info += "\n   _timeout_sec     = " + str(state_machine.get_timeout_sec())
     info += "\n   _window_open     = " + str(state_machine.get_window_open())
     return info
 
@@ -110,16 +111,16 @@ class SecurityDoorWindowStatemachine(StateMachine):
                       st_black.to.itself()
                       )
 
-    tr_timeout = (st_black.to.itself() |
-                  st_blue.to.itself(cond="cond_window_open") |
-                  st_blue.to(st_black) |
-                  st_green.to(st_black) |
-                  st_purple.to.itself() |
-                  st_red.to.itself() |
-                  st_yellow.to(st_purple, cond="cond_outer_door_open") |
-                  st_yellow.to(st_blue, cond="cond_window_open") |
-                  st_yellow.to(st_green)
-                  )
+    tr_timeout_state = (st_black.to.itself() |
+                        st_blue.to.itself(cond="cond_window_open") |
+                        st_blue.to(st_black) |
+                        st_green.to(st_black) |
+                        st_purple.to.itself() |
+                        st_red.to.itself() |
+                        st_yellow.to(st_purple, cond="cond_outer_door_open") |
+                        st_yellow.to(st_blue, cond="cond_window_open") |
+                        st_yellow.to(st_green)
+                        )
 
     def __init__(self, name="unnamed", logger=None):
         # variables
@@ -129,8 +130,9 @@ class SecurityDoorWindowStatemachine(StateMachine):
         self._bell_rang = False
         self._lock_error = False
         self._outer_door_open = False
-        self._timeout = False
+        self._timeout_state = False
         self._window_open = False
+        self._timeout_sec = 0
 
         self._light_level = 0
 
@@ -163,12 +165,19 @@ class SecurityDoorWindowStatemachine(StateMachine):
         """
         return self._outer_door_open
 
-    def get_timeout(self):
+    def get_timeout_state(self):
         """return the state of the timeout
         Returns:
             bool: timeout state
         """
-        return self._timeout
+        return self._timeout_state
+
+    def get_timeout_sec(self):
+        """return the current set time of the timeout
+        Returns:
+            int: timeout in seconds
+        """
+        return self._timeout_sec
 
     def get_window_open(self):
         """return the state of the light
@@ -226,14 +235,14 @@ class SecurityDoorWindowStatemachine(StateMachine):
         self._logger.info(self.get_name() +
                           ": - outer door open is: " + str(self._outer_door_open))
 
-    def set_timeout(self, state):
+    def set_timeout_state(self, state):
         """set internal state of timeout
         Args:
             state (bool): state of timeout
         """
-        self._timeout = state
+        self._timeout_state = state
         self._logger.info(self.get_name() +
-                          ": - outer door open is: " + str(self._timeout))
+                          ": - timeout is: " + str(self._timeout_state))
 
     def set_window_open(self, state):
         """set internal state of light
@@ -288,17 +297,30 @@ class SecurityDoorWindowStatemachine(StateMachine):
     def before_transition(self, event, state):
         """events received for any state """
         self._logger.debug(self.get_name() + "(" + str(id(self)) +
-                           "): Before   '{}' in '{}' state.".format(event, state.id))
+                           "): before_transition   '{}' in '{}' state.".format(event, state.id))
+        self._timeout_sec = 0
 
     def on_enter_state(self, event, state):
         """entry function for any state """
         self._logger.debug(self.get_name() + "(" + str(id(self)) +
-                           "): Entering '{}' state triggered by '{}' event.".format(state.id, event))
+                           "): on_enter_state '{}' state triggered by '{}' event.".format(state.id, event))
 
     def after_transition(self, event, state):
         """last function in state change queue """
+        self._logger.debug(self.get_name() + "(" + str(id(self)) +
+                           "): after_transition is in state {}.".format(state.id))
+
+    def on_enter_st_green(self, source, target):
+        """entry action for state st_green"""
         self._logger.debug(
-            self.get_name() + ": is in state {}.".format(state.id))
+            self.get_name() + ": entered state {} -- from state {}.".format(target.id, source.id))
+        self._timeout_sec = 10
+
+    def on_enter_st_blue(self, source, target):
+        """entry action for state st_blue"""
+        self._logger.debug(
+            self.get_name() + ": entered state {} -- from state {}.".format(target.id, source.id))
+        self._timeout_sec = 20
 
     def on_enter_st_black(self, source, target):
         """entry action for state st_black"""

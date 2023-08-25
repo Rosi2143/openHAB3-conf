@@ -30,12 +30,22 @@ log.addHandler(ch)
 
 def test_state(state_machine, state):
     """make testing of states with logging easier"""
-    log.debug(
-        f"assert: {state_machine.get_name()} [current]{state_machine.current_state.name} == [expect]{state}")
+    log.debug("assert: %s [current]%s == [expect]%s",
+              state_machine.get_name(),
+              state_machine.current_state.name,
+              state)
     assert state_machine.current_state.name == state
 
 
 def run_tests(event, test_set, state_machine):
+    """run all tests in the test_set
+       This is the central test function
+
+    Args:
+        event (string): event that shall be tested
+        test_set (_type_): map of events and states that are tested
+        state_machine (statemachine): statemachine that is tested
+    """
 
     event_function = getattr(state_machine, "set_" + event)
     for test, results in test_set.items():
@@ -103,11 +113,11 @@ def test_bell_rang_state():
                                 "ON_ON": "yellow",
                                 "OFF": "yellow"
                                 },
-                "timeout": {"ON": "green",
-                            "ON_OFF": "green",
-                            "ON_ON": "yellow",
-                            "OFF": "green"
-                            }
+                "timeout_state": {"ON": "green",
+                                  "ON_OFF": "green",
+                                  "ON_ON": "yellow",
+                                  "OFF": "green"
+                                  }
                 }
 
     run_tests("bell_rang", test_set, state_machine)
@@ -141,11 +151,11 @@ def test_lock_error_state():
                                 "ON_ON": "red",
                                 "OFF": "red"
                                 },
-                "timeout": {"ON": "red",
-                            "ON_OFF": "green",
-                            "ON_ON": "red",
-                            "OFF": "red"
-                            }
+                "timeout_state": {"ON": "red",
+                                  "ON_OFF": "green",
+                                  "ON_ON": "red",
+                                  "OFF": "red"
+                                  }
                 }
 
     run_tests("lock_error", test_set, state_machine)
@@ -179,11 +189,11 @@ def test_outer_door_state():
                                 "ON_ON": "purple",
                                 "OFF": "purple"
                                 },
-                "timeout": {"ON": "purple",
-                            "ON_OFF": "green",
-                            "ON_ON": "purple",
-                            "OFF": "purple"
-                            }
+                "timeout_state": {"ON": "purple",
+                                  "ON_OFF": "green",
+                                  "ON_ON": "purple",
+                                  "OFF": "purple"
+                                  }
                 }
 
     run_tests("outer_door_open", test_set, state_machine)
@@ -217,11 +227,11 @@ def test_window_state():
                                     "ON_ON": "purple",
                                     "OFF": "blue"
                                     },
-                "timeout": {"ON": "blue",
-                            "ON_OFF": "green",
-                            "ON_ON": "blue",
-                            "OFF": "blue"
-                            }
+                "timeout_state": {"ON": "blue",
+                                  "ON_OFF": "green",
+                                  "ON_ON": "blue",
+                                  "OFF": "blue"
+                                  }
                 }
 
     run_tests("window_open", test_set, state_machine)
@@ -236,8 +246,8 @@ def test_timeout_state():
         name=function_name, logger=log)
 
     # timeout_open is active
-    state_machine.set_timeout(True)
-    state_machine.send("tr_timeout")
+    state_machine.set_timeout_state(True)
+    state_machine.send("tr_timeout_state")
     test_state(state_machine, "black")
 
     test_set = {"bell_rang": {"ON": "yellow",
@@ -262,11 +272,11 @@ def test_timeout_state():
                                 }
                 }
 
-    run_tests("timeout", test_set, state_machine)
+    run_tests("timeout_state", test_set, state_machine)
 
 
 def test_light_level():
-    """Test if if light level is correctly set"""
+    """Test if light level is correctly set"""
     function_name = inspect.currentframe().f_code.co_name
     print("\n########## %s #########", function_name)
 
@@ -282,8 +292,53 @@ def test_light_level():
     state_machine.set_bell_rang(False)
     state_machine.send("tr_bell_rang")
     assert state_machine.get_light_level() != 0
-    state_machine.send("tr_timeout")
+    state_machine.send("tr_timeout_state")
     assert state_machine.get_light_level() == 0
+
+
+def test_timeout_second():
+    """Test if timeout value is correctly set"""
+    function_name = inspect.currentframe().f_code.co_name
+    print("\n########## %s #########", function_name)
+
+    state_machine = SecurityDoorWindowStatemachine(
+        name=function_name, logger=log)
+
+    # black == 0
+    test_state(state_machine, "black")
+    assert state_machine.get_timeout_sec() == 0
+
+    # blue == 10
+    state_machine.set_window_open(True)
+    state_machine.send("tr_window_open")
+    test_state(state_machine, "blue")
+    assert state_machine.get_timeout_sec() == 20
+
+    # green == 20
+    state_machine.set_window_open(False)
+    state_machine.send("tr_window_open")
+    test_state(state_machine, "green")
+    assert state_machine.get_timeout_sec() == 10
+
+    # purple == 0
+    state_machine.set_outer_door_open(True)
+    state_machine.send("tr_outer_door_open")
+    test_state(state_machine, "purple")
+    assert state_machine.get_timeout_sec() == 0
+
+    # red == 0
+    state_machine.set_lock_error(True)
+    state_machine.send("tr_lock_error")
+    test_state(state_machine, "red")
+    assert state_machine.get_timeout_sec() == 0
+
+    # yellow == 20
+    state_machine.set_lock_error(False)
+    state_machine.send("tr_lock_error")
+    state_machine.set_bell_rang(True)
+    state_machine.send("tr_bell_rang")
+    test_state(state_machine, "yellow")
+    assert state_machine.get_timeout_sec() == 0
 
 
 test_default_state()
@@ -293,3 +348,4 @@ test_outer_door_state()
 test_window_state()
 test_timeout_state()
 test_light_level()
+test_timeout_second()

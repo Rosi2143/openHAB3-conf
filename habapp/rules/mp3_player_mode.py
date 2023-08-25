@@ -5,7 +5,7 @@
 import logging  # required for extended logging
 
 import sys
-import os
+from datetime import timedelta
 
 import sys
 import HABApp
@@ -19,8 +19,7 @@ OH_CONF = "/etc/openhab/"  # os.getenv('OPENHAB_CONF')
 sys.path.append(OH_CONF + 'habapp/rules/')
 from statemachines.SecurityDoorWindowStatemachine import SecurityDoorWindowStatemachine, get_state_machine_graph
 
-MP3_PLAYER_STATE_MACHINE = SecurityDoorWindowStatemachine(
-    "Kueche", log)
+MP3_PLAYER_STATE_MACHINE = SecurityDoorWindowStatemachine("Kueche", log)
 
 
 class Mp3PlayerStatemachineRule(HABApp.Rule):
@@ -83,6 +82,12 @@ class Mp3PlayerStatemachineRule(HABApp.Rule):
         self.openhab.send_command("Mp3Spieler_Color", state)
         self.openhab.send_command("Mp3Spieler_Level", str(level))
 
+        timeout_sec = MP3_PLAYER_STATE_MACHINE.get_timeout_sec()
+        if timeout_sec != 0:
+            log.info("Start timer of %s sec", timeout_sec)
+            self.run.at(time=timedelta(seconds=timeout_sec),
+                        callback=self.timeout)
+
     # ####################
     # Rules
     # ####################
@@ -94,10 +99,10 @@ class Mp3PlayerStatemachineRule(HABApp.Rule):
         Args:
             event (_type_): any BellRang item
         """
-        log.info("##############################\nrule fired because of %s %s --> %s", event.itemName,
-                 event.oldItemState, event.itemState)
+        log.info("##############################\nrule fired because of %s %s --> %s", event.name,
+                 event.old_value, event.value)
 
-        MP3_PLAYER_STATE_MACHINE.set_bell_rang((str(event.itemState)) == "ON")
+        MP3_PLAYER_STATE_MACHINE.set_bell_rang((str(event.value)) == "ON")
         MP3_PLAYER_STATE_MACHINE.send("tr_bell_rang")
         self.set_mode_item(MP3_PLAYER_STATE_MACHINE.get_state_name(),
                            MP3_PLAYER_STATE_MACHINE.get_light_level())
@@ -109,10 +114,10 @@ class Mp3PlayerStatemachineRule(HABApp.Rule):
         Args:
             event (_type_): any Lock_Error item
         """
-        log.info("##############################\nrule fired because of %s %s --> %s", event.itemName,
-                 event.oldItemState, event.itemState)
+        log.info("##############################\nrule fired because of %s %s --> %s", event.name,
+                 event.old_value, event.value)
 
-        MP3_PLAYER_STATE_MACHINE.set_lock_error(str(event.itemState) == "ON")
+        MP3_PLAYER_STATE_MACHINE.set_lock_error(str(event.value) == "ON")
         MP3_PLAYER_STATE_MACHINE.send("tr_lock_error")
         self.set_mode_item(MP3_PLAYER_STATE_MACHINE.get_state_name(),
                            MP3_PLAYER_STATE_MACHINE.get_light_level())
@@ -124,11 +129,11 @@ class Mp3PlayerStatemachineRule(HABApp.Rule):
         Args:
             event (_type_): any Light item
         """
-        log.info("##############################\nrule fired because of %s %s --> %s", event.itemName,
-                 event.oldItemState, event.itemState)
+        log.info("##############################\nrule fired because of %s %s --> %s", event.name,
+                 event.old_value, event.value)
 
         MP3_PLAYER_STATE_MACHINE.set_outer_door_open(
-            str(event.itemState) == "ON")
+            str(event.value) == "OPEN")
         MP3_PLAYER_STATE_MACHINE.send("tr_outer_door_open")
         self.set_mode_item(MP3_PLAYER_STATE_MACHINE.get_state_name(),
                            MP3_PLAYER_STATE_MACHINE.get_light_level())
@@ -140,26 +145,25 @@ class Mp3PlayerStatemachineRule(HABApp.Rule):
         Args:
             event (_type_): any window_open item
         """
-        log.info("##############################\nrule fired because of %s %s --> %s", event.itemName,
-                 event.oldItemState, event.itemState)
+        log.info("##############################\nrule fired because of %s %s --> %s", event.name,
+                 event.old_value, event.value)
 
-        MP3_PLAYER_STATE_MACHINE.set_window_open(str(event.itemState) == "ON")
+        MP3_PLAYER_STATE_MACHINE.set_window_open(str(event.value) == "ON")
         MP3_PLAYER_STATE_MACHINE.send("tr_window_open")
         self.set_mode_item(MP3_PLAYER_STATE_MACHINE.get_state_name(),
                            MP3_PLAYER_STATE_MACHINE.get_light_level())
 
     # Check Timeout
-    def timeout(self, event: ValueChangeEvent):
+    def timeout(self):
         """
         send event to mp3 player statemachine if Timeout changes
         Args:
             event (_type_): any Timeout item
         """
-        log.info("##############################\nrule fired because of %s %s --> %s", event.itemName,
-                 event.oldItemState, event.itemState)
+        log.info("##############################\nrule fired because of timeout")
 
-        MP3_PLAYER_STATE_MACHINE.set_timeout(True)
-        MP3_PLAYER_STATE_MACHINE.send("tr_timeout")
+        MP3_PLAYER_STATE_MACHINE.set_timeout_state(True)
+        MP3_PLAYER_STATE_MACHINE.send("tr_timeout_state")
         self.set_mode_item(MP3_PLAYER_STATE_MACHINE.get_state_name(),
                            MP3_PLAYER_STATE_MACHINE.get_light_level())
 
