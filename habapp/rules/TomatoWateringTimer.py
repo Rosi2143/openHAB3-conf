@@ -12,7 +12,8 @@ from HABApp.core.events import EventFilter
 logger = logging.getLogger('TomatoTimer')
 
 TIME_FOR_WATERING_MIN = 2
-THING_UID_PLUG = "hue:0010:ecb5fa2c8738:21"
+THING_UID_PLUG = "hue:0010:ecb5fa2c8738:25"
+DEVICE_NAME_PLUG_STATE = "AussenSteckdose_Betrieb"
 
 RAIN_EFFECT_FACTOR = 5
 TEMPERATURE_EFFECT_BASE = 25
@@ -40,8 +41,7 @@ class MyTomatoTimer(HABApp.Rule):
             self.dark_outside_item.get_value())
         logger.info("is it dark outside? --> %s", dark_outside_state)
 
-        self.watering_active_item = SwitchItem.get_item(
-            "SteckdoseAussen_Betrieb")
+        self.watering_active_item = SwitchItem.get_item(DEVICE_NAME_PLUG_STATE)
         watering_active_state = self.watering_active_item.get_value()
         logger.info("watering active? --> %s", watering_active_state)
 
@@ -241,7 +241,7 @@ class MyTomatoTimer(HABApp.Rule):
         """deactivate the watering"""
         logger.info('set watering: OFF')
         self.watering_state = False
-        self.openhab.send_command("SteckdoseAussen_Betrieb", "OFF")
+        self.openhab.send_command(DEVICE_NAME_PLUG_STATE, "OFF")
 
     def activate_watering(self):
         """activate the watering for a given time
@@ -251,18 +251,18 @@ class MyTomatoTimer(HABApp.Rule):
         """
         logger.info('set watering: ON')
         self.watering_state = True
-        self.openhab.send_command("SteckdoseAussen_Betrieb", "ON")
+        self.openhab.send_command(DEVICE_NAME_PLUG_STATE, "ON")
         self.run.at(time=timedelta(minutes=TIME_FOR_WATERING_MIN),
                     callback=self.deactivate_watering)
 
     def is_dark_outside(self, sun_phase):
         """checks if it is dark outside"""
         if ((sun_phase == "NAUTIC_DUSK") |
-                (sun_phase == "ASTRO_DUSK") |
-                (sun_phase == "NIGHT") |
-            (sun_phase == "ASTRO_DAWN") |
-                    (sun_phase == "NAUTIC_DAWN")
-            ):
+                    (sun_phase == "ASTRO_DUSK") |
+                    (sun_phase == "NIGHT") |
+                (sun_phase == "ASTRO_DAWN") |
+                (sun_phase == "NAUTIC_DAWN")
+                ):
             return True
         else:
             return False
