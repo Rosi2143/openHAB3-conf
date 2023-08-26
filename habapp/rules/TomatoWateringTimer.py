@@ -1,14 +1,26 @@
 # https://habapp.readthedocs.io/en/latest/getting_started.html
 import logging  # required for extended logging
 from datetime import timedelta
+import math
 
 import HABApp
-from HABApp.openhab.items import StringItem, SwitchItem, NumberItem
-from HABApp.core.events import ValueUpdateEvent, ValueUpdateEventFilter, ValueChangeEvent, ValueChangeEventFilter
+from HABApp.openhab.items import StringItem, SwitchItem, NumberItem, Thing
+from HABApp.openhab.definitions import ThingStatusEnum
+from HABApp.openhab.events import ThingStatusInfoChangedEvent
+from HABApp.core.events import EventFilter
 
 logger = logging.getLogger('TomatoTimer')
 
 TIME_FOR_WATERING_MIN = 2
+THING_UID_PLUG = "hue:0010:ecb5fa2c8738:21"
+
+RAIN_EFFECT_FACTOR = 5
+TEMPERATURE_EFFECT_BASE = 25
+TEMPERATURE_EFFECT_FACTOR = 2
+HUMIDITY_EFFECT_BASE = 100
+HUMIDITY_EFFECT_FACTOR = 2
+WIND_EFFECT_FACTOR = 5
+LIGHT_EFFECT_FACTOR = 5
 
 
 class MyTomatoTimer(HABApp.Rule):
@@ -20,7 +32,7 @@ class MyTomatoTimer(HABApp.Rule):
         """initialize class and calculate the first time"""
         super().__init__()
 
-        self.run.soon(self.timer_expired)
+        self.thing_offline_on_request = False
         logger.info('Started TomatoTimer')
         self.dark_outside_item = StringItem.get_item(
             "Sonnendaten_Sonnenphase")
@@ -33,8 +45,33 @@ class MyTomatoTimer(HABApp.Rule):
         watering_active_state = self.watering_active_item.get_value()
         logger.info("watering active? --> %s", watering_active_state)
 
-        self.watering_state = (watering_active_state == "ON")
-        self.timer_expired()
+        self.watering_state = watering_active_state == "ON"
+
+        self.plug_thing = Thing.get_item(THING_UID_PLUG)
+        self.plug_thing.listen_event(self.thing_status_changed,
+                                     EventFilter(ThingStatusInfoChangedEvent))
+        logger.info("Thing   = %s", self.plug_thing.label)
+        logger.info("Status  = %s", self.plug_thing.status)
+
+        self.run.soon(self.timer_expired)
+
+    def thing_status_changed(self, event: ThingStatusInfoChangedEvent):
+        """handle changes in plug thing status
+
+        Args:
+            event (ThingStatusInfoChangedEvent): event that lead to this change
+        """
+        logger.info(
+            "rule fired because of %s %s --> %s", event.name, event.old_status, event.status)
+        if event.status == ThingStatusEnum.ONLINE:
+            if self.thing_offline_on_request:
+                logger.info("Activate plug now")
+                self.thing_offline_on_request = False
+                self.activate_watering()
+        else:
+            logger.info("%s: Details = %s",
+                        event.name,
+                        event.detail)
 
     def get_next_start(self):
         """determine when the pump shall be activated the next time
@@ -55,81 +92,126 @@ class MyTomatoTimer(HABApp.Rule):
         current_weather_item = StringItem.get_item(
             "openWeatherVorhersage_Wetterlage")
         current_weather_state = current_weather_item.get_value()
-        logger.info(
-            "openWeatherVorhersage_Wetterlage               ---   %s", current_weather_state)
+        logger.info("Wetter: Wetterlage               ---   %s",
+                    current_weather_state)
         forecast_weather_item = StringItem.get_item(
             "openWeatherVorhersage_Vorhergesagte_Wetterlage")
         forecast_weather_state = forecast_weather_item.get_value()
-        logger.info(
-            "openWeatherVorhersage_Vorhergesagte_Wetterlage ---   %s", forecast_weather_state)
+        logger.info("Wetter: Vorhergesagte_Wetterlage ---   %s",
+                    forecast_weather_state)
 
         current_rain_item = NumberItem.get_item(
             "openWeatherVorhersage_Current_PrecipitationAmount")
         current_rain_state = current_rain_item.get_value()
-        logger.info(
-            "openWeatherVorhersage_Current_PrecipitationAmount         ---   %0.2fmm", current_rain_state)
+        logger.info("Wetter: Current_PrecipitationAmount         ---   %0.2fmm",
+                    current_rain_state)
         forecast_rain_item = NumberItem.get_item(
             "openWeatherVorhersage_ForecastHours03_PrecipitationAmount")
         forecast_rain_state = forecast_rain_item.get_value()
-        logger.info(
-            "openWeatherVorhersage_ForecastHours03_PrecipitationAmount ---   %0.2fmm", forecast_rain_state)
+        logger.info("Wetter: ForecastHours03_PrecipitationAmount ---   %0.2fmm",
+                    forecast_rain_state)
 
         current_temperature_item = NumberItem.get_item(
             "openWeatherVorhersage_Current_Temperature")
         current_temperature_state = current_temperature_item.get_value()
-        logger.info(
-            "openWeatherVorhersage_Current_Temperature         ---   %0.2f°C", current_temperature_state)
+        logger.info("Wetter: Current_Temperature         ---   %0.2f°C",
+                    current_temperature_state)
         forecast_temperature_item = NumberItem.get_item(
             "openWeatherVorhersage_ForecastHours03_Temperature")
         forecast_temperature_state = forecast_temperature_item.get_value()
-        logger.info(
-            "openWeatherVorhersage_ForecastHours03_Temperature ---   %0.2f°C", forecast_temperature_state)
+        logger.info("Wetter: ForecastHours03_Temperature ---   %0.2f°C",
+                    forecast_temperature_state)
 
         current_humidity_item = NumberItem.get_item(
             "openWeatherVorhersage_Luftfeuchtigkeit")
         current_humidity_state = current_humidity_item.get_value()
-        logger.info(
-            "openWeatherVorhersage_Luftfeuchtigkeit               ---   %0.1f%", current_humidity_state)
+        logger.info("Wetter: Luftfeuchtigkeit               ---   %0.1f%%",
+                    current_humidity_state)
         forecast_humidity_item = NumberItem.get_item(
             "openWeatherVorhersage_Vorhergesagte_Luftfeuchtigkeit")
         forecast_humidity_state = forecast_humidity_item.get_value()
-        logger.info(
-            "openWeatherVorhersage_Vorhergesagte_Luftfeuchtigkeit ---   %0.1f%", forecast_humidity_state)
+        logger.info("Wetter: Vorhergesagte_Luftfeuchtigkeit ---   %0.1f%%",
+                    forecast_humidity_state)
 
         current_wind_item = NumberItem.get_item(
             "openWeatherVorhersage_Windgeschwindigkeit")
         current_wind_state = current_wind_item.get_value()
-        logger.info(
-            "openWeatherVorhersage_Windgeschwindigkeit               ---   %skm/h", current_wind_state)
+        logger.info("Wetter: Windgeschwindigkeit               ---   %skm/h",
+                    current_wind_state)
         forecast_wind_item = NumberItem.get_item(
             "openWeatherVorhersage_Vorhergesagte_Windgeschwindigkeit")
         forecast_wind_state = forecast_wind_item.get_value()
-        logger.info(
-            "openWeatherVorhersage_Vorhergesagte_Windgeschwindigkeit ---   %skm/h", forecast_wind_state)
+        logger.info("Wetter: Vorhergesagte_Windgeschwindigkeit ---   %skm/h",
+                    forecast_wind_state)
 
         current_sun_exposure_item = NumberItem.get_item(
             "Sonnendaten_DirekteStrahlung")
         current_sun_exposure_state = current_sun_exposure_item.get_value()
-        logger.info(
-            "Sonnendaten_DirekteStrahlung ---   %0.2flx", current_sun_exposure_state)
+        logger.info("Sonnendaten_DirekteStrahlung ---   %0.2flx",
+                    current_sun_exposure_state)
         current_sun_exposure_driveway_item = NumberItem.get_item(
             "LichtSensorEinfahrt_Beleuchtungsstaerke")
         current_sun_exposure_driveway_state = current_sun_exposure_driveway_item.get_value()
-        logger.info(
-            "LichtSensorEinfahrt_Beleuchtungsstaerke ---   %0.2flx", current_sun_exposure_driveway_state)
+        logger.info("Licht: SensorEinfahrt ---   %0.2flx",
+                    current_sun_exposure_driveway_state)
         current_sun_exposure_orielway_item = NumberItem.get_item(
             "LichtSensorErkerWeg_Beleuchtungsstaerke")
         current_sun_exposure_orielway_state = current_sun_exposure_orielway_item.get_value()
-        logger.info(
-            "LichtSensorErkerWeg_Beleuchtungsstaerke ---   %0.2flx", current_sun_exposure_orielway_state)
+        logger.info("Licht: SensorErkerWeg ---   %0.2flx",
+                    current_sun_exposure_orielway_state)
         current_sun_exposure_well_item = NumberItem.get_item(
             "LichtSensorBrunnen_Beleuchtungsstarke")
         current_sun_exposure_well_state = current_sun_exposure_well_item.get_value()
-        logger.info(
-            "LichtSensorBrunnen_Beleuchtungsstarke   ---   %0.2flx", current_sun_exposure_well_state)
+        logger.info("Licht: SensorBrunnen   ---   %0.2flx",
+                    current_sun_exposure_well_state)
 
-        calculated_delay = 2 * 60
-        logger.info("calculated delay = %s min", calculated_delay)
+        if self.plug_thing.status != ThingStatusEnum.ONLINE:
+            logger.info("%s: Details = %s",
+                        self.plug_thing.label,
+                        self.plug_thing.status_detail)
+            logger.info("Saving ON-request")
+            self.thing_offline_on_request = True
+            calculated_delay = 0
+        else:
+            rain_effect_min = (
+                (current_rain_state + forecast_rain_state) / 2) * RAIN_EFFECT_FACTOR
+            logger.info("rain_effect_min  ---   %0.1fmin",
+                        rain_effect_min)
+
+            temperature_effect_min = math.log2(max(1.0000001,
+                                                   ((current_temperature_state +
+                                                     forecast_temperature_state) / 2)
+                                                   - TEMPERATURE_EFFECT_BASE)) * \
+                TEMPERATURE_EFFECT_FACTOR
+            logger.info("temperature_effect_min  ---   %0.1fmin",
+                        temperature_effect_min)
+
+            humidity_effect_min = math.log2(HUMIDITY_EFFECT_BASE -
+                                            ((current_humidity_state +
+                                              forecast_humidity_state) / 2)) * \
+                HUMIDITY_EFFECT_FACTOR
+            logger.info("humidity_effect_min  ---   %0.1fmin",
+                        humidity_effect_min)
+
+            wind_effect_min = math.log10(
+                (current_wind_state + forecast_wind_state) / 2) * WIND_EFFECT_FACTOR
+            logger.info("wind_effect_min      ---   %0.1fmin",
+                        wind_effect_min)
+
+            light_effect_min = math.log10((current_sun_exposure_driveway_state +
+                                           current_sun_exposure_orielway_state +
+                                           current_sun_exposure_well_state) / 3) * \
+                LIGHT_EFFECT_FACTOR
+            logger.info("light_effect_min     ---   %0.1fmin",
+                        light_effect_min)
+
+            calculated_delay = 2 * 60 + \
+                rain_effect_min - \
+                humidity_effect_min - \
+                wind_effect_min - \
+                light_effect_min
+
+        logger.info("calculated delay = %0.1fmin", calculated_delay)
         return calculated_delay
 
     def timer_expired(self):
@@ -149,6 +231,9 @@ class MyTomatoTimer(HABApp.Rule):
             duration_next_start = self.get_next_start()
             self.run.at(time=timedelta(minutes=duration_next_start),
                         callback=self.activate_watering)
+
+        ###########################################################
+        #
         # test
         self.get_next_start()
 
@@ -175,9 +260,9 @@ class MyTomatoTimer(HABApp.Rule):
         if ((sun_phase == "NAUTIC_DUSK") |
                 (sun_phase == "ASTRO_DUSK") |
                 (sun_phase == "NIGHT") |
-                    (sun_phase == "ASTRO_DAWN") |
+            (sun_phase == "ASTRO_DAWN") |
                     (sun_phase == "NAUTIC_DAWN")
-                ):
+            ):
             return True
         else:
             return False
