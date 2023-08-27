@@ -223,19 +223,14 @@ class MyTomatoTimer(HABApp.Rule):
         is_dark = self.is_dark_outside(dark_outside_state)
         if is_dark:
             logger.info("Start next timer at sun rise")
-            self.run.on_sunrise(self.activate_watering)
+            self.run.on_sunrise(self.timer_expired)
         else:
             logger.info("Set watering active for %s sec",
                         TIME_FOR_WATERING_MIN)
             self.activate_watering()
             duration_next_start = self.get_next_start()
             self.run.at(time=timedelta(minutes=duration_next_start),
-                        callback=self.activate_watering)
-
-        ###########################################################
-        #
-        # test
-        self.get_next_start()
+                        callback=self.timer_expired)
 
     def deactivate_watering(self):
         """deactivate the watering"""
