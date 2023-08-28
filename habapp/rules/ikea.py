@@ -162,6 +162,10 @@ class IkeaZigbeeDevices(HABApp.Rule):
             self.extract_mqtt_item_name(event.name) + "/set"
         # value conversion see https://www.zigbee2mqtt.io/devices/LED1732G11.html#light
         mqtt_value = int(event.value)
+        if mqtt_name == "OFF":
+            mqtt_value = 0
+        elif mqtt_value == "ON":
+            mqtt_value = 100
         if "_Dimmer" in event.name:
             mqtt_topic_value = "{ \"brightness\": "
             mqtt_value = int(mqtt_value * 2.54)
