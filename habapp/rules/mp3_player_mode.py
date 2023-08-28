@@ -7,14 +7,13 @@ import logging  # required for extended logging
 import sys
 from datetime import timedelta
 
-import sys
 import HABApp
 from HABApp.core.events import ValueChangeEvent, ValueChangeEventFilter
 from HABApp.openhab.items import GroupItem, SwitchItem
 
 log = logging.getLogger('MP3PlayerMode')
 
-OH_CONF = "/etc/openhab/"  # os.getenv('OPENHAB_CONF')
+OH_CONF = "/etc/openhab/"
 
 sys.path.append(OH_CONF + 'habapp/rules/')
 from statemachines.SecurityDoorWindowStatemachine import SecurityDoorWindowStatemachine, get_state_machine_graph
@@ -99,7 +98,8 @@ class Mp3PlayerStatemachineRule(HABApp.Rule):
         Args:
             event (_type_): any BellRang item
         """
-        log.info("##############################\nrule fired because of %s %s --> %s", event.name,
+        log.info("##############################\nrule fired because of %s %s --> %s",
+                 event.name,
                  event.old_value, event.value)
 
         MP3_PLAYER_STATE_MACHINE.set_bell_rang((str(event.value)) == "ON")
@@ -114,7 +114,8 @@ class Mp3PlayerStatemachineRule(HABApp.Rule):
         Args:
             event (_type_): any Lock_Error item
         """
-        log.info("##############################\nrule fired because of %s %s --> %s", event.name,
+        log.info("##############################\nrule fired because of %s %s --> %s",
+                 event.name,
                  event.old_value, event.value)
 
         MP3_PLAYER_STATE_MACHINE.set_lock_error(str(event.value) == "ON")
@@ -129,7 +130,8 @@ class Mp3PlayerStatemachineRule(HABApp.Rule):
         Args:
             event (_type_): any Light item
         """
-        log.info("##############################\nrule fired because of %s %s --> %s", event.name,
+        log.info("##############################\nrule fired because of %s %s --> %s",
+                 event.name,
                  event.old_value, event.value)
 
         MP3_PLAYER_STATE_MACHINE.set_outer_door_open(
@@ -145,7 +147,8 @@ class Mp3PlayerStatemachineRule(HABApp.Rule):
         Args:
             event (_type_): any window_open item
         """
-        log.info("##############################\nrule fired because of %s %s --> %s", event.name,
+        log.info("##############################\nrule fired because of %s %s --> %s",
+                 event.name,
                  event.old_value, event.value)
 
         MP3_PLAYER_STATE_MACHINE.set_window_open(str(event.value) == "ON")

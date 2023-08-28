@@ -110,20 +110,26 @@ class Zigbee2MqttBridge(HABApp.Rule):
 
         # event registration
         self.listen_event(self.mqtt_base_info,
-                          self.info_topic_updated, ValueChangeEventFilter())
+                          self.info_topic_updated,
+                          ValueChangeEventFilter())
 
         self.listen_event(self.mqtt_base_response_topic + "permit_join",
-                          self.permit_to_join_topic_updated, ValueUpdateEventFilter())
+                          self.permit_to_join_topic_updated,
+                          ValueUpdateEventFilter())
         self.oh_permit_to_join_state.listen_event(
-            self.on_permit_join, ValueUpdateEventFilter(value="ON"))
+            self.on_permit_join,
+            ValueUpdateEventFilter(value="ON"))
 
         self.listen_event(self.mqtt_base_response_topic + "health_check",
-                          self.health_check_topic_updated, ValueUpdateEventFilter())
+                          self.health_check_topic_updated,
+                          ValueUpdateEventFilter())
 
         self.listen_event(self.mqtt_base_response_topic + "networkmap",
-                          self.networkmap_topic_updated, ValueUpdateEventFilter())
+                          self.networkmap_topic_updated,
+                          ValueUpdateEventFilter())
         self.oh_network_map_request_state.listen_event(
-            self.on_request_network_map, ValueUpdateEventFilter(value="ON"))
+            self.on_request_network_map,
+            ValueUpdateEventFilter(value="ON"))
 
         self.oh_restart_bridge_state.listen_event(
             self.on_bridge_restart_request, ValueUpdateEventFilter(value="ON"))
@@ -150,7 +156,9 @@ class Zigbee2MqttBridge(HABApp.Rule):
                 (SwitchItem.get_item(trigger_update_name)).listen_event(
                     self.on_trigger_update)
                 log.info(
-                    "register listener for %s item # %s", trigger_update_name, itemcount)
+                    "register listener for %s item # %s",
+                    trigger_update_name,
+                    itemcount)
                 itemcount = itemcount + 1
 
         log.info('rule Zigbee2Mqtt_Bridge started')
@@ -214,7 +222,9 @@ class Zigbee2MqttBridge(HABApp.Rule):
         """the topic of permitToJoin has changed"""
 
         log.info("mqtt topic %s updated to %s (type = %s)",
-                 event.name, event.value, type(event))
+                 event.name,
+                 event.value,
+                 type(event))
         assert isinstance(event, ValueUpdateEvent), type(event)
 
 # health check
@@ -271,7 +281,7 @@ class Zigbee2MqttBridge(HABApp.Rule):
             if "value" in event.value["data"]:
                 digraph = str(event.value["data"]["value"])
                 digraph = digraph.replace("\\n", '\n').replace("\\\"", "\"")
-                with open(map_file, "w") as text_file:
+                with open(map_file, "w", encoding='utf8') as text_file:
                     text_file.write(digraph)
         self.mqtt_network_map_update.oh_send_command(datetime.datetime.now())
         log.info("Check http://www.webgraphviz.com/ to generate graph")

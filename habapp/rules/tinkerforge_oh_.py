@@ -35,7 +35,10 @@ class MyTinkerforgeRule(HABApp.Rule):
         log.info("Started %s \nName = %s", scriptname, __name__)
 
 #        try:
-        with open(os.path.join(scriptpath, 'tinkerforge_oh.json'), "rt") as json_file:
+        with open(os.path.join(scriptpath,
+                               'tinkerforge_oh.json'),
+                  "rt",
+                  encoding='utf8') as json_file:
             json_config = json.load(json_file)
 
         log.info("\n\n")
