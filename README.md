@@ -11,9 +11,16 @@ config for the openHAB3 setup
   * network
   * ntp
 * Additions
-  * Map transformation
+  * Map Transformation
+  * JSONPath Transformation
+  * RegEx Transformation
+  * Javascript Transformation
   * InfluxDB Persistence
   * openHAB Cloud Connector
+* Automation
+  * Groovy Scripting
+  * JavaScript Scripting
+  * Jython Scripting
 
 ## additional SW
 * openhabian-config
