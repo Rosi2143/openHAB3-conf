@@ -1,6 +1,6 @@
 # https://habapp.readthedocs.io/en/latest/getting_started.html
 import logging  # required for extended logging
-from datetime import timedelta
+from datetime import timedelta, datetime
 import math
 
 import HABApp
@@ -34,7 +34,8 @@ class MyTomatoTimer(HABApp.Rule):
         super().__init__()
 
         self.thing_offline_on_request = False
-        logger.info('Started TomatoTimer')
+        self.now = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
+        logger.info('Started TomatoTimer: %s', self.now)
         self.dark_outside_item = StringItem.get_item(
             "Sonnendaten_Sonnenphase")
         dark_outside_state = self.is_dark_outside(
@@ -53,6 +54,7 @@ class MyTomatoTimer(HABApp.Rule):
         logger.info("Thing   = %s", self.plug_thing.label)
         logger.info("Status  = %s", self.plug_thing.status)
 
+        self.now = ""  # reset now to disable timer_expired workaround
         self.run.soon(self.timer_expired)
 
     def thing_status_changed(self, event: ThingStatusInfoChangedEvent):
@@ -205,7 +207,7 @@ class MyTomatoTimer(HABApp.Rule):
             logger.info("light_effect_min     ---   %0.1fmin",
                         light_effect_min)
 
-            calculated_delay = 2 * 60 + \
+            calculated_delay = 2 * 80 + \
                 rain_effect_min - \
                 humidity_effect_min - \
                 wind_effect_min - \
@@ -219,18 +221,31 @@ class MyTomatoTimer(HABApp.Rule):
 
         logger.info('TomatoTimer expired')
 
+        # workaround as timer_expired is executed twice for on_sunrise
+        now = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
+        if now == self.now:
+            logger.info('TomatoTimer expired now already')
+            return
+        else:
+            self.now = now
+
         dark_outside_state = self.dark_outside_item.get_value()
         is_dark = self.is_dark_outside(dark_outside_state)
         if is_dark:
             logger.info("Start next timer at sun rise")
-            self.run.on_sunrise(self.timer_expired)
+            tomato_timer = self.run.on_sunrise(
+                self.timer_expired).offset(timedelta(minutes=30))
+            logger.info("next trigger time: %s",
+                        tomato_timer.get_next_run().strftime("%d/%m/%Y %H:%M:%S"))
         else:
             logger.info("Set watering active for %s sec",
                         TIME_FOR_WATERING_MIN)
             self.activate_watering()
             duration_next_start = self.get_next_start()
-            self.run.at(time=timedelta(minutes=duration_next_start),
-                        callback=self.timer_expired)
+            tomato_timer = self.run.at(time=timedelta(minutes=duration_next_start),
+                                       callback=self.timer_expired)
+            logger.info("next trigger time: %s",
+                        tomato_timer.get_next_run().strftime("%d/%m/%Y %H:%M:%S"))
 
     def deactivate_watering(self):
         """deactivate the watering"""
@@ -253,11 +268,11 @@ class MyTomatoTimer(HABApp.Rule):
     def is_dark_outside(self, sun_phase):
         """checks if it is dark outside"""
         if ((sun_phase == "NAUTIC_DUSK") |
-                    (sun_phase == "ASTRO_DUSK") |
+            (sun_phase == "ASTRO_DUSK") |
                     (sun_phase == "NIGHT") |
                 (sun_phase == "ASTRO_DAWN") |
                 (sun_phase == "NAUTIC_DAWN")
-                ):
+            ):
             return True
         else:
             return False
