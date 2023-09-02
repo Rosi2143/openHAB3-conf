@@ -66,9 +66,11 @@ class SecurityDoorWindowStatemachine(StateMachine):
     # Transitions
     tr_bell_rang = (st_black.to(st_yellow, cond="cond_bell_rang") |
                     st_blue.to(st_yellow, cond="cond_bell_rang") |
+                    st_blue.to.itself() |
                     st_green.to(st_yellow, cond="cond_bell_rang") |
                     st_green.to.itself() |
                     st_purple.to(st_yellow, cond="cond_bell_rang") |
+                    st_purple.to.itself() |
                     st_red.to.itself() |
                     st_yellow.to.itself(cond="cond_bell_rang") |
                     st_yellow.to(st_purple, cond="cond_outer_door_open") |
@@ -79,14 +81,19 @@ class SecurityDoorWindowStatemachine(StateMachine):
 
     tr_lock_error = (st_black.to(st_red, cond="cond_lock_error") |
                      st_blue.to(st_red, cond="cond_lock_error") |
+                     st_blue.to.itself() |
                      st_green.to(st_red, cond="cond_lock_error") |
+                     st_green.to.itself() |
                      st_purple.to(st_red, cond="cond_lock_error") |
+                     st_purple.to.itself() |
                      st_red.to(st_red, cond="cond_lock_error") |
-                     st_yellow.to(st_red, cond="cond_lock_error") |
                      st_red.to(st_yellow, cond="cond_bell_rang") |
                      st_red.to(st_purple, cond="cond_outer_door_open") |
                      st_red.to(st_blue, cond="cond_window_open") |
                      st_red.to(st_green) |
+                     st_red.to.itself() |
+                     st_yellow.to(st_red, cond="cond_lock_error") |
+                     st_yellow.to.itself() |
                      st_black.to.itself()
                      )
 
