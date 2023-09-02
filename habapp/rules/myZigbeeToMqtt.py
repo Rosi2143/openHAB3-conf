@@ -3,6 +3,7 @@
 import logging  # required for extended logging
 import datetime
 import time
+import pydot
 
 import HABApp
 from HABApp.core.events import ValueUpdateEvent, ValueUpdateEventFilter
@@ -276,16 +277,20 @@ class Zigbee2MqttBridge(HABApp.Rule):
         log.info("mqtt topic %s updated to %s (type = %s)",
                  event.name, event.value, type(event))
 
-        map_file = "/home/openhabian/git/public_files/mqtt_networkmap.svg"
+        digraph_file = "/home/openhabian/git/public_files/mqtt_networkmap.digraph"
+        svg_file = "/home/openhabian/git/public_files/mqtt_networkmap.svg"
         if "data" in event.value:
             if "value" in event.value["data"]:
                 digraph = str(event.value["data"]["value"])
                 digraph = digraph.replace("\\n", '\n').replace("\\\"", "\"")
-                with open(map_file, "w", encoding='utf8') as text_file:
+                with open(digraph_file, "w", encoding='utf8') as text_file:
                     text_file.write(digraph)
+                graphs = pydot.graph_from_dot_data(digraph)
+                graphs[0].write_svg(svg_file)
         self.mqtt_network_map_update.oh_send_command(datetime.datetime.now())
         log.info("Check http://www.webgraphviz.com/ to generate graph")
-        log.info("Data are stored in %s.", map_file)
+        log.info("Data are stored in %s.", digraph_file)
+        log.info("Image is stored in %s.", svg_file)
 
 # bridge restart request
     def on_bridge_restart_request(self, event: ValueUpdateEvent):
