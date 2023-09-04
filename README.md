@@ -98,11 +98,18 @@ config for the openHAB3 setup
     * `sudo chown -r openhab /mnt/usb1/log/`
   * change log location
     * `sudo systemctl edit openhab.service`
-    *
         ```
         [Service]
         Environment=OPENHAB_LOGDIR=
         Environment=OPENHAB_LOGDIR=/mnt/usb1/log/openhab
+        ```
+  * change logViewer
+    * `sudo systemctl edit frontail.service`
+        ```
+        [Service]
+        ExecStart=
+        ExecStart=/usr/lib/node_modules/frontail/bin/frontail --disable-usage-stats --ui-highlight --ui-highlight-preset /usr/lib/node_modules/frontail/preset/openhab_AEM.json --theme openhab_AEM --lines 2000 --number 200 /mnt/usb1/log/openhab/openhab.log /mnt/usb1/log/openhab/events.log
+
         ```
 
     * restart openhab
