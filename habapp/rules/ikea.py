@@ -9,7 +9,7 @@ from HABApp.core.events import ValueUpdateEvent, ValueUpdateEventFilter
 from HABApp.openhab.events import ItemStateEvent, ItemStateEventFilter
 from HABApp.openhab.items import SwitchItem, NumberItem, DimmerItem, StringItem
 
-logger = logging.getLogger('Ikea')
+logger = logging.getLogger("Ikea")
 
 
 class IkeaZigbeeDevices(HABApp.Rule):
@@ -20,57 +20,63 @@ class IkeaZigbeeDevices(HABApp.Rule):
 
         super().__init__()
 
-        parm_file = 'ikea_param_file'
+        parm_file = "ikea_param_file"
         # read the low bat threshold from the parameter file
         self.min_battery_charge = HABApp.Parameter(
-            parm_file, 'min_battery_charge', default_value=20)
+            parm_file, "min_battery_charge", default_value=20
+        )
         # read the motion detectors from the parameter file
         self.motion_detectors = HABApp.DictParameter(
-            parm_file, 'MotionDetectors', default_value=None)
+            parm_file, "MotionDetectors", default_value=None
+        )
         # read the lights from the parameter file
-        self.lights = HABApp.DictParameter(
-            parm_file, 'Lights', default_value=None)
+        self.lights = HABApp.DictParameter(parm_file, "Lights", default_value=None)
         # read the remote controls from the parameter file
         self.remote_controls = HABApp.DictParameter(
-            parm_file, 'RemoteControls', default_value=None)
+            parm_file, "RemoteControls", default_value=None
+        )
 
         # map to convert MQTT states to switch states
-        self.state_map = {'False': 'OFF',
-                          'True': 'ON',
-                          'false': 'OFF',
-                          'true': 'ON'
-                          }
+        self.state_map = {"False": "OFF", "True": "ON", "false": "OFF", "true": "ON"}
         # hold the base path for the MQTT topic
         self.mqtt_base_topic = "zigbee2mqtt/IKEA/"
 
         for motion_detector in self.motion_detectors.values():
-            mqtt_motion_detector_topic = self.mqtt_base_topic + \
-                'Bewegungsmelder/' + motion_detector
-            self.listen_event(mqtt_motion_detector_topic,
-                              self.motion_detect_updated, ValueUpdateEventFilter())
+            mqtt_motion_detector_topic = (
+                self.mqtt_base_topic + "Bewegungsmelder/" + motion_detector
+            )
+            self.listen_event(
+                mqtt_motion_detector_topic,
+                self.motion_detect_updated,
+                ValueUpdateEventFilter(),
+            )
             logger.info("added listener for %s", mqtt_motion_detector_topic)
 
         for remote_control in self.remote_controls.values():
-            mqtt_remote_control_topic = self.mqtt_base_topic + \
-                'Fernbedienung/' + remote_control
-            self.listen_event(mqtt_remote_control_topic,
-                              self.remote_control_updated, ValueUpdateEventFilter())
+            mqtt_remote_control_topic = (
+                self.mqtt_base_topic + "Fernbedienung/" + remote_control
+            )
+            self.listen_event(
+                mqtt_remote_control_topic,
+                self.remote_control_updated,
+                ValueUpdateEventFilter(),
+            )
             logger.info("added listener for %s", mqtt_remote_control_topic)
 
         validator = {
-            'min_battery_charge': int,
-            'MotionDetectors': {str: str},
-            'RemoteControls': {str: str},
-            'Lights': {str: str}
+            "min_battery_charge": int,
+            "MotionDetectors": {str: str},
+            "RemoteControls": {str: str},
+            "Lights": {str: str},
         }
         HABApp.parameters.set_file_validator(parm_file, validator)
 
         self.init_light()
 
-        logger.info('rule IkeaZigbeeDevices started')
+        logger.info("rule IkeaZigbeeDevices started")
 
-# helpers
-#########
+    # helpers
+    #########
     def oh_switch_item_changed(self, oh_switch_item, new_value):
         """helper function to check if a dimmer item has changed"""
 
@@ -79,11 +85,16 @@ class IkeaZigbeeDevices(HABApp.Rule):
         if (state == "None") or (state is None):
             ret = True
         else:
-            if ((state == "ON" and new_value == "OFF") or (state == "OFF" and new_value == "ON")):
+            if (state == "ON" and new_value == "OFF") or (
+                state == "OFF" and new_value == "ON"
+            ):
                 ret = True
         logger.debug(
             "OH_switch_item_Changed for %s %s <-- {oh_switch_item.get_value()} vs. %s",
-            oh_switch_item.name, ret, new_value)
+            oh_switch_item.name,
+            ret,
+            new_value,
+        )
         return ret
 
     def oh_dimmer_item_changed(self, oh_dimmer_item, new_value):
@@ -99,7 +110,11 @@ class IkeaZigbeeDevices(HABApp.Rule):
                 ret = True
         logger.debug(
             "OH_dimmer_item_Changed for %s %s <-- %s vs. %s",
-            oh_dimmer_item.name, ret, value, new_value)
+            oh_dimmer_item.name,
+            ret,
+            value,
+            new_value,
+        )
         return ret
 
     def oh_number_item_changed(self, oh_number_item, new_value):
@@ -114,7 +129,11 @@ class IkeaZigbeeDevices(HABApp.Rule):
                 ret = True
         logger.debug(
             "OH_NumberItem_Changed for %s %s <-- %s vs. %s",
-            oh_number_item.name, ret, value, new_value)
+            oh_number_item.name,
+            ret,
+            value,
+            new_value,
+        )
         return ret
 
     def extract_mqtt_item_name(self, oh_item_name):
@@ -123,8 +142,7 @@ class IkeaZigbeeDevices(HABApp.Rule):
         logger.debug(oh_item_name)
         _oh_item_name = oh_item_name.rsplit("_", 1)[0]
         logger.debug(_oh_item_name)
-        _oh_item_name = _oh_item_name.replace(
-            "_Dimmer", "").replace("_ColorTemp", "")
+        _oh_item_name = _oh_item_name.replace("_Dimmer", "").replace("_ColorTemp", "")
         logger.debug(_oh_item_name)
         _oh_item_name = _oh_item_name.replace("Licht", "")
         logger.debug(_oh_item_name)
@@ -143,9 +161,13 @@ class IkeaZigbeeDevices(HABApp.Rule):
 
         assert isinstance(event, ItemStateEvent)
         logger.debug("received %s <- %s", event.name, event.value)
-        mqtt_topic = self.mqtt_base_topic + "Lampe/" + \
-            self.extract_mqtt_item_name(event.name) + "/set"
-        mqtt_topic_value = "{ \"state\": \"" + str(event.value) + "\"}"
+        mqtt_topic = (
+            self.mqtt_base_topic
+            + "Lampe/"
+            + self.extract_mqtt_item_name(event.name)
+            + "/set"
+        )
+        mqtt_topic_value = '{ "state": "' + str(event.value) + '"}'
         logger.info("send - %s: %s", mqtt_topic, mqtt_topic_value)
         self.mqtt.publish(mqtt_topic, mqtt_topic_value)
 
@@ -158,35 +180,41 @@ class IkeaZigbeeDevices(HABApp.Rule):
         mqtt_name = self.extract_mqtt_item_name(event.name)
         transition_item_value = 0
 
-        mqtt_topic = self.mqtt_base_topic + "Lampe/" + \
-            self.extract_mqtt_item_name(event.name) + "/set"
+        mqtt_topic = (
+            self.mqtt_base_topic
+            + "Lampe/"
+            + self.extract_mqtt_item_name(event.name)
+            + "/set"
+        )
         # value conversion see https://www.zigbee2mqtt.io/devices/LED1732G11.html#light
-        mqtt_value = int(event.value)
+        mqtt_value_str = event.value
         if mqtt_name == "OFF":
-            mqtt_value = 0
-        elif mqtt_value == "ON":
-            mqtt_value = 100
+            mqtt_value_str = 0
+        elif mqtt_value_str == "ON":
+            mqtt_value_str = 100
+        mqtt_value = int(mqtt_value_str)
         if "_Dimmer" in event.name:
-            mqtt_topic_value = "{ \"brightness\": "
+            mqtt_topic_value = '{ "brightness": '
             mqtt_value = int(mqtt_value * 2.54)
         else:
             if "_ColorTemp" in event.name:
-                mqtt_topic_value = "{ \"color_temp\": "
+                mqtt_topic_value = '{ "color_temp": '
                 mqtt_value = int(mqtt_value * 2.04) + 250
             else:
-                logger.error(
-                    "wrong callback dimmer_item_update for %s", event.name)
+                logger.error("wrong callback dimmer_item_update for %s", event.name)
                 return
 
         mqtt_topic_value = mqtt_topic_value + str(mqtt_value)
 
         if self.openhab.item_exists("Licht" + mqtt_name + "_Transition"):
             transition_item_value = NumberItem.get_item(
-                "Licht" + mqtt_name + "_Transition").get_value(5)
+                "Licht" + mqtt_name + "_Transition"
+            ).get_value(5)
 
         if transition_item_value != 0:
-            mqtt_topic_value = mqtt_topic_value + \
-                ", \"transition\": " + str(int(transition_item_value))
+            mqtt_topic_value = (
+                mqtt_topic_value + ', "transition": ' + str(int(transition_item_value))
+            )
 
         mqtt_topic_value = mqtt_topic_value + "}"
         logger.info("send - %s: %s", mqtt_topic, mqtt_topic_value)
@@ -203,15 +231,14 @@ class IkeaZigbeeDevices(HABApp.Rule):
         mqtt_topic = self.mqtt_base_topic + "Lampe/" + mqtt_name + "/set"
         value = int(event.value)
         if "_Dimmer" in event.name:
-            mqtt_topic_value = "{ \"brightness"
+            mqtt_topic_value = '{ "brightness'
             value = int(value * 2.54)
         else:
             if "_ColorTemp" in event.name:
-                mqtt_topic_value = "{ \"color_temp"
+                mqtt_topic_value = '{ "color_temp'
                 value = int(value * 2.04)
             else:
-                logger.error(
-                    "wrong callback number_item_update for %s", event.name)
+                logger.error("wrong callback number_item_update for %s", event.name)
                 return
 
         if "_Step" in event.name:
@@ -220,11 +247,10 @@ class IkeaZigbeeDevices(HABApp.Rule):
             if "_Move" in event.name:
                 mqtt_topic_value = mqtt_topic_value + "_move"
             else:
-                logger.error(
-                    "wrong callback number_item_update for %s", event.name)
+                logger.error("wrong callback number_item_update for %s", event.name)
                 return
 
-        mqtt_topic_value = mqtt_topic_value + "\": " + str(value) + "}"
+        mqtt_topic_value = mqtt_topic_value + '": ' + str(value) + "}"
         logger.info("send - %s: %s", mqtt_topic, mqtt_topic_value)
         self.mqtt.publish(mqtt_topic, mqtt_topic_value)
 
@@ -238,27 +264,25 @@ class IkeaZigbeeDevices(HABApp.Rule):
 
         mqtt_topic = self.mqtt_base_topic + "Lampe/" + mqtt_name + "/set"
         if "_ColorTemp_String" in event.name:
-            mqtt_topic_value = "{ \"color_temp"
+            mqtt_topic_value = '{ "color_temp'
         else:
             if "_Effect" in event.name:
-                mqtt_topic_value = "{ \"effect"
+                mqtt_topic_value = '{ "effect'
             else:
-                logger.error(
-                    "wrong callback stringitem_update for %s", event.name)
+                logger.error("wrong callback stringitem_update for %s", event.name)
                 return
 
-        mqtt_topic_value = mqtt_topic_value + \
-            "\": \"" + str(event.value) + "\"}"
+        mqtt_topic_value = mqtt_topic_value + '": "' + str(event.value) + '"}'
 
         logger.info("send - %s: %s", mqtt_topic, mqtt_topic_value)
         self.mqtt.publish(mqtt_topic, mqtt_topic_value)
 
-###############################################################################
-# Ambient White Lights
-###############################################################################
+    ###############################################################################
+    # Ambient White Lights
+    ###############################################################################
 
     def init_light(self):
-        """"initialize the light elements
+        """ "initialize the light elements
 
         register to OpenHAB items
         register to MQTT topics
@@ -270,70 +294,73 @@ class IkeaZigbeeDevices(HABApp.Rule):
             if self.openhab.item_exists(state_item_name):
                 switch_item_light = SwitchItem.get_item(state_item_name)
                 switch_item_light.listen_event(
-                    self.switch_item_update, ItemStateEventFilter())
+                    self.switch_item_update, ItemStateEventFilter()
+                )
             else:
                 logger.error("%s does not exist", state_item_name)
 
             dimmer_item_name = light_equipment_name + "_Dimmer"
             if self.openhab.item_exists(dimmer_item_name):
-                dimmer_item_light = DimmerItem.get_item(
-                    dimmer_item_name)
+                dimmer_item_light = DimmerItem.get_item(dimmer_item_name)
                 dimmer_item_light.listen_event(
-                    self.dimmer_item_update, ItemStateEventFilter())
+                    self.dimmer_item_update, ItemStateEventFilter()
+                )
             else:
                 logger.error("%s does not exist", dimmer_item_name)
 
             dimmer_move_item_name = light_equipment_name + "_Dimmer_Move"
             if self.openhab.item_exists(dimmer_move_item_name):
-                dimmer_move_item_light = NumberItem.get_item(
-                    dimmer_move_item_name)
+                dimmer_move_item_light = NumberItem.get_item(dimmer_move_item_name)
                 dimmer_move_item_light.listen_event(
-                    self.number_item_update, ItemStateEventFilter())
+                    self.number_item_update, ItemStateEventFilter()
+                )
             else:
                 logger.error("%s does not exist", dimmer_move_item_name)
 
             dimmer_step_item_name = light_equipment_name + "_Dimmer_Step"
             if self.openhab.item_exists(dimmer_step_item_name):
-                dimmer_step_item_light = NumberItem.get_item(
-                    dimmer_step_item_name)
+                dimmer_step_item_light = NumberItem.get_item(dimmer_step_item_name)
                 dimmer_step_item_light.listen_event(
-                    self.number_item_update, ItemStateEventFilter())
+                    self.number_item_update, ItemStateEventFilter()
+                )
             else:
                 logger.error("%s does not exist", dimmer_step_item_name)
 
             color_temp_item_name = light_equipment_name + "_ColorTemp"
             if self.openhab.item_exists(color_temp_item_name):
-                color_temp_item_light = dimmer_item_light.get_item(
-                    color_temp_item_name)
+                color_temp_item_light = dimmer_item_light.get_item(color_temp_item_name)
                 color_temp_item_light.listen_event(
-                    self.dimmer_item_update, ItemStateEventFilter())
+                    self.dimmer_item_update, ItemStateEventFilter()
+                )
             else:
                 logger.error("%s does not exist", color_temp_item_name)
 
             color_temp_string_item_name = light_equipment_name + "_ColorTemp_String"
             if self.openhab.item_exists(color_temp_string_item_name):
                 color_temp_string_item = StringItem.get_item(
-                    color_temp_string_item_name)
+                    color_temp_string_item_name
+                )
                 color_temp_string_item.listen_event(
-                    self.string_item_update, ItemStateEventFilter())
+                    self.string_item_update, ItemStateEventFilter()
+                )
             else:
                 logger.error("%s does not exist", color_temp_string_item_name)
 
             color_temp_move_item_name = light_equipment_name + "_ColorTemp_Move"
             if self.openhab.item_exists(color_temp_move_item_name):
-                color_temp_move_item = NumberItem.get_item(
-                    color_temp_move_item_name)
+                color_temp_move_item = NumberItem.get_item(color_temp_move_item_name)
                 color_temp_move_item.listen_event(
-                    self.number_item_update, ItemStateEventFilter())
+                    self.number_item_update, ItemStateEventFilter()
+                )
             else:
                 logger.error("%s does not exist", color_temp_move_item_name)
 
             color_temp_step_item_name = light_equipment_name + "_ColorTemp_Step"
             if self.openhab.item_exists(color_temp_step_item_name):
-                color_temp_step_item = NumberItem.get_item(
-                    color_temp_step_item_name)
+                color_temp_step_item = NumberItem.get_item(color_temp_step_item_name)
                 color_temp_step_item.listen_event(
-                    self.number_item_update, ItemStateEventFilter())
+                    self.number_item_update, ItemStateEventFilter()
+                )
             else:
                 logger.error("%s does not exist", color_temp_step_item_name)
 
@@ -341,7 +368,8 @@ class IkeaZigbeeDevices(HABApp.Rule):
             if self.openhab.item_exists(effect_item_name):
                 effect_item = StringItem.get_item(effect_item_name)
                 effect_item.listen_event(
-                    self.string_item_update, ItemStateEventFilter())
+                    self.string_item_update, ItemStateEventFilter()
+                )
             else:
                 logger.error("%s does not exist", effect_item_name)
 
@@ -349,28 +377,28 @@ class IkeaZigbeeDevices(HABApp.Rule):
             if self.openhab.item_exists(transition_item_name):
                 transition_item = NumberItem.get_item(transition_item_name)
                 transition_item.listen_event(
-                    self.number_item_update, ItemStateEventFilter())
+                    self.number_item_update, ItemStateEventFilter()
+                )
             else:
                 logger.error("%s does not exist", transition_item_name)
 
-            mqtt_light_topic = self.mqtt_base_topic + 'Lampe/' + light
-            self.listen_event(mqtt_light_topic,
-                              self.light_updated, ValueUpdateEventFilter())
+            mqtt_light_topic = self.mqtt_base_topic + "Lampe/" + light
+            self.listen_event(
+                mqtt_light_topic, self.light_updated, ValueUpdateEventFilter()
+            )
             logger.info("added listener for %s", mqtt_light_topic)
 
             logger.info("added listener for Light %s", light)
-        logger.info('lights are setup')
+        logger.info("lights are setup")
 
     def light_updated(self, event):
         """handle changes in the mqtt topic of light elements"""
 
         assert isinstance(event, ValueUpdateEvent), type(event)
-        logger.info("mqtt topic %s updated to %s",
-                    event.name, str(event.value))
+        logger.info("mqtt topic %s updated to %s", event.name, str(event.value))
 
         if "state" in event.value:
-            state_item_name = "Licht" + \
-                self.extract_oh_item_name(event.name) + "_State"
+            state_item_name = "Licht" + self.extract_oh_item_name(event.name) + "_State"
             if self.openhab.item_exists(state_item_name):
                 switch_item_state = SwitchItem.get_item(state_item_name)
                 new_value = str(event.value["state"])
@@ -381,11 +409,11 @@ class IkeaZigbeeDevices(HABApp.Rule):
                 logger.error("item %s does not exist", state_item_name)
 
         if "brightness" in event.value:
-            dimmer_item_name = "Licht" + \
-                self.extract_oh_item_name(event.name) + "_Dimmer"
+            dimmer_item_name = (
+                "Licht" + self.extract_oh_item_name(event.name) + "_Dimmer"
+            )
             if self.openhab.item_exists(dimmer_item_name):
-                dimmer_item_bright = DimmerItem.get_item(
-                    dimmer_item_name)
+                dimmer_item_bright = DimmerItem.get_item(dimmer_item_name)
                 new_value = int(int(event.value["brightness"]) / 2.54)
                 if self.oh_dimmer_item_changed(dimmer_item_bright, new_value):
                     # IKEA https://www.zigbee2mqtt.io/devices/LED1732G11.html#light
@@ -396,11 +424,11 @@ class IkeaZigbeeDevices(HABApp.Rule):
                 logger.error("item %s does not exist", dimmer_item_name)
 
         if "color_temp" in event.value:
-            color_temp_item_name = "Licht" + \
-                self.extract_oh_item_name(event.name) + "_ColorTemp"
+            color_temp_item_name = (
+                "Licht" + self.extract_oh_item_name(event.name) + "_ColorTemp"
+            )
             if self.openhab.item_exists(color_temp_item_name):
-                color_temp_item = DimmerItem.get_item(
-                    color_temp_item_name)
+                color_temp_item = DimmerItem.get_item(color_temp_item_name)
                 new_value = int((int(event.value["color_temp"]) - 250) / 2.04)
                 if self.oh_dimmer_item_changed(color_temp_item, new_value):
                     # IKEA https://www.zigbee2mqtt.io/devices/LED1732G11.html#light
@@ -412,8 +440,9 @@ class IkeaZigbeeDevices(HABApp.Rule):
 
         if "update" in event.value:
             if "state" in event.value["update"]:
-                update_item_name = "Licht" + \
-                    self.extract_oh_item_name(event.name) + "_UpdatePending"
+                update_item_name = (
+                    "Licht" + self.extract_oh_item_name(event.name) + "_UpdatePending"
+                )
                 if self.openhab.item_exists(update_item_name):
                     update_item = SwitchItem.get_item(update_item_name)
                     new_value = str(event.value["update"]["state"])
@@ -429,9 +458,9 @@ class IkeaZigbeeDevices(HABApp.Rule):
                 else:
                     logger.error("item %s does not exist", update_item_name)
 
-###############################################################################
-# Motion Detector
-###############################################################################
+    ###############################################################################
+    # Motion Detector
+    ###############################################################################
 
     def motion_detect_updated(self, event):
         """handle changes in the MQTT topic for motion detectors."""
@@ -440,33 +469,36 @@ class IkeaZigbeeDevices(HABApp.Rule):
 
         battery_charge = 100
         battery_weak = False
-        if 'battery' in event.value:
-            battery_charge = int(event.value['battery'])
+        if "battery" in event.value:
+            battery_charge = int(event.value["battery"])
         if battery_charge < self.min_battery_charge:
             battery_weak = True
 
-        occupancy = 'False'
-        if 'occupancy' in event.value:
-            occupancy = str(event.value['occupancy'])
+        occupancy = "False"
+        if "occupancy" in event.value:
+            occupancy = str(event.value["occupancy"])
 
         link_quality = 100
-        if 'linkquality' in event.value:
-            link_quality = event.value['linkquality']
+        if "linkquality" in event.value:
+            link_quality = event.value["linkquality"]
 
         illuminance_above_threshold = False
-        if 'illuminance_above_threshold' in event.value:
-            illuminance_above_threshold = event.value['illuminance_above_threshold']
+        if "illuminance_above_threshold" in event.value:
+            illuminance_above_threshold = event.value["illuminance_above_threshold"]
 
         update_available = False
-        if 'update' in event.value:
+        if "update" in event.value:
             if "available" == event.value["update"]["state"]:
                 update_available = True
 
         # see naming conventions in ikea.items
-        topic_items = str(event.name).split('/')
+        topic_items = str(event.name).split("/")
 
         logger.debug(
-            "mqtt topic %s updated to \n%s", event.name, json.dumps(event.value, indent=2))
+            "mqtt topic %s updated to \n%s",
+            event.name,
+            json.dumps(event.value, indent=2),
+        )
         logger.info("Item       : %s", topic_items[2] + topic_items[3])
         logger.info("MotionState: %s", occupancy)
         logger.info("Battery    : %s", str(battery_charge))
@@ -504,11 +536,9 @@ class IkeaZigbeeDevices(HABApp.Rule):
             logger.error("item %s does not exist", motion_state)
             exitcode = 4
 
-        motion_detect_state = topic_items[2] + \
-            topic_items[3] + "_MotionDetectState"
+        motion_detect_state = topic_items[2] + topic_items[3] + "_MotionDetectState"
         if self.openhab.item_exists(motion_detect_state):
-            my_oh_item_motiondetectstate = SwitchItem.get_item(
-                motion_detect_state)
+            my_oh_item_motiondetectstate = SwitchItem.get_item(motion_detect_state)
         else:
             logger.error("item %s does not exist", motion_detect_state)
             exitcode = 5
@@ -517,17 +547,16 @@ class IkeaZigbeeDevices(HABApp.Rule):
             return exitcode
 
         my_oh_item_charging_level.oh_send_command(battery_charge)
-        my_oh_item_batterystate.oh_send_command(
-            self.state_map[str(battery_weak)])
-        my_oh_item_updatepending.oh_send_command(
-            self.state_map[str(update_available)])
+        my_oh_item_batterystate.oh_send_command(self.state_map[str(battery_weak)])
+        my_oh_item_updatepending.oh_send_command(self.state_map[str(update_available)])
         my_oh_item_motionstate.oh_send_command(self.state_map[str(occupancy)])
         my_oh_item_motiondetectstate.oh_send_command(
-            self.state_map[str(illuminance_above_threshold)])
+            self.state_map[str(illuminance_above_threshold)]
+        )
 
-###############################################################################
-# Remote Controller
-###############################################################################
+    ###############################################################################
+    # Remote Controller
+    ###############################################################################
 
     def remote_control_updated(self, event):
         """handle changes in MQTT topic for remote control switches"""
@@ -536,29 +565,32 @@ class IkeaZigbeeDevices(HABApp.Rule):
 
         battery_charge = 100
         battery_weak = False
-        if 'battery' in event.value:
-            battery_charge = int(event.value['battery'])
+        if "battery" in event.value:
+            battery_charge = int(event.value["battery"])
         if battery_charge < self.min_battery_charge:
             battery_weak = True
 
-        action = 'none'
-        if 'action' in event.value:
-            action = str(event.value['action'])
+        action = "none"
+        if "action" in event.value:
+            action = str(event.value["action"])
 
         link_quality = 100
-        if 'linkquality' in event.value:
-            link_quality = event.value['linkquality']
+        if "linkquality" in event.value:
+            link_quality = event.value["linkquality"]
 
         update_available = False
-        if 'update' in event.value:
+        if "update" in event.value:
             if "available" == event.value["update"]["state"]:
                 update_available = True
 
         # see naming conventions in ikea.items
-        topic_items = str(event.name).split('/')
+        topic_items = str(event.name).split("/")
 
-        logger.debug("mqtt topic %s updated to\n%s", event.name,
-                     json.dumps(event.value, indent=2))
+        logger.debug(
+            "mqtt topic %s updated to\n%s",
+            event.name,
+            json.dumps(event.value, indent=2),
+        )
         logger.info("Item       : %s", topic_items[2] + topic_items[3])
         logger.info("Action     : %s", action)
         logger.info("Battery    : %s", str(battery_charge))
@@ -593,37 +625,37 @@ class IkeaZigbeeDevices(HABApp.Rule):
 
         if self.oh_number_item_changed(my_oh_item_charging_level, battery_charge):
             my_oh_item_charging_level.oh_send_command(battery_charge)
-        if self.oh_switch_item_changed(my_oh_item_batterystate,
-                                       self.state_map[str(battery_weak)]):
-            my_oh_item_batterystate.oh_send_command(
-                self.state_map[str(battery_weak)])
-        if self.oh_switch_item_changed(my_oh_item_updatepending,
-                                       self.state_map[str(update_available)]):
+        if self.oh_switch_item_changed(
+            my_oh_item_batterystate, self.state_map[str(battery_weak)]
+        ):
+            my_oh_item_batterystate.oh_send_command(self.state_map[str(battery_weak)])
+        if self.oh_switch_item_changed(
+            my_oh_item_updatepending, self.state_map[str(update_available)]
+        ):
             my_oh_item_updatepending.oh_send_command(
-                self.state_map[str(update_available)])
+                self.state_map[str(update_available)]
+            )
 
         if action != "none":
-            keypress_items = {"toggle": ["_MainButton", "ON"],
-                              "brightness_up_click": ["_Up", "ON"],
-                              "brightness_down_click": ["_Down", "ON"],
-                              "arrow_left_click": ["_Left", "ON"],
-                              "arrow_right_click": ["_Right", "ON"],
-
-                              "toggle_hold": ["_MainButton_Long", "ON"],
-                              "brightness_up_hold": ["_Up_Long", "ON"],
-                              "brightness_down_hold": ["_Down_Long", "ON"],
-                              "arrow_left_hold": ["_Left_Long", "ON"],
-                              "arrow_right_hold": ["_Right_Long", "ON"],
-
-                              "brightness_up_release": ["_Up_Long", "OFF"],
-                              "brightness_down_release": ["_Down_Long", "OFF"],
-                              "arrow_left_release": ["_Left_Long", "OFF"],
-                              "arrow_right_release": ["_Right_Long", "OFF"],
-
-                              "on": ["_Main", "ON"],
-                              "brightness_move_up": ["_Main_Long", "ON"],
-                              "brightness_stop": ["_Main_Long", "OFF"],
-                              }
+            keypress_items = {
+                "toggle": ["_MainButton", "ON"],
+                "brightness_up_click": ["_Up", "ON"],
+                "brightness_down_click": ["_Down", "ON"],
+                "arrow_left_click": ["_Left", "ON"],
+                "arrow_right_click": ["_Right", "ON"],
+                "toggle_hold": ["_MainButton_Long", "ON"],
+                "brightness_up_hold": ["_Up_Long", "ON"],
+                "brightness_down_hold": ["_Down_Long", "ON"],
+                "arrow_left_hold": ["_Left_Long", "ON"],
+                "arrow_right_hold": ["_Right_Long", "ON"],
+                "brightness_up_release": ["_Up_Long", "OFF"],
+                "brightness_down_release": ["_Down_Long", "OFF"],
+                "arrow_left_release": ["_Left_Long", "OFF"],
+                "arrow_right_release": ["_Right_Long", "OFF"],
+                "on": ["_Main", "ON"],
+                "brightness_move_up": ["_Main_Long", "ON"],
+                "brightness_stop": ["_Main_Long", "OFF"],
+            }
 
             itemcount = 3
             found_action = False
@@ -634,8 +666,13 @@ class IkeaZigbeeDevices(HABApp.Rule):
                     itemcount = itemcount + 1
                     if self.openhab.item_exists(key_item_name):
                         oh_keypress_item = SwitchItem.get_item(key_item_name)
-                        logger.debug("found action for %s for %s :: %s --> %s",
-                                     action, key, key_item_name, item[1])
+                        logger.debug(
+                            "found action for %s for %s :: %s --> %s",
+                            action,
+                            key,
+                            key_item_name,
+                            item[1],
+                        )
                         if self.oh_switch_item_changed(oh_keypress_item, item[1]):
                             oh_keypress_item.oh_send_command(item[1])
                         found_action = True
@@ -644,8 +681,9 @@ class IkeaZigbeeDevices(HABApp.Rule):
                         logger.error("item %s does not exist", key_item_name)
                         exitcode = itemcount
                 else:
-                    logger.info("skip OH item %s - for action %s",
-                                key_item_name, action)
+                    logger.info(
+                        "skip OH item %s - for action %s", key_item_name, action
+                    )
 
             if exitcode != 0:
                 return exitcode
