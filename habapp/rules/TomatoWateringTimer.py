@@ -14,6 +14,7 @@ logger = logging.getLogger("TomatoTimer")
 TIME_FOR_WATERING_MIN = 2
 THING_UID_PLUG = "hue:0010:ecb5fa2c8738:25"
 DEVICE_NAME_PLUG_STATE = "AussenSteckdose_Betrieb"
+INITIAL_DELAY = 160
 
 RAIN_EFFECT_FACTOR = 5
 TEMPERATURE_EFFECT_BASE = 25
@@ -208,8 +209,8 @@ class MyTomatoTimer(HABApp.Rule):
         if self.plug_thing is None:
             self.get_plug_thing()
 
+        calculated_delay = INITIAL_DELAY
         if self.plug_thing is not None:
-            calculated_delay = 0
             if self.plug_thing.status != ThingStatusEnum.ONLINE:
                 logger.info(
                     "%s: Details = %s",
@@ -270,7 +271,7 @@ class MyTomatoTimer(HABApp.Rule):
                 logger.info("light_effect_min     ---   %0.1fmin", light_effect_min)
 
                 calculated_delay = (
-                    2 * 80
+                    INITIAL_DELAY
                     + rain_effect_min
                     - humidity_effect_min
                     - wind_effect_min
