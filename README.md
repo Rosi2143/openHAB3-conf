@@ -122,3 +122,22 @@ config for the openHAB3 setup
   * `mkdir ~/git`
   * `cd ~/git`
   * `git clone git@github.com:Rosi2143/public_files.git`
+* create passwordless access to karaf
+  * enable command execution from HabApp without passwords
+  * see
+    * https://karaf.apache.org/manual/latest/security#:~:text=For%20the%20SSH%20layer%2C%20Karaf,Karaf%20SSHD%20(server%20side).
+    * https://openhabforum.de/viewtopic.php?t=5609
+  * create key file `karaf.id_rsa`
+  * copy key files to `/home/openhab/.ssh/`
+  * change permissions
+    ```
+    sudo chgrp openhab /home/openhab
+    sudo chgrp openhab /home/openhab/.ssh
+    sudo chgrp openhab /home/openhab/.ssh/karaf.id_rsa
+    sudo chgrp openhab /home/openhab/.ssh/karaf.id_rsa.pub
+
+    sudo chown openhab /home/openhab
+    sudo chown openhab /home/openhab/.ssh
+    sudo chown openhab /home/openhab/.ssh/karaf.id_rsa
+    sudo chown openhab /home/openhab/.ssh/karaf.id_rsa.pub
+    ```
