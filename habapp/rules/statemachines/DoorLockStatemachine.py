@@ -27,8 +27,9 @@ def get_state_machine_graph(state_machine):
     imagepath = os.path.join(scriptpath, "images")
     if not os.path.exists(imagepath):
         os.makedirs(imagepath)
-    graph().write_png(os.path.join(imagepath,
-                                   state_machine.get_name() + "_doorlock_sm.png"))
+    graph().write_png(
+        os.path.join(imagepath, state_machine.get_name() + "_doorlock_sm.png")
+    )
 
 
 def get_internal_state_machine_state(state_machine):
@@ -61,8 +62,7 @@ class DoorLockStatemachine(StateMachine):
 
     LOCKED = "LOCKED"
     UNLOCKED = "UNLOCKED"
-    state_map = {LOCKED: True,
-                 UNLOCKED: False}
+    state_map = {LOCKED: True, UNLOCKED: False}
 
     # States
     st_unlocked = State("unlocked", initial=True)
@@ -70,78 +70,79 @@ class DoorLockStatemachine(StateMachine):
     st_error = State("error")
 
     # Transitions
-    tr_dark_outside_change = (st_unlocked.to(st_error, cond="cond_error") |
-                              st_unlocked.to(st_locked, cond="cond_lock_required") |
-                              st_unlocked.to.itself() |
-                              st_locked.to(st_error, cond="cond_error") |
-                              # st_locked.to(st_unlocked, unless="cond_lock_required") |
-                              st_locked.to.itself() |
-                              st_error.to(st_unlocked, unless=[
-                                  "cond_error", "cond_lock_required"]) |
-                              # st_error.to(st_locked, unless="cond_error",
-                              #             cond="cond_lock_required") |
-                              st_error.to.itself()
-                              )
+    tr_dark_outside_change = (
+        st_unlocked.to(st_error, cond="cond_error")
+        | st_unlocked.to(st_locked, cond="cond_lock_required")
+        | st_unlocked.to.itself()
+        | st_locked.to(st_error, cond="cond_error")
+        |
+        # st_locked.to(st_unlocked, unless="cond_lock_required") |
+        st_locked.to.itself()
+        | st_error.to(st_unlocked, unless=["cond_error", "cond_lock_required"])
+        |
+        # st_error.to(st_locked, unless="cond_error",
+        #             cond="cond_lock_required") |
+        st_error.to.itself()
+    )
 
-    tr_door_open_change = (st_unlocked.to(st_error, cond="cond_error") |
-                           st_unlocked.to(st_locked, cond="cond_lock_required") |
-                           st_unlocked.to.itself() |
-                           st_locked.to(st_error, cond="cond_error") |
-                           st_locked.to(st_unlocked, unless="cond_lock_required") |
-                           st_locked.to.itself() |
-                           st_error.to(st_unlocked, unless=[
-                               "cond_error", "cond_lock_required"]) |
-                           st_error.to(st_locked, unless="cond_error",
-                                       cond="cond_lock_required") |
-                           st_error.to.itself()
-                           )
+    tr_door_open_change = (
+        st_unlocked.to(st_error, cond="cond_error")
+        | st_unlocked.to(st_locked, cond="cond_lock_required")
+        | st_unlocked.to.itself()
+        | st_locked.to(st_error, cond="cond_error")
+        | st_locked.to(st_unlocked, unless="cond_lock_required")
+        | st_locked.to.itself()
+        | st_error.to(st_unlocked, unless=["cond_error", "cond_lock_required"])
+        | st_error.to(st_locked, unless="cond_error", cond="cond_lock_required")
+        | st_error.to.itself()
+    )
 
-    tr_error_change = (st_unlocked.to(st_error, cond="cond_error") |
-                       st_unlocked.to.itself() |
-                       st_locked.to(st_error, cond="cond_error") |
-                       st_locked.to.itself() |
-                       st_error.to.itself(cond="cond_error") |
-                       st_error.to(st_locked, cond="cond_lock_required") |
-                       st_error.to(st_unlocked, unless="cond_lock_required")
-                       )
+    tr_error_change = (
+        st_unlocked.to(st_error, cond="cond_error")
+        | st_unlocked.to.itself()
+        | st_locked.to(st_error, cond="cond_error")
+        | st_locked.to.itself()
+        | st_error.to.itself(cond="cond_error")
+        | st_error.to(st_locked, cond="cond_lock_required")
+        | st_error.to(st_unlocked, unless="cond_lock_required")
+    )
 
-    tr_light_change = (st_unlocked.to(st_error, cond="cond_error") |
-                       st_unlocked.to(st_locked, cond="cond_lock_required") |
-                       st_unlocked.to.itself() |
-                       st_locked.to(st_error, cond="cond_error") |
-                       st_locked.to(st_unlocked, unless="cond_lock_required") |
-                       st_locked.to.itself() |
-                       st_error.to(st_unlocked, unless=[
-                                   "cond_error", "cond_lock_required"]) |
-                       st_error.to(st_locked, unless="cond_error",
-                                   cond="cond_lock_required") |
-                       st_error.to.itself()
-                       )
+    tr_light_change = (
+        st_unlocked.to(st_error, cond="cond_error")
+        | st_unlocked.to(st_locked, cond="cond_lock_required")
+        | st_unlocked.to.itself()
+        | st_locked.to(st_error, cond="cond_error")
+        | st_locked.to(st_unlocked, unless="cond_lock_required")
+        | st_locked.to.itself()
+        | st_error.to(st_unlocked, unless=["cond_error", "cond_lock_required"])
+        | st_error.to(st_locked, unless="cond_error", cond="cond_lock_required")
+        | st_error.to.itself()
+    )
 
-    tr_presence_change = (st_unlocked.to(st_error, cond="cond_error") |
-                          st_unlocked.to(st_locked, cond="cond_lock_required") |
-                          st_unlocked.to.itself() |
-                          st_locked.to(st_error, cond="cond_error") |
-                          # st_locked.to(st_unlocked, unless="cond_lock_required") |
-                          st_locked.to.itself() |
-                          st_error.to(st_unlocked, unless=[
-                              "cond_error", "cond_lock_required"]) |
-                          st_error.to(st_locked, unless="cond_error",
-                                      cond="cond_lock_required") |
-                          st_error.to.itself()
-                          )
+    tr_presence_change = (
+        st_unlocked.to(st_error, cond="cond_error")
+        | st_unlocked.to(st_locked, cond="cond_lock_required")
+        | st_unlocked.to.itself()
+        | st_locked.to(st_error, cond="cond_error")
+        |
+        # st_locked.to(st_unlocked, unless="cond_lock_required") |
+        st_locked.to.itself()
+        | st_error.to(st_unlocked, unless=["cond_error", "cond_lock_required"])
+        | st_error.to(st_locked, unless="cond_error", cond="cond_lock_required")
+        | st_error.to.itself()
+    )
 
-    tr_reported_lock_change = (st_unlocked.to(st_error, cond="cond_error") |
-                               st_unlocked.to(st_locked, cond="cond_reported_lock") |
-                               st_unlocked.to.itself() |
-                               st_locked.to(st_error, cond="cond_error") |
-                               st_locked.to(st_unlocked, unless="cond_reported_lock") |
-                               st_locked.to.itself() |
-                               st_error.to.itself(cond="cond_error") |
-                               st_error.to(st_locked, cond="cond_lock_required") |
-                               st_error.to(
-                                   st_unlocked, unless="cond_lock_required")
-                               )
+    tr_reported_lock_change = (
+        st_unlocked.to(st_error, cond="cond_error")
+        | st_unlocked.to(st_locked, cond="cond_reported_lock")
+        | st_unlocked.to.itself()
+        | st_locked.to(st_error, cond="cond_error")
+        | st_locked.to(st_unlocked, unless="cond_reported_lock")
+        | st_locked.to.itself()
+        | st_error.to.itself(cond="cond_error")
+        | st_error.to(st_locked, cond="cond_lock_required")
+        | st_error.to(st_unlocked, unless="cond_lock_required")
+    )
 
     def __init__(self, name="unnamed", logger=None):
         # variables
@@ -155,8 +156,8 @@ class DoorLockStatemachine(StateMachine):
         self._light = False
         self._presence = True
 
-#        for name, value in os.environ.items():
-#            self._logger.debug("{0}: {1}".format(name, value))
+        #        for name, value in os.environ.items():
+        #            self._logger.debug("{0}: {1}".format(name, value))
 
         super(DoorLockStatemachine, self).__init__()
 
@@ -236,8 +237,12 @@ class DoorLockStatemachine(StateMachine):
         """
         self._dark_outside = state
         self._logger.info(
-            self.get_name() + "(" + str(id(self)) + "): - Dark_Outside is: " +
-            str(self._dark_outside))
+            self.get_name()
+            + "("
+            + str(id(self))
+            + "): - Dark_Outside is: "
+            + str(self._dark_outside)
+        )
 
     def set_door_open(self, state):
         """set internal state of door_open
@@ -245,8 +250,7 @@ class DoorLockStatemachine(StateMachine):
             state (bool): state of door_open
         """
         self._door_open = state
-        self._logger.info(self.get_name() +
-                          ": - DoorOpen is: " + str(self._door_open))
+        self._logger.info(self.get_name() + ": - DoorOpen is: " + str(self._door_open))
 
     def set_light(self, state):
         """set internal state of light
@@ -255,7 +259,8 @@ class DoorLockStatemachine(StateMachine):
         """
         self._light = state
         self._logger.info(
-            self.get_name() + "(" + str(id(self)) + "): - Light is: " + str(self._light))
+            self.get_name() + "(" + str(id(self)) + "): - Light is: " + str(self._light)
+        )
 
     def set_lock_error(self, key, state):
         """set internal state of lock_error
@@ -265,10 +270,16 @@ class DoorLockStatemachine(StateMachine):
         if key in self.error_keys:
             self._lock_error[key] = state
             self._logger.info(
-                self.get_name() + "(" + str(id(self)) + "): - Error is: " + str(self._lock_error))
+                self.get_name()
+                + "("
+                + str(id(self))
+                + "): - Error is: "
+                + str(self._lock_error)
+            )
         else:
             self._logger.error(
-                self.get_name() + "(" + str(id(self)) + "): - undefined key " + key)
+                self.get_name() + "(" + str(id(self)) + "): - undefined key " + key
+            )
 
     def set_presence(self, state):
         """set internal state of presence
@@ -277,7 +288,12 @@ class DoorLockStatemachine(StateMachine):
         """
         self._presence = state
         self._logger.info(
-            self.get_name() + "(" + str(id(self)) + "): - Presence is: " + str(self._presence))
+            self.get_name()
+            + "("
+            + str(id(self))
+            + "): - Presence is: "
+            + str(self._presence)
+        )
 
     def set_reported_lock(self, state):
         """set internal state of reported lock state
@@ -285,12 +301,17 @@ class DoorLockStatemachine(StateMachine):
             state (bool): reported state of lock
         """
         if state not in self.state_map.keys():
-            self._logger.error(f"{self.get_name()}: - reported LockState invalid: {str(state)}\n \
-{str(self.state_map)}")
+            self._logger.error(
+                f"{self.get_name()}: - reported LockState invalid: {str(state)}\n \
+{str(self.state_map)}"
+            )
         else:
             self._reported_lock = self.state_map[state]
-            self._logger.info(self.get_name() +
-                              ": - reported LockState is: " + str(self._reported_lock))
+            self._logger.info(
+                self.get_name()
+                + ": - reported LockState is: "
+                + str(self._reported_lock)
+            )
 
     # Conditions
     def cond_dark_outside(self):
@@ -298,8 +319,10 @@ class DoorLockStatemachine(StateMachine):
         Returns:
             boolean: True/False
         """
-        self._logger.debug(f"{self.get_name()} ({str(id(self))}): \
-dark_outside = {str(self._dark_outside)}")
+        self._logger.debug(
+            f"{self.get_name()} ({str(id(self))}): \
+dark_outside = {str(self._dark_outside)}"
+        )
         return self._dark_outside
 
     def cond_door_is_open(self):
@@ -307,8 +330,10 @@ dark_outside = {str(self._dark_outside)}")
         Returns:
             boolean: True/False
         """
-        self._logger.debug(f"{self.get_name()} ({str(id(self))}): \
-door_open = {str(self._door_open)}")
+        self._logger.debug(
+            f"{self.get_name()} ({str(id(self))}): \
+door_open = {str(self._door_open)}"
+        )
         return self._door_open
 
     def cond_error(self):
@@ -316,8 +341,7 @@ door_open = {str(self._door_open)}")
         Returns:
             boolean: True/False
         """
-        self._logger.debug(self.get_name() + "(" + str(id(self)) +
-                           "): cond_error")
+        self._logger.debug(self.get_name() + "(" + str(id(self)) + "): cond_error")
 
         result = False
         if self.get_lock_error():
@@ -329,8 +353,13 @@ door_open = {str(self._door_open)}")
             if self._reported_lock:
                 result = True
 
-        self._logger.debug(self.get_name() + "(" + str(id(self)) +
-                           "): result (cond_error) = " + str(result))
+        self._logger.debug(
+            self.get_name()
+            + "("
+            + str(id(self))
+            + "): result (cond_error) = "
+            + str(result)
+        )
 
         return result
 
@@ -339,8 +368,14 @@ door_open = {str(self._door_open)}")
         Returns:
             boolean: True/False
         """
-        self._logger.debug(self.get_name() + "(" + str(id(self)) +
-                           "): ExternalLock = '" + str(self._reported_lock) + "'.")
+        self._logger.debug(
+            self.get_name()
+            + "("
+            + str(id(self))
+            + "): ExternalLock = '"
+            + str(self._reported_lock)
+            + "'."
+        )
         return self._reported_lock
 
     def cond_light_is_active(self):
@@ -348,8 +383,14 @@ door_open = {str(self._door_open)}")
         Returns:
             boolean: True/False
         """
-        self._logger.debug(self.get_name() + "(" + str(id(self)) +
-                           "): light = '" + str(self._light) + "'.")
+        self._logger.debug(
+            self.get_name()
+            + "("
+            + str(id(self))
+            + "): light = '"
+            + str(self._light)
+            + "'."
+        )
         return self._light
 
     def cond_lock_required(self):
@@ -357,20 +398,28 @@ door_open = {str(self._door_open)}")
         Returns:
             boolean: True/False
         """
-        self._logger.debug(self.get_name() + "(" + str(id(self)) +
-                           "): cond_lock_required")
+        self._logger.debug(
+            self.get_name() + "(" + str(id(self)) + "): cond_lock_required"
+        )
         self._logger.debug(get_internal_state_machine_state(self))
 
         result = False
 
-        if not self._presence:
+        if self._door_open:
+            result = False
+        elif (not self._presence) and (not self._light) and self._dark_outside:
             result = True
         elif self._dark_outside:
             if not self._light:
                 result = True
 
-        self._logger.debug(self.get_name() + "(" + str(id(self)) +
-                           "): result (cond_lock_required) = " + str(result))
+        self._logger.debug(
+            self.get_name()
+            + "("
+            + str(id(self))
+            + "): result (cond_lock_required) = "
+            + str(result)
+        )
 
         return result
 
@@ -379,8 +428,14 @@ door_open = {str(self._door_open)}")
         Returns:
             boolean: True/False
         """
-        self._logger.debug(self.get_name() + "(" + str(id(self)) +
-                           "): lock_error = '" + str(self._lock_error) + "'.")
+        self._logger.debug(
+            self.get_name()
+            + "("
+            + str(id(self))
+            + "): lock_error = '"
+            + str(self._lock_error)
+            + "'."
+        )
         return self._lock_error
 
     def cond_presence_is_active(self):
@@ -388,22 +443,34 @@ door_open = {str(self._door_open)}")
         Returns:
             boolean: True/False
         """
-        self._logger.debug(self.get_name() + "(" + str(id(self)) +
-                           "): presence = '" + str(self._presence) + "'.")
+        self._logger.debug(
+            self.get_name()
+            + "("
+            + str(id(self))
+            + "): presence = '"
+            + str(self._presence)
+            + "'."
+        )
         return self._presence
 
     # see https://python-statemachine.readthedocs.io/en/latest/actions.html#ordering
     def before_transition(self, event, state):
-        """events received for any state """
-        self._logger.debug(f"{self.get_name()} ({str(id(self))}): \
-Before   '{event}' in '{state.id}' state.")
+        """events received for any state"""
+        self._logger.debug(
+            f"{self.get_name()} ({str(id(self))}): \
+Before   '{event}' in '{state.id}' state."
+        )
 
     def on_enter_state(self, event, state):
-        """entry function for any state """
-        self._logger.debug(f"{self.get_name()} ({str(id(self))}): \
-Entering '{state.id}' state triggered by '{event}' event.")
+        """entry function for any state"""
+        self._logger.debug(
+            f"{self.get_name()} ({str(id(self))}): \
+Entering '{state.id}' state triggered by '{event}' event."
+        )
 
     def after_transition(self, event, state):
-        """last function in state change queue """
-        self._logger.info(f"{self.get_name()} ({str(id(self))}): \
-is in state {state.id}")
+        """last function in state change queue"""
+        self._logger.info(
+            f"{self.get_name()} ({str(id(self))}): \
+is in state {state.id}"
+        )
