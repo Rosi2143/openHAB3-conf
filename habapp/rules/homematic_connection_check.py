@@ -51,14 +51,19 @@ class HomematicConnect(HABApp.Rule):
 
     def check_uptime(self):
         uptime_state = self.uptime_item.get_value()
-        p = re.match(r"(\d+)T\s(\d)+:(\d+)", uptime_state)
+        p = re.match(r"(\d+)T\s(\d+):(\d+)", uptime_state)
         days = int(p.group(1))
         hours = int(p.group(2))
         minutes = int(p.group(3))
-        logger.info("Uptime: --> %dTage %dStunden %dMinuten", days, hours, minutes)
+        logger.info("Uptime: --> %dTage %02dStunden %02dMinuten", days, hours, minutes)
         uptime_now = days * 24 * 60 + hours * 60 + minutes
+        logger.info(
+            "Compare Uptime\nUptime_last --> %d\nUptime_now  --> %d",
+            self.uptime_last,
+            uptime_now,
+        )
         if self.uptime_last < uptime_now:
-            self.uptime_last = uptime_now
+            logger.info("All is fine!")
         else:
             logger.warning("Restart homematic binding")
             res = subprocess.run(
@@ -96,6 +101,7 @@ class HomematicConnect(HABApp.Rule):
                 )
             else:
                 logger.info("restart homematic binding success")
+        self.uptime_last = uptime_now
 
 
 # Rules
