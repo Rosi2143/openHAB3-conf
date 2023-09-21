@@ -6,11 +6,13 @@ import re
 from datetime import datetime, timedelta
 
 import HABApp
-from HABApp.openhab.items import StringItem
+from HABApp.openhab.items import SwitchItem, StringItem
+from HABApp.core.events import ItemNoChangeEvent
 
 logger = logging.getLogger("HomematicConnect")
 
 RASPBERRYMATIC_PI = "192.168.178.38"
+UPTIME_NO_CHANGE_TIMEOUT_SEC = 6 * 60
 
 
 class HomematicConnect(HABApp.Rule):
@@ -31,6 +33,16 @@ class HomematicConnect(HABApp.Rule):
         logger.info("script started at %s", now_str)
         logger.info("************************************************************")
         logger.info("************************************************************")
+
+        self.connection_check_item = SwitchItem.get_item(
+            "RaspiMaticVirtuelleTasten_HM_1_Press_Short"
+        )
+        logger.info("Current State = %s", str(self.connection_check_item.get_value()))
+        watcher = self.connection_check_item.watch_change(
+            UPTIME_NO_CHANGE_TIMEOUT_SEC
+        )  # check if uptime was not changed in x-sec
+        watcher.listen_event(self.check_constant)
+
         self.run.every(
             timedelta(seconds=5), timedelta(seconds=30), self.check_connection
         )
@@ -49,6 +61,33 @@ class HomematicConnect(HABApp.Rule):
                 self.ConnectionStatus = "OK"
                 logger.info("connection OK detected at %s", now_str)
 
+    def restart_homematic_binding(self):
+        logger.warning("Restart homematic binding")
+        res = subprocess.run(
+            [
+                "/usr/bin/ssh",
+                "-p",
+                "8101",
+                "-i",
+                "/home/openhab/.ssh/karaf.id_rsa",
+                "openhab@localhost",
+                "bundle:restart",
+                "org.openhab.binding.homematic",
+            ],
+            capture_output=True,
+            check=False,
+        )
+        if res.returncode != 0:
+            logger.error(
+                "restart homematic binding failed - %d\nARGS: %s\nSTDOUT: %s\nSTDERR: %s",
+                res.returncode,
+                res.args,
+                str(res.stdout, "UTF-8"),
+                str(res.stderr, "UTF-8"),
+            )
+        else:
+            logger.info("restart homematic binding success")
+
     def check_uptime(self):
         uptime_state = self.uptime_item.get_value()
         p = re.match(r"(\d+)T\s(\d+):(\d+)", uptime_state)
@@ -65,43 +104,15 @@ class HomematicConnect(HABApp.Rule):
         if self.uptime_last < uptime_now:
             logger.info("All is fine!")
         else:
-            logger.warning("Restart homematic binding")
-            res = subprocess.run(
-                [
-                    "whoami",
-                ],
-                capture_output=True,
-                check=False,
-            )
-            logger.error(
-                "whoami - %s",
-                str(res.stdout, "UTF-8"),
-            )
-            res = subprocess.run(
-                [
-                    "/usr/bin/ssh",
-                    "-p",
-                    "8101",
-                    "-i",
-                    "/home/openhab/.ssh/karaf.id_rsa",
-                    "openhab@localhost",
-                    "bundle:restart",
-                    "org.openhab.binding.homematic",
-                ],
-                capture_output=True,
-                check=False,
-            )
-            if res.returncode != 0:
-                logger.error(
-                    "restart homematic binding failed - %d\nARGS: %s\nSTDOUT: %s\nSTDERR: %s",
-                    res.returncode,
-                    res.args,
-                    str(res.stdout, "UTF-8"),
-                    str(res.stderr, "UTF-8"),
-                )
-            else:
-                logger.info("restart homematic binding success")
+            self.restart_homematic_binding()
         self.uptime_last = uptime_now
+
+        last_key_update = self.connection_check_item.last_change
+        logger.info("Last update was %s", str(last_key_update))
+
+    def check_constant(self, event: ItemNoChangeEvent):
+        logger.info("item %s constant for %s", event.name, event.seconds)
+        self.restart_homematic_binding()
 
 
 # Rules
