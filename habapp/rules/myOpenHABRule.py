@@ -1,11 +1,23 @@
 import logging  # required for extended logging
 
 import HABApp
-from HABApp.core.events import ValueUpdateEvent, ValueUpdateEventFilter, ValueChangeEvent, ValueChangeEventFilter
-from HABApp.openhab.events import ItemStateEvent, ItemStateEventFilter, ItemCommandEvent, ItemCommandEventFilter, ItemStateChangedEvent, ItemStateChangedEventFilter
+from HABApp.core.events import (
+    ValueUpdateEvent,
+    ValueUpdateEventFilter,
+    ValueChangeEvent,
+    ValueChangeEventFilter,
+)
+from HABApp.openhab.events import (
+    ItemStateUpdatedEvent,
+    ItemStateUpdatedEventFilter,
+    ItemCommandEvent,
+    ItemCommandEventFilter,
+    ItemStateChangedEvent,
+    ItemStateChangedEventFilter,
+)
 from HABApp.openhab.items import SwitchItem, ContactItem, DatetimeItem
 
-log = logging.getLogger('MyRule')
+log = logging.getLogger("MyRule")
 
 
 class MyOpenhabRule(HABApp.Rule):
@@ -18,21 +30,17 @@ class MyOpenhabRule(HABApp.Rule):
         super().__init__()
 
         # get items
-        test_contact = ContactItem.get_item('HABApp_Contact')
-        test_date_time = DatetimeItem.get_item('HABApp_DateTime')
-        test_switch = SwitchItem.get_item('HABApp_Switch')
+        test_contact = ContactItem.get_item("HABApp_Contact")
+        test_date_time = DatetimeItem.get_item("HABApp_DateTime")
+        test_switch = SwitchItem.get_item("HABApp_Switch")
 
         # Trigger on item updates
-        test_contact.listen_event(
-            self.item_state_update, ItemStateEventFilter())
-        test_date_time.listen_event(
-            self.item_state_update, ValueUpdateEventFilter())
+        test_contact.listen_event(self.item_state_update, ItemStateUpdatedEventFilter())
+        test_date_time.listen_event(self.item_state_update, ValueUpdateEventFilter())
 
         # Trigger on item changes
-        test_contact.listen_event(
-            self.item_state_change, ItemStateChangedEventFilter())
-        test_date_time.listen_event(
-            self.item_state_change, ValueChangeEventFilter())
+        test_contact.listen_event(self.item_state_change, ItemStateChangedEventFilter())
+        test_date_time.listen_event(self.item_state_change, ValueChangeEventFilter())
 
         # Trigger on item commands
         test_switch.listen_event(self.item_command, ItemCommandEventFilter())
@@ -41,19 +49,19 @@ class MyOpenhabRule(HABApp.Rule):
         """test update of state"""
 
         assert isinstance(event, ValueUpdateEvent)
-        log.info('%s', event)
+        log.info("%s", event)
 
     def item_state_change(self, event):
         """test change of state"""
 
         assert isinstance(event, ValueChangeEvent)
-        log.info('%s', event)
+        log.info("%s", event)
 
         # interaction is available through self.openhab or self.oh
-        self.openhab.send_command('HABApp_Switch2', 'ON')
+        self.openhab.send_command("HABApp_Switch2", "ON")
 
         # example for interaction with openhab item type
-        switch_item = SwitchItem.get_item('HABApp_Switch')
+        switch_item = SwitchItem.get_item("HABApp_Switch")
         if switch_item.is_on():
             switch_item.off()
         else:
@@ -63,10 +71,10 @@ class MyOpenhabRule(HABApp.Rule):
         """send a command ourselves"""
 
         assert isinstance(event, ItemCommandEvent)
-        log.info('%s', event)
+        log.info("%s", event)
 
         # interaction is available through self.openhab or self.oh
-        self.oh.post_update('HABApp_String', str(event))
+        self.oh.post_update("HABApp_String", str(event))
 
 
 # MyOpenhabRule()
