@@ -10,3 +10,6 @@
   * `/opt/habapp/bin/habapp -di`
   * or
   * `/opt/habapp/bin/pip list`
+
+# update 1.1
+* [release note](https://community.openhab.org/t/habapp-1-1/147269)

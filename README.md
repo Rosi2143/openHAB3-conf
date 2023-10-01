@@ -1,3 +1,10 @@
+- [openHAB3-conf](#openhab3-conf)
+  - [bindings](#bindings)
+  - [additional SW](#additional-sw)
+  - [copying git repos](#copying-git-repos)
+  - [other configs](#other-configs)
+- [Update 4.x](#update-4x)
+
 # openHAB3-conf
 config for the openHAB3 setup
 
@@ -141,3 +148,7 @@ config for the openHAB3 setup
     sudo chown openhab /home/openhab/.ssh/karaf.id_rsa
     sudo chown openhab /home/openhab/.ssh/karaf.id_rsa.pub
     ```
+
+# Update 4.x
+* [release note](https://www.openhab.org/blog/2023-07-23-openhab-4-0-release.html)
+

@@ -1,6 +1,7 @@
 """
 This script handles event triggers for HABPanel items.
 """
+# log:set DEBUG org.openhab.core.automation
 # log:set INFO jsr223.jython.HABPanel
 
 from core.log import logging, LOG_PREFIX
@@ -13,17 +14,21 @@ BATTERY_MAX_CHARGE = 80
 BATTERY_MIN_CHARGE = 40
 
 
-@rule("HABPanel: Charge state",
-      description="start or stop charging of the HABPanel",
-      tags=["itemchange", "habpanel"])
+@rule(
+    "HABPanel: Charge state",
+    description="start or stop charging of the HABPanel",
+    tags=["itemchange", "habpanel"],
+)
 @when("Item HABPanel_Battery_Level changed")
 @when("Time cron 15 2/5 * 1/1 * ? *")
 def check_charging_state(event):
     """check if HABPanel needs charging"""
 
     if event:
-        check_charging_state.log.info(
-            "rule fired because of %s", event.itemName)
+        if event.getType() == "TimerEvent":
+            check_charging_state.log.info("rule fired because of %s", event.getSource())
+        else:
+            check_charging_state.log.info("rule fired because of %s", event.itemName)
 
     battery_level = 0
     charging_state = False
@@ -34,25 +39,33 @@ def check_charging_state(event):
         charging_state = items["HABPanel_Battery_Charging"] == "OPEN"
 
     check_charging_state.log.debug(
-        "HABPanel_Battery_Level = %s --> LowBat = %s", battery_level, (battery_level < BATTERY_MIN_CHARGE))
+        "HABPanel_Battery_Level = %s --> LowBat = %s",
+        battery_level,
+        (battery_level < BATTERY_MIN_CHARGE),
+    )
 
-    check_charging_state.log.debug(
-        "HABPanel_Battery_Charging = %s", charging_state)
+    check_charging_state.log.debug("HABPanel_Battery_Charging = %s", charging_state)
 
-    if ((battery_level < BATTERY_MIN_CHARGE) and not charging_state):
+    if (battery_level < BATTERY_MIN_CHARGE) and not charging_state:
         events.sendCommand("HABPanelLadung_Betrieb", "ON")
         check_charging_state.log.info("start charging")
-    elif ((battery_level > BATTERY_MAX_CHARGE) and charging_state):
+    elif (battery_level > BATTERY_MAX_CHARGE) and charging_state:
         events.sendCommand("HABPanelLadung_Betrieb", "OFF")
         check_charging_state.log.info("stop charging")
     else:
         check_charging_state.log.info(
-            "No change: ChargeState=" + str(charging_state) + " ChargeLevel=" + str(battery_level))
+            "No change: ChargeState="
+            + str(charging_state)
+            + " ChargeLevel="
+            + str(battery_level)
+        )
 
 
-@rule("HABPanel: Proximity alert",
-      description="turn the HABPanel on if someone get close",
-      tags=["itemchange", "habpanel"])
+@rule(
+    "HABPanel: Proximity alert",
+    description="turn the HABPanel on if someone get close",
+    tags=["itemchange", "habpanel"],
+)
 # @when("Item HABPanel_Proximity changed to CLOSED")
 @when("Item HABPanel_Motion changed")
 def proximity_alert(event):
@@ -60,7 +73,8 @@ def proximity_alert(event):
 
     if event:
         proximity_alert.log.info(
-            "rule fired because of %s --> %s", event.itemName, event.itemState)
+            "rule fired because of %s --> %s", event.itemName, event.itemState
+        )
 
     if str(event.itemState) == "OPEN":
         events.sendCommand("HABPanel_Command", "SCREEN_OFF")
