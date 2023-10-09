@@ -36,15 +36,7 @@ handlers:
     formatter: HABApp_format
     level: DEBUG
 
-  MyRuleHandler:
-    class: HABApp.config.logging.MidnightRotatingFileHandler
-    filename: "/mnt/usb1/log/habapp/MyRule.log" # absolute filename is recommended
-    maxBytes: 10_000_000
-    backupCount: 3
-
-    formatter: HABApp_format
-    level: DEBUG
-
+  # my rules start here
   AstralHandler:
     class: HABApp.config.logging.MidnightRotatingFileHandler
     filename: "/mnt/usb1/log/habapp/Astral.log"
@@ -63,14 +55,23 @@ handlers:
     formatter: HABApp_format
     level: INFO
 
-  TinkerforgeHandler:
+  DoorLockModeHandler:
     class: HABApp.config.logging.MidnightRotatingFileHandler
-    filename: "/mnt/usb1/log/habapp/Tinkerforge.log" # absolute filename is recommended
+    filename: "/mnt/usb1/log/habapp/DoorLockMode.log" # absolute filename is recommended
     maxBytes: 10_000_000
     backupCount: 3
 
     formatter: HABApp_format
-    level: INFO
+    level: DEBUG
+
+  HomematicConnectHandler:
+    class: HABApp.config.logging.MidnightRotatingFileHandler
+    filename: "/mnt/usb1/log/habapp/HomematicConnect.log" # absolute filename is recommended
+    maxBytes: 10_000_000
+    backupCount: 3
+
+    formatter: HABApp_format
+    level: DEBUG
 
   IkeaHandler:
     class: HABApp.config.logging.MidnightRotatingFileHandler
@@ -80,6 +81,15 @@ handlers:
 
     formatter: HABApp_format
     level: INFO
+
+  MP3PlayerModeHandler:
+    class: HABApp.config.logging.MidnightRotatingFileHandler
+    filename: "/mnt/usb1/log/habapp/MP3PlayerMode.log" # absolute filename is recommended
+    maxBytes: 10_000_000
+    backupCount: 3
+
+    formatter: HABApp_format
+    level: DEBUG
 
   MqttHandler:
     class: HABApp.config.logging.MidnightRotatingFileHandler
@@ -96,36 +106,27 @@ handlers:
     maxBytes: 10_000_000
     backupCount: 3
 
-  DoorLockModeHandler:
+  ThingsHandler:
     class: HABApp.config.logging.MidnightRotatingFileHandler
-    filename: "/mnt/usb1/log/habapp/DoorLockMode.log" # absolute filename is recommended
+    filename: "/mnt/usb1/log/habapp/Things.log" # absolute filename is recommended
     maxBytes: 10_000_000
     backupCount: 3
 
     formatter: HABApp_format
     level: DEBUG
 
-  MP3PlayerModeHandler:
+  TinkerforgeHandler:
     class: HABApp.config.logging.MidnightRotatingFileHandler
-    filename: "/mnt/usb1/log/habapp/MP3PlayerMode.log" # absolute filename is recommended
+    filename: "/mnt/usb1/log/habapp/Tinkerforge.log" # absolute filename is recommended
     maxBytes: 10_000_000
     backupCount: 3
 
     formatter: HABApp_format
-    level: DEBUG
+    level: INFO
 
   TomatoTimerHandler:
     class: HABApp.config.logging.MidnightRotatingFileHandler
     filename: "/mnt/usb1/log/habapp/TomatoTimer.log" # absolute filename is recommended
-    maxBytes: 10_000_000
-    backupCount: 3
-
-    formatter: HABApp_format
-    level: DEBUG
-
-  HomematicConnectHandler:
-    class: HABApp.config.logging.MidnightRotatingFileHandler
-    filename: "/mnt/usb1/log/habapp/HomematicConnect.log" # absolute filename is recommended
     maxBytes: 10_000_000
     backupCount: 3
 
@@ -145,12 +146,7 @@ loggers:
       - EventFile
     propagate: False
 
-  MyRule:
-    level: DEBUG
-    handlers:
-      - MyRuleHandler # This logger uses the MyRuleHandler
-    propagate: False
-
+  # my rules start here
   Astral:
     level: DEBUG
     handlers:
@@ -163,16 +159,28 @@ loggers:
       - ContactSwitchMapping
     propagate: False
 
-  Tinkerforge:
+  DoorLockMode:
     level: DEBUG
     handlers:
-      - TinkerforgeHandler
+      - DoorLockModeHandler
+    propagate: False
+
+  HomematicConnect:
+    level: DEBUG
+    handlers:
+      - HomematicConnectHandler
     propagate: False
 
   Ikea:
     level: DEBUG
     handlers:
       - IkeaHandler
+    propagate: False
+
+  MP3PlayerMode:
+    level: DEBUG
+    handlers:
+      - MP3PlayerModeHandler
     propagate: False
 
   Mqtt:
@@ -187,26 +195,20 @@ loggers:
       - ThermostatModeHandler
     propagate: False
 
-  DoorLockMode:
+  Things:
     level: DEBUG
     handlers:
-      - DoorLockModeHandler
+      - ThingsHandler
     propagate: False
 
-  MP3PlayerMode:
+  Tinkerforge:
     level: DEBUG
     handlers:
-      - MP3PlayerModeHandler
+      - TinkerforgeHandler
     propagate: False
 
   TomatoTimer:
     level: DEBUG
     handlers:
       - TomatoTimerHandler
-    propagate: False
-
-  HomematicConnect:
-    level: DEBUG
-    handlers:
-      - HomematicConnectHandler
     propagate: False

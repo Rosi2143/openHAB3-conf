@@ -1,0 +1,23 @@
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+
+rule "indego home notification"
+when
+    Item Bosch_Indego_StatusText changed to "Returning to Dock" or
+    Item Bosch_Indego_Statuscode changed to 768 or
+    Item Bosch_Indego_Statuscode changed to 769 or
+    Item Bosch_Indego_Statuscode changed to 770 or
+    Item Bosch_Indego_Statuscode changed to 771 or
+    Item Bosch_Indego_Statuscode changed to 772 or
+    Item Bosch_Indego_Statuscode changed to 773 or
+    Item Bosch_Indego_Statuscode changed to 774 or
+    Item Bosch_Indego_Statuscode changed to 775 or
+    Item Bosch_Indego_Statuscode changed to 776
+then
+    var DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm:ss");
+    var LocalTime localTime = LocalTime.now();
+    var timeRightNow = dtf.format(localTime)
+
+    logInfo("Indego RTH", "Item " + triggeringItemName + " changed to " + newState)
+    sendNotification("schrott.micha@web.de", "Indego returns to Dock at: " + timeRightNow, "iconify:mdi:robot-mower-outline", "Info")
+end
