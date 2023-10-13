@@ -11,7 +11,7 @@ then
         var LocalTime localTime = LocalTime.now();
         var timeRightNow = dtf.format(localTime)
 
-        logInfo("Indego RTH", "Item " + triggeringItemName + " changed to " + newState)
+        logInfo("Indego RTH", "Item " + triggeringItemName + " changed to \"" + newState + "\"")
         sendNotification("schrott.micha@web.de", "Indego \"" + newState + "\" at: " + timeRightNow, "iconify:mdi:robot-mower-outline", "Info")
     }
 end
