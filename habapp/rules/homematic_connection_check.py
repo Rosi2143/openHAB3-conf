@@ -6,7 +6,7 @@ import re
 from datetime import datetime, timedelta
 
 import HABApp
-from HABApp.openhab.items import SwitchItem, StringItem
+from HABApp.openhab.items import SwitchItem, StringItem, Thing
 from HABApp.core.events import ItemNoChangeEvent
 
 logger = logging.getLogger("HomematicConnect")
@@ -34,6 +34,9 @@ class HomematicConnect(HABApp.Rule):
         logger.info("************************************************************")
         logger.info("************************************************************")
 
+        self.raspi_item = Thing.get_item("homematic:bridge:3014F711A061A7D70992B1AC")
+        self.Firmware = self.raspi_item.properties["firmwareVersion"]
+        logger.info("Firmware = %s", self.Firmware)
         self.connection_check_item = SwitchItem.get_item(
             "RaspiMaticVirtuelleTasten_HM_1_Press_Short"
         )
@@ -104,6 +107,12 @@ class HomematicConnect(HABApp.Rule):
         if self.uptime_last < uptime_now:
             logger.info("All is fine!")
         else:
+            if self.uptime_last > uptime_now:
+                Firmware_new: = self.raspi_item.properties["firmwareVersion"]
+                logger.info("Firmware old = %s : new = %s", self.Firmware, Firmware_new)
+                if Firmware_new != self.Firmware:
+                    self.Firmware = Firmware_new
+                    logger.info("Restart of Homematic after update detected")
             self.restart_homematic_binding()
         self.uptime_last = uptime_now
 
