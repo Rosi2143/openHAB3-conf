@@ -12,6 +12,8 @@ config for the openHAB3 setup
 * bindings
   * Ambient Weather Binding
   * astro
+  * bosch indego
+  * home connect
   * homematic
   * hue
   * iCalendar
