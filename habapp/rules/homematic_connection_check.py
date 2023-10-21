@@ -108,7 +108,7 @@ class HomematicConnect(HABApp.Rule):
             logger.info("All is fine!")
         else:
             if self.uptime_last > uptime_now:
-                Firmware_new: = self.raspi_item.properties["firmwareVersion"]
+                Firmware_new = self.raspi_item.properties["firmwareVersion"]
                 logger.info("Firmware old = %s : new = %s", self.Firmware, Firmware_new)
                 if Firmware_new != self.Firmware:
                     self.Firmware = Firmware_new
