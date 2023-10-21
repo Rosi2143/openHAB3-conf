@@ -120,7 +120,9 @@ class DoorLockStatemachineRule(HABApp.Rule):
 
     def set_mode_item(self, state):
         """set the door_lock_mode item"""
-        self.openhab.send_command("SchlossWaschkueche_LockTargetLevel", state)
+        itemName = "SchlossWaschkueche_LockTargetLevel"
+        if StringItem.get_item(itemName).get_value() != state:
+            self.openhab.send_command(itemName, state)
 
     #        self.openhab.send_command("SchlossWaschkueche_Mode", state)
 
