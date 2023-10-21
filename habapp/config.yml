@@ -33,7 +33,7 @@ mqtt:
 openhab:
   connection:
     url: http://localhost:8080 # Connect to this url. Empty string ("") disables the connection.
-    user: "admin"
+    user: "micha"
     password: "openHAB74#"
     verify_ssl: true # Check certificates when using https
   general:
