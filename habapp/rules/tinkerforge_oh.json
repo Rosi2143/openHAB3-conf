@@ -174,8 +174,8 @@
             "checkinterval_s": 10,
             "OH_port_mapping": {
                 "0": "LichtKuecheToaster",
-                "1": "LichtKuecheBacken",
-                "2": "LichtKuecheAbzug",
+                "1": "LichtKuecheAbzug",
+                "2": "LichtKuecheBacken",
                 "3": "LichtHaustuer"
             }
         },
