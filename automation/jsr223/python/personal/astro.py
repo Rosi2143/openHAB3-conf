@@ -20,7 +20,7 @@ def astro_sunrise_start(event):
         event (_type_): triggering event
     """
 
-    astro_sunrise_start.log.info("rule fired because of %s", event.triggerEvent)
+    astro_sunrise_start.log.info("rule fired because of %s", event.event)
 
     astro_sunrise_start.log.info("Hue de-activate NightLight")
     events.sendCommand("Hue_Zone_Garten_Betrieb", "OFF")
@@ -40,7 +40,7 @@ def astro_daylight_start(event):
         event (_type_): triggering event
     """
 
-    astro_daylight_start.log.info("rule fired because of %s", event.triggerEvent)
+    astro_daylight_start.log.info("rule fired because of %s", event.event)
 
 
 @rule(
@@ -57,7 +57,7 @@ def astro_sunset_start(event):
         event (_type_): triggering event
     """
 
-    astro_sunset_start.log.info("rule fired because of %s", event.triggerEvent)
+    astro_sunset_start.log.info("rule fired because of %s", event.event)
 
     astro_sunset_start.log.info("Hue activate NightLight")
     events.sendCommand("Hue_Zone_Garten_Betrieb", "ON")
@@ -78,7 +78,7 @@ def astro_astrodusk_start(event):
         event (_type_): triggering event
     """
 
-    astro_astrodusk_start.log.info("rule fired because of %s", event.triggerEvent)
+    astro_astrodusk_start.log.info("rule fired because of %s", event.event)
 
     if items["TuerWaschkueche_OpenState"] == "OPEN":
         events.sendCommand("SchlossWaschkueche_Fehler", "ON")
