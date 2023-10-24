@@ -82,6 +82,15 @@ handlers:
     formatter: HABApp_format
     level: INFO
 
+  IndegoHandler:
+    class: HABApp.config.logging.MidnightRotatingFileHandler
+    filename: "/mnt/usb1/log/habapp/Indego.log" # absolute filename is recommended
+    maxBytes: 10_000_000
+    backupCount: 3
+
+    formatter: HABApp_format
+    level: INFO
+
   MP3PlayerModeHandler:
     class: HABApp.config.logging.MidnightRotatingFileHandler
     filename: "/mnt/usb1/log/habapp/MP3PlayerMode.log" # absolute filename is recommended
@@ -172,43 +181,49 @@ loggers:
     propagate: False
 
   Ikea:
-    level: DEBUG
+    level: INFO
     handlers:
       - IkeaHandler
     propagate: False
 
-  MP3PlayerMode:
+  Indego:
     level: DEBUG
+    handlers:
+      - IndegoHandler
+    propagate: False
+
+  MP3PlayerMode:
+    level: INFO
     handlers:
       - MP3PlayerModeHandler
     propagate: False
 
   Mqtt:
-    level: DEBUG
+    level: INFO
     handlers:
       - MqttHandler
     propagate: False
 
   ThermostatMode:
-    level: DEBUG
+    level: INFO
     handlers:
       - ThermostatModeHandler
     propagate: False
 
   Things:
-    level: DEBUG
+    level: INFO
     handlers:
       - ThingsHandler
     propagate: False
 
   Tinkerforge:
-    level: DEBUG
+    level: INFO
     handlers:
       - TinkerforgeHandler
     propagate: False
 
   TomatoTimer:
-    level: DEBUG
+    level: INFO
     handlers:
       - TomatoTimerHandler
     propagate: False
