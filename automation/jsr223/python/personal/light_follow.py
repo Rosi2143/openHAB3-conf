@@ -48,6 +48,6 @@ def light_following_frontdoor(event):
 
     light_following_frontdoor.log.info("rule fired because of %s", event.itemName)
 
-    if items["BewegungsmelderHaustuer_Motion_Detection_Active"] == "ON":
+    if items["BewegungsmelderHaustuer_Motion_Detection_Active"] == ON:
         events.sendCommand("LichtFlurErdgeschoss_State", "ON")
         events.sendCommand("LichtHaustuer_State", "ON")
