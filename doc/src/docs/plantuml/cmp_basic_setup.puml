@@ -55,12 +55,18 @@ node raspi #Pink {
   }
   component grafana #Red {
   }
+  component influxDB #Red {
+  }
 
-  interface OH_Rest_API as oh_rest #Red
-  oh -up- oh_rest
+  interface OH_Rest_API as oh_rest_if #Red
+  oh -up- oh_rest_if
 
-  habapp ..> oh_rest : use
-  grafana ..> oh_rest : use
+ interface influxDB as influxDB_if #Red
+ influxDB -up- influxDB_if
+
+  habapp ..> oh_rest_if : use
+  oh ..> influxDB_if : use
+  grafana ..> influxDB_if : use
 }
 
 package MQTT {
@@ -93,13 +99,15 @@ package homematic_ip {
   node homematic-raspi #Aqua{
     component CCU3 #SpringGreen{
     }
-    interface homematic #SpringGreen
-    port "RPI-RF-MOD" as rf
+    interface homematic as homematic_if #SpringGreen
+    port "RPI-RF-MOD" as hmip_rf_if
 
-    CCU3 - homematic
-    CCU3 - rf
+    CCU3 - homematic_if
+    CCU3 - hmip_rf_if
   }
   node hmip_blind {
+  }
+  node hmip_dimmer {
   }
   node hmip_door_window {
   }
@@ -109,55 +117,91 @@ package homematic_ip {
   }
   node hmip_mp3 {
   }
+  node hmip_plug {
+  }
   node hmip_ring_detect {
   }
   node hmip_thermostat {
   }
 
-  hmip_blind --> rf
-  hmip_door_window --> rf
-  hmip_lock --> rf
-  hmip_motion_detect --> rf
-  hmip_mp3 --> rf
-  hmip_ring_detect --> rf
-  hmip_thermostat --> rf
+  hmip_blind --> hmip_rf_if
+  hmip_dimmer --> hmip_rf_if
+  hmip_door_window --> hmip_rf_if
+  hmip_lock --> hmip_rf_if
+  hmip_motion_detect --> hmip_rf_if
+  hmip_mp3 --> hmip_rf_if
+  hmip_plug --> hmip_rf_if
+  hmip_ring_detect --> hmip_rf_if
+  hmip_thermostat --> hmip_rf_if
 }
 
 package cloud {
+  node "Alexa" #LightYellow {
+    component alexa #Yellow
+  }
+  node "Bosch" #LightYellow {
+    component BoschConnectApp as boschConnectApp #Yellow
+    component boschIndegoApp as boschIndegoApp #Yellow
+  }
+  node "Brennenstuhl" #LightYellow {
+    component brennenstuhl_App as brennenstuhlApp #Yellow
+  }
   node "Google Assistent" #LightYellow {
     component googleassistent as google #Yellow
   }
-  node "Alexa" #LightYellow {
-    component alexa #Yellow
+  node "Merros" #LightYellow {
+    component merros_App as merrosApp #Yellow
+  }
+  node "Mobile" #LightYellow {
+    component openHAB_App as ohApp #Yellow
+    component HabPanel as habpanel #Yellow
   }
   node "Philips Hue" #LightYellow {
     component HueApp as hueApp #Yellow
   }
-  node "Mobile" #LightYellow {
-    component HabPanel as habpanel #Yellow
-    component App as app #Yellow
-  }
+
   cloud myOpenhab #sienna {
     component myopenhab #brown
-
-    interface myOH_Rest_API as myOH_Rest #brown
-
-    myopenhab -up- myOH_Rest
+    interface myOH_Rest_API as myOH_Rest_if #brown
+    myopenhab -up- myOH_Rest_if
   }
+
+  cloud publicCloud #sienna {
+    component boschConnectCloud #brown
+    interface boschConnectCloud_Rest_API as boschConnectCloud_if #brown
+    boschConnectCloud -up- boschConnectCloud_if
+
+    component boschIndegoCloud #brown
+    interface boschIndegoCloud_Rest_API as boschIndegoCloud_if #brown
+    boschIndegoCloud -up- boschIndegoCloud_if
+
+    component brennenstuhlCloud #brown
+    interface brennenstuhlCloud_Rest_API as brennenstuhlCloud_if #brown
+    brennenstuhlCloud -up- brennenstuhlCloud_if
+
+    component hueCloud #brown
+    interface hueCloud_Rest_API as hueCloud_if #brown
+    hueCloud -up- hueCloud_if
+
+    component merrosCloud #brown
+    interface merrosCloud_Rest_API as merrosCloud_if #brown
+    merrosCloud -up- merrosCloud_if
+  }
+
 }
 
 package hue {
   node "Hue" #gold{
     component HueBridge as hueBridge #orange
 
-    interface HueRest #orange
+    interface HueBridge_If #orange
 
     port zigbeeHue
 
-    hueBridge -left- HueRest
+    hueBridge -left- HueBridge_If
     hueBridge - zigbeeHue
 
-    hueApp ..> HueRest : use
+    hueApp ..> HueBridge_If : use
   }
   package zigbee_hue {
       node hue_light {
@@ -187,18 +231,39 @@ package hue {
   }
 }
 
+alexa ..> myOH_Rest_if : use
+alexa ..> hueCloud_if : use
+
+boschConnectApp ..> boschConnectCloud_if : use
+boschIndegoCloud ..> myOH_Rest_if : use
+
+boschConnectCloud ..> myOH_Rest_if : use
+boschIndegoApp ..> boschIndegoCloud_if : use
+
+brennenstuhlCloud ..> myOH_Rest_if : use
+brennenstuhlApp ..> brennenstuhlCloud_if : use
+
+google ..> myOH_Rest_if : use
+google ..> hueCloud_if : use
+
 habapp ..> mqtt : use
 habapp ..> brickd : use
-myopenhab ..> oh_rest : use
-hueBridge ..> oh_rest : use
-habpanel ..> oh_rest : use
 
-google ..> myOH_Rest : use
-google ..> HueRest : use
-alexa ..> myOH_Rest : use
-habpanel ..> myOH_Rest : use
-app ..> myOH_Rest : use
+habpanel ..> oh_rest_if : use
+habpanel ..> myOH_Rest_if : use
 
-oh ..> homematic : use
-oh ..> HueRest : use
+hueApp ..> hueCloud_if : use
+hueBridge ..> oh_rest_if : use
+hueCloud ..> myOH_Rest_if : use
+
+merrosCloud ..> myOH_Rest_if : use
+merrosApp ..> merrosCloud_if : use
+
+myopenhab ..> oh_rest_if : use
+
+ohApp ..> myOH_Rest_if : use
+ohApp ..> oh_rest_if : use
+
+oh ..> homematic_if : use
+oh ..> HueBridge_If : use
 @enduml

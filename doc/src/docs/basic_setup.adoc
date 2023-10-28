@@ -5,7 +5,7 @@ the basic setup of HW and deployment of SW is shown in diagram <<basicsetup>>.
 .basic setup
 
 [[basicsetup]]
-[plantuml, "{plantUMLDir}basic setup", png]
+[plantuml, "{plantUMLDir}basic setup", png, size-limit=8192]
 ----
 include::plantuml/cmp_basic_setup.puml[]
 ----

@@ -19,7 +19,61 @@
 
 ## flow
 .flow for window states
-[plantuml, "{plantUMLDir}windows", png]
+[plantuml, "{plantUMLDir}motion_sensor", png]
 ----
 include::plantuml/act_motion_sensors.puml[]
+----
+
+## Software
+
+### naming convention
+All motion detectors that shall switch a (group of) light(s), must have a point with following properties:
+
+* name: **Bewegungsmelder_**<name>**_MotionState**
+** e.g. BewegungsmelderBuero_MotionState
+* type: SwitchItem
+
+The "MotionState"-item has to be member of the group `gBewegungsmelder_MotionState`.
+
+A light that shall be controlled by a motion detector, must have a point with the following properties
+
+* name: **Licht_**<name>**_State**
+** e.g. LichtBuero_State
+* type: SwitchItem
+
+Lights will simply follow the MotionState item.
+
+### "extended" Motion detectors
+The idea of <<_extended_motion_detectors>> is to be able to define times where the light is switch `ON`.
+E.g. at night when everyone is sleeping the light shall not be turned `ON` automatically.
+
+#### extended items
+An <<_extended_motion_detectors>> must have the following additional metadata:
+
+* namespace `TimeRestraints`
+* value: anything
+* config: Time string with format `"%H:%M:%S"`
+** active time start: `ON_<x>`
+** active time end: `OFF_<x>`
+
+e.g.
+
+[source,yaml]
+----
+value: Night
+config:
+  OFF_2: 23:59:59
+  OFF_1: 1:00:00
+  ON_1: 0:00:00
+  ON_2: 7:30:00
+----
+
+wrapping around midnight is allowed.
+
+[source,yaml]
+----
+value: Night
+config:
+  OFF_1: 1:00:00
+  ON_1: 7:30:00
 ----
