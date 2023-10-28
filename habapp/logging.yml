@@ -91,6 +91,15 @@ handlers:
     formatter: HABApp_format
     level: INFO
 
+  MotionDetectorHandler:
+    class: HABApp.config.logging.MidnightRotatingFileHandler
+    filename: "/mnt/usb1/log/habapp/MotionDetector.log" # absolute filename is recommended
+    maxBytes: 10_000_000
+    backupCount: 3
+
+    formatter: HABApp_format
+    level: INFO
+
   MP3PlayerModeHandler:
     class: HABApp.config.logging.MidnightRotatingFileHandler
     filename: "/mnt/usb1/log/habapp/MP3PlayerMode.log" # absolute filename is recommended
@@ -190,6 +199,12 @@ loggers:
     level: DEBUG
     handlers:
       - IndegoHandler
+    propagate: False
+
+  MotionDetector:
+    level: DEBUG
+    handlers:
+      - MotionDetectorHandler
     propagate: False
 
   MP3PlayerMode:

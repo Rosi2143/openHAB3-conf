@@ -10,6 +10,8 @@ inputPath = 'src/docs';
 // please check http://doctoolchain.org/docToolchain/v2.0.x/020_tutorial/030_generateHTML.html#_pdf_style for further details
 // pdfThemeDir = './src/docs/pdfTheme'
 
+System.setProperty("PLANTUML_LIMIT_SIZE", "8192")
+
 inputFiles = [
         [file: 'oh3_overall.adoc',      formats: ['html','pdf']],
 
