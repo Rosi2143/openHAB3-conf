@@ -1,5 +1,4 @@
 """StateMachine for Homematic-IP DoorLock """
-import sys
 import os
 import platform
 
