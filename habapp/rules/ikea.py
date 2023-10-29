@@ -20,20 +20,20 @@ class IkeaZigbeeDevices(HABApp.Rule):
 
         super().__init__()
 
-        parm_file = "ikea_param_file"
+        param_file = "ikea_param_file"
         # read the low bat threshold from the parameter file
         self.min_battery_charge = HABApp.Parameter(
-            parm_file, "min_battery_charge", default_value=20
+            param_file, "min_battery_charge", default_value=20
         )
         # read the motion detectors from the parameter file
         self.motion_detectors = HABApp.DictParameter(
-            parm_file, "MotionDetectors", default_value=None
+            param_file, "MotionDetectors", default_value=None
         )
         # read the lights from the parameter file
-        self.lights = HABApp.DictParameter(parm_file, "Lights", default_value=None)
+        self.lights = HABApp.DictParameter(param_file, "Lights", default_value=None)
         # read the remote controls from the parameter file
         self.remote_controls = HABApp.DictParameter(
-            parm_file, "RemoteControls", default_value=None
+            param_file, "RemoteControls", default_value=None
         )
 
         # map to convert MQTT states to switch states
@@ -69,7 +69,7 @@ class IkeaZigbeeDevices(HABApp.Rule):
             "RemoteControls": {str: str},
             "Lights": {str: str},
         }
-        HABApp.parameters.set_file_validator(parm_file, validator)
+        HABApp.parameters.set_file_validator(param_file, validator)
 
         self.init_light()
 

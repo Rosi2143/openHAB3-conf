@@ -27,17 +27,17 @@ class Zigbee2MqttBridge(HABApp.Rule):
         self.mqtt_base_topic = "zigbee2mqtt/bridge/"
         # MQTT topic for bridge info
         self.mqtt_base_info = self.mqtt_base_topic + "info"
-        parm_file = "ikea_param_file"
+        param_file = "ikea_param_file"
         # array of maps of all MQTT item read from parameter file
         self.mqtt_items = {}
         self.mqtt_items["Bewegungsmelder"] = HABApp.DictParameter(
-            parm_file, "MotionDetectors", default_value=None
+            param_file, "MotionDetectors", default_value=None
         )
         self.mqtt_items["Licht"] = HABApp.DictParameter(
-            parm_file, "Lights", default_value=None
+            param_file, "Lights", default_value=None
         )
         self.mqtt_items["Fernbedienung"] = HABApp.DictParameter(
-            parm_file, "RemoteControls", default_value=None
+            param_file, "RemoteControls", default_value=None
         )
 
         # item definitions
