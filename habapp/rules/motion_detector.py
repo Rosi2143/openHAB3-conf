@@ -90,7 +90,7 @@ class motion_detector(HABApp.Rule):
         timeFormat24h = "%H:%M:%S"
         begin_time = datetime.strptime(begin_time_str, timeFormat24h).time()
         end_time = datetime.strptime(end_time_str, timeFormat24h).time()
-        check_time = datetime.utcnow().time()
+        check_time = datetime.now().time()
         if begin_time < end_time:
             return check_time >= begin_time and check_time <= end_time
         else:  # crosses midnight
