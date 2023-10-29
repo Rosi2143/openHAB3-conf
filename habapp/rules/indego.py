@@ -54,9 +54,11 @@ class Indego(HABApp.Rule):
             event.value,
         )
 
-        self.statusText = str(StringItem.get_item("Bosch_Indego_StatusText"))
+        self.statusText = str(
+            StringItem.get_item("Bosch_Indego_StatusText").get_value()
+        )
 
-        indego_state_machine.set_reported_state(self.statusText.value)
+        indego_state_machine.set_reported_state(self.statusText)
 
 
 Indego()

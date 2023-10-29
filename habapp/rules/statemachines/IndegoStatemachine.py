@@ -89,14 +89,6 @@ class IndegoStatemachine(StateMachine):
         | dock.to(mow)
     )
 
-    tr_mowing = (
-        init.to(mow)
-        | mow.to.itself(internal=True)
-        | mowing_complete.to(mow)
-        | pause.to(mow)
-        | dock.to(mow)
-    )
-
     tr_spotmow = (
         init.to(mow)
         | mow.to.itself(internal=True)
@@ -180,9 +172,9 @@ class IndegoStatemachine(StateMachine):
         self._reported_state = self.STATUS_UNKNOWN
         self._operationState = self.STATUS_UNKNOWN
 
-        self._start_time_mow = datetime.min
+        self._start_time_mow = datetime.now()
         self._mowing_time = timedelta(0)
-        self._start_time_pause = datetime.min
+        self._start_time_pause = datetime.now()
         self._pause_time = timedelta(0)
 
         self._time_state_entered = datetime.now()
@@ -358,15 +350,21 @@ Before   '{event}' in '{state.id}' state."
             self._pause_time = self._pause_time + (
                 datetime.now() - self._start_time_pause
             )
-            self._mowing_time = datetime.now() - self._start_time_mow - self._pause_time
+            self._mowing_time = (
+                datetime.now() - self.get_mow_start_time() - self.get_pause_duration()
+            )
             self._logger.info("###########################################")
             self._logger.info("Mowing complete")
             self._logger.info(
                 "overall time = %s",
-                self.format_time(datetime.now() - self._start_time_mow),
+                self.format_time(datetime.now() - self.get_mow_start_time()),
             )
-            self._logger.info("Mowing time  = %s", self.format_time(self._mowing_time))
-            self._logger.info("Pause time   = %s", self.format_time(self._pause_time))
+            self._logger.info(
+                "Mowing time  = %s", self.format_time(self.get_mow_duration())
+            )
+            self._logger.info(
+                "Pause time   = %s", self.format_time(self.get_pause_duration())
+            )
             self._logger.info("###########################################")
 
             self._start_time_pause = datetime.min
