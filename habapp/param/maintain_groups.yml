@@ -1,0 +1,15 @@
+Groups:
+  LowBattery:
+    GroupName: gBatterieSchwach
+    MemberItemRule:
+      Tag: LowBattery
+  BoostModes:
+    GroupName: gThermostate_BoostMode
+    MemberItemRule:
+      Label: Boost Mode
+  ButtonLong:
+    GroupName: gSchalter_Long
+    MemberItemRule:
+      Label: Schalter(Long)
+      Tag: Setpoint
+      Type: Contact
