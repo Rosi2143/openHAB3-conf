@@ -30,6 +30,7 @@ class maintain_groups(HABApp.Rule):
         groups = HABApp.DictParameter(param_file, "Groups", default_value=None)
         for group in groups.values():
             self.handle_group(group)
+        log.info("maintain groups done")
 
     def handle_group(self, group_description):
         log.info("handling group %s", group_description)
