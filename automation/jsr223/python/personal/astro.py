@@ -24,6 +24,7 @@ def astro_sunrise_start(event):
 
     astro_sunrise_start.log.info("Hue de-activate NightLight")
     events.sendCommand("Hue_Zone_Garten_Betrieb", "OFF")
+    events.sendCommand("IstTag", "ON")
 
 
 @rule(
@@ -59,9 +60,12 @@ def astro_sunset_start(event):
 
     astro_sunset_start.log.info("rule fired because of %s", event.event)
 
-    astro_sunset_start.log.info("Hue activate NightLight")
-    events.sendCommand("Hue_Zone_Garten_Betrieb", "ON")
-    events.sendCommand("Hue_Zone_Garten_Zone", "l7Vupj3gn20HJds")  # Nachtlicht
+    if items["GartenLichtAutomatik"] == "ON":
+        astro_sunset_start.log.info("Hue activate NightLight")
+        events.sendCommand("Hue_Zone_Garten_Betrieb", "ON")
+        events.sendCommand("Hue_Zone_Garten_Zone", "l7Vupj3gn20HJds")  # Nachtlicht
+
+    events.sendCommand("IstTag", "OFF")
 
 
 @rule(
