@@ -1,0 +1,29 @@
+prepositionExtra:
+  preposition1:
+    locations:
+      Küche:
+      Werkstatt:
+      Waschküche:
+      Haustür:
+      Kammer:
+      Einfahrt:
+    string: " in der "
+  preposition2:
+    locations:
+      Finnja:
+      Sara:
+      Mika:
+    string: " von "
+  preposition3:
+    locations:
+      Brunnen:
+    string: " beim "
+prepositionDefaultString: " im "
+uiSemanticsKeys:
+  equipment: ""
+  equipmentItem: ""
+  location: ""
+  preposition: ""
+  icon: ""
+  warn: -30
+  fail: -45

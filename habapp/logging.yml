@@ -160,6 +160,15 @@ handlers:
     formatter: HABApp_format
     level: DEBUG
 
+  UiSemanticsHandler:
+    class: HABApp.config.logging.MidnightRotatingFileHandler
+    filename: "/mnt/usb1/log/habapp/UiSemantics.log" # absolute filename is recommended
+    maxBytes: 10_000_000
+    backupCount: 1
+
+    formatter: HABApp_format
+    level: INFO
+
 loggers:
   HABApp:
     level: INFO
@@ -256,4 +265,10 @@ loggers:
     level: INFO
     handlers:
       - TomatoTimerHandler
+    propagate: False
+
+  UiSemantics:
+    level: DEBUG
+    handlers:
+      - UiSemanticsHandler
     propagate: False
