@@ -348,7 +348,7 @@ Before   '{event}' in '{state.id}' state."
         )
         if source.id == self.STATUS_MOWING_COMPLETE:
             self._pause_time = self._pause_time + (
-                datetime.now() - self._start_time_pause
+                datetime.now() - self.get_pause_start_time()
             )
             self._mowing_time = (
                 datetime.now() - self.get_mow_start_time() - self.get_pause_duration()
@@ -389,7 +389,7 @@ entered {self.STATUS_MOW} - source state was {source.id}"
             source.id == self.STATUS_MOWING_COMPLETE
         ):
             self._pause_time = self._pause_time + (
-                datetime.now() - self._start_time_pause
+                datetime.now() - self.get_pause_start_time()
             )
             self._start_time_pause = datetime.min
             self._logger.info(
@@ -428,3 +428,17 @@ entered {self.STATUS_MOW} - source state was {source.id}"
         """last function in state change queue"""
         self._logger.info(f"{self.get_name()}({str(id(self))}): is in state {state.id}")
         self._time_state_entered = datetime.now()
+
+    def get_action_timer(self):
+        if self.current_state.name.lower() == self.STATUS_DOCK:
+            return self.get_mow_duration(), self.get_pause_duration()
+        else:
+            if self.get_pause_start_time() != datetime.min:
+                pausetime = self.get_pause_duration() + (
+                    datetime.now() - self.get_pause_start_time()
+                )
+            else:
+                pausetime = self.get_pause_duration()
+            mowtime = (datetime.now() - self.get_mow_start_time()) - pausetime
+
+            return mowtime, pausetime

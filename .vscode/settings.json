@@ -15,12 +15,6 @@
         "swiper",
         "thermostate"
     ],
-    //
-    // Python pylint
-    "python.linting.enabled": true,
-    "python.linting.pylintEnabled": true,
-    //
-    // Python Type Hints
     "python.analysis.diagnosticMode": "workspace",
     "python.analysis.stubPath": "./automation/typings",
     "python.autoComplete.extraPaths": [
@@ -29,12 +23,4 @@
     "python.analysis.extraPaths": [
         "./automation/lib/python"
     ],
-    "python.linting.ignorePatterns": [
-        "**/automation/**/python/core/**/*.py",
-        "**/automation/**/python/community/**/*.py"
-    ],
-    "python.formatting.provider": "autopep8",
-    "openhab.useRestApi": false,
-    "python.linting.flake8Enabled": false,
-    "restructuredtext.preview.docutils.disabled": true
 }
