@@ -216,31 +216,28 @@ class create_ui_semantics(HABApp.Rule):
 
             self._uiSemanticsKeys["fail"] = int(self._uiSemanticsKeys["warn"]) * 1.5
 
+            value = f"{self._uiSemanticsKeys['equipment']}{self._uiSemanticsKeys['preposition']}{self._uiSemanticsKeys['location']}"
             if (
                 self.getRelationItem(p_oh_item, UI_NAMESPACE, "equipmentItem")
                 is not None
             ):
                 log.info(
-                    "Item: '%s' UPDATE Metadata in %s: %s%s%s",
+                    "Item: '%s' UPDATE Metadata in %s: '%s'",
                     p_oh_item.name,
                     UI_NAMESPACE,
-                    self._uiSemanticsKeys["equipment"],
-                    self._uiSemanticsKeys["preposition"],
-                    self._uiSemanticsKeys["location"],
+                    value,
                 )
                 self._itemsAdded.append(p_oh_item.name)
-                # MetadataRegistry.update(new Metadata(new MetadataKey(UI_NAMESPACE, oh_item), None, self.uiSemanticsKeys))
+                self.setMetadata(p_oh_item, UI_NAMESPACE, value)
             else:
                 log.info(
-                    "Item: '%s' ADD Metadata in %s: %s%s%s",
+                    "Item: '%s' ADD Metadata in %s: '%s'",
                     p_oh_item.name,
                     UI_NAMESPACE,
-                    self._uiSemanticsKeys["equipment"],
-                    self._uiSemanticsKeys["preposition"],
-                    self._uiSemanticsKeys["location"],
+                    value,
                 )
                 self._itemsAdded.append(p_oh_item.name)
-                # MetadataRegistry.add(new Metadata(new MetadataKey(UI_NAMESPACE, oh_item), None, self.uiSemanticsKeys))
+                self.setMetadata(p_oh_item, UI_NAMESPACE, value)
 
         return None
 
@@ -311,6 +308,58 @@ class create_ui_semantics(HABApp.Rule):
             return p_metaData[config][p_relation]
         else:
             return None
+
+    def setMetadata(self, p_oh_item, p_semantic, p_value):
+        if p_semantic in p_oh_item.metadata.keys():
+            log.debug(
+                "old: %s",
+                yaml.dump(
+                    p_oh_item.metadata[p_semantic]["config"],
+                    default_flow_style=False,
+                    allow_unicode=True,
+                ),
+            )
+        else:
+            log.debug("No metadata for %s", p_semantic)
+        log.debug(
+            "new: %s",
+            yaml.dump(
+                self._uiSemanticsKeys,
+                default_flow_style=False,
+                allow_unicode=True,
+            ),
+        )
+
+        if self.openhab.set_metadata(
+            p_oh_item.name,
+            namespace=p_semantic,
+            value=p_value,
+            config=self._uiSemanticsKeys,
+        ):
+            log.info("Set metadata successfully")
+        else:
+            log.error("Setting metadata failed")
+
+    def removeMetadata(self, p_oh_item, p_semantic):
+        if p_semantic in p_oh_item.metadata.keys():
+            log.debug(
+                "old: %s",
+                yaml.dump(
+                    p_oh_item.metadata[p_semantic]["config"],
+                    default_flow_style=False,
+                    allow_unicode=True,
+                ),
+            )
+        else:
+            log.info("No metadata for %s", p_semantic)
+
+        if self.openhab.remove_metadata(
+            p_oh_item.name,
+            namespace=p_semantic,
+        ):
+            log.info("Removed metadata successfully")
+        else:
+            log.error("Removimging metadata failed")
 
 
 create_ui_semantics()
