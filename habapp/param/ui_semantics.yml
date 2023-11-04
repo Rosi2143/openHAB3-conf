@@ -24,6 +24,5 @@ uiSemanticsKeys:
   equipmentItem: ""
   location: ""
   preposition: ""
-  icon: ""
   warn: -30
   fail: -45

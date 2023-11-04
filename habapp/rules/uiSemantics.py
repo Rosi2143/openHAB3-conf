@@ -24,6 +24,7 @@ class create_ui_semantics(HABApp.Rule):
 
         self._log_indend = 0
         self._itemsAdded = []
+        self._items_not_changed = 0
 
         self.read_parameter("ui_semantics")
 
@@ -109,7 +110,6 @@ class create_ui_semantics(HABApp.Rule):
 
         for new_item in self._itemsAdded:
             log.debug("added: %s", new_item)
-        log.info("Added %d uiSemantics", len(self._itemsAdded))
 
         remove_count = 0
         for item in self.get_items(OpenhabItem):
@@ -123,6 +123,11 @@ class create_ui_semantics(HABApp.Rule):
                     log.info("(%d): remove item %s", remove_count, item.name)
         #                    MetadataRegistry.remove(new MetadataKey(UI_NAMESPACE, item.getUID().getItemName()))
         log.info("Done: Collecting semantics")
+        log.info(
+            "Added %d uiSemantics", len(self._itemsAdded) - self._items_not_changed
+        )
+        log.info("%d items unchanged", self._items_not_changed)
+        log.info("%d items removed", remove_count)
 
     def logItemInfo(self, p_oh_item, p_logMetaData):
         log.debug("found in Registry item: %s", p_oh_item)
@@ -212,7 +217,7 @@ class create_ui_semantics(HABApp.Rule):
             if not found_preposition:
                 self._uiSemanticsKeys["preposition"] = self._prepositionDefaultString
 
-            self._uiSemanticsKeys["icon"] = p_icon
+            # self._uiSemanticsKeys["icon"] = p_icon
 
             self._uiSemanticsKeys["fail"] = int(self._uiSemanticsKeys["warn"]) * 1.5
 
@@ -330,15 +335,18 @@ class create_ui_semantics(HABApp.Rule):
             ),
         )
 
-        if self.openhab.set_metadata(
-            p_oh_item.name,
-            namespace=p_semantic,
-            value=p_value,
-            config=self._uiSemanticsKeys,
-        ):
-            log.info("Set metadata successfully")
+        if p_oh_item.metadata[p_semantic]["config"] == self._uiSemanticsKeys:
+            self._items_not_changed += 1
         else:
-            log.error("Setting metadata failed")
+            if self.openhab.set_metadata(
+                p_oh_item.name,
+                namespace=p_semantic,
+                value=p_value,
+                config=self._uiSemanticsKeys,
+            ):
+                log.info("Set metadata successfully")
+            else:
+                log.error("Setting metadata failed")
 
     def removeMetadata(self, p_oh_item, p_semantic):
         if p_semantic in p_oh_item.metadata.keys():
