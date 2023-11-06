@@ -3,6 +3,11 @@ Groups:
     GroupName: gBatterieSchwach
     MemberItemRule:
       Tag: LowBattery
+    Exception:
+      Mp3Spieler_LowBattery:
+      gHeizungenEsszimmer_LowBattery:
+      gHeizungenSofa_LowBattery:
+      gHeizungenBad_LowBattery:
   BoostModes:
     GroupName: gThermostate_BoostMode
     MemberItemRule:
@@ -13,3 +18,10 @@ Groups:
       Label: Schalter(Long)
       Tag: Setpoint
       Type: Contact
+  Lights:
+    GroupName: gLichter
+    MemberItemRule:
+      in_Name: _State
+      Tag: Light
+      Type: Switch
+
