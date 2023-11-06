@@ -53,4 +53,7 @@ def light_following_frontdoor(event):
         events.sendCommand("LichtHaustuer_State", "ON")
         light_following_frontdoor.log.info("turned lights ON")
     else:
-        light_following_frontdoor.log.info("not dark enough outside")
+        light_following_frontdoor.log.info(
+            "not dark enough outside (%d>=10)",
+            items["BewegungsmelderHaustuer_Illumination"],
+        )
