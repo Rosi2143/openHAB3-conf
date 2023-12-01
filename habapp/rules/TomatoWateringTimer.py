@@ -24,6 +24,9 @@ HUMIDITY_EFFECT_FACTOR = 2
 WIND_EFFECT_FACTOR = 5
 LIGHT_EFFECT_FACTOR = 5
 
+TOMATO_START_MONTH = 4
+TOMATO_END_MOTNH = 10
+
 
 class MyTomatoTimer(HABApp.Rule):
     """check when the tomatoes should get more water
@@ -49,6 +52,7 @@ class MyTomatoTimer(HABApp.Rule):
 
         self.get_plug_thing()
         self.now = ""  # reset now to disable timer_expired workaround
+
         self.tomato_timer = self.run.soon(self.timer_expired)
 
     def thing_status_changed(self, event: ThingStatusInfoChangedEvent):
@@ -295,41 +299,51 @@ class MyTomatoTimer(HABApp.Rule):
         else:
             self.now = now
 
-        dark_outside_state = self.dark_outside_item.get_value()
-        is_dark = self.is_dark_outside(dark_outside_state)
-        if is_dark:
-            logger.info("Start next timer at sun rise")
-            if self.tomato_timer is None:
-                self.tomato_timer = self.run.on_sunrise(self.timer_expired).offset(
-                    timedelta(minutes=30)
-                )
-                logger.info(
-                    "next trigger time: %s",
-                    self.tomato_timer.get_next_run().strftime("%d/%m/%Y %H:%M:%S"),
-                )
-            else:
-                logger.info(
-                    "timer already running --> next trigger time: %s",
-                    self.tomato_timer.get_next_run().strftime("%d/%m/%Y %H:%M:%S"),
-                )
+        current_month = datetime.now().month
+        if (current_month < TOMATO_START_MONTH) or (current_month > TOMATO_END_MOTNH):
+            self.tomato_timer = self.run.on_sunrise(self.timer_expired).offset(
+                timedelta(minutes=30)
+            )
+            logger.info(
+                "no tomato time - next trigger time: %s",
+                self.tomato_timer.get_next_run().strftime("%d/%m/%Y %H:%M:%S"),
+            )
         else:
-            logger.info("Set watering active for %s sec", TIME_FOR_WATERING_MIN)
-            self.activate_watering()
-            duration_next_start = self.get_next_start()
-            if self.tomato_timer is None:
-                self.tomato_timer = self.run.at(
-                    time=timedelta(minutes=duration_next_start),
-                    callback=self.timer_expired,
-                )
-                logger.info(
-                    "next trigger time: %s",
-                    self.tomato_timer.get_next_run().strftime("%d/%m/%Y %H:%M:%S"),
-                )
+            dark_outside_state = self.dark_outside_item.get_value()
+            is_dark = self.is_dark_outside(dark_outside_state)
+            if is_dark:
+                logger.info("Start next timer at sun rise")
+                if self.tomato_timer is None:
+                    self.tomato_timer = self.run.on_sunrise(self.timer_expired).offset(
+                        timedelta(minutes=30)
+                    )
+                    logger.info(
+                        "next trigger time: %s",
+                        self.tomato_timer.get_next_run().strftime("%d/%m/%Y %H:%M:%S"),
+                    )
+                else:
+                    logger.info(
+                        "timer already running --> next trigger time: %s",
+                        self.tomato_timer.get_next_run().strftime("%d/%m/%Y %H:%M:%S"),
+                    )
             else:
-                logger.info(
-                    "timer already running --> next trigger time: %s",
-                    self.tomato_timer.get_next_run().strftime("%d/%m/%Y %H:%M:%S"),
-                )
+                logger.info("Set watering active for %s sec", TIME_FOR_WATERING_MIN)
+                self.activate_watering()
+                duration_next_start = self.get_next_start()
+                if self.tomato_timer is None:
+                    self.tomato_timer = self.run.at(
+                        time=timedelta(minutes=duration_next_start),
+                        callback=self.timer_expired,
+                    )
+                    logger.info(
+                        "next trigger time: %s",
+                        self.tomato_timer.get_next_run().strftime("%d/%m/%Y %H:%M:%S"),
+                    )
+                else:
+                    logger.info(
+                        "timer already running --> next trigger time: %s",
+                        self.tomato_timer.get_next_run().strftime("%d/%m/%Y %H:%M:%S"),
+                    )
 
     def deactivate_watering(self):
         """deactivate the watering"""
