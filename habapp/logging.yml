@@ -46,9 +46,18 @@ handlers:
     formatter: HABApp_format
     level: INFO
 
-  ContactSwitchMapping:
+  ContactSwitchMappingHandler:
     class: HABApp.config.logging.MidnightRotatingFileHandler
     filename: "/mnt/usb1/log/habapp/ContactSwitch.log"
+    maxBytes: 10_000_000
+    backupCount: 3
+
+    formatter: HABApp_format
+    level: INFO
+
+  ChristmasLightsHandler:
+    class: HABApp.config.logging.MidnightRotatingFileHandler
+    filename: "/mnt/usb1/log/habapp/ChristmasLights.log"
     maxBytes: 10_000_000
     backupCount: 3
 
@@ -192,7 +201,13 @@ loggers:
   ContactSwitch:
     level: DEBUG
     handlers:
-      - ContactSwitchMapping
+      - ContactSwitchMappingHandler
+    propagate: False
+
+  ChristmasLights:
+    level: DEBUG
+    handlers:
+      - ChristmasLightsHandler
     propagate: False
 
   DoorLockMode:
