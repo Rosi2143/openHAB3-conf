@@ -14,13 +14,22 @@ from HABApp.core.events import EventFilter
 
 logger = logging.getLogger("ChristmasLights")
 
-THING_UID_PLUG = "hue:0010:ecb5fa2c8738:25"
-DEVICE_NAME_PLUG_STATE = "AussenSteckdose_Betrieb"
+THING_UID_BASE = "hue:0010:ecb5fa2c8738:"
+THING_UID_OUTDOOR_PLUG = f"{THING_UID_BASE}25"
+DEVICE_NAME_OUTDOOR_PLUG_STATE = "AussenSteckdose_Betrieb"
+
+THING_UID_CANDLE_ARCH_PLUG = f"{THING_UID_BASE}19"
+DEVICE_NAME_CANDLE_ARCH_PLUG_STATE = "SteckdoseSchwibbogen_Betrieb"
+
+THING_UID_TREE_IN_CORRIDOR_PLUG = f"{THING_UID_BASE}20"
+DEVICE_NAME_TREE_IN_CORRIDOR_PLUG_STATE = "SteckdoseBaumImFlur_Betrieb"
+
 ITEM_MOTION = "BewegungsmelderEinfahrt_MotionLong"
 
 CHRISTMASLIGHTS_START_MONTH = 12
 CHRISTMASLIGHTS_START_TIME = time(6)
-CHRISTMASLIGHTS_END_TIME = time(11, 59)
+CHRISTMASLIGHTS_NOON_TIME = time(12)
+CHRISTMASLIGHTS_END_TIME = time(23, 59)
 
 
 class ChristmasLights(HABApp.Rule):
@@ -37,7 +46,9 @@ class ChristmasLights(HABApp.Rule):
         dark_outside_state = self.is_dark_outside(self.dark_outside_item.get_value())
         logger.info("is it dark outside? --> %s", dark_outside_state)
 
-        self.christmaslight_active_item = SwitchItem.get_item(DEVICE_NAME_PLUG_STATE)
+        self.christmaslight_active_item = SwitchItem.get_item(
+            DEVICE_NAME_OUTDOOR_PLUG_STATE
+        )
         christmaslight_active_state = self.christmaslight_active_item.get_value()
         logger.info("christmaslight active? --> %s", christmaslight_active_state)
 
@@ -50,7 +61,7 @@ class ChristmasLights(HABApp.Rule):
 
         self.christmaslights_state = christmaslight_active_state == "ON"
 
-        self.get_plug_thing()
+        self.get_plug_things()
 
         self.run.at(5, self.timer_expired)
 
@@ -91,7 +102,10 @@ class ChristmasLights(HABApp.Rule):
                 self.deactivate_lights()
             else:
                 now_time = datetime.now().time()
-                if now_time > CHRISTMASLIGHTS_START_TIME and now_time < time(12):
+                if (
+                    now_time > CHRISTMASLIGHTS_START_TIME
+                    and now_time < CHRISTMASLIGHTS_NOON_TIME
+                ):
                     logger.info("Set christmaslight active till sunrise")
                     christmaslights_timer = self.run.on_sunrise(
                         self.timer_expired
@@ -103,7 +117,10 @@ class ChristmasLights(HABApp.Rule):
                         ),
                     )
                     self.activate_lights()
-                elif now_time < CHRISTMASLIGHTS_END_TIME and now_time > time(12):
+                elif (
+                    now_time < CHRISTMASLIGHTS_END_TIME
+                    and now_time > CHRISTMASLIGHTS_NOON_TIME
+                ):
                     logger.info("Set christmaslight active till midnight")
                     christmaslights_timer = self.run.on_sunrise(
                         self.timer_expired
@@ -164,26 +181,53 @@ class ChristmasLights(HABApp.Rule):
         else:
             logger.info("%s: Details = %s", event.name, event.detail)
 
-    def get_plug_thing(self):
+    def get_plug_things(self):
         try:
-            self.plug_thing = Thing.get_item(THING_UID_PLUG)
-            self.plug_thing.listen_event(
+            self.outdoor_plug_thing = Thing.get_item(THING_UID_OUTDOOR_PLUG)
+            self.outdoor_plug_thing.listen_event(
                 self.thing_status_changed, EventFilter(ThingStatusInfoChangedEvent)
             )
-            logger.info("Thing   = %s", self.plug_thing.label)
-            logger.info("Status  = %s", self.plug_thing.status)
+            logger.info("Thing   = %s", self.outdoor_plug_thing.label)
+            logger.info("Status  = %s", self.outdoor_plug_thing.status)
         except ItemNotFoundException:
-            logger.warning("Thing %s does not exist", DEVICE_NAME_PLUG_STATE)
-            self.plug_thing = None
+            logger.warning("Thing %s does not exist", DEVICE_NAME_OUTDOOR_PLUG_STATE)
+            self.outdoor_plug_thing = None
 
-    def deactivate_lights(self, change_state_request=True):
+        try:
+            self.candlearch_plug_thing = Thing.get_item(THING_UID_CANDLE_ARCH_PLUG)
+            self.candlearch_plug_thing.listen_event(
+                self.thing_status_changed, EventFilter(ThingStatusInfoChangedEvent)
+            )
+            logger.info("Thing   = %s", self.candlearch_plug_thing.label)
+            logger.info("Status  = %s", self.candlearch_plug_thing.status)
+        except ItemNotFoundException:
+            logger.warning("Thing %s does not exist", DEVICE_NAME_OUTDOOR_PLUG_STATE)
+            self.candlearch_plug_thing = None
+
+        try:
+            self.treeincorridor_plug_thing = Thing.get_item(
+                THING_UID_TREE_IN_CORRIDOR_PLUG
+            )
+            self.treeincorridor_plug_thing.listen_event(
+                self.thing_status_changed, EventFilter(ThingStatusInfoChangedEvent)
+            )
+            logger.info("Thing   = %s", self.treeincorridor_plug_thing.label)
+            logger.info("Status  = %s", self.treeincorridor_plug_thing.status)
+        except ItemNotFoundException:
+            logger.warning("Thing %s does not exist", DEVICE_NAME_OUTDOOR_PLUG_STATE)
+            self.treeincorridor_plug_thing = None
+
+    def deactivate_lights(self, change_state_request=True, switch_all=True):
         """deactivate the christmaslight"""
         logger.info("set christmaslight: OFF")
         if change_state_request:
             self.christmaslights_state = False
-        self.openhab.send_command(DEVICE_NAME_PLUG_STATE, "OFF")
+        self.openhab.send_command(DEVICE_NAME_OUTDOOR_PLUG_STATE, "OFF")
+        if switch_all:
+            self.openhab.send_command(DEVICE_NAME_CANDLE_ARCH_PLUG_STATE, "OFF")
+            self.openhab.send_command(DEVICE_NAME_TREE_IN_CORRIDOR_PLUG_STATE, "OFF")
 
-    def activate_lights(self, change_state_request=True):
+    def activate_lights(self, change_state_request=True, switch_all=True):
         """activate the christmaslight for a given time
 
         Args:
@@ -192,7 +236,10 @@ class ChristmasLights(HABApp.Rule):
         logger.info("set christmaslight: ON")
         if change_state_request:
             self.christmaslights_state = True
-        self.openhab.send_command(DEVICE_NAME_PLUG_STATE, "ON")
+        self.openhab.send_command(DEVICE_NAME_OUTDOOR_PLUG_STATE, "ON")
+        if switch_all:
+            self.openhab.send_command(DEVICE_NAME_CANDLE_ARCH_PLUG_STATE, "ON")
+            self.openhab.send_command(DEVICE_NAME_TREE_IN_CORRIDOR_PLUG_STATE, "ON")
 
     def is_dark_outside(self, sun_phase):
         """checks if it is dark outside"""
@@ -214,10 +261,10 @@ class ChristmasLights(HABApp.Rule):
         assert isinstance(event, ItemStateUpdatedEvent)
 
         if str(event.value) == "ON":
-            self.activate_lights(False)
+            self.activate_lights(change_state_request=False, switch_all=False)
         else:
             if not self.christmaslights_state:
-                self.deactivate_lights(False)
+                self.deactivate_lights(change_state_request=False, switch_all=False)
 
 
 # Rules
