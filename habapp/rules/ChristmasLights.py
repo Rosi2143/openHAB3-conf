@@ -43,8 +43,13 @@ class ChristmasLights(HABApp.Rule):
         self.now = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
         logger.info("Started ChristmasLights: %s", self.now)
         self.dark_outside_item = StringItem.get_item("Sonnendaten_Sonnenphase")
-        dark_outside_state = self.is_dark_outside(self.dark_outside_item.get_value())
-        logger.info("is it dark outside? --> %s", dark_outside_state)
+        self.dark_outside_state = self.is_dark_outside(
+            self.dark_outside_item.get_value()
+        )
+        logger.info("is it dark outside? --> %s", self.dark_outside_state)
+        self.dark_outside_item.listen_event(
+            self.sun_state_changed, ItemStateUpdatedEventFilter()
+        )
 
         self.christmaslight_active_item = SwitchItem.get_item(
             DEVICE_NAME_OUTDOOR_PLUG_STATE
@@ -91,14 +96,7 @@ class ChristmasLights(HABApp.Rule):
             dark_outside_state = self.dark_outside_item.get_value()
             is_dark = self.is_dark_outside(dark_outside_state)
             if not is_dark:
-                logger.info("Start next timer 30min before sun set")
-                christmaslights_timer = self.run.on_sunset(self.timer_expired).offset(
-                    timedelta(minutes=-30)
-                )
-                logger.info(
-                    "next trigger time: %s",
-                    christmaslights_timer.get_next_run().strftime("%d/%m/%Y %H:%M:%S"),
-                )
+                logger.info("Start at sun set")
                 self.deactivate_lights()
             else:
                 now_time = datetime.now().time()
@@ -107,24 +105,15 @@ class ChristmasLights(HABApp.Rule):
                     and now_time < CHRISTMASLIGHTS_NOON_TIME
                 ):
                     logger.info("Set christmaslight active till sunrise")
-                    christmaslights_timer = self.run.on_sunrise(
-                        self.timer_expired
-                    ).offset(timedelta(minutes=30))
-                    logger.info(
-                        "next trigger time: %s",
-                        christmaslights_timer.get_next_run().strftime(
-                            "%d/%m/%Y %H:%M:%S"
-                        ),
-                    )
                     self.activate_lights()
                 elif (
-                    now_time < CHRISTMASLIGHTS_END_TIME
-                    and now_time > CHRISTMASLIGHTS_NOON_TIME
+                    now_time > CHRISTMASLIGHTS_NOON_TIME
+                    and now_time < CHRISTMASLIGHTS_END_TIME
                 ):
                     logger.info("Set christmaslight active till midnight")
-                    christmaslights_timer = self.run.on_sunrise(
-                        self.timer_expired
-                    ).offset(timedelta(minutes=30))
+                    christmaslights_timer = self.run.at(
+                        time=CHRISTMASLIGHTS_END_TIME, callback=self.timer_expired
+                    )
                     logger.info(
                         "next trigger time: %s",
                         christmaslights_timer.get_next_run().strftime(
@@ -149,17 +138,11 @@ class ChristmasLights(HABApp.Rule):
                     )
                     self.deactivate_lights()
                 else:
-                    christmaslights_timer = self.run.at(
-                        time=timedelta(minutes=duration_next_start),
-                        callback=self.timer_expired,
+                    logger.error(
+                        "unknown condition: time %s, sunstate %s",
+                        now_time.strftime("%d/%m/%Y %H:%M:%S"),
+                        self.is_dark_outside(self.dark_outside_item.get_value()),
                     )
-                    logger.info(
-                        "next trigger time: %s",
-                        christmaslights_timer.get_next_run().strftime(
-                            "%d/%m/%Y %H:%M:%S"
-                        ),
-                    )
-                    self.activate_lights()
 
     def thing_status_changed(self, event: ThingStatusInfoChangedEvent):
         """handle changes in plug thing status
@@ -260,11 +243,33 @@ class ChristmasLights(HABApp.Rule):
         """checks if it is dark outside"""
         assert isinstance(event, ItemStateUpdatedEvent)
 
-        if str(event.value) == "ON":
-            self.activate_lights(change_state_request=False, switch_all=False)
-        else:
-            if not self.christmaslights_state:
-                self.deactivate_lights(change_state_request=False, switch_all=False)
+        logger.info(
+            "rule fired because of %s %s --> %s",
+            event.name,
+            event.old_status,
+            event.status,
+        )
+
+        if self.is_dark_outside(
+            self.is_dark_outside(self.dark_outside_item.get_value())
+        ):
+            if str(event.value) == "ON":
+                self.activate_lights(change_state_request=False, switch_all=False)
+            else:
+                if not self.christmaslights_state:
+                    self.deactivate_lights(change_state_request=False, switch_all=False)
+
+    def sun_state_changed(self, event):
+        """checks if it is dark outside"""
+        assert isinstance(event, ItemStateUpdatedEvent)
+
+        logger.info(
+            "rule fired because of %s %s --> %s",
+            event.name,
+            event.old_status,
+            event.status,
+        )
+        self.timer_expired()
 
 
 # Rules
