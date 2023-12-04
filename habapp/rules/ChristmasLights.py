@@ -97,7 +97,7 @@ class ChristmasLights(HABApp.Rule):
             is_dark = self.is_dark_outside(dark_outside_state)
             if not is_dark:
                 logger.info("Start at sun set")
-                self.deactivate_lights()
+                self.set_lights(state="OFF")
             else:
                 now_time = datetime.now().time()
                 if (
@@ -105,7 +105,7 @@ class ChristmasLights(HABApp.Rule):
                     and now_time < CHRISTMASLIGHTS_NOON_TIME
                 ):
                     logger.info("Set christmaslight active till sunrise")
-                    self.activate_lights()
+                    self.set_lights(state="ON")
                 elif (
                     now_time > CHRISTMASLIGHTS_NOON_TIME
                     and now_time < CHRISTMASLIGHTS_END_TIME
@@ -120,7 +120,7 @@ class ChristmasLights(HABApp.Rule):
                             "%d/%m/%Y %H:%M:%S"
                         ),
                     )
-                    self.activate_lights()
+                    self.set_lights(state="ON")
                 elif (
                     now_time > CHRISTMASLIGHTS_END_TIME
                     or now_time < CHRISTMASLIGHTS_START_TIME
@@ -136,7 +136,7 @@ class ChristmasLights(HABApp.Rule):
                             "%d/%m/%Y %H:%M:%S"
                         ),
                     )
-                    self.deactivate_lights()
+                    self.set_lights(state="OFF")
                 else:
                     logger.error(
                         "unknown condition: time %s, sunstate %s",
@@ -160,7 +160,7 @@ class ChristmasLights(HABApp.Rule):
             if self.thing_offline_on_request:
                 logger.info("Activate plug now")
                 self.thing_offline_on_request = False
-                self.activate_lights()
+                self.set_lights(state="ON")
         else:
             logger.info("%s: Details = %s", event.name, event.detail)
 
@@ -200,29 +200,15 @@ class ChristmasLights(HABApp.Rule):
             logger.warning("Thing %s does not exist", DEVICE_NAME_OUTDOOR_PLUG_STATE)
             self.treeincorridor_plug_thing = None
 
-    def deactivate_lights(self, change_state_request=True, switch_all=True):
-        """deactivate the christmaslight"""
-        logger.info("set christmaslight: OFF")
+    def set_lights(self, change_state_request=True, switch_all=True, state="ON"):
+        """set the state of the christmaslight"""
+        logger.info("set christmaslight: %s", state)
         if change_state_request:
             self.christmaslights_state = False
-        self.openhab.send_command(DEVICE_NAME_OUTDOOR_PLUG_STATE, "OFF")
+        self.openhab.send_command(DEVICE_NAME_OUTDOOR_PLUG_STATE, state)
         if switch_all:
-            self.openhab.send_command(DEVICE_NAME_CANDLE_ARCH_PLUG_STATE, "OFF")
-            self.openhab.send_command(DEVICE_NAME_TREE_IN_CORRIDOR_PLUG_STATE, "OFF")
-
-    def activate_lights(self, change_state_request=True, switch_all=True):
-        """activate the christmaslight for a given time
-
-        Args:
-            state (datetime): duration for which the pump shall be ON
-        """
-        logger.info("set christmaslight: ON")
-        if change_state_request:
-            self.christmaslights_state = True
-        self.openhab.send_command(DEVICE_NAME_OUTDOOR_PLUG_STATE, "ON")
-        if switch_all:
-            self.openhab.send_command(DEVICE_NAME_CANDLE_ARCH_PLUG_STATE, "ON")
-            self.openhab.send_command(DEVICE_NAME_TREE_IN_CORRIDOR_PLUG_STATE, "ON")
+            self.openhab.send_command(DEVICE_NAME_CANDLE_ARCH_PLUG_STATE, state)
+            self.openhab.send_command(DEVICE_NAME_TREE_IN_CORRIDOR_PLUG_STATE, state)
 
     def is_dark_outside(self, sun_phase):
         """checks if it is dark outside"""
@@ -254,10 +240,14 @@ class ChristmasLights(HABApp.Rule):
             self.is_dark_outside(self.dark_outside_item.get_value())
         ):
             if str(event.value) == "ON":
-                self.activate_lights(change_state_request=False, switch_all=False)
+                self.set_lights(
+                    change_state_request=False, switch_all=False, state="ON"
+                )
             else:
                 if not self.christmaslights_state:
-                    self.deactivate_lights(change_state_request=False, switch_all=False)
+                    self.set_lights(
+                        change_state_request=False, switch_all=False, state="OFF"
+                    )
 
     def sun_state_changed(self, event):
         """checks if it is dark outside"""
