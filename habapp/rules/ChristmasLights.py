@@ -29,7 +29,7 @@ ITEM_MOTION = "BewegungsmelderEinfahrt_MotionLong"
 CHRISTMASLIGHTS_START_MONTH = 12
 CHRISTMASLIGHTS_START_TIME = time(6)
 CHRISTMASLIGHTS_NOON_TIME = time(12)
-CHRISTMASLIGHTS_END_TIME = time(23, 59)
+CHRISTMASLIGHTS_END_TIME = time(23)
 
 
 class ChristmasLights(HABApp.Rule):
@@ -125,7 +125,7 @@ class ChristmasLights(HABApp.Rule):
                     now_time > CHRISTMASLIGHTS_END_TIME
                     or now_time < CHRISTMASLIGHTS_START_TIME
                 ):
-                    logger.info("Set christmaslight inactive till start-time")
+                    logger.info("Set christmaslight inactive till start-time tomorrow")
                     christmaslights_timer = self.run.at(
                         time=CHRISTMASLIGHTS_START_TIME,
                         callback=self.timer_expired,
@@ -254,9 +254,8 @@ class ChristmasLights(HABApp.Rule):
         assert isinstance(event, ItemStateUpdatedEvent)
 
         logger.info(
-            "rule fired because of %s %s --> %s",
+            "rule fired because of %s --> %s",
             event.name,
-            event.old_status,
             event.status,
         )
         self.timer_expired()
