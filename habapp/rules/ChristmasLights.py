@@ -7,8 +7,8 @@ from HABApp.openhab.items import StringItem, SwitchItem, Thing
 from HABApp.openhab.definitions import ThingStatusEnum
 from HABApp.openhab.events import (
     ThingStatusInfoChangedEvent,
-    ItemStateUpdatedEvent,
-    ItemStateUpdatedEventFilter,
+    ItemStateChangedEvent,
+    ItemStateChangedEventFilter,
 )
 from HABApp.core.events import EventFilter
 
@@ -48,7 +48,7 @@ class ChristmasLights(HABApp.Rule):
         )
         logger.info("is it dark outside? --> %s", self.dark_outside_state)
         self.dark_outside_item.listen_event(
-            self.sun_state_changed, ItemStateUpdatedEventFilter()
+            self.sun_state_changed, ItemStateChangedEventFilter()
         )
 
         self.christmaslight_active_item = SwitchItem.get_item(
@@ -61,7 +61,7 @@ class ChristmasLights(HABApp.Rule):
         motion_detect_state = self.motiondetector_active_item.get_value()
         logger.info("motion detected? --> %s", motion_detect_state)
         self.motiondetector_active_item.listen_event(
-            self.motion_changed, ItemStateUpdatedEventFilter()
+            self.motion_changed, ItemStateChangedEventFilter()
         )
 
         self.christmaslights_state = christmaslight_active_state == "ON"
@@ -218,6 +218,7 @@ class ChristmasLights(HABApp.Rule):
             | (sun_phase == "NIGHT")
             | (sun_phase == "ASTRO_DAWN")
             | (sun_phase == "NAUTIC_DAWN")
+            | (sun_phase == "CIVIL_DAWN")
         ):
             logger.info("It's %s and dark", sun_phase)
             return True
@@ -227,18 +228,15 @@ class ChristmasLights(HABApp.Rule):
 
     def motion_changed(self, event):
         """checks if it is dark outside"""
-        assert isinstance(event, ItemStateUpdatedEvent)
+        assert isinstance(event, ItemStateChangedEvent)
 
         logger.info(
-            "rule fired because of %s %s --> %s",
+            "rule fired because of %s --> %s",
             event.name,
-            event.old_status,
-            event.status,
+            event.value,
         )
 
-        if self.is_dark_outside(
-            self.is_dark_outside(self.dark_outside_item.get_value())
-        ):
+        if self.is_dark_outside(self.dark_outside_item.get_value()):
             if str(event.value) == "ON":
                 self.set_lights(
                     change_state_request=False, switch_all=False, state="ON"
@@ -251,12 +249,12 @@ class ChristmasLights(HABApp.Rule):
 
     def sun_state_changed(self, event):
         """checks if it is dark outside"""
-        assert isinstance(event, ItemStateUpdatedEvent)
+        assert isinstance(event, ItemStateChangedEvent)
 
         logger.info(
             "rule fired because of %s --> %s",
             event.name,
-            event.status,
+            event.value,
         )
         self.timer_expired()
 
