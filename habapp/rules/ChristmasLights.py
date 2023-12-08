@@ -14,7 +14,7 @@ from HABApp.core.events import EventFilter
 
 logger = logging.getLogger("ChristmasLights")
 
-THING_UID_BASE = "hue:0010:ecb5fa2c8738:"
+THING_UID_BASE = "hue:device:ecb5fafffe2c8738:"
 THING_UID_OUTDOOR_PLUG = f"{THING_UID_BASE}25"
 DEVICE_NAME_OUTDOOR_PLUG_STATE = "AussenSteckdose_Betrieb"
 
@@ -213,7 +213,9 @@ class ChristmasLights(HABApp.Rule):
     def is_dark_outside(self, sun_phase):
         """checks if it is dark outside"""
         if (
-            (sun_phase == "NAUTIC_DUSK")
+            (sun_phase == "SUN_SET")
+            | (sun_phase == "CIVIL_DUSK")
+            | (sun_phase == "NAUTIC_DUSK")
             | (sun_phase == "ASTRO_DUSK")
             | (sun_phase == "NIGHT")
             | (sun_phase == "ASTRO_DAWN")
