@@ -204,8 +204,8 @@ class ChristmasLights(HABApp.Rule):
         """set the state of the christmaslight"""
         logger.info("set christmaslight: %s", state)
         if change_state_request:
-            self.christmaslights_state = False
-        self.openhab.send_command(DEVICE_NAME_OUTDOOR_PLUG_STATE, state)
+            self.openhab.send_command(DEVICE_NAME_OUTDOOR_PLUG_STATE, state)
+        self.christmaslights_state = (state == "ON")
         if switch_all:
             self.openhab.send_command(DEVICE_NAME_CANDLE_ARCH_PLUG_STATE, state)
             self.openhab.send_command(DEVICE_NAME_TREE_IN_CORRIDOR_PLUG_STATE, state)
