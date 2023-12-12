@@ -8,6 +8,7 @@ Groups:
       gHeizungenEsszimmer_LowBattery:
       gHeizungenSofa_LowBattery:
       gHeizungenBad_LowBattery:
+      RaspiMaticGatewayExtras_Batteriestatus:
   BoostModes:
     GroupName: gThermostate_BoostMode
     MemberItemRule:
