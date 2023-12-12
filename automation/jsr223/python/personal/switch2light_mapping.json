@@ -85,7 +85,6 @@
         "SchalterFlurObergeschossBad": "LichtFlurObergeschoss",
         "SchalterBadTuer": "LichtBadDecke",
         "SchalterBadSpiegel": "LichtBadSpiegel",
-        "TuerKammer": "LichtKammer",
         "SchalterDachboden": "LichtDachboden",
         "Tinkerforge_TestIn_OpenState": "Tinkerforge_TestOut"
     }

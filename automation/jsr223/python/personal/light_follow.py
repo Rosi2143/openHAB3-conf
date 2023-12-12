@@ -44,7 +44,7 @@ def generic_light_following(event):
 )
 @when("Item TuerHaustuer_StateContact changed to OPEN")
 def light_following_frontdoor(event):
-    """make all office lights follow the main light"""
+    """turn frontdoor light ON when door opens"""
 
     light_following_frontdoor.log.info("rule fired because of %s", event.itemName)
 
@@ -58,3 +58,20 @@ def light_following_frontdoor(event):
             "not dark enough outside (%d>=10)",
             outside_light,
         )
+
+
+@rule(
+    "LightFollow: UpperFloor Storage",
+    description="turn lights on/off when Frontdoor opens/closes",
+    tags=["itemchange", "light follow", "storage"],
+)
+@when("Item TuerKammer_OpenState changed")
+def light_following_upper_storage(event):
+    """make all office lights follow the main light"""
+
+    light_following_upper_storage.log.info("rule fired because of %s", event.itemName)
+
+    if str(event.itemState) == "OPEN":
+        events.sendCommand("LichtKammer_State", "ON")
+    else:
+        events.sendCommand("LichtKammer_State", "OFF")
