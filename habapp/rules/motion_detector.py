@@ -4,11 +4,11 @@
 # minimum version python-statemachine = 1.0.3
 import logging  # required for extended logging
 
-from datetime import datetime, time
+from datetime import datetime
 
 import HABApp
 from HABApp.core.events import ValueChangeEvent, ValueChangeEventFilter
-from HABApp.openhab.items import GroupItem, SwitchItem
+from HABApp.openhab.items import GroupItem
 
 log = logging.getLogger("MotionDetector")
 
