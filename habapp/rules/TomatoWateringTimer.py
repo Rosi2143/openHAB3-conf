@@ -12,7 +12,7 @@ from HABApp.core.events import EventFilter
 logger = logging.getLogger("TomatoTimer")
 
 TIME_FOR_WATERING_MIN = 2
-THING_UID_PLUG = "hue:0010:ecb5fa2c8738:25"
+THING_UID_PLUG = "hue:device:ecb5fafffe2c8738:25"
 DEVICE_NAME_PLUG_STATE = "AussenSteckdose_Betrieb"
 INITIAL_DELAY = 160
 
