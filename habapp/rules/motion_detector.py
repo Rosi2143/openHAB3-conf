@@ -41,7 +41,8 @@ class motion_detector(HABApp.Rule):
 
         light_item_name = "Licht" + str(event.name).replace(
             "Bewegungsmelder", ""
-        ).replace("_MotionState", "_State")
+        ).replace("_MotionState", "_State").replace("_Motion", "_State")
+
         if light_item_name in light_item_name_map:
             light_item_name = light_item_name_map[light_item_name]
 
