@@ -27,6 +27,7 @@ DEVICE_NAME_TREE_IN_CORRIDOR_PLUG_STATE = "SteckdoseBaumImFlur_Betrieb"
 ITEM_MOTION = "BewegungsmelderEinfahrt_MotionLong"
 
 CHRISTMASLIGHTS_START_MONTH = 12
+CHRISTMASLIGHTS_END_MONTH = 1
 CHRISTMASLIGHTS_START_TIME = time(6)
 CHRISTMASLIGHTS_NOON_TIME = time(12)
 CHRISTMASLIGHTS_END_TIME = time(23)
@@ -84,7 +85,9 @@ class ChristmasLights(HABApp.Rule):
             self.now = now
 
         current_month = datetime.now().month
-        if current_month < CHRISTMASLIGHTS_START_MONTH:
+        if (current_month < CHRISTMASLIGHTS_START_MONTH) and (
+            current_month > CHRISTMASLIGHTS_END_MONTH
+        ):
             christmaslights_timer = self.run.on_sunrise(self.timer_expired).offset(
                 timedelta(minutes=30)
             )
@@ -205,7 +208,7 @@ class ChristmasLights(HABApp.Rule):
         logger.info("set christmaslight: %s", state)
         if change_state_request:
             self.openhab.send_command(DEVICE_NAME_OUTDOOR_PLUG_STATE, state)
-        self.christmaslights_state = (state == "ON")
+        self.christmaslights_state = state == "ON"
         if switch_all:
             self.openhab.send_command(DEVICE_NAME_CANDLE_ARCH_PLUG_STATE, state)
             self.openhab.send_command(DEVICE_NAME_TREE_IN_CORRIDOR_PLUG_STATE, state)
