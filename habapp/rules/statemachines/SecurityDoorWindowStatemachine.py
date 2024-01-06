@@ -29,8 +29,9 @@ def get_state_machine_graph(state_machine):
     imagepath = os.path.join(scriptpath, "images")
     if not os.path.exists(imagepath):
         os.makedirs(imagepath)
-    graph().write_png(os.path.join(imagepath,
-                                   state_machine.get_name() + "_door_window_color_sm.png"))
+    graph().write_png(
+        os.path.join(imagepath, state_machine.get_name() + "_door_window_color_sm.png")
+    )
 
 
 def get_internal_state_machine_state(state_machine):
@@ -44,8 +45,7 @@ def get_internal_state_machine_state(state_machine):
     info += "\n   state            = " + str(state_machine.get_state_name())
     info += "\n   _bell_rang       = " + str(state_machine.get_bell_rang())
     info += "\n   _lock_error      = " + str(state_machine.get_lock_error())
-    info += "\n   _outer_door_open = " + \
-        str(state_machine.get_outer_door_open())
+    info += "\n   _outer_door_open = " + str(state_machine.get_outer_door_open())
     info += "\n   _timeout_state   = " + str(state_machine.get_timeout_state())
     info += "\n   _timeout_sec     = " + str(state_machine.get_timeout_sec())
     info += "\n   _window_open     = " + str(state_machine.get_window_open())
@@ -64,70 +64,75 @@ class SecurityDoorWindowStatemachine(StateMachine):
     st_yellow = State("yellow")
 
     # Transitions
-    tr_bell_rang = (st_black.to(st_yellow, cond="cond_bell_rang") |
-                    st_blue.to(st_yellow, cond="cond_bell_rang") |
-                    st_blue.to.itself() |
-                    st_green.to(st_yellow, cond="cond_bell_rang") |
-                    st_green.to.itself() |
-                    st_purple.to(st_yellow, cond="cond_bell_rang") |
-                    st_purple.to.itself() |
-                    st_red.to.itself() |
-                    st_yellow.to.itself(cond="cond_bell_rang") |
-                    st_yellow.to(st_purple, cond="cond_outer_door_open") |
-                    st_yellow.to(st_blue, cond="cond_window_open") |
-                    st_yellow.to(st_green) |
-                    st_black.to.itself()
-                    )
+    tr_bell_rang = (
+        st_black.to(st_yellow, cond="cond_bell_rang")
+        | st_blue.to(st_yellow, cond="cond_bell_rang")
+        | st_blue.to.itself()
+        | st_green.to(st_yellow, cond="cond_bell_rang")
+        | st_green.to.itself()
+        | st_purple.to(st_yellow, cond="cond_bell_rang")
+        | st_purple.to.itself()
+        | st_red.to.itself()
+        | st_yellow.to.itself(cond="cond_bell_rang")
+        | st_yellow.to(st_purple, cond="cond_outer_door_open")
+        | st_yellow.to(st_blue, cond="cond_window_open")
+        | st_yellow.to(st_green)
+        | st_black.to.itself()
+    )
 
-    tr_lock_error = (st_black.to(st_red, cond="cond_lock_error") |
-                     st_blue.to(st_red, cond="cond_lock_error") |
-                     st_blue.to.itself() |
-                     st_green.to(st_red, cond="cond_lock_error") |
-                     st_green.to.itself() |
-                     st_purple.to(st_red, cond="cond_lock_error") |
-                     st_purple.to.itself() |
-                     st_red.to(st_red, cond="cond_lock_error") |
-                     st_red.to(st_yellow, cond="cond_bell_rang") |
-                     st_red.to(st_purple, cond="cond_outer_door_open") |
-                     st_red.to(st_blue, cond="cond_window_open") |
-                     st_red.to(st_green) |
-                     st_red.to.itself() |
-                     st_yellow.to(st_red, cond="cond_lock_error") |
-                     st_yellow.to.itself() |
-                     st_black.to.itself()
-                     )
+    tr_lock_error = (
+        st_black.to(st_red, cond="cond_lock_error")
+        | st_blue.to(st_red, cond="cond_lock_error")
+        | st_blue.to.itself()
+        | st_green.to(st_red, cond="cond_lock_error")
+        | st_green.to.itself()
+        | st_purple.to(st_red, cond="cond_lock_error")
+        | st_purple.to.itself()
+        | st_red.to(st_red, cond="cond_lock_error")
+        | st_red.to(st_yellow, cond="cond_bell_rang")
+        | st_red.to(st_purple, cond="cond_outer_door_open")
+        | st_red.to(st_blue, cond="cond_window_open")
+        | st_red.to(st_green)
+        | st_red.to.itself()
+        | st_yellow.to(st_red, cond="cond_lock_error")
+        | st_yellow.to.itself()
+        | st_black.to.itself()
+    )
 
-    tr_outer_door_open = (st_black.to(st_purple, cond="cond_outer_door_open") |
-                          st_blue.to(st_purple, cond="cond_outer_door_open") |
-                          st_green.to(st_purple, cond="cond_outer_door_open") |
-                          st_purple.to.itself(cond="cond_outer_door_open") |
-                          st_red.to.itself() |
-                          st_yellow.to.itself() |
-                          st_purple.to(st_blue, cond="cond_window_open") |
-                          st_purple.to(st_green) |
-                          st_black.to.itself()
-                          )
+    tr_outer_door_open = (
+        st_black.to(st_purple, cond="cond_outer_door_open")
+        | st_blue.to(st_purple, cond="cond_outer_door_open")
+        | st_green.to(st_purple, cond="cond_outer_door_open")
+        | st_purple.to.itself(cond="cond_outer_door_open")
+        | st_red.to.itself()
+        | st_yellow.to.itself()
+        | st_purple.to(st_blue, cond="cond_window_open")
+        | st_purple.to(st_green)
+        | st_black.to.itself()
+    )
 
-    tr_window_open = (st_black.to(st_blue, cond="cond_window_open") |
-                      st_blue.to(st_blue, cond="cond_window_open") |
-                      st_green.to(st_blue, cond="cond_window_open") |
-                      st_purple.to.itself() |
-                      st_red.to.itself() |
-                      st_yellow.to.itself() |
-                      st_blue.to(st_green) |
-                      st_black.to.itself()
-                      )
+    tr_window_open = (
+        st_black.to(st_blue, cond="cond_window_open")
+        | st_blue.to(st_blue, cond="cond_window_open")
+        | st_green.to(st_blue, cond="cond_window_open")
+        | st_purple.to.itself()
+        | st_red.to.itself()
+        | st_yellow.to.itself()
+        | st_blue.to(st_green)
+        | st_black.to.itself()
+    )
 
-    tr_timeout_state = (st_black.to.itself() |
-                        st_blue.to.itself(cond="cond_window_open") |
-                        st_blue.to(st_black) |
-                        st_green.to(st_black) |
-                        st_purple.to.itself() |
-                        st_red.to.itself() |
-                        st_yellow.to(st_purple, cond="cond_outer_door_open") |
-                        st_yellow.to(st_blue, cond="cond_window_open") |
-                        st_yellow.to(st_green)
-                        )
+    tr_timeout_state = (
+        st_black.to.itself()
+        | st_blue.to(st_black)
+        | st_green.to(st_black)
+        | st_purple.to.itself(cond="cond_outer_door_open")
+        | st_purple.to.itself()
+        | st_red.to.itself()
+        | st_yellow.to(st_purple, cond="cond_outer_door_open")
+        | st_yellow.to(st_blue, cond="cond_window_open")
+        | st_yellow.to(st_green)
+    )
 
     def __init__(self, name="unnamed", logger=None):
         # variables
@@ -143,8 +148,8 @@ class SecurityDoorWindowStatemachine(StateMachine):
 
         self._light_level = 0
 
-#        for name, value in os.environ.items():
-#            self._logger.debug("{0}: {1}".format(name, value))
+        #        for name, value in os.environ.items():
+        #            self._logger.debug("{0}: {1}".format(name, value))
 
         super(SecurityDoorWindowStatemachine, self).__init__()
 
@@ -221,8 +226,7 @@ class SecurityDoorWindowStatemachine(StateMachine):
             state (bool): state of bell_rang
         """
         self._bell_rang = state
-        self._logger.info(
-            self.get_name() + ": - bell rang is: " + str(self._bell_rang))
+        self._logger.info(self.get_name() + ": - bell rang is: " + str(self._bell_rang))
 
     def set_lock_error(self, state):
         """set internal state of lock_error
@@ -231,7 +235,8 @@ class SecurityDoorWindowStatemachine(StateMachine):
         """
         self._lock_error = state
         self._logger.info(
-            self.get_name() + ": - lock error is: " + str(self._lock_error))
+            self.get_name() + ": - lock error is: " + str(self._lock_error)
+        )
 
     def set_outer_door_open(self, state):
         """set internal state of outer_door_open
@@ -239,8 +244,9 @@ class SecurityDoorWindowStatemachine(StateMachine):
             state (bool): state of outer_door_open
         """
         self._outer_door_open = state
-        self._logger.info(self.get_name() +
-                          ": - outer door open is: " + str(self._outer_door_open))
+        self._logger.info(
+            self.get_name() + ": - outer door open is: " + str(self._outer_door_open)
+        )
 
     def set_timeout_state(self, state):
         """set internal state of timeout
@@ -248,8 +254,9 @@ class SecurityDoorWindowStatemachine(StateMachine):
             state (bool): state of timeout
         """
         self._timeout_state = state
-        self._logger.info(self.get_name() +
-                          ": - timeout is: " + str(self._timeout_state))
+        self._logger.info(
+            self.get_name() + ": - timeout is: " + str(self._timeout_state)
+        )
 
     def set_window_open(self, state):
         """set internal state of light
@@ -257,8 +264,9 @@ class SecurityDoorWindowStatemachine(StateMachine):
             state (bool): state of light
         """
         self._window_open = state
-        self._logger.info(self.get_name() +
-                          ": - window open is: " + str(self._window_open))
+        self._logger.info(
+            self.get_name() + ": - window open is: " + str(self._window_open)
+        )
 
     # Conditions
     def cond_bell_rang(self):
@@ -266,8 +274,9 @@ class SecurityDoorWindowStatemachine(StateMachine):
         Returns:
             boolean: True/False
         """
-        self._logger.debug(self.get_name() +
-                           ": bell_rang = '{}'.".format(str(self._bell_rang)))
+        self._logger.debug(
+            self.get_name() + ": bell_rang = '{}'.".format(str(self._bell_rang))
+        )
         return self._bell_rang
 
     def cond_outer_door_open(self):
@@ -276,7 +285,9 @@ class SecurityDoorWindowStatemachine(StateMachine):
             boolean: True/False
         """
         self._logger.debug(
-            self.get_name() + ": outer_door_open = '{}'.".format(str(self._outer_door_open)))
+            self.get_name()
+            + ": outer_door_open = '{}'.".format(str(self._outer_door_open))
+        )
         return self._outer_door_open
 
     def cond_lock_error(self):
@@ -286,7 +297,8 @@ class SecurityDoorWindowStatemachine(StateMachine):
         """
 
         self._logger.debug(
-            self.get_name() + ": lock_error = '{}'.".format(str(self._lock_error)))
+            self.get_name() + ": lock_error = '{}'.".format(str(self._lock_error))
+        )
 
         return self._lock_error
 
@@ -295,38 +307,57 @@ class SecurityDoorWindowStatemachine(StateMachine):
         Returns:
             boolean: True/False
         """
-        self._logger.debug(self.get_name() + ": light = '" +
-                           str(self._window_open) + "'.")
+        self._logger.debug(
+            self.get_name() + ": light = '" + str(self._window_open) + "'."
+        )
         return self._window_open
 
     # see https://python-statemachine.readthedocs.io/en/latest/actions.html#ordering
 
     def before_transition(self, event, state):
-        """events received for any state """
-        self._logger.debug(self.get_name() + "(" + str(id(self)) +
-                           "): before_transition   '{}' in '{}' state.".format(event, state.id))
+        """events received for any state"""
+        self._logger.debug(
+            self.get_name()
+            + "("
+            + str(id(self))
+            + "): before_transition   '{}' in '{}' state.".format(event, state.id)
+        )
         self._timeout_sec = 0
 
     def on_enter_state(self, event, state):
-        """entry function for any state """
-        self._logger.debug(self.get_name() + "(" + str(id(self)) +
-                           "): on_enter_state '{}' state triggered by '{}' event.".format(state.id, event))
+        """entry function for any state"""
+        self._logger.debug(
+            self.get_name()
+            + "("
+            + str(id(self))
+            + "): on_enter_state '{}' state triggered by '{}' event.".format(
+                state.id, event
+            )
+        )
 
     def after_transition(self, event, state):
-        """last function in state change queue """
-        self._logger.debug(self.get_name() + "(" + str(id(self)) +
-                           "): after_transition is in state {}.".format(state.id))
+        """last function in state change queue"""
+        self._logger.debug(
+            self.get_name()
+            + "("
+            + str(id(self))
+            + "): after_transition is in state {}.".format(state.id)
+        )
 
     def on_enter_st_green(self, source, target):
         """entry action for state st_green"""
         self._logger.debug(
-            self.get_name() + ": entered state {} -- from state {}.".format(target.id, source.id))
+            self.get_name()
+            + ": entered state {} -- from state {}.".format(target.id, source.id)
+        )
         self._timeout_sec = 10
 
     def on_enter_st_blue(self, source, target):
         """entry action for state st_blue"""
         self._logger.debug(
-            self.get_name() + ": entered state {} -- from state {}.".format(target.id, source.id))
+            self.get_name()
+            + ": entered state {} -- from state {}.".format(target.id, source.id)
+        )
         self._timeout_sec = 20
 
     def on_enter_st_black(self, source, target):
@@ -334,17 +365,17 @@ class SecurityDoorWindowStatemachine(StateMachine):
         if source != target:
             self._light_level = 0
             self._logger.debug(
-                self.get_name() + ": set light level to %d", self._light_level)
+                self.get_name() + ": set light level to %d", self._light_level
+            )
         else:
-            self._logger.debug(
-                self.get_name() + ": internal transition")
+            self._logger.debug(self.get_name() + ": internal transition")
 
     def on_exit_st_black(self, source, target):
         """entry action for state st_black"""
         if source != target:
             self._light_level = LIGHT_LEVEL
             self._logger.debug(
-                self.get_name() + ": set light level to %d", self._light_level)
+                self.get_name() + ": set light level to %d", self._light_level
+            )
         else:
-            self._logger.debug(
-                self.get_name() + ": internal transition")
+            self._logger.debug(self.get_name() + ": internal transition")
