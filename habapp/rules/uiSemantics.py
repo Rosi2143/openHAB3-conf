@@ -335,7 +335,9 @@ class create_ui_semantics(HABApp.Rule):
             ),
         )
 
-        if p_oh_item.metadata[p_semantic]["config"] == self._uiSemanticsKeys:
+        if (p_semantic in p_oh_item.metadata.keys()) and (
+            p_oh_item.metadata[p_semantic]["config"] == self._uiSemanticsKeys
+        ):
             self._items_not_changed += 1
         else:
             if self.openhab.set_metadata(
