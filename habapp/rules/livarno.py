@@ -59,6 +59,11 @@ class LivarnoZigbeeDevices(HABApp.Rule):
                 self.mqtt_outdoor_spotlight_updated,
                 ValueUpdateEventFilter(),
             )
+            self.listen_event(
+                mqtt_outdoor_spotlight_topic + "/availability",
+                self.mqtt_outdoor_spotlight_availability_updated,
+                ValueUpdateEventFilter(),
+            )
             logger.info("added listener for %s", mqtt_outdoor_spotlight_topic)
         logger.info(" -- mqtt listener for spotlights done")
 
@@ -69,6 +74,11 @@ class LivarnoZigbeeDevices(HABApp.Rule):
             self.listen_event(
                 mqtt_outdoor_plug_topic,
                 self.outdoor_plug_updated,
+                ValueUpdateEventFilter(),
+            )
+            self.listen_event(
+                mqtt_outdoor_plug_topic + "/availability",
+                self.outdoor_plug_availability_updated,
                 ValueUpdateEventFilter(),
             )
             logger.info("added listener for %s", mqtt_outdoor_plug_topic)
@@ -522,10 +532,10 @@ class LivarnoZigbeeDevices(HABApp.Rule):
                 + "_State"
             )
             if self.openhab.item_exists(state_item_name):
-                switch_item_state = SwitchItem.get_item(state_item_name)
+                number_item_state = SwitchItem.get_item(state_item_name)
                 new_value = str(event.value["state"])
-                if self.oh_switch_item_changed(switch_item_state, new_value):
-                    switch_item_state.oh_send_command(new_value)
+                if self.oh_switch_item_changed(number_item_state, new_value):
+                    number_item_state.oh_send_command(new_value)
                 logger.info("state     : %s", new_value)
             else:
                 logger.error("item %s does not exist", state_item_name)
@@ -604,6 +614,46 @@ class LivarnoZigbeeDevices(HABApp.Rule):
                     logger.info("update    : %s", new_value)
                 else:
                     logger.error("item %s does not exist", update_item_name)
+        link_quality = 100
+        if "linkquality" in event.value:
+            link_quality = int(event.value["linkquality"])
+            state_item_name = (
+                OUTDOOR_SPOTLIGHT_NAME_PREFIX
+                + self.extract_oh_item_name(event.name)
+                + "_LinkQuality"
+            )
+            if self.openhab.item_exists(state_item_name):
+                number_item_state = NumberItem.get_item(state_item_name)
+                if self.oh_number_item_changed(number_item_state, link_quality):
+                    number_item_state.oh_send_command(link_quality)
+                logger.info("state     : %s", link_quality)
+            else:
+                logger.error("item %s does not exist", state_item_name)
+
+    def mqtt_outdoor_spotlight_availability_updated(self, event: ValueUpdateEvent):
+        """handle changes in the mqtt availability topic of outdoor_spotlight elements"""
+
+        assert isinstance(event, ValueUpdateEvent), type(event)
+        logger.info(
+            "%s: mqtt topic %s updated to %s",
+            self.mqtt_outdoor_spotlight_updated.__name__,
+            event.name,
+            str(event.value),
+        )
+
+        online_item_name = (
+            OUTDOOR_PLUG_NAME_PREFIX + self.extract_oh_item_name(event.name) + "_Online"
+        )
+        if self.openhab.item_exists(online_item_name):
+            switch_item_state = SwitchItem.get_item(online_item_name)
+            new_value = "ON"
+            if "Offline" == str(event.value):
+                new_value = "OFF"
+            if self.oh_switch_item_changed(switch_item_state, new_value):
+                switch_item_state.oh_send_command(new_value)
+            logger.info("state     : %s", new_value)
+        else:
+            logger.error("item %s does not exist", online_item_name)
 
     ###############################################################################
     # Outdoor plugs
@@ -648,45 +698,61 @@ class LivarnoZigbeeDevices(HABApp.Rule):
                 + "_State"
             )
             if self.openhab.item_exists(state_item_name):
-                switch_item_state = SwitchItem.get_item(state_item_name)
+                number_item_state = SwitchItem.get_item(state_item_name)
                 new_value = str(event.value["state"])
-                if self.oh_switch_item_changed(switch_item_state, new_value):
-                    switch_item_state.oh_send_command(new_value)
+                if self.oh_switch_item_changed(number_item_state, new_value):
+                    number_item_state.oh_send_command(new_value)
                 logger.info("state     : %s", new_value)
             else:
                 logger.error("item %s does not exist", state_item_name)
 
         link_quality = 100
         if "linkquality" in event.value:
-            link_quality = event.value["linkquality"]
-
-        update_available = False
-        if "update" in event.value:
-            if "available" == event.value["update"]["state"]:
-                update_available = True
+            link_quality = int(event.value["linkquality"])
+            state_item_name = (
+                OUTDOOR_PLUG_NAME_PREFIX
+                + self.extract_oh_item_name(event.name)
+                + "_LinkQuality"
+            )
+            if self.openhab.item_exists(state_item_name):
+                number_item_state = NumberItem.get_item(state_item_name)
+                if self.oh_number_item_changed(number_item_state, link_quality):
+                    number_item_state.oh_send_command(link_quality)
+                logger.info("state     : %s", link_quality)
+            else:
+                logger.error("item %s does not exist", state_item_name)
 
         topic_items = str(event.name).split("/")
 
         logger.info("Item       : %s", topic_items[2] + topic_items[3])
         logger.info("LinkQuality: %s", str(link_quality))
-        logger.info("FW Update  : %s", str(update_available))
 
-        exitcode = 0
-        update_pending = topic_items[2] + topic_items[3] + "_UpdatePending"
-        if self.openhab.item_exists(update_pending):
-            my_oh_item_updatepending = SwitchItem.get_item(update_pending)
+    def outdoor_plug_availability_updated(self, event):
+        """handle changes in MQTT availability topic for outdoor plugs"""
+
+        assert isinstance(event, ValueUpdateEvent), type(event)
+        logger.info(
+            "%s: mqtt topic %s updated to %s",
+            self.outdoor_plug_updated.__name__,
+            event.name,
+            str(event.value),
+        )
+
+        online_item_name = (
+            OUTDOOR_SPOTLIGHT_NAME_PREFIX
+            + self.extract_oh_item_name(event.name)
+            + "_Online"
+        )
+        if self.openhab.item_exists(online_item_name):
+            switch_item_state = SwitchItem.get_item(online_item_name)
+            new_value = "ON"
+            if "Offline" == str(event.value):
+                new_value = "OFF"
+            if self.oh_switch_item_changed(switch_item_state, new_value):
+                switch_item_state.oh_send_command(new_value)
+            logger.info("state     : %s", new_value)
         else:
-            logger.error("item %s does not exist", update_pending)
-            exitcode = 3
-
-        if exitcode != 0:
-            return exitcode
-        if self.oh_switch_item_changed(
-            my_oh_item_updatepending, self.state_map[str(update_available)]
-        ):
-            my_oh_item_updatepending.oh_send_command(
-                self.state_map[str(update_available)]
-            )
+            logger.error("item %s does not exist", online_item_name)
 
 
 LivarnoZigbeeDevices()

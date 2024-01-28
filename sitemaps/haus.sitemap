@@ -14,4 +14,10 @@ sitemap haus label="My home automation" {
         Text item=Zigbee2Mqtt_PermitJoin_TimeRemain label="Remaining time [%.0f %unit%]"
         Switch item=Zigbee2Mqtt_Restart_Bridge label="Restart bridge"
     }
+    Frame label="Livarno" {
+        Default item=eSteckdosePool label="Steckdose Pool"
+        Default item=eSteckdoseRosenbogen label="Steckdose Rosenbogen"
+        Default item=eStrahlerPool label="LED-Strahler Pool"
+        Default item=eStrahlerRosenbogen label="LED-Strahler Rosenbogen"
+    }
 }
