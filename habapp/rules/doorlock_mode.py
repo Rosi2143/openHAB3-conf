@@ -248,11 +248,11 @@ class DoorLockStatemachineRule(HABApp.Rule):
         )
 
         error_type = ""
-        if event.name.includes("ConfigPending"):
+        if "ConfigPending" in event.name:
             error_type = DOOR_LOCK_STATE_MACHINE.CONFIG_PENDING
-        elif event.name.includes("ErrorJammed"):
+        elif "ErrorJammed" in event.name:
             error_type = DOOR_LOCK_STATE_MACHINE.JAMMED
-        elif event.name.includes("Unreachable"):
+        elif "Unreachable" in event.name:
             error_type = DOOR_LOCK_STATE_MACHINE.UNREACHABLE
         else:
             log.error("Unknown event %s", event.name)
