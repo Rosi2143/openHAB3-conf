@@ -11,6 +11,9 @@ from HABApp.openhab.items import SwitchItem, NumberItem, DimmerItem, StringItem
 
 logger = logging.getLogger("Ikea")
 
+COLOR_TEMP_OFFSET = 250
+COLOR_TEMP_SCALE = 2.04
+
 
 class IkeaZigbeeDevices(HABApp.Rule):
     """handle any zigbee device of IKEA"""
@@ -78,7 +81,7 @@ class IkeaZigbeeDevices(HABApp.Rule):
     # helpers
     #########
     def oh_switch_item_changed(self, oh_switch_item, new_value):
-        """helper function to check if a dimmer item has changed"""
+        """helper function to check if a switch item has changed"""
 
         ret = False
         state = oh_switch_item.get_value("OFF")
@@ -199,7 +202,7 @@ class IkeaZigbeeDevices(HABApp.Rule):
         else:
             if "_ColorTemp" in event.name:
                 mqtt_topic_value = '{ "color_temp": '
-                mqtt_value = int(mqtt_value * 2.04) + 250
+                mqtt_value = int(mqtt_value * COLOR_TEMP_SCALE) + COLOR_TEMP_OFFSET
             else:
                 logger.error("wrong callback dimmer_item_update for %s", event.name)
                 return
@@ -236,7 +239,7 @@ class IkeaZigbeeDevices(HABApp.Rule):
         else:
             if "_ColorTemp" in event.name:
                 mqtt_topic_value = '{ "color_temp'
-                value = int(value * 2.04)
+                value = int(value * COLOR_TEMP_SCALE)
             else:
                 logger.error("wrong callback number_item_update for %s", event.name)
                 return
@@ -429,7 +432,10 @@ class IkeaZigbeeDevices(HABApp.Rule):
             )
             if self.openhab.item_exists(color_temp_item_name):
                 color_temp_item = DimmerItem.get_item(color_temp_item_name)
-                new_value = int((int(event.value["color_temp"]) - 250) / 2.04)
+                new_value = int(
+                    (int(event.value["color_temp"]) - COLOR_TEMP_OFFSET)
+                    / COLOR_TEMP_SCALE
+                )
                 if self.oh_dimmer_item_changed(color_temp_item, new_value):
                     # IKEA https://www.zigbee2mqtt.io/devices/LED1732G11.html#light
                     # 250 ... 454
