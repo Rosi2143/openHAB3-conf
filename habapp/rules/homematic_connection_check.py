@@ -11,7 +11,7 @@ from HABApp.core.events import ItemNoChangeEvent
 
 logger = logging.getLogger("HomematicConnect")
 
-RASPBERRYMATIC_PI = "192.168.178.38"
+RASPBERRYMATIC_PI = "192.168.178.20"
 UPTIME_NO_CHANGE_TIMEOUT_SEC = 6 * 60
 
 
