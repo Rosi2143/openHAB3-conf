@@ -109,6 +109,15 @@ handlers:
     formatter: HABApp_format
     level: INFO
 
+  LivarnoHandler:
+    class: HABApp.config.logging.MidnightRotatingFileHandler
+    filename: "/mnt/usb1/log/habapp/Livarno.log" # absolute filename is recommended
+    maxBytes: 10_000_000
+    backupCount: 3
+
+    formatter: HABApp_format
+    level: DEBUG
+
   MaintainGroupHandler:
     class: HABApp.config.logging.MidnightRotatingFileHandler
     filename: "/mnt/usb1/log/habapp/MaintainGroup.log" # absolute filename is recommended
@@ -247,6 +256,12 @@ loggers:
     level: DEBUG
     handlers:
       - IndegoHandler
+    propagate: False
+
+  Livarno:
+    level: DEBUG
+    handlers:
+      - LivarnoHandler
     propagate: False
 
   MaintainGroup:
