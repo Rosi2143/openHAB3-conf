@@ -46,6 +46,15 @@ handlers:
     formatter: HABApp_format
     level: INFO
 
+  AstroHandler:
+    class: HABApp.config.logging.MidnightRotatingFileHandler
+    filename: "/mnt/usb1/log/habapp/Astro.log"
+    maxBytes: 10_000_000
+    backupCount: 3
+
+    formatter: HABApp_format
+    level: INFO
+
   ContactSwitchMappingHandler:
     class: HABApp.config.logging.MidnightRotatingFileHandler
     filename: "/mnt/usb1/log/habapp/ContactSwitch.log"
@@ -214,6 +223,12 @@ loggers:
     level: DEBUG
     handlers:
       - AstralHandler
+    propagate: False
+
+  Astro:
+    level: DEBUG
+    handlers:
+      - AstroHandler
     propagate: False
 
   ContactSwitch:

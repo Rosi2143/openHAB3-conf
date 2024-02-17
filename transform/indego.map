@@ -1,0 +1,7 @@
+1=mow
+2=return_to_dock
+3=pause
+
+mow=1
+return_to_dock=2
+pause=3
