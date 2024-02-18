@@ -109,6 +109,15 @@ handlers:
     formatter: HABApp_format
     level: INFO
 
+  HomematicHandler:
+    class: HABApp.config.logging.MidnightRotatingFileHandler
+    filename: "/mnt/usb1/log/habapp/Homematic.log" # absolute filename is recommended
+    maxBytes: 10_000_000
+    backupCount: 3
+
+    formatter: HABApp_format
+    level: DEBUG
+
   HomematicConnectHandler:
     class: HABApp.config.logging.MidnightRotatingFileHandler
     filename: "/mnt/usb1/log/habapp/HomematicConnect.log" # absolute filename is recommended
@@ -283,6 +292,12 @@ loggers:
     level: DEBUG
     handlers:
       - HistoricHandler
+    propagate: False
+
+  Homematic:
+    level: DEBUG
+    handlers:
+      - HomematicHandler
     propagate: False
 
   HomematicConnect:
