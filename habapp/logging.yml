@@ -91,6 +91,15 @@ handlers:
     formatter: HABApp_format
     level: INFO
 
+  HabpanelHandler:
+    class: HABApp.config.logging.MidnightRotatingFileHandler
+    filename: "/mnt/usb1/log/habapp/Habpanel.log"
+    maxBytes: 10_000_000
+    backupCount: 3
+
+    formatter: HABApp_format
+    level: INFO
+
   HistoricHandler:
     class: HABApp.config.logging.MidnightRotatingFileHandler
     filename: "/mnt/usb1/log/habapp/Historic.log"
@@ -262,6 +271,12 @@ loggers:
     level: DEBUG
     handlers:
       - EphemerisHandler
+    propagate: False
+
+  Habpanel:
+    level: DEBUG
+    handlers:
+      - HabpanelHandler
     propagate: False
 
   Historic:
