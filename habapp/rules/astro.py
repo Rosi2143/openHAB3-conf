@@ -55,9 +55,7 @@ class AstroInfo(HABApp.Rule):
         if SwitchItem.get_item("GartenLichtAutomatik").get_value() == "ON":
             logger.info("Hue activate NightLight")
             self.openhab.send_command("Hue_Zone_Garten_Betrieb", "ON")
-            self.openhab.send_command(
-                "Hue_Zone_Garten_Zone", "l7Vupj3gn20HJds"
-            )  # Nachtlicht
+            self.openhab.send_command("Hue_Zone_Garten_Zone", "Nachtlicht")
 
         self.openhab.send_command("IstTag", "OFF")
 
