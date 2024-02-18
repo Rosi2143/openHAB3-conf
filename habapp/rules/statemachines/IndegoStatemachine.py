@@ -1,4 +1,5 @@
 """StateMachine for Indego operation states """
+
 import os
 import platform
 from datetime import datetime, timedelta

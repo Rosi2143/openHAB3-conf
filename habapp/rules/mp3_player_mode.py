@@ -4,6 +4,7 @@
 # minimum version python-statemachine = 1.0.3
 import logging  # required for extended logging
 
+import os
 import sys
 from datetime import timedelta
 
@@ -13,9 +14,16 @@ from HABApp.openhab.items import GroupItem, SwitchItem
 
 log = logging.getLogger("MP3PlayerMode")
 
-OH_CONF = "/etc/openhab/"
+param_file = "openhab"
+# read the low bat threshold from the parameter file
+OH_CONF = HABApp.DictParameter(param_file, "OH_Directories", default_value="")[
+    "OPENHAB_CONF"
+]
+HABAPP_RULES = HABApp.DictParameter(param_file, "HABAPP_Directories", default_value="")[
+    "HABAPP_RULES"
+]
 
-sys.path.append(OH_CONF + "habapp/rules/")
+sys.path.append(os.path.join(OH_CONF, HABAPP_RULES))
 from statemachines.SecurityDoorWindowStatemachine import (
     SecurityDoorWindowStatemachine,
     get_state_machine_graph,

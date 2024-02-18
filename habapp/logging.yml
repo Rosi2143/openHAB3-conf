@@ -82,6 +82,15 @@ handlers:
     formatter: HABApp_format
     level: DEBUG
 
+  EphemerisHandler:
+    class: HABApp.config.logging.MidnightRotatingFileHandler
+    filename: "/mnt/usb1/log/habapp/Ephemeris.log"
+    maxBytes: 10_000_000
+    backupCount: 3
+
+    formatter: HABApp_format
+    level: INFO
+
   HistoricHandler:
     class: HABApp.config.logging.MidnightRotatingFileHandler
     filename: "/mnt/usb1/log/habapp/Historic.log"
@@ -247,6 +256,12 @@ loggers:
     level: DEBUG
     handlers:
       - DoorLockModeHandler
+    propagate: False
+
+  Ephemeris:
+    level: DEBUG
+    handlers:
+      - EphemerisHandler
     propagate: False
 
   Historic:

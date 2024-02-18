@@ -1,6 +1,6 @@
 import logging  # required for extended logging
 from datetime import datetime, timedelta
-import time
+import os
 import sys
 
 import HABApp
@@ -12,12 +12,20 @@ from HABApp.core.events import (
 
 logger = logging.getLogger("Indego")
 
-OH_CONF = "/etc/openhab/"
+param_file = "openhab"
+# read the low bat threshold from the parameter file
+OH_CONF = HABApp.DictParameter(param_file, "OH_Directories", default_value="")[
+    "OPENHAB_CONF"
+]
+HABAPP_RULES = HABApp.DictParameter(param_file, "HABAPP_Directories", default_value="")[
+    "HABAPP_RULES"
+]
+
 OH_ITEM_INDEGO_STATUS_TEXT = "Bosch_Indego_StatusText"
 OH_ITEM_INDEGO_MOW_TIME = "Bosch_Indego_Last_MowTime"
 OH_ITEM_INDEGO_PAUSE_TIME = "Bosch_Indego_Last_PauseTime"
 
-sys.path.append(OH_CONF + "habapp/rules/")
+sys.path.append(os.path.join(OH_CONF, HABAPP_RULES))
 from statemachines.IndegoStatemachine import IndegoStatemachine
 
 indego_state_machine = IndegoStatemachine(name="Indego_S+500", logger=logger)

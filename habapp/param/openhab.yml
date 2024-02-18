@@ -1,0 +1,9 @@
+OH_Directories:
+  OPENHAB_HOME: /usr/share/openhab
+  OPENHAB_RUNTIME: /usr/share/openhab/runtime
+  OPENHAB_USERDATA: /var/lib/openhab
+  OPENHAB_CONF: /etc/openhab
+  OPENHAB_LOGDIR: /var/log/openhab
+  OPENHAB_BACKUPS: /var/lib/openhab/backups
+HABAPP_Directories:
+  HABAPP_RULES: "habapp/rules/"

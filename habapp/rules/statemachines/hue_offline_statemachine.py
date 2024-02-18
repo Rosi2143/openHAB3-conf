@@ -1,4 +1,5 @@
 """StateMachine for handling hue offline problem """
+
 import sys
 import os
 import platform
@@ -30,22 +31,33 @@ def get_state_machine(item_name, logger):
     """
     thing_name = item_name.split("_")[0]
     if thing_name not in hue_offline_list:
-        hue_offline_list[thing_name] = HueOfflineStatemachine(
-            thing_name, logger)
-        logger.info("Created HueOfflineSm: (" + str(id(hue_offline_list[thing_name])) + "):" +
-                    hue_offline_list[thing_name].get_name())
+        hue_offline_list[thing_name] = HueOfflineStatemachine(thing_name, logger)
+        logger.info(
+            "Created HueOfflineSm: ("
+            + str(id(hue_offline_list[thing_name]))
+            + "):"
+            + hue_offline_list[thing_name].get_name()
+        )
 
-        if (platform.system() != "Windows"):
+        if platform.system() != "Windows":
             # also accepts instances
             graph = DotGraphMachine(hue_offline_list[thing_name])
             imagepath = os.path.join(scriptpath, "images")
             if not os.path.exists(imagepath):
                 os.makedirs(imagepath)
-            graph().write_png(os.path.join(
-                imagepath, hue_offline_list[thing_name].get_name() + "_hue_offline_sm.png"))
+            graph().write_png(
+                os.path.join(
+                    imagepath,
+                    hue_offline_list[thing_name].get_name() + "_hue_offline_sm.png",
+                )
+            )
     else:
-        logger.info("Use existing HueOfflineSm (" + str(id(hue_offline_list[thing_name])) + "): " +
-                    hue_offline_list[thing_name].get_name())
+        logger.info(
+            "Use existing HueOfflineSm ("
+            + str(id(hue_offline_list[thing_name]))
+            + "): "
+            + hue_offline_list[thing_name].get_name()
+        )
 
     return hue_offline_list[thing_name]
 
@@ -73,27 +85,33 @@ class HueOfflineStatemachine(StateMachine):
     st_offline = State("offline")
 
     # Transitions
-    tr_online_change = (st_online_on.to(st_offline, cond="cond_offline_is_active") |
-                        st_online_on.to(st_online_off, unless=["cond_offline_is_active",
-                                                               "cond_state_is_active"]) |
-                        st_online_on.to.itself() |
+    tr_online_change = (
+        st_online_on.to(st_offline, cond="cond_offline_is_active")
+        | st_online_on.to(
+            st_online_off, unless=["cond_offline_is_active", "cond_state_is_active"]
+        )
+        | st_online_on.to.itself()
+        | st_online_off.to(st_offline, cond="cond_offline_is_active")
+        | st_online_off.to(
+            st_online_on, unless="cond_offline_is_active", cond="cond_state_is_active"
+        )
+        | st_online_off.to.itself()
+        | st_offline.to(
+            st_online_off, unless=["cond_offline_is_active", "cond_state_is_active"]
+        )
+        | st_offline.to(
+            st_online_on, unless="cond_offline_is_active", cond="cond_state_is_active"
+        )
+        | st_offline.to.itself()
+    )
 
-                        st_online_off.to(st_offline, cond="cond_offline_is_active") |
-                        st_online_off.to(st_online_on, unless="cond_offline_is_active",
-                                         cond="cond_state_is_active") |
-                        st_online_off.to.itself() |
-
-                        st_offline.to(st_online_off, unless=["cond_offline_is_active",
-                                                             "cond_state_is_active"]) |
-                        st_offline.to(st_online_on, unless="cond_offline_is_active",
-                                      cond="cond_state_is_active") |
-                        st_offline.to.itself())
-
-    tr_state_change = (st_online_on.to(st_online_off, unless="cond_state_is_active") |
-                       st_online_on.to.itself() |
-                       st_online_off.to(st_online_on, cond="cond_state_is_active") |
-                       st_online_off.to.itself() |
-                       st_offline.to.itself())
+    tr_state_change = (
+        st_online_on.to(st_online_off, unless="cond_state_is_active")
+        | st_online_on.to.itself()
+        | st_online_off.to(st_online_on, cond="cond_state_is_active")
+        | st_online_off.to.itself()
+        | st_offline.to.itself()
+    )
 
     def __init__(self, name="unnamed", logger=None):
         # variables
@@ -103,8 +121,8 @@ class HueOfflineStatemachine(StateMachine):
         self._offline = False
         self._state = False
 
-#        for name, value in os.environ.items():
-#            self._logger.debug("{0}: {1}".format(name, value))
+        #        for name, value in os.environ.items():
+        #            self._logger.debug("{0}: {1}".format(name, value))
 
         super(HueOfflineStatemachine, self).__init__()
 
@@ -130,7 +148,12 @@ class HueOfflineStatemachine(StateMachine):
         """
         self._offline = state
         self._logger.info(
-            self.get_name() + "(" + str(id(self)) + "): - offline is: " + str(self._offline))
+            self.get_name()
+            + "("
+            + str(id(self))
+            + "): - offline is: "
+            + str(self._offline)
+        )
 
     def set_state(self, state):
         """set internal state of offline
@@ -139,7 +162,8 @@ class HueOfflineStatemachine(StateMachine):
         """
         self._state = state
         self._logger.info(
-            self.get_name() + "(" + str(id(self)) + "): - state is: " + str(self._state))
+            self.get_name() + "(" + str(id(self)) + "): - state is: " + str(self._state)
+        )
 
     # Conditions
     def cond_offline_is_active(self):
@@ -147,8 +171,14 @@ class HueOfflineStatemachine(StateMachine):
         Returns:
             boolean: True/False
         """
-        self._logger.debug(self.get_name() + "(" + str(id(self)) +
-                           "): offline = '" + str(self._offline) + "'.")
+        self._logger.debug(
+            self.get_name()
+            + "("
+            + str(id(self))
+            + "): offline = '"
+            + str(self._offline)
+            + "'."
+        )
         return self._offline
 
     def cond_state_is_active(self):
@@ -156,22 +186,40 @@ class HueOfflineStatemachine(StateMachine):
         Returns:
             boolean: True/False
         """
-        self._logger.debug(self.get_name() + "(" + str(id(self)) +
-                           "): state = '" + str(self._state) + "'.")
+        self._logger.debug(
+            self.get_name()
+            + "("
+            + str(id(self))
+            + "): state = '"
+            + str(self._state)
+            + "'."
+        )
         return self._state
 
     # see https://python-statemachine.readthedocs.io/en/latest/actions.html#ordering
     def before_transition(self, event, state):
-        """events received for any state """
-        self._logger.debug(self.get_name() + "(" + str(id(self)) +
-                           "): Before   '{}' in '{}' state.".format(event, state.id))
+        """events received for any state"""
+        self._logger.debug(
+            self.get_name()
+            + "("
+            + str(id(self))
+            + "): Before   '{}' in '{}' state.".format(event, state.id)
+        )
 
     def on_enter_state(self, event, state):
-        """entry function for any state """
-        self._logger.debug(self.get_name() + "(" + str(id(self)) +
-                           "): Entering '{}' state triggered by '{}' event.".format(state.id, event))
+        """entry function for any state"""
+        self._logger.debug(
+            self.get_name()
+            + "("
+            + str(id(self))
+            + "): Entering '{}' state triggered by '{}' event.".format(state.id, event)
+        )
 
     def after_transition(self, event, state):
-        """last function in state change queue """
+        """last function in state change queue"""
         self._logger.info(
-            self.get_name() + "(" + str(id(self)) + "): is in state {}.".format(state.id))
+            self.get_name()
+            + "("
+            + str(id(self))
+            + "): is in state {}.".format(state.id)
+        )

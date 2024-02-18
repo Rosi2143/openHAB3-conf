@@ -5,6 +5,7 @@
 
 import logging  # required for extended logging
 
+import os
 import sys
 import HABApp
 from HABApp.core.events import ValueChangeEvent, ValueChangeEventFilter
@@ -12,9 +13,16 @@ from HABApp.openhab.items import ContactItem, GroupItem, StringItem, SwitchItem
 
 log = logging.getLogger("DoorLockMode")
 
-OH_CONF = "/etc/openhab/"  # os.getenv('OPENHAB_CONF')
+param_file = "openhab"
+# read the low bat threshold from the parameter file
+OH_CONF = HABApp.DictParameter(param_file, "OH_Directories", default_value="")[
+    "OPENHAB_CONF"
+]
+HABAPP_RULES = HABApp.DictParameter(param_file, "HABAPP_Directories", default_value="")[
+    "HABAPP_RULES"
+]
 
-sys.path.append(OH_CONF + "habapp/rules/")
+sys.path.append(os.path.join(OH_CONF, HABAPP_RULES))
 from statemachines.DoorLockStatemachine import (
     DoorLockStatemachine,
     get_state_machine_graph,

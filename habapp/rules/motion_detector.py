@@ -12,7 +12,11 @@ from HABApp.openhab.items import GroupItem
 
 log = logging.getLogger("MotionDetector")
 
-OH_CONF = "/etc/openhab/"
+param_file = "openhab"
+# read the low bat threshold from the parameter file
+OH_CONF = HABApp.DictParameter(param_file, "OH_Directories", default_value="")[
+    "OPENHAB_CONF"
+]
 
 
 class motion_detector(HABApp.Rule):
