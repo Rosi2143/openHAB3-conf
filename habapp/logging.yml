@@ -127,6 +127,15 @@ handlers:
     formatter: HABApp_format
     level: DEBUG
 
+  HueHandler:
+    class: HABApp.config.logging.MidnightRotatingFileHandler
+    filename: "/mnt/usb1/log/habapp/Hue.log" # absolute filename is recommended
+    maxBytes: 10_000_000
+    backupCount: 3
+
+    formatter: HABApp_format
+    level: DEBUG
+
   IkeaHandler:
     class: HABApp.config.logging.MidnightRotatingFileHandler
     filename: "/mnt/usb1/log/habapp/Ikea.log" # absolute filename is recommended
@@ -304,6 +313,12 @@ loggers:
     level: DEBUG
     handlers:
       - HomematicConnectHandler
+    propagate: False
+
+  Hue:
+    level: DEBUG
+    handlers:
+      - HueHandler
     propagate: False
 
   Ikea:

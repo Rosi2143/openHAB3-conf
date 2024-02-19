@@ -55,7 +55,9 @@ class Homematic_CCU(HABApp.Rule):
         logger.debug("Timer has executed")
         self.openhab.send_command(
             "RaspiMaticGatewayExtras_Commcounter_Error",
-            NumberItem.get_item("RaspiMaticGatewayExtras_Commcounter_Error").get_value()
+            NumberItem.get_item("RaspiMaticGatewayExtras_Commcounter_Error").get_value(
+                default_value=0
+            )
             + 1,
         )
 
@@ -100,7 +102,7 @@ class Homematic_IP(HABApp.Rule):
         oh_item_shed_door.listen_event(self.shed_door, ValueChangeEventFilter())
 
         self.listen_event(
-            "homematic:HmIP-DSD-PCB:homematicBridge-90f3312b69:0026DBE998F796:1#BUTTON",
+            'homematic:HmIP-DSD-PCB:homematicBridge-90f3312b69:0026DBE998F796:1#BUTTON',
             self.ring_start,
             EventFilter(ChannelTriggeredEvent, event="SHORT_PRESSED"),
         )
