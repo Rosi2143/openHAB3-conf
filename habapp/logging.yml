@@ -208,6 +208,15 @@ handlers:
     formatter: HABApp_format
     level: INFO
 
+  NotificationHandler:
+    class: HABApp.config.logging.MidnightRotatingFileHandler
+    filename: "/mnt/usb1/log/habapp/Notification.log" # absolute filename is recommended
+    maxBytes: 10_000_000
+    backupCount: 3
+
+    formatter: HABApp_format
+    level: INFO
+
   ThermostatModeHandler:
     class: HABApp.config.logging.MidnightRotatingFileHandler
     filename: "/mnt/usb1/log/habapp/ThermostatMode.log" # absolute filename is recommended
@@ -376,6 +385,12 @@ loggers:
     level: INFO
     handlers:
       - MqttHandler
+    propagate: False
+
+  Notification:
+    level: INFO
+    handlers:
+      - NotificationHandler
     propagate: False
 
   ThermostatMode:
