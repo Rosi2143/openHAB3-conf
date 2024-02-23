@@ -69,8 +69,20 @@ class Hue(HABApp.Rule):
         EinfahrtBewegung = SwitchItem.get_item(
             "BewegungsmelderErkerweg_MotionLong"
         ).get_value()
-        EinfahrtMax = int(GroupItem.get_item("Hue_Raum_Einfahrt_Max").get_value() * 100)
-        EinfahrtMin = int(GroupItem.get_item("Hue_Raum_Einfahrt_Min").get_value() * 100)
+        try:
+            EinfahrtMax = int(
+                GroupItem.get_item("Hue_Raum_Einfahrt_Max").get_value() * 100
+            )
+        except ValueError as ve:
+            logger.error("ValueError: %s", ve)
+            EinfahrtMax = 0
+        try:
+            EinfahrtMin = int(
+                GroupItem.get_item("Hue_Raum_Einfahrt_Min").get_value() * 100
+            )
+        except ValueError as ve:
+            logger.error("ValueError: %s", ve)
+            EinfahrtMin = 0
 
         logger.info(
             "rule fired: Einfahrt: Dunkel %s; Bewegung %s; Min %s; Max %s",
@@ -97,8 +109,20 @@ class Hue(HABApp.Rule):
         ErkerWegBewegung = SwitchItem.get_item(
             "BewegungsmelderErkerweg_MotionLong"
         ).get_value()
-        ErkerWegMax = int(GroupItem.get_item("Hue_Raum_Erkerweg_Max").get_value() * 100)
-        ErkerWegMin = int(GroupItem.get_item("Hue_Raum_Erkerweg_Min").get_value() * 100)
+        try:
+            ErkerWegMax = int(
+                GroupItem.get_item("Hue_Raum_Erkerweg_Max").get_value() * 100
+            )
+        except ValueError as ve:
+            logger.error("ValueError: %s", ve)
+            ErkerWegMax = 0
+        try:
+            ErkerWegMin = int(
+                GroupItem.get_item("Hue_Raum_Erkerweg_Min").get_value() * 100
+            )
+        except ValueError as ve:
+            logger.error("ValueError: %s", ve)
+            ErkerWegMin = 0
 
         logger.info(
             "rule fired: ErkerWeg: Dunkel %s; Bewegung %s; Min %s; Max %s",
@@ -125,8 +149,22 @@ class Hue(HABApp.Rule):
         BrunnenBewegung = SwitchItem.get_item(
             "BewegungsmelderBrunnen_BewegungLong"
         ).get_value()
-        BrunnenMax = int(GroupItem.get_item("Hue_Raum_Brunnen_Max").get_value() * 100)
-        BrunnenMin = int(GroupItem.get_item("Hue_Raum_Brunnen_Min").get_value() * 100)
+
+        try:
+            BrunnenMax = int(
+                GroupItem.get_item("Hue_Raum_Brunnen_Max").get_value() * 100
+            )
+        except ValueError as ve:
+            logger.error("ValueError: %s", ve)
+            BrunnenMax = 0
+
+        try:
+            BrunnenMin = int(
+                GroupItem.get_item("Hue_Raum_Brunnen_Min").get_value() * 100
+            )
+        except ValueError as ve:
+            logger.error("ValueError: %s", ve)
+            BrunnenMin = 0
 
         logger.info(
             "rule fired: Brunnen : Dunkel %s; Bewegung %s; Min %s; Max %s",
