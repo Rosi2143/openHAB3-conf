@@ -35,7 +35,7 @@ class LivarnoZigbeeDevices(HABApp.Rule):
         super().__init__()
 
         logger.info("Start")
-        param_file = "livarno_param_file"
+        param_file = "livarno"
         # read the outdoor spotlights from the parameter file
         self.outdoor_spotlights = HABApp.DictParameter(
             param_file, "OutdoorSpotlight", default_value=None

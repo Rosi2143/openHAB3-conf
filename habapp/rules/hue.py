@@ -69,8 +69,8 @@ class Hue(HABApp.Rule):
         EinfahrtBewegung = SwitchItem.get_item(
             "BewegungsmelderErkerweg_MotionLong"
         ).get_value()
-        EinfahrtMax = int(GroupItem.get_item("Hue_Raum_Einfahrt_Max").get_value())
-        EinfahrtMin = int(GroupItem.get_item("Hue_Raum_Einfahrt_Min").get_value())
+        EinfahrtMax = int(GroupItem.get_item("Hue_Raum_Einfahrt_Max").get_value() * 100)
+        EinfahrtMin = int(GroupItem.get_item("Hue_Raum_Einfahrt_Min").get_value() * 100)
 
         logger.info(
             "rule fired: Einfahrt: Dunkel %s; Bewegung %s; Min %s; Max %s",
@@ -97,8 +97,8 @@ class Hue(HABApp.Rule):
         ErkerWegBewegung = SwitchItem.get_item(
             "BewegungsmelderErkerweg_MotionLong"
         ).get_value()
-        ErkerWegMax = int(GroupItem.get_item("Hue_Raum_Erkerweg_Max").get_value())
-        ErkerWegMin = int(GroupItem.get_item("Hue_Raum_Erkerweg_Min").get_value())
+        ErkerWegMax = int(GroupItem.get_item("Hue_Raum_Erkerweg_Max").get_value() * 100)
+        ErkerWegMin = int(GroupItem.get_item("Hue_Raum_Erkerweg_Min").get_value() * 100)
 
         logger.info(
             "rule fired: ErkerWeg: Dunkel %s; Bewegung %s; Min %s; Max %s",
@@ -125,8 +125,8 @@ class Hue(HABApp.Rule):
         BrunnenBewegung = SwitchItem.get_item(
             "BewegungsmelderBrunnen_BewegungLong"
         ).get_value()
-        BrunnenMax = int(GroupItem.get_item("Hue_Raum_Brunnen_Max").get_value())
-        BrunnenMin = int(GroupItem.get_item("Hue_Raum_Brunnen_Min").get_value())
+        BrunnenMax = int(GroupItem.get_item("Hue_Raum_Brunnen_Max").get_value() * 100)
+        BrunnenMin = int(GroupItem.get_item("Hue_Raum_Brunnen_Min").get_value() * 100)
 
         logger.info(
             "rule fired: Brunnen : Dunkel %s; Bewegung %s; Min %s; Max %s",

@@ -23,7 +23,7 @@ class IkeaZigbeeDevices(HABApp.Rule):
 
         super().__init__()
 
-        param_file = "ikea_param_file"
+        param_file = "ikea"
         # read the low bat threshold from the parameter file
         self.min_battery_charge = HABApp.Parameter(
             param_file, "min_battery_charge", default_value=20

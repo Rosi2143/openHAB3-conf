@@ -1,7 +1,7 @@
 """This script handles Homematic elements."""
 
 import logging  # required for extended logging
-from datetime import datetime, timedelta
+from datetime import timedelta
 
 import HABApp
 from HABApp.openhab.items import SwitchItem, NumberItem, GroupItem, ContactItem
@@ -102,7 +102,7 @@ class Homematic_IP(HABApp.Rule):
         oh_item_shed_door.listen_event(self.shed_door, ValueChangeEventFilter())
 
         self.listen_event(
-            'homematic:HmIP-DSD-PCB:homematicBridge-90f3312b69:0026DBE998F796:1#BUTTON',
+            "homematic:HmIP-DSD-PCB:homematicBridge-90f3312b69:0026DBE998F796:1#BUTTON",
             self.ring_start,
             EventFilter(ChannelTriggeredEvent, event="SHORT_PRESSED"),
         )
