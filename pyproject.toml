@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "openhab"
+version = "0.1.0"
+description = "python environment to run openhab scripts locally"
+authors = ["Schrotti <Schrott.Micha@web.de>"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.9"
+icalendar = "^5.0.11"
+holidays = "^0.43"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

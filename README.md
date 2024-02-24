@@ -64,6 +64,8 @@ config for the openHAB3 setup
   * [brickd](https://www.tinkerforge.com/de/doc/Software/Brickd_Install_Linux.html#brickd-install-linux)
   * [brick-flash](https://www.tinkerforge.com/de/doc/Software/Brickd_Install_Linux.html#brickd-install-linux)
   * [python binding](https://www.tinkerforge.com/de/doc/Software/API_Bindings_Python.html#api-bindings-python)
+* python virtual environment
+  * [poetry](https://python-poetry.org/docs/)
 
 ## copying git repos
 * create ssh-key
@@ -88,7 +90,6 @@ config for the openHAB3 setup
   * https://raspberrytips.com/mount-usb-drive-raspberry-pi/
   * add new location to samba
     * `sudo nano /etc/samba/smb.conf`
-    *
         ```
           [openHAB-USB]
           comment=USBDrive
