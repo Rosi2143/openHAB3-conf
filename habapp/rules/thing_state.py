@@ -1,66 +1,78 @@
-"""Example of python module statemachine: https://pypi.org/project/python-statemachine/"""
-
-# log:set INFO jsr223.jython.ThingState_statemachines_create
-# minimum version python-statemachine = 1.0.3
-
 import logging  # required for extended logging
 
-import HABApp
-from HABApp.openhab.items import GroupItem, SwitchItem
-from HABApp.core.events import ValueChangeEventFilter
-from HABApp.openhab import transformations
+from HABApp import Rule
+from HABApp.openhab.events import ThingStatusInfoChangedEvent
+from HABApp.openhab.items import Thing
+from HABApp.core.events import EventFilter
+from HABApp.openhab.items import GroupItem
 
-logger = logging.getLogger("Switch2Light")
-
-param_file = "switch2light"
-LONG_MAP = HABApp.DictParameter(param_file, "Long", default_value="")
-SHORT_MAP = HABApp.DictParameter(param_file, "Short", default_value="")
-TOGGLE_MAP = transformations.map["toggle.map"]
+log = logging.getLogger("Things")
 
 
-class Switch2Light(HABApp.Rule):
-    """This class handles Hue internal states."""
+class ThingsRule(Rule):
+    """test rule for OpenHAB from the examples"""
 
     def __init__(self):
-        """initialize the logger test"""
+        """initialize OpenHAB testrule
+
+        create items of all kinds and register callbacks for changes and updates"""
         super().__init__()
 
+        thing_group_item = GroupItem.get_item("gThingItems")
+        thing_list = sorted(self.get_items(Thing), key=lambda x: x.name, reverse=False)
+        log.debug(type(thing_list))
 
-@rule(
-    "ThingState_statemachines_create",
-    description="initialize the statemachines for thing states",
-    tags=["systemstart", "things", "statemachines"],
-)
-@when("System started")
-def initialize_thingstate_statemachines(event):
-    """setup all statemachines for thermostats"""
+    #        for thing in thing_list:
+    #            log.info("found %s : %s -> %s", thing.name, thing.label, thing.status)
+    #            thing.listen_event(
+    #                self.thing_status_changed, EventFilter(ThingStatusInfoChangedEvent)
+    #            )
+    #            if not self.openhab.item_exists(thing.label):
+    #                log.info("%s does not exist - continue", thing.label)
+    #                continue
+    #
+    #            _item = self.openhab.get_item(thing.label)
+    #            _item_groups = list(_item.groups)
+    #
+    #            if thing_group_item.name in _item_groups:
+    #                log.info("%s already in %s", _item_groups, thing_group_item.name)
+    #            else:
+    #                _item_groups.append(thing_group_item.name)
+    #
+    #                log.info("Adding %s to %s", _item.name, thing_group_item.name)
+    #
+    #                if not self.openhab.create_item(
+    #                    item_type="Group",
+    #                    name=_item.name,
+    #                    label=_item.label,
+    #                    category=_item.category,
+    #                    tags=list(_item.tags),
+    #                    groups=_item_groups,
+    #                ):
+    #                    log.error("item update failed")
+    #                    log.error("name     = %s", _item.name)
+    #                    log.error("label    = %s", _item.label)
+    #                    log.error("tags     = %s", _item.tags)
+    #                    log.error("category = %s", _item.category)
+    #                    log.error("groups   = %s --> %s", _item.groups, type(_item.groups))
+    #                    log.error("metadata = %s", _item.metadata)
+    #                else:
+    #                    log.info("item update succeeded")
 
-    for oh_thing in things.getAll():
-
-        initialize_thingstate_statemachines.log.debug(
-            "handling thing: " + oh_thing.getLabel() + "/" + str(oh_thing.getUID())
+    def thing_status_changed(self, event: ThingStatusInfoChangedEvent):
+        log.info(
+            "%s : changed from %s to %s", event.name, event.old_status, event.status
         )
 
-        thing_UID = str(oh_thing.getUID())
-        if "hue:" in thing_UID:
-
-            if ":group:" in thing_UID:
-                continue
-            if ":bridge:" in thing_UID:
-                continue
-
-            thing_label = oh_thing.getLabel()
-            thing_status = oh_thing.getStatus()
-
-            initialize_thingstate_statemachines.log.info(
-                "handling thing: %s -- %s / %s", thing_UID, thing_label, thing_status
-            )
-
-    initialize_thingstate_statemachines.log.info("Done")
+        thing_list = sorted(self.get_items(Thing), key=lambda x: x.name, reverse=False)
+        if event.name not in thing_list:
+            log.error("%s not found in list of things", event.name)
+        else:
+            itemName = thing_list[event.name].label
+            log.info("checking for item %s", itemName)
 
 
-# ####################
-# Rules
-# ####################
+#            if self.openhab.item_exists(itemName):
 
-# Check BoostModes
+
+ThingsRule()
