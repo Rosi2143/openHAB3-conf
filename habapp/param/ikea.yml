@@ -1,4 +1,4 @@
-min_battery_charge: 20
+min_battery_charge: 10
 MotionDetectors:
   md1: Buero
   md2: Gaestezimmer
