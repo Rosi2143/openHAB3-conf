@@ -61,12 +61,12 @@ class Notifications(HABApp.Rule):
         """
         logger.info(
             "rule fired because of %s %s --> %s",
-            event.itemName,
-            event.oldItemState,
-            event.itemState,
+            event.name,
+            event.old_value,
+            event.value,
         )
 
-        self.openhab.post_update("LightNotification_FF", str(event.itemState))
+        self.openhab.post_update("LightNotification_FF", str(event.value))
 
     def ground_floor_lights(self, event):
         """
@@ -77,12 +77,12 @@ class Notifications(HABApp.Rule):
         """
         logger.info(
             "rule fired because of %s %s --> %s",
-            event.itemName,
-            event.oldItemState,
-            event.itemState,
+            event.name,
+            event.old_value,
+            event.value,
         )
 
-        self.openhab.post_update("LightNotification_GF", str(event.itemState))
+        self.openhab.post_update("LightNotification_GF", str(event.value))
 
     def basement_lights(self, event):
         """
@@ -93,12 +93,12 @@ class Notifications(HABApp.Rule):
         """
         logger.info(
             "rule fired because of %s %s --> %s",
-            event.itemName,
-            event.oldItemState,
-            event.itemState,
+            event.name,
+            event.old_value,
+            event.value,
         )
 
-        self.openhab.post_update("LightNotification_BM", str(event.itemState))
+        self.openhab.post_update("LightNotification_BM", str(event.value))
 
     def security_state(self, event):
         """
@@ -109,9 +109,9 @@ class Notifications(HABApp.Rule):
         """
         logger.info(
             "rule fired because of %s %s --> %s",
-            event.itemName,
-            event.oldItemState,
-            event.itemState,
+            event.name,
+            event.old_value,
+            event.value,
         )
 
         if (
@@ -132,9 +132,9 @@ class Notifications(HABApp.Rule):
         """
         logger.info(
             "rule fired because of %s %s --> %s",
-            event.itemName,
-            event.oldItemState,
-            event.itemState,
+            event.name,
+            event.old_value,
+            event.value,
         )
 
         if items["gThingItems"] != "OFF":
