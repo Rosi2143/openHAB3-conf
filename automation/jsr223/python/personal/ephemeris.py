@@ -1,6 +1,4 @@
-"""
-This script sets todays type of days using ephemeris actions
-"""
+"""This script sets todays type of days using ephemeris actions"""
 
 from core.rules import rule
 from core.triggers import when
@@ -41,9 +39,8 @@ def determine_day_type(event):
         "Nächster Feiertag: " + str(next_public_holiday_date.toString()).split("T")[0]
     )
 
-    #   postUpdate(DateString_NextPublicHoliday,   Ephemeris.getHolidayDescription(nextHoliday))
-    #   postUpdate(DateDaysTill_NextPublicHoliday, untilHoliday)
-    #   postUpdate(DateTime_NextPublicHoliday,     NextPublicHolidayDate.toString)
+    events.sendCommand("NextDay_PublicHoliday", str(name_holiday))
+    events.sendCommand("NextDay_Till_PublicHoliday", str(until_holiday))
 
     ephemeris_birthday_file = OH_CONF + "/services/birthdays.xml"
     next_birthday = Ephemeris.getNextBankHoliday(ephemeris_birthday_file)
@@ -60,16 +57,20 @@ def determine_day_type(event):
         "Nächster Geburtstag: " + str(next_birthday_date.toString()).split("T")[0]
     )
 
-    #    postUpdate(DateString_NextBirthDay,   nextBirth)
-    #    postUpdate(DateDaysTill_NextBirthDay, untBirth)
-    #    postUpdate(DateTime_NextBirthDay,     next_birthday_date.toString)
+    events.sendCommand("NextDay_Birthday", str(next_birthday))
+    events.sendCommand("NextDay_Till_Birthday", str(until_birthday))
+
     ephemeris_school_holiday_file = OH_CONF + "/services/holidays.xml"
     next_school_holiday = Ephemeris.getNextBankHoliday(ephemeris_school_holiday_file)
     until_school_holiday = Ephemeris.getDaysUntil(
         next_school_holiday, ephemeris_school_holiday_file
     )
+    next_school_holiday = str(str(next_school_holiday).split(" ")[0])
     determine_day_type.log.info(
-        "Nächster Ferientag: " + str() + " in Tagen: " + str(until_school_holiday)
+        "Nächster Ferientag: "
+        + next_school_holiday
+        + " in Tagen: "
+        + str(until_school_holiday)
     )
 
     next_school_holiday_date = today_morning.plusDays(until_school_holiday)
@@ -77,9 +78,8 @@ def determine_day_type(event):
         "Nächster Ferientag: " + str(next_school_holiday_date.toString()).split("T")[0]
     )
 
-    #    postUpdate(DateString_NextSchoolHoliday,   next_school_holiday)
-    #    postUpdate(DateDaysTill_NextSchoolHoliday, until_school_holiday)
-    #    postUpdate(DateTime_NextSchoolHoliday,     next_school_holiday_date.toString)
+    events.sendCommand("NextDay_SchoolHoliday", next_school_holiday)
+    events.sendCommand("NextDay_Till_SchoolHoliday", str(until_school_holiday))
 
     day_of_year = today_morning.getDayOfYear() - 1
     start_of_year_date = today_morning.minusDays(day_of_year)
@@ -92,12 +92,12 @@ def determine_day_type(event):
     )
 
     scan_birthdays = Ephemeris.getNextBankHoliday(
-        start_of_year_date, ephemeris_birthday_file
+        today_morning, ephemeris_birthday_file
     )
     scan_birthdays_date = today_morning.plusDays(
         Ephemeris.getDaysUntil(scan_birthdays, ephemeris_birthday_file)
     )
-    last_birthday_date = start_of_year_date
+    last_birthday_date = today_morning
     while last_birthday_date.until(scan_birthdays_date, ChronoUnit.DAYS) > 0:
         determine_day_type.log.info(
             "Geburtstag: "
@@ -150,3 +150,13 @@ def determine_day_type(event):
         scan_birthdays_date = today_morning.plusDays(
             Ephemeris.getDaysUntil(scan_birthdays, ephemeris_birthday_file)
         )
+
+
+#        determine_day_type.log.info(
+#            "Nächster Geburtstag: "
+#            + str(scan_birthdays)
+#            + " am "
+#            + str(scan_birthdays_date.toString()).split("T")[0]
+#            + " in "
+#            + str(last_birthday_date.until(scan_birthdays_date, ChronoUnit.DAYS))
+#        )
