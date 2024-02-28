@@ -5,7 +5,6 @@ import logging  # required for extended logging
 import HABApp
 from HABApp.openhab.items import ContactItem, GroupItem
 from HABApp.core.events import ValueChangeEventFilter
-from HABApp.openhab import transformations
 
 logger = logging.getLogger("Notification")
 
@@ -115,9 +114,11 @@ class Notifications(HABApp.Rule):
         )
 
         if (
-            (items["gAussenTueren"] != "OPEN")
-            and (items["gFenster"] != "OPEN")
-            and (items["TuerWaschkueche_OpenState"] != "OPEN")
+            (GroupItem.get_item("gAussenTueren").get_value() != "OPEN")
+            and (GroupItem.get_item("gFenster").get_value() != "OPEN")
+            and (
+                ContactItem.get_item("TuerWaschkueche_OpenState").get_value() != "OPEN"
+            )
         ):
             self.openhab.send_command("SomeExternalWindowsDoorsOpen", "OFF")
         else:
@@ -137,7 +138,7 @@ class Notifications(HABApp.Rule):
             event.value,
         )
 
-        if items["gThingItems"] != "OFF":
+        if GroupItem.get_item("gThingItems").get_value() != "OFF":
             self.openhab.send_command("ThingItems", "ON")
         else:
             self.openhab.send_command("ThingItems", "OFF")

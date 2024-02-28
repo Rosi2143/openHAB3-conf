@@ -1,11 +1,10 @@
 """makes other light(s) follow a leading light"""
 
 import logging  # required for extended logging
-from datetime import timedelta
 
 import HABApp
-from HABApp.openhab.items import SwitchItem, GroupItem, ContactItem
-from HABApp.core.events import ValueChangeEvent, ValueChangeEventFilter
+from HABApp.openhab.items import NumberItem, GroupItem, ContactItem
+from HABApp.core.events import ValueChangeEventFilter
 
 logger = logging.getLogger("Light")
 
