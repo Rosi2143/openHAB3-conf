@@ -26,7 +26,7 @@ class Light(HABApp.Rule):
 
         oh_item_front_door = ContactItem.get_item("TuerHaustuer_StateContact")
         oh_item_front_door.listen_event(
-            self.following_frontdoor, ValueChangeEventFilter()
+            self.following_frontdoor, ValueChangeEventFilter(value="OPEN")
         )
 
         oh_item_upper_storage = ContactItem.get_item("TuerKammer_OpenState")
@@ -37,7 +37,12 @@ class Light(HABApp.Rule):
     def light_following(self, event):
         """make all office lights follow the main light"""
 
-        logger.info("rule fired because of %s", event.name)
+        logger.info(
+            "rule fired because of %s %s --> %s",
+            event.name,
+            event.old_value,
+            event.value,
+        )
 
         if not event.name in self.lights_follow:
             logger.error("element %s not found in %s", event.name, self.lights_follow)
@@ -49,7 +54,12 @@ class Light(HABApp.Rule):
     def following_frontdoor(self, event):
         """turn frontdoor light ON when door opens"""
 
-        logger.info("rule fired because of %s", event.name)
+        logger.info(
+            "rule fired because of %s %s --> %s",
+            event.name,
+            event.old_value,
+            event.value,
+        )
 
         outside_light = NumberItem.get_item(
             "BewegungsmelderHaustuer_Illumination"
@@ -67,7 +77,12 @@ class Light(HABApp.Rule):
     def following_upper_storage(self, event):
         """make all office lights follow the main light"""
 
-        logger.info("rule fired because of %s", event.name)
+        logger.info(
+            "rule fired because of %s %s --> %s",
+            event.name,
+            event.old_value,
+            event.value,
+        )
 
         if str(event.value) == "OPEN":
             self.openhab.send_command("LichtKammer_State", "ON")
