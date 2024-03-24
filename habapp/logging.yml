@@ -241,6 +241,9 @@ handlers:
     maxBytes: 10_000_000
     backupCount: 3
 
+    formatter: HABApp_format
+    level: INFO
+
   ThingsHandler:
     class: HABApp.config.logging.MidnightRotatingFileHandler
     filename: "/mnt/usb1/log/habapp/Things.log" # absolute filename is recommended
