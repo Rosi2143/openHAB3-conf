@@ -53,10 +53,10 @@ class Mqtt(HABApp.Rule):
         if "_Long" in event.name:
             longItem = "gLichterKeller_State"
             longItem2 = "gLichterHaus_State"
-            if SwitchItem.get_item("longItem").get_value() == "ON":
+            if SwitchItem.get_item(longItem).get_value() == "ON":
                 logger.info("turn %s OFF", longItem)
                 self.openhab.send_command(longItem, "OFF")
-            elif SwitchItem.get_item("longItem2").get_value() == "ON":
+            elif SwitchItem.get_item(longItem2).get_value() == "ON":
                 logger.info("turn %s OFF", longItem2)
                 self.openhab.send_command(longItem2, "OFF")
             else:
