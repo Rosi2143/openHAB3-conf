@@ -7,15 +7,16 @@ from datetime import timedelta
 
 import HABApp
 from HABApp.openhab.items import ContactItem, NumberItem
-from HABApp.openhab.events import ItemStateUpdatedEventFilter
+from HABApp.openhab.events import ItemStateUpdatedEventFilter, ItemStateUpdatedEvent
 
 logger = logging.getLogger("Habpanel")
 
 BATTERY_MAX_CHARGE = 80
-BATTERY_MIN_CHARGE = 40
+BATTERY_MIN_CHARGE = 0  # battery is broken 40
 OH_ITEM_NAME_BATTERY_LEVEL = "HABPanel_Battery_Level"
 OH_ITEM_NAME_BATTERY_CHARGING = "HABPanel_Battery_Charging"
 OH_ITEM_NAME_BATTERY_CHARGING_STATE = "HABPanelLadung_Betrieb"
+OH_ITEM_NAME_BATTERY_LOW_STATE = "HABPanel_Battery_Low"
 OH_ITEM_NAME_MOTION = "HABPanel_Motion"
 OH_ITEM_NAME_COMMAND = "HABPanel_Command"
 
@@ -30,14 +31,19 @@ class Habpanel(HABApp.Rule):
 
         logger.info("Start")
 
+        OH_ItemBatLowState = ContactItem.get_item(OH_ITEM_NAME_BATTERY_LOW_STATE)
+        OH_ItemBatLowState.listen_event(
+            self.check_charging_state, ItemStateUpdatedEventFilter()
+        )
+
         OH_ItemChargingState = NumberItem.get_item(OH_ITEM_NAME_BATTERY_LEVEL)
         OH_ItemChargingState.listen_event(
             self.check_charging_state, ItemStateUpdatedEventFilter()
         )
         self.run.every(
-            timedelta(seconds=6),
-            timedelta(minutes=5),
-            self.check_charging_state,
+            start_time=timedelta(seconds=6),
+            interval=timedelta(minutes=5),
+            callback=self.check_charging_state,
             event=None,
         )
 
@@ -51,13 +57,14 @@ class Habpanel(HABApp.Rule):
         """check if HABPanel needs charging"""
 
         if event:
-            if event.getType() == "ItemStateUpdatedEvent":
-                logger.info("rule fired because of %s", event.name)
+            if isinstance(event, ItemStateUpdatedEvent):
+                logger.info("rule fired because of %s --> ", event.name, event.value)
             else:
                 logger.info("rule fired because of cron-timer")
 
         battery_level = 0
         charging_state = False
+        low_battery_state = False
 
         if self.openhab.item_exists(OH_ITEM_NAME_BATTERY_LEVEL):
             battery_level = NumberItem.get_item(OH_ITEM_NAME_BATTERY_LEVEL).get_value()
@@ -70,28 +77,33 @@ class Habpanel(HABApp.Rule):
             )
         else:
             logger.warning("Item %s not found", OH_ITEM_NAME_BATTERY_LEVEL)
+        if self.openhab.item_exists(OH_ITEM_NAME_BATTERY_LOW_STATE):
+            low_battery_state = ContactItem.get_item(
+                OH_ITEM_NAME_BATTERY_LOW_STATE
+            ).get_value() == "CLOSED" or (battery_level < BATTERY_MIN_CHARGE)
+        else:
+            logger.warning("Item %s not found", OH_ITEM_NAME_BATTERY_LOW_STATE)
 
         logger.debug(
             "%s = %s --> LowBat = %s",
             OH_ITEM_NAME_BATTERY_LEVEL,
             battery_level,
-            (battery_level < BATTERY_MIN_CHARGE),
+            low_battery_state,
         )
 
         logger.debug("%s = %s", OH_ITEM_NAME_BATTERY_CHARGING, charging_state)
 
-        if (battery_level < BATTERY_MIN_CHARGE) and not charging_state:
+        if low_battery_state and not charging_state:
             self.openhab.send_command(OH_ITEM_NAME_BATTERY_CHARGING_STATE, "ON")
             logger.info("start charging")
-        elif (battery_level > BATTERY_MAX_CHARGE) and charging_state:
+        elif not low_battery_state and charging_state:
             self.openhab.send_command(OH_ITEM_NAME_BATTERY_CHARGING_STATE, "OFF")
             logger.info("stop charging")
         else:
             logger.info(
-                "No change: ChargeState="
-                + str(charging_state)
-                + " ChargeLevel="
-                + str(battery_level)
+                "No change: ChargeState=%s ChargeLevel=%s",
+                str(charging_state),
+                str(battery_level),
             )
 
     def proximity_alert(self, event):
