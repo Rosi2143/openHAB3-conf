@@ -21,7 +21,7 @@ class Homematic_CCU(HABApp.Rule):
         self.run.every(
             timedelta(seconds=6), timedelta(minutes=5), self.refresh_homematic_extras
         )
-        logger.info("Homematic started")
+        logger.info("start Homematic_CCU")
 
         oh_item_commwd_timeout = SwitchItem.get_item("Homematic_CommWd_Timeout")
         oh_item_commwd_timeout.listen_event(
@@ -35,7 +35,7 @@ class Homematic_CCU(HABApp.Rule):
             self.homematic_comm_wd, ValueChangeEventFilter()
         )
 
-        logger.info("Homematic started.")
+        logger.info("Homematic_CCU started.")
 
     def refresh_homematic_extras(self):
         """send refresh to HomematicRaspi"""
@@ -124,7 +124,7 @@ class Homematic_IP(HABApp.Rule):
         logger.debug(
             "%s : %s",
             self.shed_door.__name__,
-            SwitchItem.get_item("TuerSchuppen_OpenState").get_value(),
+            ContactItem.get_item("TuerSchuppen_OpenState").get_value(),
         )
 
         if str(event.value) == "OPEN":
@@ -192,6 +192,8 @@ class Homematic_Overheat(HABApp.Rule):
                 self.overheat_protection_end, ValueChangeEventFilter(value="OFF")
             )
 
+        logger.info("Homematic_Overheat started.")
+
     def overheat_protection_start(self, event):
         """
         make sure the temperature is not too high for too long
@@ -248,7 +250,7 @@ class WindowState(HABApp.Rule):
         super().__init__()
 
         oh_group_window_state = GroupItem.get_item("gThermostate_WindowOpenStates")
-        for oh_item in oh_group_window_state.get_members():
+        for oh_item in oh_group_window_state.members:
             oh_item.listen_event(
                 self.window_open_state_handling, ValueChangeEventFilter()
             )
@@ -266,14 +268,18 @@ class WindowState(HABApp.Rule):
         )
 
         windowstate_item_name = event.name.replace("_WindowOpenState", "_WindowState")
-        if self.openhab.item_exists(windowstate_item_name):
+        if not self.openhab.item_exists(windowstate_item_name):
             logger.info(
                 "WindowOpenStateItem: %s does not exist.", windowstate_item_name
             )
         else:
+            logger.info(
+                "Set %s to %s.", windowstate_item_name, str(event.value)
+            )
             self.openhab.send_command(windowstate_item_name, str(event.value))
 
 
 Homematic_CCU()
 Homematic_IP()
 Homematic_Overheat()
+WindowState()
