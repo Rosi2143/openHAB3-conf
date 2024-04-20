@@ -8,7 +8,7 @@
             "type": "BrickletIo16V2Switch",
             "uid": "io1",
             "device_callback_all_config": {
-                "period": 200,
+                "period": 50,
                 "value_has_to_change": "True"
             },
             "device_callback_config": {
@@ -40,7 +40,7 @@
             "type": "BrickletIo16V2Switch",
             "uid": "io2",
             "device_callback_all_config": {
-                "period": 200,
+                "period": 50,
                 "value_has_to_change": "True"
             },
             "device_callback_config": {
