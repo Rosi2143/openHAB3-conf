@@ -67,7 +67,7 @@ class AstroInfo(HABApp.Rule):
         """
         logger.info(self.func_name())
 
-        if ContactItem.get_item("TuerWaschkueche_OpenState").get_value() == "OPEN":
+        if ContactItem.get_item("TuerWaschkuecheTerrasse_OpenState").get_value() == "OPEN":
             self.openhab.send_command("SchlossWaschkueche_Fehler", "ON")
             logger.error("cannot lock the door -- as it is open")
         else:
