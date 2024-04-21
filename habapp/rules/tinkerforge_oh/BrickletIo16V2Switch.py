@@ -30,6 +30,9 @@ class BrickletIo16V2Switch(BrickletIo16V2):
         contact_state_map = {"True": "pressed", "False": "released"}
         if contact_state_map[oh_state] == "released":
             press = ""
+            if timediff.total_seconds() == 0 and (timediff.microseconds/1000) < 75:
+                self.logger.fatal("timediff is %sms. Ignoring the press.", timediff.microseconds/1000)
+                return
             if timediff.total_seconds() > 2:
                 press = "Long"
             else:
