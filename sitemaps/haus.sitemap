@@ -17,7 +17,9 @@ sitemap haus label="My home automation" {
     Frame label="Livarno" {
         Default item=eSteckdosePool label="Steckdose Pool"
         Default item=eSteckdoseRosenbogen label="Steckdose Rosenbogen"
-        Default item=eStrahlerPool label="LED-Strahler Pool"
-        Default item=eStrahlerRosenbogen label="LED-Strahler Rosenbogen"
+        Default item=eStrahlerPool label="LED-Strahler Links"
+        Default item=eStrahlerRosenbogen label="LED-Strahler Rechts"
+        Selection item=StrahlerPool_Effect label="Effekt Links" mappings=["blink"="Blinken", "breathe"="Atmen", "okay"="Okay", "stop_effect"="Stop"]
+        Selection item=StrahlerRosenbogen_Effect label="Effekt Rechts" mappings=["blink"="Blinken", "breathe"="Atmen", "okay"="Okay", "stop_effect"="Stop"]
     }
 }
