@@ -371,6 +371,7 @@ Before   '{event}' in '{state.id}' state."
             self._start_time_pause = datetime.min
             self._pause_time = timedelta(0)
             self._start_time_mow = datetime.min
+            self._mowing_time = timedelta(0)
         else:
             self._logger.error("Undefined transition")
 
