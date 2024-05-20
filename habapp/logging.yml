@@ -127,6 +127,15 @@ handlers:
     formatter: HABApp_format
     level: DEBUG
 
+  HuaweiHandler:
+    class: HABApp.config.logging.MidnightRotatingFileHandler
+    filename: "/mnt/usb1/log/habapp/Huawei.log" # absolute filename is recommended
+    maxBytes: 10_000_000
+    backupCount: 3
+
+    formatter: HABApp_format
+    level: DEBUG
+
   HueHandler:
     class: HABApp.config.logging.MidnightRotatingFileHandler
     filename: "/mnt/usb1/log/habapp/Hue.log" # absolute filename is recommended
@@ -352,6 +361,12 @@ loggers:
     level: DEBUG
     handlers:
       - HomematicConnectHandler
+    propagate: False
+
+  Huawei:
+    level: DEBUG
+    handlers:
+      - HuaweiHandler
     propagate: False
 
   Hue:

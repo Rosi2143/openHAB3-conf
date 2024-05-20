@@ -16,7 +16,6 @@ class Hue(HABApp.Rule):
     """This class handles Hue internal states."""
 
     def __init__(self):
-        """initialize the logger test"""
         super().__init__()
 
         oh_item_erkerweg_motion = SwitchItem.get_item("BewegungsmelderErkerweg_Motion")
