@@ -22,4 +22,13 @@ sitemap haus label="My home automation" {
         Selection item=StrahlerPool_Effect label="Effekt Links" mappings=["blink"="Blinken", "breathe"="Atmen", "okay"="Okay", "stop_effect"="Stop"]
         Selection item=StrahlerRosenbogen_Effect label="Effekt Rechts" mappings=["blink"="Blinken", "breathe"="Atmen", "okay"="Okay", "stop_effect"="Stop"]
     }
+
+    Frame label="Faders" {
+        Switch item=LichtGrillbereich_FadeTrigger label="Grill Fade [%s]"
+        Slider item=LichtGrillbereich_FadeDuration label="Grill Zeit (30...600) [%.0f %unit%]" minValue=30 maxValue=600 step=10
+        Switch item=FernseherLEDStrip_FadeTrigger label="TV Fade [%s]"
+        Slider item=FernseherLEDStrip_FadeDuration label="TV Zeit (30...600) [%.0f %unit%]" minValue=30 maxValue=600 step=10
+        Switch item=Brunnen_FadeTrigger label="Brunnen Fade [%s]"
+        Slider item=Brunnen_FadeDuration label="Brunnen Zeit (30...600) [%.0f %unit%]" minValue=30 maxValue=600 step=10
+    }
 }
