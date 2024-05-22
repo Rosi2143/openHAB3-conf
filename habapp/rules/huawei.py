@@ -32,6 +32,17 @@ class Huawei(HABApp.Rule):
         self.warnjob = None
         self.endjob = None
         self.off_grid_counter = 0
+
+        self.save_color = "Black"
+        self.save_brightness = 0
+        self.save_soundfile = "NO_SOUNDFILE"
+        self.save_soundlevel = 0
+
+        self.ColorItem_Color = StringItem.get_item("Mp3Spieler_Color")
+        self.ColorItem_Brightness = DimmerItem.get_item("Mp3Spieler_Level")
+        self.ColorItem_Soundfile = StringItem.get_item("Mp3Spieler_2_SOUNDFILE")
+        self.ColorItem_Soundlevel = DimmerItem.get_item("Mp3Spieler_2_LEVEL")
+
         logger.info("Huawei started.")
 
     def off_grid(self, event):
@@ -52,99 +63,171 @@ class Huawei(HABApp.Rule):
         if event.value == "ON":
             logger.error("Power Grid is down!")
             self.off_grid_counter = 0
+            if self.endjob is not None:
+                self.endjob.cancel()
+                self.endjob = None
+                self.ColorItem_Color.oh_post_update_if(
+                    self.save_color, not_equal=self.save_color
+                )
+                self.ColorItem_Brightness.oh_post_update_if(
+                    self.save_brightness, not_equal=self.save_brightness
+                )
+                self.ColorItem_Soundfile.oh_post_update_if(
+                    self.save_soundfile, not_equal=self.save_soundfile
+                )
+                self.ColorItem_Soundlevel.oh_post_update_if(
+                    self.save_soundlevel, not_equal=self.save_soundlevel
+                )
+
+            self.save_color = self.ColorItem_Color.get_value()
+            self.save_brightness = self.ColorItem_Brightness.get_value()
+            self.save_soundfile = self.ColorItem_Soundfile.get_value()
+            self.save_soundlevel = self.ColorItem_Soundlevel.get_value()
+
             self.warnjob = self.run.every(
-                start_time=0,
+                start_time=timedelta(0),
                 interval=timedelta(seconds=TIME_BETWEEN_WARNINGS_SEC),
                 callback=self.create_mp3_grid_off_warning,
             )
-            self.endjob.cancel()
-            self.endjob = None
         else:
             if event.old_value == "ON":
                 logger.info("Power Grid is up again.")
                 self.off_grid_counter = 0
-                self.warnjob = self.run.every(
-                    start_time=0,
+                if self.warnjob is not None:
+                    self.warnjob.cancel()
+                    self.warnjob = None
+                    self.ColorItem_Color.oh_post_update_if(
+                        self.save_color, not_equal=self.save_color
+                    )
+                    self.ColorItem_Brightness.oh_post_update_if(
+                        self.save_brightness, not_equal=self.save_brightness
+                    )
+                    self.ColorItem_Soundfile.oh_post_update_if(
+                        self.save_soundfile, not_equal=self.save_soundfile
+                    )
+                    self.ColorItem_Soundlevel.oh_post_update_if(
+                        self.save_soundlevel, not_equal=self.save_soundlevel
+                    )
+
+                self.save_color = self.ColorItem_Color.get_value()
+                self.save_brightness = self.ColorItem_Brightness.get_value()
+                self.save_soundfile = self.ColorItem_Soundfile.get_value()
+                self.save_soundlevel = self.ColorItem_Soundlevel.get_value()
+
+                self.endjob = self.run.every(
+                    start_time=timedelta(0),
                     interval=timedelta(seconds=TIME_BETWEEN_WARNINGS_SEC),
                     callback=self.create_mp3_grid_on_info,
                 )
-                self.warnjob.cancel()
-                self.warnjob = None
             else:
                 logger.info("Initial value received!")
 
     def create_mp3_grid_off_warning(self):
         """create mp3 warning"""
+
         if self.off_grid_counter > MAX_WARN_LOOPS:
             self.off_grid_counter = 0
 
-            ColorItem_Color.send_command(save_color)
-            ColorItem_Brightness.send_command(save_brightness)
+            self.ColorItem_Color.oh_post_update_if(
+                self.save_color, not_equal=self.save_color
+            )
+            self.ColorItem_Brightness.oh_post_update_if(
+                self.save_brightness, not_equal=self.save_brightness
+            )
+            self.ColorItem_Soundfile.oh_post_update_if(
+                self.save_soundfile, not_equal=self.save_soundfile
+            )
+            self.ColorItem_Soundlevel.oh_post_update_if(
+                self.save_soundlevel, not_equal=self.save_soundlevel
+            )
 
-            ColorItem_Soundfile.send_command(ColorItem_Soundfile)
-            ColorItem_Soundfile.send_command(ColorItem_Soundlevel)
-            self.warnjob.cancel()
+            if self.warnjob is not None:
+                self.warnjob.cancel()
             return
 
-        ColorItem_Color = StringItem.get_item("Mp3Spieler_Color")
-        ColorItem_Brightness = DimmerItem.get_item("Mp3Spieler_Level")
-        ColorItem_Soundfile = StringItem.get_item("Mp3Spieler_1_SOUNDFILE")
-        ColorItem_Soundlevel = StringItem.get_item("Mp3Spieler_1_LEVEL")
-        if self.off_grid_counter == 0:
-            save_color = ColorItem_Color.get_value()
-            save_brightness = ColorItem_Brightness.get_value()
-            save_soundfile = ColorItem_Soundfile.get_value()
+        logger.info("create_mp3_grid_off_warning: %s", self.off_grid_counter)
 
         if self.off_grid_counter % 2 == 0:
-            ColorItem_Color.send_command("RED")
-            ColorItem_Brightness.send_command("100")
+            logger.info("RED / 100")
+            self.ColorItem_Color.oh_post_update_if("RED", not_equal="RED")
+            self.ColorItem_Brightness.oh_post_update_if("100", not_equal="100")
         else:
-            ColorItem_Color.send_command(save_color)
-            ColorItem_Brightness.send_command(save_brightness)
+            logger.info("%s / %d", self.save_color, self.save_brightness)
+            self.ColorItem_Color.oh_post_update_if(
+                self.save_color, not_equal=self.save_color
+            )
+            self.ColorItem_Brightness.oh_post_update_if(
+                self.save_brightness, not_equal=self.save_brightness
+            )
 
         if self.off_grid_counter % TEXT_TO_BLINK_RATIO == 0:
-            ColorItem_Soundfile.send_command("SOUNDFILE_014")
-            ColorItem_Soundfile.send_command("100")
-        if self.off_grid_counter % TEXT_TO_BLINK_RATIO == 2:
-            ColorItem_Soundfile.send_command(ColorItem_Soundfile)
-            ColorItem_Soundfile.send_command(ColorItem_Soundlevel)
+            logger.info("SOUNDFILE_014 / 100")
+            self.ColorItem_Soundfile.oh_post_update_if(
+                "SOUNDFILE_014", not_equal="SOUNDFILE_014"
+            )
+            self.ColorItem_Soundlevel.oh_post_update_if("100", not_equal="100")
+        if self.off_grid_counter % TEXT_TO_BLINK_RATIO == TEXT_TO_BLINK_RATIO / 2:
+            logger.info("%s / %d", self.save_soundfile, self.save_soundlevel)
+            self.ColorItem_Soundfile.oh_post_update_if(
+                self.save_soundfile, not_equal=self.save_soundfile
+            )
+            self.ColorItem_Soundlevel.oh_post_update_if(
+                self.save_soundlevel, not_equal=self.save_soundlevel
+            )
         self.off_grid_counter += 1
 
     def create_mp3_grid_on_info(self):
         """create mp3 info that grid is back"""
+
         if self.off_grid_counter > MAX_WARN_LOOPS:
             self.off_grid_counter = 0
 
-            ColorItem_Color.send_command(save_color)
-            ColorItem_Brightness.send_command(save_brightness)
+            self.ColorItem_Color.oh_post_update_if(
+                self.save_color, not_equal=self.save_color
+            )
+            self.ColorItem_Brightness.oh_post_update_if(
+                self.save_brightness, not_equal=self.save_brightness
+            )
 
-            ColorItem_Soundfile.send_command(save_soundfile)
-            ColorItem_Soundfile.send_command(save_soundfile)
-            self.endjob.cancel()
+            self.ColorItem_Soundfile.oh_post_update_if(
+                self.save_soundfile, not_equal=self.save_soundfile
+            )
+            self.ColorItem_Soundlevel.oh_post_update_if(
+                self.save_soundlevel, not_equal=self.save_soundlevel
+            )
+            if self.endjob is not None:
+                self.endjob.cancel()
             return
 
-        ColorItem_Color = StringItem.get_item("Mp3Spieler_Color")
-        ColorItem_Brightness = DimmerItem.get_item("Mp3Spieler_Level")
-        ColorItem_Soundfile = StringItem.get_item("Mp3Spieler_1_SOUNDFILE")
-        ColorItem_Soundlevel = StringItem.get_item("Mp3Spieler_1_LEVEL")
-        if self.off_grid_counter == 0:
-            save_color = ColorItem_Color.get_value()
-            save_brightness = ColorItem_Brightness.get_value()
-            save_soundfile = ColorItem_Soundfile.get_value()
+        logger.info("create_mp3_grid_on_info: %s", self.off_grid_counter)
 
         if self.off_grid_counter % 2 == 0:
-            ColorItem_Color.send_command("Green")
-            ColorItem_Brightness.send_command("100")
+            logger.info("Green / 100")
+            self.ColorItem_Color.oh_post_update_if("Green", not_equal="Green")
+            self.ColorItem_Brightness.oh_post_update_if("100", not_equal="100")
         else:
-            ColorItem_Color.send_command(save_color)
-            ColorItem_Brightness.send_command(save_brightness)
+            logger.info("%s / %d", self.save_color, self.save_brightness)
+            self.ColorItem_Color.oh_post_update_if(
+                self.save_color, not_equal=self.save_color
+            )
+            self.ColorItem_Brightness.oh_post_update_if(
+                self.save_brightness, not_equal=self.save_brightness
+            )
 
         if self.off_grid_counter % TEXT_TO_BLINK_RATIO == 0:
-            ColorItem_Soundfile.send_command("SOUNDFILE_015")
-            ColorItem_Soundfile.send_command("100")
-        if self.off_grid_counter % TEXT_TO_BLINK_RATIO == 2:
-            ColorItem_Soundfile.send_command(save_soundfile)
-            ColorItem_Soundfile.send_command(save_soundfile)
+            logger.info("SOUNDFILE_015 / 100")
+            self.ColorItem_Soundfile.oh_post_update_if(
+                "SOUNDFILE_015", not_equal="SOUNDFILE_015"
+            )
+            self.ColorItem_Soundlevel.oh_post_update_if("100", not_equal="100")
+        if self.off_grid_counter % TEXT_TO_BLINK_RATIO == TEXT_TO_BLINK_RATIO / 2:
+            logger.info("%s / %d", self.save_soundfile, self.save_soundlevel)
+            self.ColorItem_Soundfile.oh_post_update_if(
+                self.save_soundfile, not_equal=self.save_soundfile
+            )
+            self.ColorItem_Soundlevel.oh_post_update_if(
+                self.save_soundlevel, not_equal=self.save_soundlevel
+            )
         self.off_grid_counter += 1
 
 
