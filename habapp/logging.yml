@@ -91,6 +91,15 @@ handlers:
     formatter: HABApp_format
     level: INFO
 
+  ExceptionsHandler:
+    class: HABApp.config.logging.MidnightRotatingFileHandler
+    filename: "/mnt/usb1/log/habapp/Exceptions.log"
+    maxBytes: 10_000_000
+    backupCount: 3
+
+    formatter: HABApp_format
+    level: INFO
+
   FaderHandler:
     class: HABApp.config.logging.MidnightRotatingFileHandler
     filename: "/mnt/usb1/log/habapp/Fader.log"
@@ -346,6 +355,12 @@ loggers:
     level: DEBUG
     handlers:
       - EphemerisHandler
+    propagate: False
+
+  Exceptions:
+    level: DEBUG
+    handlers:
+      - ExceptionsHandler
     propagate: False
 
   Fader:
