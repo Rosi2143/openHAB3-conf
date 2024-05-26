@@ -55,4 +55,4 @@ class FaultyRule(HABApp.Rule):
         1 / 0
 
 
-FaultyRule()
+# FaultyRule()
