@@ -170,7 +170,7 @@ handlers:
     backupCount: 3
 
     formatter: HABApp_format
-    level: INFO
+    level: DEBUG
 
   LightHandler:
     class: HABApp.config.logging.MidnightRotatingFileHandler

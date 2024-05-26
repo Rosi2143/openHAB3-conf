@@ -23,6 +23,7 @@ HABAPP_RULES = HABApp.DictParameter(param_file, "HABAPP_Directories", default_va
 OH_ITEM_INDEGO_STATUS_TEXT = "Bosch_Indego_StatusText"
 OH_ITEM_INDEGO_MOW_TIME = "Bosch_Indego_Last_MowTime"
 OH_ITEM_INDEGO_PAUSE_TIME = "Bosch_Indego_Last_PauseTime"
+UPDATE_DURATION_SEC = 30
 
 sys.path.append(os.path.join(OH_CONF, HABAPP_RULES))
 from statemachines.IndegoStatemachine import IndegoStatemachine
@@ -46,6 +47,8 @@ class Indego(HABApp.Rule):
         self.startTimePause = datetime.now()
         self.pauseTime = timedelta(0)
         self.status = indego_state_machine.STATUS_UNKNOWN
+        self.last_mowing_time = self.mowingTime
+        self.last_pause_time = self.pauseTime
         self.next_timer_job = self.run.soon(
             self.status_changes,
             ValueChangeEvent(name="start-up", value="none", old_value="none"),
@@ -74,37 +77,55 @@ class Indego(HABApp.Rule):
             indego_state_machine.current_state.name.lower()
             != indego_state_machine.STATUS_DOCK
         ):
-            self.next_timer_job = self.run.soon(self.item_updater)
+            if self.next_timer_job != None:
+                if self.next_timer_job.remaining() is not None:
+                    self.next_timer_job.cancel()
+                self.next_timer_job = None
+            self.next_timer_job = self.run.every(
+                timedelta(seconds=1),
+                timedelta(seconds=UPDATE_DURATION_SEC),
+                self.item_updater,
+            )
         else:
             logger.info("Indego is docked - timer not started")
 
-    def get_valid_time_format(self, time_in):
+    def get_valid_time_format(self, time_in) -> str:
         return "{:02}:{:02}:{:02}".format(
-            int(time_in.seconds / 3600),
-            int((time_in.seconds / 60) % 60),
-            int(time_in.seconds % 60),
+            int(time_in / 3600),
+            int((time_in / 60) % 60),
+            int(time_in % 60),
         )
 
     def item_updater(self):
         """run a timer if required and update the indego action times"""
         logger.info("Update times")
-        mowtime, pausetime = indego_state_machine.get_action_timer()
-        self.openhab.send_command(
-            OH_ITEM_INDEGO_MOW_TIME, self.get_valid_time_format(mowtime)
-        )
-        logger.info("MowTime  : %s", self.get_valid_time_format(mowtime))
-        self.openhab.send_command(
-            OH_ITEM_INDEGO_PAUSE_TIME, self.get_valid_time_format(pausetime)
-        )
-        logger.info("PauseTime: %s", self.get_valid_time_format(pausetime))
         if (
             indego_state_machine.current_state.name.lower()
             != indego_state_machine.STATUS_DOCK
         ):
             logger.info("Restart timer")
-            if self.next_timer_job.remaining() != None:
+        else:
+            logger.info("Indego is docked - timer stopped")
+            if self.next_timer_job.remaining() is not None:
                 self.next_timer_job.cancel()
-            self.run.at(time=timedelta(seconds=10), callback=self.item_updater)
+            self.next_timer_job = None
+            return
+
+        mowing_time, pause_time = indego_state_machine.get_action_timer()
+
+        logger.info("MowTime  : %s", self.get_valid_time_format(mowing_time))
+        if self.last_mowing_time != mowing_time:
+            self.openhab.send_command(
+                OH_ITEM_INDEGO_MOW_TIME, self.get_valid_time_format(mowing_time)
+            )
+            self.last_mowing_time = mowing_time
+
+        logger.info("PauseTime: %s", self.get_valid_time_format(pause_time))
+        if self.last_pause_time != pause_time:
+            self.openhab.send_command(
+                OH_ITEM_INDEGO_PAUSE_TIME, self.get_valid_time_format(pause_time)
+            )
+            self.last_pause_time = pause_time
 
 
 Indego()
