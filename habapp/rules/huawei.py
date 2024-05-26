@@ -66,18 +66,14 @@ class Huawei(HABApp.Rule):
             if self.endjob is not None:
                 self.endjob.cancel()
                 self.endjob = None
-                self.ColorItem_Color.oh_post_update_if(
-                    self.save_color, not_equal=self.save_color
-                )
-                self.ColorItem_Brightness.oh_post_update_if(
-                    self.save_brightness, not_equal=self.save_brightness
-                )
-                self.ColorItem_Soundfile.oh_post_update_if(
-                    self.save_soundfile, not_equal=self.save_soundfile
-                )
-                self.ColorItem_Soundlevel.oh_post_update_if(
-                    self.save_soundlevel, not_equal=self.save_soundlevel
-                )
+                if self.ColorItem_Brightness.get_value() != self.save_brightness:
+                    self.ColorItem_Brightness.oh_send_command(self.save_brightness)
+                if self.ColorItem_Color.get_value() != self.save_color:
+                    self.ColorItem_Color.oh_send_command(self.save_color)
+                if self.ColorItem_Soundfile.get_value() != self.save_soundfile:
+                    self.ColorItem_Soundfile.oh_send_command(self.save_soundfile)
+                if self.ColorItem_Soundlevel.get_value() != self.save_soundlevel:
+                    self.ColorItem_Soundlevel.oh_send_command(self.save_soundlevel)
 
             self.save_color = self.ColorItem_Color.get_value()
             self.save_brightness = self.ColorItem_Brightness.get_value()
@@ -96,18 +92,14 @@ class Huawei(HABApp.Rule):
                 if self.warnjob is not None:
                     self.warnjob.cancel()
                     self.warnjob = None
-                    self.ColorItem_Color.oh_post_update_if(
-                        self.save_color, not_equal=self.save_color
-                    )
-                    self.ColorItem_Brightness.oh_post_update_if(
-                        self.save_brightness, not_equal=self.save_brightness
-                    )
-                    self.ColorItem_Soundfile.oh_post_update_if(
-                        self.save_soundfile, not_equal=self.save_soundfile
-                    )
-                    self.ColorItem_Soundlevel.oh_post_update_if(
-                        self.save_soundlevel, not_equal=self.save_soundlevel
-                    )
+                    if self.ColorItem_Brightness.get_value() != self.save_brightness:
+                        self.ColorItem_Brightness.oh_send_command(self.save_brightness)
+                    if self.ColorItem_Color.get_value() != self.save_color:
+                        self.ColorItem_Color.oh_send_command(self.save_color)
+                    if self.ColorItem_Soundfile.get_value() != self.save_soundfile:
+                        self.ColorItem_Soundfile.oh_send_command(self.save_soundfile)
+                    if self.ColorItem_Soundlevel.get_value() != self.save_soundlevel:
+                        self.ColorItem_Soundlevel.oh_send_command(self.save_soundlevel)
 
                 self.save_color = self.ColorItem_Color.get_value()
                 self.save_brightness = self.ColorItem_Brightness.get_value()
@@ -128,18 +120,14 @@ class Huawei(HABApp.Rule):
         if self.off_grid_counter > MAX_WARN_LOOPS:
             self.off_grid_counter = 0
 
-            self.ColorItem_Color.oh_post_update_if(
-                self.save_color, not_equal=self.save_color
-            )
-            self.ColorItem_Brightness.oh_post_update_if(
-                self.save_brightness, not_equal=self.save_brightness
-            )
-            self.ColorItem_Soundfile.oh_post_update_if(
-                self.save_soundfile, not_equal=self.save_soundfile
-            )
-            self.ColorItem_Soundlevel.oh_post_update_if(
-                self.save_soundlevel, not_equal=self.save_soundlevel
-            )
+            if self.ColorItem_Brightness.get_value() != self.save_brightness:
+                self.ColorItem_Brightness.oh_send_command(self.save_brightness)
+            if self.ColorItem_Color.get_value() != self.save_color:
+                self.ColorItem_Color.oh_send_command(self.save_color)
+            if self.ColorItem_Soundfile.get_value() != self.save_soundfile:
+                self.ColorItem_Soundfile.oh_send_command(self.save_soundfile)
+            if self.ColorItem_Soundlevel.get_value() != self.save_soundlevel:
+                self.ColorItem_Soundlevel.oh_send_command(self.save_soundlevel)
 
             if self.warnjob is not None:
                 self.warnjob.cancel()
@@ -149,52 +137,46 @@ class Huawei(HABApp.Rule):
 
         if self.off_grid_counter % 2 == 0:
             logger.info("RED / 100")
-            self.ColorItem_Color.oh_post_update_if("RED", not_equal="RED")
-            self.ColorItem_Brightness.oh_post_update_if("100", not_equal="100")
+            if self.ColorItem_Brightness.get_value() != 100:
+                self.ColorItem_Brightness.oh_send_command(100)
+            if self.ColorItem_Color.get_value() != "RED":
+                self.ColorItem_Color.oh_send_command("RED")
         else:
             logger.info("%s / %d", self.save_color, self.save_brightness)
-            self.ColorItem_Color.oh_post_update_if(
-                self.save_color, not_equal=self.save_color
-            )
-            self.ColorItem_Brightness.oh_post_update_if(
-                self.save_brightness, not_equal=self.save_brightness
-            )
+            if self.ColorItem_Brightness.get_value() != self.save_brightness:
+                self.ColorItem_Brightness.oh_send_command(self.save_brightness)
+            if self.ColorItem_Color.get_value() != self.save_color:
+                self.ColorItem_Color.oh_send_command(self.save_color)
 
         if self.off_grid_counter % TEXT_TO_BLINK_RATIO == 0:
             logger.info("SOUNDFILE_014 / 100")
-            self.ColorItem_Soundfile.oh_post_update_if(
-                "SOUNDFILE_014", not_equal="SOUNDFILE_014"
-            )
-            self.ColorItem_Soundlevel.oh_post_update_if("100", not_equal="100")
+            if self.ColorItem_Soundfile.get_value() != "SOUNDFILE_014":
+                self.ColorItem_Soundfile.oh_send_command("SOUNDFILE_014")
+            if self.ColorItem_Soundlevel.get_value() != 100:
+                self.ColorItem_Soundlevel.oh_send_command(100)
         if self.off_grid_counter % TEXT_TO_BLINK_RATIO == TEXT_TO_BLINK_RATIO / 2:
             logger.info("%s / %d", self.save_soundfile, self.save_soundlevel)
-            self.ColorItem_Soundfile.oh_post_update_if(
-                self.save_soundfile, not_equal=self.save_soundfile
-            )
-            self.ColorItem_Soundlevel.oh_post_update_if(
-                self.save_soundlevel, not_equal=self.save_soundlevel
-            )
+            if self.ColorItem_Soundfile.get_value() != self.save_soundfile:
+                self.ColorItem_Soundfile.oh_send_command(self.save_soundfile)
+            if self.ColorItem_Soundlevel.get_value() != self.save_soundlevel:
+                self.ColorItem_Soundlevel.oh_send_command(self.save_soundlevel)
         self.off_grid_counter += 1
 
     def create_mp3_grid_on_info(self):
         """create mp3 info that grid is back"""
 
-        if self.off_grid_counter > MAX_WARN_LOOPS:
+        if self.off_grid_counter > MAX_END_INFO:
             self.off_grid_counter = 0
 
-            self.ColorItem_Color.oh_post_update_if(
-                self.save_color, not_equal=self.save_color
-            )
-            self.ColorItem_Brightness.oh_post_update_if(
-                self.save_brightness, not_equal=self.save_brightness
-            )
+            if self.ColorItem_Brightness.get_value() != self.save_brightness:
+                self.ColorItem_Brightness.oh_send_command(self.save_brightness)
+            if self.ColorItem_Color.get_value() != self.save_color:
+                self.ColorItem_Color.oh_send_command(self.save_color)
 
-            self.ColorItem_Soundfile.oh_post_update_if(
-                self.save_soundfile, not_equal=self.save_soundfile
-            )
-            self.ColorItem_Soundlevel.oh_post_update_if(
-                self.save_soundlevel, not_equal=self.save_soundlevel
-            )
+            if self.ColorItem_Soundfile.get_value() != self.save_soundfile:
+                self.ColorItem_Soundfile.oh_send_command(self.save_soundfile)
+            if self.ColorItem_Soundlevel.get_value() != self.save_soundlevel:
+                self.ColorItem_Soundlevel.oh_send_command(self.save_soundlevel)
             if self.endjob is not None:
                 self.endjob.cancel()
             return
@@ -203,31 +185,29 @@ class Huawei(HABApp.Rule):
 
         if self.off_grid_counter % 2 == 0:
             logger.info("Green / 100")
-            self.ColorItem_Color.oh_post_update_if("Green", not_equal="Green")
-            self.ColorItem_Brightness.oh_post_update_if("100", not_equal="100")
+            if self.ColorItem_Brightness.get_value() != 100:
+                self.ColorItem_Brightness.oh_send_command("100")
+            if self.ColorItem_Color.get_value() != "Green":
+                self.ColorItem_Color.oh_send_command("Green")
         else:
             logger.info("%s / %d", self.save_color, self.save_brightness)
-            self.ColorItem_Color.oh_post_update_if(
-                self.save_color, not_equal=self.save_color
-            )
-            self.ColorItem_Brightness.oh_post_update_if(
-                self.save_brightness, not_equal=self.save_brightness
-            )
+            if self.ColorItem_Brightness.get_value() != self.save_brightness:
+                self.ColorItem_Brightness.oh_send_command(self.save_brightness)
+            if self.ColorItem_Color.get_value() != self.save_color:
+                self.ColorItem_Color.oh_send_command(self.save_color)
 
         if self.off_grid_counter % TEXT_TO_BLINK_RATIO == 0:
             logger.info("SOUNDFILE_015 / 100")
-            self.ColorItem_Soundfile.oh_post_update_if(
-                "SOUNDFILE_015", not_equal="SOUNDFILE_015"
-            )
-            self.ColorItem_Soundlevel.oh_post_update_if("100", not_equal="100")
+            if self.ColorItem_Soundfile.get_value() != "SOUNDFILE_015":
+                self.ColorItem_Soundfile.oh_send_command("SOUNDFILE_015")
+            if self.ColorItem_Soundlevel.get_value() != 100:
+                self.ColorItem_Soundlevel.oh_send_command("100")
         if self.off_grid_counter % TEXT_TO_BLINK_RATIO == TEXT_TO_BLINK_RATIO / 2:
             logger.info("%s / %d", self.save_soundfile, self.save_soundlevel)
-            self.ColorItem_Soundfile.oh_post_update_if(
-                self.save_soundfile, not_equal=self.save_soundfile
-            )
-            self.ColorItem_Soundlevel.oh_post_update_if(
-                self.save_soundlevel, not_equal=self.save_soundlevel
-            )
+            if self.ColorItem_Soundfile.get_value() != self.save_soundfile:
+                self.ColorItem_Soundfile.oh_send_command(self.save_soundfile)
+            if self.ColorItem_Soundlevel.get_value() != self.save_soundlevel:
+                self.ColorItem_Soundlevel.oh_send_command(self.save_soundlevel)
         self.off_grid_counter += 1
 
 
