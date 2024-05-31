@@ -4,16 +4,25 @@ from datetime import timedelta, datetime
 import math
 
 import HABApp
+from HABApp.core.errors import ItemNotFoundException
 from HABApp.openhab.items import StringItem, SwitchItem, NumberItem, Thing
 from HABApp.openhab.definitions import ThingStatusEnum
 from HABApp.openhab.events import ThingStatusInfoChangedEvent
-from HABApp.core.events import EventFilter
+from HABApp.core.events import EventFilter, ValueChangeEventFilter, ValueChangeEvent
 
 logger = logging.getLogger("TomatoTimer")
 
 TIME_FOR_WATERING_MIN = 2
-THING_UID_PLUG = "hue:device:ecb5fafffe2c8738:25"
-DEVICE_NAME_PLUG_STATE = "AussenSteckdose_Betrieb"
+Tomato_Set = {
+    "oben": {
+        "THING_UID_PLUG": "hue:device:ecb5fafffe2c8738:25",
+        "DEVICE_NAME_PLUG_STATE": "AussenSteckdose_Betrieb",
+    },
+    "unten": {
+        "ITEM_UID_PLUG": "SteckdosePool_Online",
+        "DEVICE_NAME_PLUG_STATE": "SteckdosePool_State",
+    },
+}
 INITIAL_DELAY = 160
 
 RAIN_EFFECT_FACTOR = 5
@@ -33,24 +42,34 @@ class MyTomatoTimer(HABApp.Rule):
     activate the pump at this time for a specified
     duration"""
 
-    def __init__(self):
+    def __init__(self, place: str):
         """initialize class and calculate the first time"""
         super().__init__()
 
+        self.device_name_plug_state = Tomato_Set[place]["DEVICE_NAME_PLUG_STATE"]
+        self.place = place
+        if "THING_UID_PLUG" in Tomato_Set[place]:
+            self.thing_uid_plug = Tomato_Set[place]["THING_UID_PLUG"]
+            self.item_uid_plug = None
+        elif "ITEM_UID_PLUG" in Tomato_Set[place]:
+            self.thing_uid_plug = None
+            self.item_uid_plug = Tomato_Set[place]["ITEM_UID_PLUG"]
+        else:
+            logger.error("%s:No plug defined", place)
         self.thing_offline_on_request = False
         self.now = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
-        logger.info("Started TomatoTimer: %s", self.now)
+        logger.info("%s:Started TomatoTimer: %s", self.place, self.now)
         self.dark_outside_item = StringItem.get_item("Sonnendaten_Sonnenphase")
         dark_outside_state = self.is_dark_outside(self.dark_outside_item.get_value())
-        logger.info("is it dark outside? --> %s", dark_outside_state)
+        logger.info("%s:is it dark outside? --> %s", self.place, dark_outside_state)
 
-        self.watering_active_item = SwitchItem.get_item(DEVICE_NAME_PLUG_STATE)
+        self.watering_active_item = SwitchItem.get_item(self.device_name_plug_state)
         watering_active_state = self.watering_active_item.get_value()
-        logger.info("watering active? --> %s", watering_active_state)
+        logger.info("%s:watering active? --> %s", self.place, watering_active_state)
 
         self.watering_state = watering_active_state == "ON"
 
-        self.get_plug_thing()
+        self.get_plug_thing_or_item()
         self.now = ""  # reset now to disable timer_expired workaround
 
         self.tomato_timer = self.run.soon(self.timer_expired)
@@ -62,30 +81,77 @@ class MyTomatoTimer(HABApp.Rule):
             event (ThingStatusInfoChangedEvent): event that lead to this change
         """
         logger.info(
-            "rule fired because of %s %s --> %s",
+            "%s:rule fired because of %s %s --> %s",
+            self.place,
             event.name,
             event.old_status,
             event.status,
         )
         if event.status == ThingStatusEnum.ONLINE:
             if self.thing_offline_on_request:
-                logger.info("Activate plug now")
+                logger.info("%s:Activate plug now", self.place)
                 self.thing_offline_on_request = False
                 self.activate_watering()
         else:
-            logger.info("%s: Details = %s", event.name, event.detail)
+            logger.info("%s:%s: Details = %s", self.place, event.name, event.detail)
 
-    def get_plug_thing(self):
-        try:
-            self.plug_thing = Thing.get_item(THING_UID_PLUG)
-            self.plug_thing.listen_event(
-                self.thing_status_changed, EventFilter(ThingStatusInfoChangedEvent)
-            )
-            logger.info("Thing   = %s", self.plug_thing.label)
-            logger.info("Status  = %s", self.plug_thing.status)
-        except ItemNotFoundException:
-            logger.warning("Thing %s does not exist", DEVICE_NAME_PLUG_STATE)
-            self.plug_thing = None
+    def item_status_changed(self, event: ValueChangeEvent):
+        """handle changes in plug thing status
+
+        Args:
+            event (ValueChangeEvent): event that lead to this change
+        """
+        logger.info(
+            "%s:rule fired because of %s %s --> %s",
+            self.place,
+            event.name,
+            event.old_status,
+            event.status,
+        )
+        if event.status == "ON":
+            if self.thing_offline_on_request:
+                logger.info("%s:Activate plug now", self.place)
+                self.thing_offline_on_request = False
+                self.activate_watering()
+        else:
+            logger.info("%s:%s: Details = %s", self.place, event.name, event.detail)
+
+    def get_plug_thing_or_item(self):
+        if self.thing_uid_plug is not None:
+            try:
+                self.plug_thing_or_item = Thing.get_item(self.thing_uid_plug)
+                self.plug_thing_or_item.listen_event(
+                    self.thing_status_changed,
+                    EventFilter(ThingStatusInfoChangedEvent),
+                )
+                logger.info(
+                    "%s:Thing   = %s", self.place, self.plug_thing_or_item.label
+                )
+                logger.info(
+                    "%s:Status  = %s", self.place, self.plug_thing_or_item.status
+                )
+            except ItemNotFoundException:
+                logger.warning(
+                    "%s:Thing %s does not exist",
+                    self.place,
+                    self.device_name_plug_state,
+                )
+                self.plug_thing_or_item = None
+        elif self.item_uid_plug is not None:
+            try:
+                self.plug_thing_or_item = SwitchItem.get_item(self.item_uid_plug)
+                self.plug_thing_or_item.listen_event(
+                    self.item_status_changed, ValueChangeEventFilter()
+                )
+                logger.info("%s:Item   = %s", self.place, self.plug_thing_or_item.label)
+                logger.info(
+                    "%s:Status = %s", self.place, self.plug_thing_or_item.get_value()
+                )
+            except ItemNotFoundException:
+                logger.warning(
+                    "%s:Item %s does not exist", self.place, self.device_name_plug_state
+                )
+                self.plug_thing_or_item = None
 
     def get_next_start(self):
         """determine when the pump shall be activated the next time
@@ -102,22 +168,31 @@ class MyTomatoTimer(HABApp.Rule):
         Returns:
             int: delay in minutes
         """
-        logger.info("calculate the next start time")
+        logger.info("%s:calculate the next start time", self.place)
         current_weather_item = StringItem.get_item("openWeatherVorhersage_Wetterlage")
         current_weather_state = current_weather_item.get_value()
-        logger.info("Wetter: Wetterlage               ---   %s", current_weather_state)
+        logger.info(
+            "%s:Wetter: Wetterlage               ---   %s",
+            self.place,
+            current_weather_state,
+        )
         forecast_weather_item = StringItem.get_item(
             "openWeatherVorhersage_Vorhergesagte_Wetterlage"
         )
         forecast_weather_state = forecast_weather_item.get_value()
-        logger.info("Wetter: Vorhergesagte_Wetterlage ---   %s", forecast_weather_state)
+        logger.info(
+            "%s:Wetter: Vorhergesagte_Wetterlage ---   %s",
+            self.place,
+            forecast_weather_state,
+        )
 
         current_rain_item = NumberItem.get_item(
             "openWeatherVorhersage_Current_PrecipitationAmount"
         )
         current_rain_state = current_rain_item.get_value()
         logger.info(
-            "Wetter: Current_PrecipitationAmount         ---   %0.2fmm",
+            "%s:Wetter: Current_PrecipitationAmount         ---   %0.2fmm",
+            self.place,
             current_rain_state,
         )
         forecast_rain_item = NumberItem.get_item(
@@ -125,7 +200,8 @@ class MyTomatoTimer(HABApp.Rule):
         )
         forecast_rain_state = forecast_rain_item.get_value()
         logger.info(
-            "Wetter: ForecastHours03_PrecipitationAmount ---   %0.2fmm",
+            "%s:Wetter: ForecastHours03_PrecipitationAmount ---   %0.2fmm",
+            self.place,
             forecast_rain_state,
         )
 
@@ -134,7 +210,8 @@ class MyTomatoTimer(HABApp.Rule):
         )
         current_temperature_state = current_temperature_item.get_value()
         logger.info(
-            "Wetter: Current_Temperature         ---   %0.2f°C",
+            "%s:Wetter: Current_Temperature         ---   %0.2f°C",
+            self.place,
             current_temperature_state,
         )
         forecast_temperature_item = NumberItem.get_item(
@@ -142,7 +219,8 @@ class MyTomatoTimer(HABApp.Rule):
         )
         forecast_temperature_state = forecast_temperature_item.get_value()
         logger.info(
-            "Wetter: ForecastHours03_Temperature ---   %0.2f°C",
+            "%s:Wetter: ForecastHours03_Temperature ---   %0.2f°C",
+            self.place,
             forecast_temperature_state,
         )
 
@@ -151,7 +229,8 @@ class MyTomatoTimer(HABApp.Rule):
         )
         current_humidity_state = current_humidity_item.get_value()
         logger.info(
-            "Wetter: Luftfeuchtigkeit               ---   %0.1f%%",
+            "%s:Wetter: Luftfeuchtigkeit               ---   %0.1f%%",
+            self.place,
             current_humidity_state,
         )
         forecast_humidity_item = NumberItem.get_item(
@@ -159,7 +238,8 @@ class MyTomatoTimer(HABApp.Rule):
         )
         forecast_humidity_state = forecast_humidity_item.get_value()
         logger.info(
-            "Wetter: Vorhergesagte_Luftfeuchtigkeit ---   %0.1f%%",
+            "%s:Wetter: Vorhergesagte_Luftfeuchtigkeit ---   %0.1f%%",
+            self.place,
             forecast_humidity_state,
         )
 
@@ -168,21 +248,26 @@ class MyTomatoTimer(HABApp.Rule):
         )
         current_wind_state = current_wind_item.get_value()
         logger.info(
-            "Wetter: Windgeschwindigkeit               ---   %skm/h", current_wind_state
+            "%s:Wetter: Windgeschwindigkeit               ---   %skm/h",
+            self.place,
+            current_wind_state,
         )
         forecast_wind_item = NumberItem.get_item(
             "openWeatherVorhersage_Vorhergesagte_Windgeschwindigkeit"
         )
         forecast_wind_state = forecast_wind_item.get_value()
         logger.info(
-            "Wetter: Vorhergesagte_Windgeschwindigkeit ---   %skm/h",
+            "%s:Wetter: Vorhergesagte_Windgeschwindigkeit ---   %skm/h",
+            self.place,
             forecast_wind_state,
         )
 
         current_sun_exposure_item = NumberItem.get_item("Sonnendaten_DirekteStrahlung")
         current_sun_exposure_state = current_sun_exposure_item.get_value()
         logger.info(
-            "Sonnendaten_DirekteStrahlung ---   %0.2flx", current_sun_exposure_state
+            "%s:Sonnendaten_DirekteStrahlung ---   %0.2flx",
+            self.place,
+            current_sun_exposure_state,
         )
         current_sun_exposure_driveway_item = NumberItem.get_item(
             "LichtSensorEinfahrt_Beleuchtungsstaerke"
@@ -191,7 +276,9 @@ class MyTomatoTimer(HABApp.Rule):
             current_sun_exposure_driveway_item.get_value()
         )
         logger.info(
-            "Licht: SensorEinfahrt ---   %0.2flx", current_sun_exposure_driveway_state
+            "%s:Licht: SensorEinfahrt ---   %0.2flx",
+            self.place,
+            current_sun_exposure_driveway_state,
         )
         current_sun_exposure_orielway_item = NumberItem.get_item(
             "LichtSensorErkerWeg_Beleuchtungsstaerke"
@@ -200,34 +287,41 @@ class MyTomatoTimer(HABApp.Rule):
             current_sun_exposure_orielway_item.get_value()
         )
         logger.info(
-            "Licht: SensorErkerWeg ---   %0.2flx", current_sun_exposure_orielway_state
+            "%s:Licht: SensorErkerWeg ---   %0.2flx",
+            self.place,
+            current_sun_exposure_orielway_state,
         )
         current_sun_exposure_well_item = NumberItem.get_item(
             "LichtSensorBrunnen_Beleuchtungsstarke"
         )
         current_sun_exposure_well_state = current_sun_exposure_well_item.get_value()
         logger.info(
-            "Licht: SensorBrunnen   ---   %0.2flx", current_sun_exposure_well_state
+            "%s:Licht: SensorBrunnen   ---   %0.2flx",
+            self.place,
+            current_sun_exposure_well_state,
         )
 
-        if self.plug_thing is None:
-            self.get_plug_thing()
+        if self.plug_thing_or_item is None:
+            self.get_plug_thing_or_item()
 
         calculated_delay = INITIAL_DELAY
-        if self.plug_thing is not None:
-            if self.plug_thing.status != ThingStatusEnum.ONLINE:
+        if self.plug_thing_or_item is not None:
+            if self.plug_thing_or_item.status != ThingStatusEnum.ONLINE:
                 logger.info(
                     "%s: Details = %s",
-                    self.plug_thing.label,
-                    self.plug_thing.status_detail,
+                    self.place,
+                    self.plug_thing_or_item.label,
+                    self.plug_thing_or_item.status_detail,
                 )
-                logger.info("Saving ON-request")
+                logger.info("%s:Saving ON-request", self.place)
                 self.thing_offline_on_request = True
             else:
                 rain_effect_min = (
                     (current_rain_state + forecast_rain_state) / 2
                 ) * RAIN_EFFECT_FACTOR
-                logger.info("rain_effect_min  ---   %0.1fmin", rain_effect_min)
+                logger.info(
+                    "%s:rain_effect_min  ---   %0.1fmin", self.place, rain_effect_min
+                )
 
                 temperature_effect_min = (
                     math.log2(
@@ -243,7 +337,9 @@ class MyTomatoTimer(HABApp.Rule):
                     * TEMPERATURE_EFFECT_FACTOR
                 )
                 logger.info(
-                    "temperature_effect_min  ---   %0.1fmin", temperature_effect_min
+                    "%s:temperature_effect_min  ---   %0.1fmin",
+                    self.place,
+                    temperature_effect_min,
                 )
 
                 humidity_effect_min = (
@@ -253,13 +349,21 @@ class MyTomatoTimer(HABApp.Rule):
                     )
                     * HUMIDITY_EFFECT_FACTOR
                 )
-                logger.info("humidity_effect_min  ---   %0.1fmin", humidity_effect_min)
+                logger.info(
+                    "%s:humidity_effect_min  ---   %0.1fmin",
+                    self.place,
+                    humidity_effect_min,
+                )
 
                 wind_effect_min = (
                     math.log10((current_wind_state + forecast_wind_state) / 2)
                     * WIND_EFFECT_FACTOR
                 )
-                logger.info("wind_effect_min      ---   %0.1fmin", wind_effect_min)
+                logger.info(
+                    "%s:wind_effect_min      ---   %0.1fmin",
+                    self.place,
+                    wind_effect_min,
+                )
 
                 light_effect_min = (
                     math.log10(
@@ -272,7 +376,11 @@ class MyTomatoTimer(HABApp.Rule):
                     )
                     * LIGHT_EFFECT_FACTOR
                 )
-                logger.info("light_effect_min     ---   %0.1fmin", light_effect_min)
+                logger.info(
+                    "%s:light_effect_min     ---   %0.1fmin",
+                    self.place,
+                    light_effect_min,
+                )
 
                 calculated_delay = (
                     INITIAL_DELAY
@@ -282,19 +390,19 @@ class MyTomatoTimer(HABApp.Rule):
                     - light_effect_min
                 )
 
-        logger.info("calculated delay = %0.1fmin", calculated_delay)
+        logger.info("%s:calculated delay = %0.1fmin", self.place, calculated_delay)
         return calculated_delay
 
     def timer_expired(self):
         """TomatoTimer expired"""
 
-        logger.info("TomatoTimer expired")
+        logger.info("%s:TomatoTimer expired", self.place)
 
         self.tomato_timer = None
         # workaround as timer_expired is executed twice for on_sunrise
         now = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
         if now == self.now:
-            logger.info("TomatoTimer expired now already")
+            logger.info("%s:TomatoTimer expired now already", self.place)
             return
         else:
             self.now = now
@@ -305,29 +413,36 @@ class MyTomatoTimer(HABApp.Rule):
                 timedelta(minutes=30)
             )
             logger.info(
-                "no tomato time - next trigger time: %s",
+                "%s:no tomato time - next trigger time: %s",
+                self.place,
                 self.tomato_timer.get_next_run().strftime("%d/%m/%Y %H:%M:%S"),
             )
         else:
             dark_outside_state = self.dark_outside_item.get_value()
             is_dark = self.is_dark_outside(dark_outside_state)
             if is_dark:
-                logger.info("Start next timer at sun rise")
+                logger.info("%s:Start next timer at sun rise", self.place)
                 if self.tomato_timer is None:
                     self.tomato_timer = self.run.on_sunrise(self.timer_expired).offset(
                         timedelta(minutes=30)
                     )
                     logger.info(
-                        "next trigger time: %s",
+                        "%s:next trigger time: %s",
+                        self.place,
                         self.tomato_timer.get_next_run().strftime("%d/%m/%Y %H:%M:%S"),
                     )
                 else:
                     logger.info(
-                        "timer already running --> next trigger time: %s",
+                        "%s:timer already running --> next trigger time: %s",
+                        self.place,
                         self.tomato_timer.get_next_run().strftime("%d/%m/%Y %H:%M:%S"),
                     )
             else:
-                logger.info("Set watering active for %s sec", TIME_FOR_WATERING_MIN)
+                logger.info(
+                    "%s:Set watering active for %s sec",
+                    self.place,
+                    TIME_FOR_WATERING_MIN,
+                )
                 self.activate_watering()
                 duration_next_start = self.get_next_start()
                 if self.tomato_timer is None:
@@ -336,20 +451,21 @@ class MyTomatoTimer(HABApp.Rule):
                         callback=self.timer_expired,
                     )
                     logger.info(
-                        "next trigger time: %s",
+                        "%s:next trigger time: %s",
+                        self.place,
                         self.tomato_timer.get_next_run().strftime("%d/%m/%Y %H:%M:%S"),
                     )
                 else:
                     logger.info(
-                        "timer already running --> next trigger time: %s",
-                        self.tomato_timer.get_next_run().strftime("%d/%m/%Y %H:%M:%S"),
+                        "%s:timer already running --> next trigger time: %s",
+                        self.place,
                     )
 
     def deactivate_watering(self):
         """deactivate the watering"""
-        logger.info("set watering: OFF")
+        logger.info("%s:set watering: OFF", self.place)
         self.watering_state = False
-        self.openhab.send_command(DEVICE_NAME_PLUG_STATE, "OFF")
+        self.openhab.send_command(self.device_name_plug_state, "OFF")
 
     def activate_watering(self):
         """activate the watering for a given time
@@ -357,9 +473,9 @@ class MyTomatoTimer(HABApp.Rule):
         Args:
             state (datetime): duration for which the pump shall be ON
         """
-        logger.info("set watering: ON")
+        logger.info("%s:set watering: ON", self.place)
         self.watering_state = True
-        self.openhab.send_command(DEVICE_NAME_PLUG_STATE, "ON")
+        self.openhab.send_command(self.device_name_plug_state, "ON")
         self.run.at(
             time=timedelta(minutes=TIME_FOR_WATERING_MIN),
             callback=self.deactivate_watering,
@@ -380,4 +496,5 @@ class MyTomatoTimer(HABApp.Rule):
 
 
 # Rules
-MyTomatoTimer()
+MyTomatoTimer("unten")
+MyTomatoTimer("oben")
