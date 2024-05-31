@@ -3,6 +3,7 @@ import logging  # required for extended logging
 from datetime import timedelta, datetime, time
 
 import HABApp
+from HABApp.core.errors import ItemNotFoundException
 from HABApp.openhab.items import StringItem, SwitchItem, Thing
 from HABApp.openhab.definitions import ThingStatusEnum
 from HABApp.openhab.events import (
