@@ -23,9 +23,9 @@ Tomato_Set = {
         "DEVICE_NAME_PLUG_STATE": "SteckdosePool_State",
     },
 }
-INITIAL_DELAY = 160
+INITIAL_DELAY = 180
 
-RAIN_EFFECT_FACTOR = 5
+RAIN_EFFECT_FACTOR = 500
 TEMPERATURE_EFFECT_BASE = 25
 TEMPERATURE_EFFECT_FACTOR = 2
 HUMIDITY_EFFECT_BASE = 100
@@ -189,7 +189,7 @@ class MyTomatoTimer(HABApp.Rule):
         current_rain_item = NumberItem.get_item(
             "openWeatherVorhersage_Current_PrecipitationAmount"
         )
-        current_rain_state = current_rain_item.get_value()
+        current_rain_state = current_rain_item.get_value() * 1000  # convert to mm
         logger.info(
             "%s:Wetter: Current_PrecipitationAmount         ---   %0.2fmm",
             self.place,
@@ -198,7 +198,7 @@ class MyTomatoTimer(HABApp.Rule):
         forecast_rain_item = NumberItem.get_item(
             "openWeatherVorhersage_ForecastHours03_PrecipitationAmount"
         )
-        forecast_rain_state = forecast_rain_item.get_value()
+        forecast_rain_state = forecast_rain_item.get_value() * 1000  # convert to mm
         logger.info(
             "%s:Wetter: ForecastHours03_PrecipitationAmount ---   %0.2fmm",
             self.place,
@@ -306,7 +306,14 @@ class MyTomatoTimer(HABApp.Rule):
 
         calculated_delay = INITIAL_DELAY
         if self.plug_thing_or_item is not None:
-            if self.plug_thing_or_item.status != ThingStatusEnum.ONLINE:
+            offline = False
+            if self.thing_uid_plug is not None:
+                if self.plug_thing_or_item.status != ThingStatusEnum.ONLINE:
+                    offline = True
+            if self.item_uid_plug is not None:
+                if self.plug_thing_or_item.get_value() != "ON":
+                    offline = True
+            if offline:
                 logger.info(
                     "%s: Details = %s",
                     self.place,
