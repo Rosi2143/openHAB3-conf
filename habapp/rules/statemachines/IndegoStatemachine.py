@@ -418,7 +418,7 @@ class IndegoStatemachine(StateMachine):
             self._logger.info(
                 "overall time = %s", self.format_time(self.get_total_time())
             )
-            self.stop_mowing(self.STATUS_DOCK)
+            self.pause_mowing(self.STATUS_DOCK)
             self._logger.info("###########################################")
         else:
             self._logger.error(self.get_trace_header() + "Undefined transition")
@@ -467,7 +467,7 @@ class IndegoStatemachine(StateMachine):
             f"{self.get_trace_header()}entered {self.STATUS_PAUSE} - source state was {source.id}"
         )
         if (source.id == self.STATUS_MOW) or (source.id == self.STATUS_MOWING_COMPLETE):
-            self.stop_mowing(self.STATUS_PAUSE)
+            self.pause_mowing(self.STATUS_PAUSE)
             self._logger.debug(f"{self.get_trace_header()}starting pause timer")
         else:
             self._logger.error(self.get_trace_header() + "Undefined transition")
@@ -546,9 +546,9 @@ class IndegoStatemachine(StateMachine):
         if self.current_state.name.lower() == self.STATUS_MOW:
             pausetime = self.get_pause_duration_sec(self.get_state_name())
         else:
-            pausetime = (
-                self.get_pause_duration_sec() + self.get_new_pause_duration_sec()
-            )
+            pausetime = self.get_pause_duration_sec(
+                self.get_state_name()
+            ) + self.get_new_pause_duration_sec(self.get_state_name())
         mowtime = self.get_new_mowing_duration_sec(self.get_state_name()) - pausetime
 
         return mowtime, pausetime
