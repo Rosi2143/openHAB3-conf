@@ -552,7 +552,7 @@ class IkeaZigbeeDevices(HABApp.Rule):
         if exitcode != 0:
             return exitcode
 
-        my_oh_item_charging_level.oh_send_command(battery_charge)
+        my_oh_item_charging_level.oh_send_command(int(battery_charge) / 100)
         my_oh_item_batterystate.oh_send_command(self.state_map[str(battery_weak)])
         my_oh_item_updatepending.oh_send_command(self.state_map[str(update_available)])
         my_oh_item_motionstate.oh_send_command(self.state_map[str(occupancy)])
@@ -630,7 +630,7 @@ class IkeaZigbeeDevices(HABApp.Rule):
             return exitcode
 
         if self.oh_number_item_changed(my_oh_item_charging_level, battery_charge):
-            my_oh_item_charging_level.oh_send_command(battery_charge)
+            my_oh_item_charging_level.oh_send_command(int(battery_charge) / 100)
         if self.oh_switch_item_changed(
             my_oh_item_batterystate, self.state_map[str(battery_weak)]
         ):
