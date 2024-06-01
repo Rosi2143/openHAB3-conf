@@ -4,7 +4,8 @@ import os
 import sys
 
 import HABApp
-from HABApp.openhab.items import StringItem
+from HABApp.openhab import transformations
+from HABApp.openhab.items import DimmerItem, NumberItem, StringItem
 from HABApp.core.events import (
     ValueChangeEvent,
     ValueChangeEventFilter,
@@ -23,6 +24,19 @@ HABAPP_RULES = HABApp.DictParameter(param_file, "HABAPP_Directories", default_va
 OH_ITEM_INDEGO_STATUS_TEXT = "Bosch_Indego_StatusText"
 OH_ITEM_INDEGO_MOW_TIME = "Bosch_Indego_Last_MowTime"
 OH_ITEM_INDEGO_PAUSE_TIME = "Bosch_Indego_Last_PauseTime"
+OH_ITEM_INDEGO_COMMAND = "Bosch_Indego_Zustand_numerisch"
+OH_ITEM_INDEGO_PROGRESS = "Bosch_Indego_Gras_schneiden"
+INDEGO_MAP = transformations.map[
+    "indego.map"
+]  # load the transformation, can be used anywhere
+
+OH_ITEM_RAIN_PRECIPATION_CURRENT = "openWeatherVorhersage_Current_PrecipitationAmount"
+OH_ITEM_WEATHER_STATE_CURRENT = "openWeatherVorhersage_Wetterlage"
+OH_ITEM_RAIN_PRECIPATION_FORECAST_3h = (
+    "openWeatherVorhersage_ForecastHours03_PrecipitationAmount"
+)
+OH_ITEM_WEATHER_STATE_FORECAST_3h = "openWeatherVorhersage_Vorhergesagte_Wetterlage"
+
 UPDATE_DURATION_SEC = 30
 
 sys.path.append(os.path.join(OH_CONF, HABAPP_RULES))
@@ -38,9 +52,40 @@ class Indego(HABApp.Rule):
         """initialize the logger test"""
         super().__init__()
 
-        self.statusText = StringItem.get_item(OH_ITEM_INDEGO_STATUS_TEXT)
-        self.statusText.listen_event(self.status_changes, ValueChangeEventFilter())
-        logger.info("Indego started. Current state = %s", self.statusText.value)
+        self.statusTextOhItem = StringItem.get_item(OH_ITEM_INDEGO_STATUS_TEXT)
+        self.statusTextOhItem.listen_event(
+            self.indego_status_changes, ValueChangeEventFilter()
+        )
+
+        self.progressOhItem = DimmerItem.get_item(OH_ITEM_INDEGO_PROGRESS)
+
+        self.rainCurrentOhItem = NumberItem.get_item(OH_ITEM_RAIN_PRECIPATION_CURRENT)
+        self.rainCurrentOhItem.listen_event(
+            self.weather_changed, ValueChangeEventFilter()
+        )
+
+        self.rainForecastOhItem = NumberItem.get_item(
+            OH_ITEM_RAIN_PRECIPATION_FORECAST_3h
+        )
+        self.rainForecastOhItem.listen_event(
+            self.weather_changed, ValueChangeEventFilter()
+        )
+
+        self.weatherCurrentOhItem = StringItem.get_item(OH_ITEM_WEATHER_STATE_CURRENT)
+        self.weatherCurrentOhItem.listen_event(
+            self.weather_changed, ValueChangeEventFilter()
+        )
+
+        self.weatherForecastOhItem = StringItem.get_item(
+            OH_ITEM_WEATHER_STATE_FORECAST_3h
+        )
+        self.weatherForecastOhItem.listen_event(
+            self.weather_changed, ValueChangeEventFilter()
+        )
+
+        self.indegoCommandOhItem = NumberItem.get_item(OH_ITEM_INDEGO_COMMAND)
+
+        logger.info("Indego started. Current state = %s", self.statusTextOhItem.value)
 
         self.startTimeMow = datetime.now()
         self.mowingTime = 0
@@ -50,11 +95,59 @@ class Indego(HABApp.Rule):
         self.last_mowing_time = self.mowingTime
         self.last_pause_time = self.pauseTime
         self.next_timer_job = self.run.soon(
-            self.status_changes,
+            self.indego_status_changes,
+            ValueChangeEvent(name="start-up", value="none", old_value="none"),
+        )
+        self.next_timer_job = self.run.soon(
+            self.weather_changed,
             ValueChangeEvent(name="start-up", value="none", old_value="none"),
         )
 
-    def status_changes(self, event: ValueChangeEvent):
+    def weather_changed(self, event: ValueChangeEvent):
+        """
+        send event to indego if rain starts
+        Args:
+            event (_type_): any weather change
+        """
+        logger.info(
+            "rule fired because of %s %s --> %s",
+            event.name,
+            event.old_value,
+            event.value,
+        )
+
+        self.rainCurrentOhItem = NumberItem.get_item(
+            OH_ITEM_RAIN_PRECIPATION_CURRENT
+        ).get_value()
+        self.raintForecast = NumberItem.get_item(
+            OH_ITEM_RAIN_PRECIPATION_FORECAST_3h
+        ).get_value()
+        self.weatherCurrentOhItem = StringItem.get_item(
+            OH_ITEM_WEATHER_STATE_CURRENT
+        ).get_value()
+        self.weatherForecastOhItem = StringItem.get_item(
+            OH_ITEM_WEATHER_STATE_FORECAST_3h
+        ).get_value()
+
+        if (
+            self.rainCurrentOhItem > 0
+            or self.raintForecast > 0
+            or "rain" in str(self.weatherCurrentOhItem).lower()
+            or "rain" in str(self.weatherForecastOhItem).lower()
+        ):
+            if self.statusTextOhItem != indego_state_machine.STATUS_DOCK:
+                self.indegoCommandOhItem.oh_send_command(INDEGO_MAP["return_to_dock"])
+                logger.info("Rain detected - Indego is returning to dock")
+        else:
+            if (
+                indego_state_machine.current_state.name.lower()
+                == indego_state_machine.STATUS_DOCK
+            ):
+                if self.progressOhItem.get_value() <= 80:
+                    self.indegoCommandOhItem.oh_send_command(INDEGO_MAP["mow"])
+                    logger.info("Indego is docked and rain stopped - starting mowing")
+
+    def indego_status_changes(self, event: ValueChangeEvent):
         """
         send event to DoorLock statemachine if ReportedLock changes
         Args:
@@ -67,11 +160,11 @@ class Indego(HABApp.Rule):
             event.value,
         )
 
-        self.statusText = str(
+        self.statusTextOhItem = str(
             StringItem.get_item(OH_ITEM_INDEGO_STATUS_TEXT).get_value()
         )
 
-        indego_state_machine.set_reported_state(self.statusText)
+        indego_state_machine.set_reported_state(self.statusTextOhItem)
 
         if (
             indego_state_machine.current_state.name.lower()
