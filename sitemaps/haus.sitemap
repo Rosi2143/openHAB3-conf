@@ -8,12 +8,6 @@ sitemap haus label="My home automation" {
         Switch item=Hue_Raum_Einfahrt_Betrieb label="Einfahrt"
         Switch item=Hue_Raum_Erkerweg_Betrieb label="Erkerweg"
     }
-    Frame label="Zigbee" {
-        Switch item=Zigbee2Mqtt_PermitJoin label="Permit to Join"
-        Setpoint item=Zigbee2Mqtt_PermitJoin_Timeout label="Timeout [%.0f %unit%]" minValue=5 maxValue=180 step=5
-        Text item=Zigbee2Mqtt_PermitJoin_TimeRemain label="Remaining time [%.0f %unit%]"
-        Switch item=Zigbee2Mqtt_Restart_Bridge label="Restart bridge"
-    }
     Frame label="Livarno" {
         Default item=eSteckdosePool label="Steckdose Pool"
         Default item=eSteckdoseRosenbogen label="Steckdose Rosenbogen"
@@ -21,14 +15,15 @@ sitemap haus label="My home automation" {
         Default item=eStrahlerRosenbogen label="LED-Strahler Rechts"
         Selection item=StrahlerPool_Effect label="Effekt Links" mappings=["blink"="Blinken", "breathe"="Atmen", "okay"="Okay", "stop_effect"="Stop"]
         Selection item=StrahlerRosenbogen_Effect label="Effekt Rechts" mappings=["blink"="Blinken", "breathe"="Atmen", "okay"="Okay", "stop_effect"="Stop"]
+        Group item=gFaderAndEffects label="Fader und Effekte"
     }
-
-    Frame label="Faders" {
-        Switch item=LichtGrillbereich_FadeTrigger label="Grill Fade [%s]"
-        Slider item=LichtGrillbereich_FadeDuration label="Grill Zeit (30...600) [%.0f %unit%]" minValue=30 maxValue=600 step=10
-        Switch item=FernseherLEDStrip_FadeTrigger label="TV Fade [%s]"
-        Slider item=FernseherLEDStrip_FadeDuration label="TV Zeit (30...600) [%.0f %unit%]" minValue=30 maxValue=600 step=10
-        Switch item=Brunnen_FadeTrigger label="Brunnen Fade [%s]"
-        Slider item=Brunnen_FadeDuration label="Brunnen Zeit (30...600) [%.0f %unit%]" minValue=30 maxValue=600 step=10
+    Frame label="Schloss" {
+        Group item=SchlossWaschkueche label="Waschküche"
+    }
+    Frame label="Zigbee" {
+        Switch item=Zigbee2Mqtt_PermitJoin label="Permit to Join"
+        Setpoint item=Zigbee2Mqtt_PermitJoin_Timeout label="Timeout [%.0f %unit%]" minValue=5 maxValue=180 step=5
+        Text item=Zigbee2Mqtt_PermitJoin_TimeRemain label="Remaining time [%.0f %unit%]"
+        Switch item=Zigbee2Mqtt_Restart_Bridge label="Restart bridge"
     }
 }
