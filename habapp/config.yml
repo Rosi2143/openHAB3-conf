@@ -11,7 +11,7 @@ location:
   elevation: 100.0
 mqtt:
   connection:
-    client_id: "HABApp3" # ClientId that is used to uniquely identify this client on the mqtt broker.
+    identifier: "HABApp3" # ClientId that is used to uniquely identify this client on the mqtt broker.
     host: "192.168.178.37" # Connect to this host. Empty string ("") disables the connection.
     port: 1883
     user: ""
