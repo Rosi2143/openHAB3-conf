@@ -209,6 +209,9 @@ class Homematic_Overheat(HABApp.Rule):
             event.value,
         )
 
+        if event.value is None:
+            return
+
         set_temp = int(event.value)
 
         if set_temp >= MAX_ALLOWED_TEMP:
@@ -273,9 +276,7 @@ class WindowState(HABApp.Rule):
                 "WindowOpenStateItem: %s does not exist.", windowstate_item_name
             )
         else:
-            logger.info(
-                "Set %s to %s.", windowstate_item_name, str(event.value)
-            )
+            logger.info("Set %s to %s.", windowstate_item_name, str(event.value))
             self.openhab.send_command(windowstate_item_name, str(event.value))
 
 
