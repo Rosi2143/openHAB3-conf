@@ -244,6 +244,15 @@ handlers:
     formatter: HABApp_format
     level: INFO
 
+  PoolHandler:
+    class: HABApp.config.logging.MidnightRotatingFileHandler
+    filename: "/mnt/usb1/log/habapp/Pool.log" # absolute filename is recommended
+    maxBytes: 10_000_000
+    backupCount: 3
+
+    formatter: HABApp_format
+    level: INFO
+
   ScenesHandler:
     class: HABApp.config.logging.MidnightRotatingFileHandler
     filename: "/mnt/usb1/log/habapp/Scenes.log" # absolute filename is recommended
@@ -457,6 +466,12 @@ loggers:
     level: INFO
     handlers:
       - NotificationHandler
+    propagate: False
+
+  Pool:
+    level: INFO
+    handlers:
+      - PoolHandler
     propagate: False
 
   Scenes:

@@ -43,6 +43,9 @@ class AstroInfo(HABApp.Rule):
         self.openhab.send_command("Hue_Zone_Garten_Betrieb", "OFF")
         self.openhab.send_command("IstTag", "ON")
 
+        logger.info("Poolpump deactivate")
+        self.openhab.send_command("SteckdosePool_State", "OFF")
+
     def sunset(self):
         """
         handle sunset start event
@@ -59,6 +62,9 @@ class AstroInfo(HABApp.Rule):
 
         self.openhab.send_command("IstTag", "OFF")
 
+        logger.info("Poolpump activate")
+        self.openhab.send_command("SteckdosePool_State", "ON")
+
     def sundusk(self):
         """
         handle astroDusk (+20min) start event
@@ -67,7 +73,10 @@ class AstroInfo(HABApp.Rule):
         """
         logger.info(self.func_name())
 
-        if ContactItem.get_item("TuerWaschkuecheTerrasse_OpenState").get_value() == "OPEN":
+        if (
+            ContactItem.get_item("TuerWaschkuecheTerrasse_OpenState").get_value()
+            == "OPEN"
+        ):
             self.openhab.send_command("SchlossWaschkueche_Fehler", "ON")
             logger.error("cannot lock the door -- as it is open")
         else:
