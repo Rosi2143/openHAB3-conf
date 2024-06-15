@@ -19,8 +19,8 @@ Tomato_Set = {
         "DEVICE_NAME_PLUG_STATE": "AussenSteckdose_Betrieb",
     },
     "unten": {
-        "ITEM_UID_PLUG": "SteckdosePool_Online",
-        "DEVICE_NAME_PLUG_STATE": "SteckdosePool_State",
+        "ITEM_UID_PLUG": "SteckdoseRosenbogen_Online",
+        "DEVICE_NAME_PLUG_STATE": "SteckdoseRosenbogen_State",
     },
 }
 INITIAL_DELAY = 180
@@ -105,10 +105,10 @@ class MyTomatoTimer(HABApp.Rule):
             "%s:rule fired because of %s %s --> %s",
             self.place,
             event.name,
-            event.old_status,
-            event.status,
+            event.old_value,
+            event.value,
         )
-        if event.status == "ON":
+        if event.value == "ON":
             if self.thing_offline_on_request:
                 logger.info("%s:Activate plug now", self.place)
                 self.thing_offline_on_request = False
@@ -189,18 +189,18 @@ class MyTomatoTimer(HABApp.Rule):
         current_rain_item = NumberItem.get_item(
             "openWeatherVorhersage_Current_PrecipitationAmount"
         )
-        current_rain_state = current_rain_item.get_value() * 1000  # convert to mm
+        current_rain_state = current_rain_item.get_value()
         logger.info(
-            "%s:Wetter: Current_PrecipitationAmount         ---   %0.2fmm",
+            "%s:Wetter: Current_PrecipitationAmount         ---   %0.1fmm",
             self.place,
             current_rain_state,
         )
         forecast_rain_item = NumberItem.get_item(
             "openWeatherVorhersage_ForecastHours03_PrecipitationAmount"
         )
-        forecast_rain_state = forecast_rain_item.get_value() * 1000  # convert to mm
+        forecast_rain_state = forecast_rain_item.get_value()
         logger.info(
-            "%s:Wetter: ForecastHours03_PrecipitationAmount ---   %0.2fmm",
+            "%s:Wetter: ForecastHours03_PrecipitationAmount ---   %0.1fmm",
             self.place,
             forecast_rain_state,
         )
@@ -210,7 +210,7 @@ class MyTomatoTimer(HABApp.Rule):
         )
         current_temperature_state = current_temperature_item.get_value()
         logger.info(
-            "%s:Wetter: Current_Temperature         ---   %0.2f°C",
+            "%s:Wetter: Current_Temperature         ---   %0.1f°C",
             self.place,
             current_temperature_state,
         )
@@ -219,7 +219,7 @@ class MyTomatoTimer(HABApp.Rule):
         )
         forecast_temperature_state = forecast_temperature_item.get_value()
         logger.info(
-            "%s:Wetter: ForecastHours03_Temperature ---   %0.2f°C",
+            "%s:Wetter: ForecastHours03_Temperature ---   %0.1f°C",
             self.place,
             forecast_temperature_state,
         )
@@ -265,7 +265,7 @@ class MyTomatoTimer(HABApp.Rule):
         current_sun_exposure_item = NumberItem.get_item("Sonnendaten_DirekteStrahlung")
         current_sun_exposure_state = current_sun_exposure_item.get_value()
         logger.info(
-            "%s:Sonnendaten_DirekteStrahlung ---   %0.2flx",
+            "%s:Sonnendaten_DirekteStrahlung ---   %dlx",
             self.place,
             current_sun_exposure_state,
         )
@@ -470,7 +470,9 @@ class MyTomatoTimer(HABApp.Rule):
 
     def deactivate_watering(self):
         """deactivate the watering"""
-        logger.info("%s:set watering: OFF", self.place)
+        logger.info(
+            "%s:set watering: OFF for %s", self.place, self.device_name_plug_state
+        )
         self.watering_state = False
         self.openhab.send_command(self.device_name_plug_state, "OFF")
 
@@ -480,7 +482,9 @@ class MyTomatoTimer(HABApp.Rule):
         Args:
             state (datetime): duration for which the pump shall be ON
         """
-        logger.info("%s:set watering: ON", self.place)
+        logger.info(
+            "%s:set watering: ON for %s", self.place, self.device_name_plug_state
+        )
         self.watering_state = True
         self.openhab.send_command(self.device_name_plug_state, "ON")
         self.run.at(
