@@ -64,20 +64,24 @@ class Hue(HABApp.Rule):
             event (_type_): triggering event
         """
 
-        EinfahrtDunkel = SwitchItem.get_item("LichtSensorEinfahrt_Dunkel").get_value()
+        EinfahrtDunkel = SwitchItem.get_item("LichtSensorEinfahrt_Dunkel").get_value(
+            default_value="OFF"
+        )
         EinfahrtBewegung = SwitchItem.get_item(
             "BewegungsmelderErkerweg_MotionLong"
-        ).get_value()
+        ).get_value(default_value="OFF")
         try:
             EinfahrtMax = int(
-                GroupItem.get_item("Hue_Raum_Einfahrt_Max").get_value() * 100
+                GroupItem.get_item("Hue_Raum_Einfahrt_Max").get_value(default_value=0)
+                * 100
             )
         except ValueError as ve:
             logger.error("ValueError: %s", ve)
             EinfahrtMax = 0
         try:
             EinfahrtMin = int(
-                GroupItem.get_item("Hue_Raum_Einfahrt_Min").get_value() * 100
+                GroupItem.get_item("Hue_Raum_Einfahrt_Min").get_value(default_value=0)
+                * 100
             )
         except ValueError as ve:
             logger.error("ValueError: %s", ve)
@@ -104,20 +108,24 @@ class Hue(HABApp.Rule):
         else:
             self.openhab.send_command("Hue_Raum_Einfahrt_Betrieb", "OFF")
 
-        ErkerWegDunkel = SwitchItem.get_item("LichtSensorErkerWeg_Dunkel").get_value()
+        ErkerWegDunkel = SwitchItem.get_item("LichtSensorErkerWeg_Dunkel").get_value(
+            default_value="OFF"
+        )
         ErkerWegBewegung = SwitchItem.get_item(
             "BewegungsmelderErkerweg_MotionLong"
-        ).get_value()
+        ).get_value(default_value="OFF")
         try:
             ErkerWegMax = int(
-                GroupItem.get_item("Hue_Raum_Erkerweg_Max").get_value() * 100
+                GroupItem.get_item("Hue_Raum_Erkerweg_Max").get_value(default_value=0)
+                * 100
             )
         except ValueError as ve:
             logger.error("ValueError: %s", ve)
             ErkerWegMax = 0
         try:
             ErkerWegMin = int(
-                GroupItem.get_item("Hue_Raum_Erkerweg_Min").get_value() * 100
+                GroupItem.get_item("Hue_Raum_Erkerweg_Min").get_value(default_value=0)
+                * 100
             )
         except ValueError as ve:
             logger.error("ValueError: %s", ve)
@@ -144,14 +152,17 @@ class Hue(HABApp.Rule):
         else:
             self.openhab.send_command("Hue_Raum_Erkerweg_Betrieb", "OFF")
 
-        BrunnenDunkel = SwitchItem.get_item("LichtSensorBrunnen_Dunkel").get_value()
+        BrunnenDunkel = SwitchItem.get_item("LichtSensorBrunnen_Dunkel").get_value(
+            default_value="OFF"
+        )
         BrunnenBewegung = SwitchItem.get_item(
             "BewegungsmelderBrunnen_BewegungLong"
-        ).get_value()
+        ).get_value(default_value="OFF")
 
         try:
             BrunnenMax = int(
-                GroupItem.get_item("Hue_Raum_Brunnen_Max").get_value() * 100
+                GroupItem.get_item("Hue_Raum_Brunnen_Max").get_value(default_value=0)
+                * 100
             )
         except ValueError as ve:
             logger.error("ValueError: %s", ve)
@@ -159,7 +170,8 @@ class Hue(HABApp.Rule):
 
         try:
             BrunnenMin = int(
-                GroupItem.get_item("Hue_Raum_Brunnen_Min").get_value() * 100
+                GroupItem.get_item("Hue_Raum_Brunnen_Min").get_value(default_value=0)
+                * 100
             )
         except ValueError as ve:
             logger.error("ValueError: %s", ve)
