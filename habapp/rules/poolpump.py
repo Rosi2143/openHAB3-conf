@@ -42,7 +42,7 @@ class MyPoolPumpTimer(HABApp.Rule):
             self.poolpump_activation_item.get_value(),
         )
 
-    def activate_pump(self):
+    def activate_pump(self, event: ValueChangeEvent):
         """activate the pump for a given time if the activation item is set to ON
 
         Args:
