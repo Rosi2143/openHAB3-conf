@@ -43,9 +43,6 @@ class AstroInfo(HABApp.Rule):
         self.openhab.send_command("Hue_Zone_Garten_Betrieb", "OFF")
         self.openhab.send_command("IstTag", "ON")
 
-        logger.info("Poolpump deactivate")
-        self.openhab.send_command("SteckdosePool_State", "OFF")
-
     def sunset(self):
         """
         handle sunset start event
@@ -61,9 +58,6 @@ class AstroInfo(HABApp.Rule):
             self.openhab.send_command("Hue_Zone_Garten_Zone", "Nachtlicht")
 
         self.openhab.send_command("IstTag", "OFF")
-
-        logger.info("Poolpump activate")
-        self.openhab.send_command("SteckdosePool_State", "ON")
 
     def sundusk(self):
         """
