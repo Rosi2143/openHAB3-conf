@@ -109,6 +109,15 @@ handlers:
     formatter: HABApp_format
     level: INFO
 
+  GardenaHandler:
+    class: HABApp.config.logging.MidnightRotatingFileHandler
+    filename: "/mnt/usb1/log/habapp/Gardena.log"
+    maxBytes: 10_000_000
+    backupCount: 3
+
+    formatter: HABApp_format
+    level: INFO
+
   HabpanelHandler:
     class: HABApp.config.logging.MidnightRotatingFileHandler
     filename: "/mnt/usb1/log/habapp/Habpanel.log"
@@ -376,6 +385,12 @@ loggers:
     level: DEBUG
     handlers:
       - FaderHandler
+    propagate: False
+
+  Gardena:
+    level: DEBUG
+    handlers:
+      - GardenaHandler
     propagate: False
 
   Habpanel:
