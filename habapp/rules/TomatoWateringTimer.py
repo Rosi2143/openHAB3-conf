@@ -24,8 +24,8 @@ Tomato_Set = {
     },
 }
 INITIAL_DELAY = 180
-
 RAIN_EFFECT_FACTOR = 500
+
 TEMPERATURE_EFFECT_BASE = 25
 TEMPERATURE_EFFECT_FACTOR = 2
 HUMIDITY_EFFECT_BASE = 100
@@ -72,7 +72,52 @@ class MyTomatoTimer(HABApp.Rule):
         self.get_plug_thing_or_item()
         self.now = ""  # reset now to disable timer_expired workaround
 
+        # get config items from UI
+        self.initial_delay_item = NumberItem.get_item("Tomato_Initial_Delay")
+        self.initial_delay = self.initial_delay_item.get_value(INITIAL_DELAY)
+        self.initial_delay_item.listen_event(
+            self.initial_delay_changed, ValueChangeEventFilter()
+        )
+
+        self.rain_effect_item = NumberItem.get_item("Tomato_RainEffect_Factor")
+        self.rain_effect = self.rain_effect_item.get_value(RAIN_EFFECT_FACTOR)
+        self.rain_effect_item.listen_event(
+            self.rain_effect_changed, ValueChangeEventFilter()
+        )
+
         self.tomato_timer = self.run.soon(self.timer_expired)
+
+    def initial_delay_changed(self, event: ValueChangeEvent):
+        """handle changes in initial delay item
+
+        Args:
+            event (ValueChangeEvent): event that lead to this change
+        """
+        logger.info(
+            "%s:rule fired because of %s %s --> %s",
+            self.place,
+            event.name,
+            event.old_value,
+            event.value,
+        )
+        self.initial_delay = event.value
+        self.run.soon(self.timer_expired)
+
+    def rain_effect_changed(self, event: ValueChangeEvent):
+        """handle changes in initial delay item
+
+        Args:
+            event (ValueChangeEvent): event that lead to this change
+        """
+        logger.info(
+            "%s:rule fired because of %s %s --> %s",
+            self.place,
+            event.name,
+            event.old_value,
+            event.value,
+        )
+        self.rain_effect = event.value
+        self.run.soon(self.timer_expired)
 
     def thing_status_changed(self, event: ThingStatusInfoChangedEvent):
         """handle changes in plug thing status
@@ -304,7 +349,7 @@ class MyTomatoTimer(HABApp.Rule):
         if self.plug_thing_or_item is None:
             self.get_plug_thing_or_item()
 
-        calculated_delay = INITIAL_DELAY
+        calculated_delay = self.initial_delay
         if self.plug_thing_or_item is not None:
             offline = False
             if self.thing_uid_plug is not None:
@@ -325,7 +370,7 @@ class MyTomatoTimer(HABApp.Rule):
             else:
                 rain_effect_min = (
                     (current_rain_state + forecast_rain_state) / 2
-                ) * RAIN_EFFECT_FACTOR
+                ) * self.rain_effect
                 logger.info(
                     "%s:rain_effect_min  ---   %0.1fmin", self.place, rain_effect_min
                 )
@@ -390,7 +435,7 @@ class MyTomatoTimer(HABApp.Rule):
                 )
 
                 calculated_delay = (
-                    INITIAL_DELAY
+                    self.initial_delay
                     + rain_effect_min
                     - humidity_effect_min
                     - wind_effect_min
@@ -398,6 +443,17 @@ class MyTomatoTimer(HABApp.Rule):
                 )
 
         logger.info("%s:calculated delay = %0.1fmin", self.place, calculated_delay)
+        now = datetime.now()
+        midnight = now.replace(hour=23, minute=59, second=59, microsecond=999999)
+        time_till_midnight = (midnight - now).total_seconds() / 60
+
+        if calculated_delay > time_till_midnight:
+            calculated_delay = time_till_midnight
+            logger.info(
+                "%s:reduced delay to %0.1fmin (midnight today)",
+                self.place,
+                calculated_delay,
+            )
         return calculated_delay
 
     def timer_expired(self):
