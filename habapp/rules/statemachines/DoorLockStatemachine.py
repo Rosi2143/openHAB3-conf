@@ -238,7 +238,7 @@ class DoorLockStatemachine(StateMachine):
         self._dark_outside = state
         self._logger.info(
             self.get_name()
-            + "("
+            + " ("
             + str(id(self))
             + "): - Dark_Outside is: "
             + str(self._dark_outside)
@@ -259,7 +259,7 @@ class DoorLockStatemachine(StateMachine):
         """
         self._light = state
         self._logger.info(
-            self.get_name() + "(" + str(id(self)) + "): - Light is: " + str(self._light)
+            self.get_name() + " (" + str(id(self)) + "): - Light is: " + str(self._light)
         )
 
     def set_lock_error(self, key, state):
@@ -271,14 +271,14 @@ class DoorLockStatemachine(StateMachine):
             self._lock_error[key] = state
             self._logger.info(
                 self.get_name()
-                + "("
+                + " ("
                 + str(id(self))
                 + "): - Error is: "
                 + str(self._lock_error)
             )
         else:
             self._logger.error(
-                self.get_name() + "(" + str(id(self)) + "): - undefined key " + key
+                self.get_name() + " (" + str(id(self)) + "): - undefined key " + key
             )
 
     def set_presence(self, state):
@@ -289,7 +289,7 @@ class DoorLockStatemachine(StateMachine):
         self._presence = state
         self._logger.info(
             self.get_name()
-            + "("
+            + " ("
             + str(id(self))
             + "): - Presence is: "
             + str(self._presence)
@@ -301,10 +301,17 @@ class DoorLockStatemachine(StateMachine):
             state (bool): reported state of lock
         """
         if state not in self.state_map.keys():
-            self._logger.error(
-                f"{self.get_name()}: - reported LockState invalid: {str(state)}\n \
-{str(self.state_map)}"
-            )
+            if state != "UNKNOWN":
+                self._logger.error(
+                    f"{self.get_name()}: - reported LockState invalid: {str(state)}\n \
+    {str(self.state_map)}"
+                )
+            else:
+                self.logger.info(
+                    self.get_name()
+                    + ": - ignore LockState: "
+                    + str(self._reported_lock)
+                )
         else:
             self._reported_lock = self.state_map[state]
             self._logger.info(
@@ -341,7 +348,7 @@ door_open = {str(self._door_open)}"
         Returns:
             boolean: True/False
         """
-        self._logger.debug(self.get_name() + "(" + str(id(self)) + "): cond_error")
+        self._logger.debug(self.get_name() + " (" + str(id(self)) + "): cond_error")
 
         result = False
         if self.get_lock_error():
@@ -355,7 +362,7 @@ door_open = {str(self._door_open)}"
 
         self._logger.debug(
             self.get_name()
-            + "("
+            + " ("
             + str(id(self))
             + "): result (cond_error) = "
             + str(result)
@@ -370,7 +377,7 @@ door_open = {str(self._door_open)}"
         """
         self._logger.debug(
             self.get_name()
-            + "("
+            + " ("
             + str(id(self))
             + "): ExternalLock = '"
             + str(self._reported_lock)
@@ -385,7 +392,7 @@ door_open = {str(self._door_open)}"
         """
         self._logger.debug(
             self.get_name()
-            + "("
+            + " ("
             + str(id(self))
             + "): light = '"
             + str(self._light)
@@ -399,7 +406,7 @@ door_open = {str(self._door_open)}"
             boolean: True/False
         """
         self._logger.debug(
-            self.get_name() + "(" + str(id(self)) + "): cond_lock_required"
+            self.get_name() + " (" + str(id(self)) + "): cond_lock_required"
         )
         self._logger.debug(get_internal_state_machine_state(self))
 
@@ -415,7 +422,7 @@ door_open = {str(self._door_open)}"
 
         self._logger.debug(
             self.get_name()
-            + "("
+            + " ("
             + str(id(self))
             + "): result (cond_lock_required) = "
             + str(result)
@@ -430,7 +437,7 @@ door_open = {str(self._door_open)}"
         """
         self._logger.debug(
             self.get_name()
-            + "("
+            + " ("
             + str(id(self))
             + "): lock_error = '"
             + str(self._lock_error)
@@ -445,7 +452,7 @@ door_open = {str(self._door_open)}"
         """
         self._logger.debug(
             self.get_name()
-            + "("
+            + " ("
             + str(id(self))
             + "): presence = '"
             + str(self._presence)
