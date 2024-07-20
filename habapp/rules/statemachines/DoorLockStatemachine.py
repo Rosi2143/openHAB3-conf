@@ -259,7 +259,11 @@ class DoorLockStatemachine(StateMachine):
         """
         self._light = state
         self._logger.info(
-            self.get_name() + " (" + str(id(self)) + "): - Light is: " + str(self._light)
+            self.get_name()
+            + " ("
+            + str(id(self))
+            + "): - Light is: "
+            + str(self._light)
         )
 
     def set_lock_error(self, key, state):
@@ -307,7 +311,7 @@ class DoorLockStatemachine(StateMachine):
     {str(self.state_map)}"
                 )
             else:
-                self.logger.info(
+                self._logger.info(
                     self.get_name()
                     + ": - ignore LockState: "
                     + str(self._reported_lock)
