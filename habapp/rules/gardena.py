@@ -231,7 +231,8 @@ class GardenaValveControl(HABApp.Rule):
             logger.info("automatic watering OFF at step %s", self.automatic_step)
             self.pump_state_set.off()
             if self.automatic_job is not None:
-                self.automatic_job.cancel()
+                if self.automatic_job.remaining() is not None:
+                    self.automatic_job.cancel()
 
 
 # Rules

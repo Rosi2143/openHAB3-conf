@@ -93,31 +93,38 @@ class HomematicConnect(HABApp.Rule):
 
     def check_uptime(self):
         uptime_state = self.uptime_item.get_value()
-        p = re.match(r"(\d+)T\s(\d+):(\d+)", uptime_state)
-        days = int(p.group(1))
-        hours = int(p.group(2))
-        minutes = int(p.group(3))
-        logger.info("Uptime: --> %dTage %02dStunden %02dMinuten", days, hours, minutes)
-        uptime_now = days * 24 * 60 + hours * 60 + minutes
-        logger.info(
-            "Compare Uptime\nUptime_last --> %d\nUptime_now  --> %d",
-            self.uptime_last,
-            uptime_now,
-        )
-        if self.uptime_last < uptime_now:
-            logger.info("All is fine!")
-        else:
-            if self.uptime_last > uptime_now:
-                Firmware_new = self.raspi_item.properties["firmwareVersion"]
-                logger.info("Firmware old = %s : new = %s", self.Firmware, Firmware_new)
-                if Firmware_new != self.Firmware:
-                    self.Firmware = Firmware_new
-                    logger.info("Restart of Homematic after update detected")
-            self.restart_homematic_binding()
-        self.uptime_last = uptime_now
+        if uptime_state is not None:
+            p = re.match(r"(\d+)T\s(\d+):(\d+)", uptime_state)
+            days = int(p.group(1))
+            hours = int(p.group(2))
+            minutes = int(p.group(3))
+            logger.info(
+                "Uptime: --> %dTage %02dStunden %02dMinuten", days, hours, minutes
+            )
+            uptime_now = days * 24 * 60 + hours * 60 + minutes
+            logger.info(
+                "Compare Uptime\nUptime_last --> %d\nUptime_now  --> %d",
+                self.uptime_last,
+                uptime_now,
+            )
+            if self.uptime_last < uptime_now:
+                logger.info("All is fine!")
+            else:
+                if self.uptime_last > uptime_now:
+                    Firmware_new = self.raspi_item.properties["firmwareVersion"]
+                    logger.info(
+                        "Firmware old = %s : new = %s", self.Firmware, Firmware_new
+                    )
+                    if Firmware_new != self.Firmware:
+                        self.Firmware = Firmware_new
+                        logger.info("Restart of Homematic after update detected")
+                self.restart_homematic_binding()
+            self.uptime_last = uptime_now
 
-        last_key_update = self.connection_check_item.last_change
-        logger.info("Last update was %s", str(last_key_update))
+            last_key_update = self.connection_check_item.last_change
+            logger.info("Last update was %s", str(last_key_update))
+        else:
+            logger.info("Uptime is currently not defined")
 
     def check_constant(self, event: ItemNoChangeEvent):
         logger.info("item %s constant for %s", event.name, event.seconds)
