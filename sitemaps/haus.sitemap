@@ -8,6 +8,32 @@ sitemap haus label="My home automation" {
         Switch item=Hue_Raum_Einfahrt_Betrieb label="Einfahrt"
         Switch item=Hue_Raum_Erkerweg_Betrieb label="Erkerweg"
     }
+    Frame label="Bewässerung" {
+        Text item=ePumpe_3_STATE label="Pumpe [%s]" icon="iconify:material-symbols:water-pump"
+        Default item=ePumpe_4_STATE label="Pumpe Set"
+        Text label=""
+        Text item=eGardenaVentilKontrolle_1_STATE label="Ventil 1 [%s]" icon=[eGardenaVentilKontrolle_1_STATE==ON="iconify:mdi:valve-closed"]
+        Default item=GardenaVentilKontrolle_1_STATE label="Ventil 1 Set"
+        Text label=""
+        Text item=eGardenaVentilKontrolle_2_STATE label="Ventil 2 [%s]" icon=[eGardenaVentilKontrolle_2_STATE==ON="iconify:mdi:valve-closed"]
+        Default item=GardenaVentilKontrolle_2_STATE label="Ventil 2 Set"
+        Text label=""
+        Text item=eGardenaVentilKontrolle_3_STATE label="Ventil 3 [%s]" icon=[eGardenaVentilKontrolle_3_STATE==ON="iconify:mdi:valve-closed"]
+        Default item=GardenaVentilKontrolle_3_STATE label="Ventil 3 Set"
+        Text label=""
+        Text item=eGardenaVentilKontrolle_1_3_STATE label="Ventil 4 [%s]" icon=[eGardenaVentilKontrolle_1_3_STATE==ON="iconify:mdi:valve-closed"]
+        Default item=GardenaVentilKontrolle_1_3_STATE label="Ventil 4 Set"
+        Text label=""
+        Text item=eGardenaVentilKontrolle_4_STATE label="Terrasse [%s]" icon=[eGardenaVentilKontrolle_4_STATE==ON="iconify:mdi:valve-closed"]
+        Default item=GardenaVentilKontrolle_4_STATE label="Terrasse Set"
+        Text label=""
+        Text item=eGardenaVentilKontrolle_5_STATE label="Tomaten [%s]" icon=[eGardenaVentilKontrolle_5_STATE==ON="iconify:mdi:valve-closed"]
+        Default item=GardenaVentilKontrolle_5_STATE label="Tomaten Set"
+        Text label=""
+        Text item=eGardenaVentilKontrolle_6_STATE label="Erkerweg [%s]" icon=[eGardenaVentilKontrolle_6_STATE==ON="iconify:mdi:valve-closed"]
+        Default item=GardenaVentilKontrolle_6_STATE label="Erkerweg Set"
+        Text label=""
+    }
     Frame label="Livarno" {
         Default item=eSteckdosePool label="Steckdose Pool"
         Default item=eSteckdoseRosenbogen label="Steckdose Rosenbogen"
