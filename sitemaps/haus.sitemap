@@ -12,17 +12,17 @@ sitemap haus label="My home automation" {
         Text item=ePumpe_3_STATE label="Pumpe [%s]" icon="iconify:material-symbols:water-pump"
         Default item=ePumpe_4_STATE label="Pumpe Set"
         Text label=""
-        Text item=eGardenaVentilKontrolle_1_STATE label="Ventil 1 [%s]" icon=[eGardenaVentilKontrolle_1_STATE==ON="iconify:mdi:valve-closed"]
-        Default item=GardenaVentilKontrolle_1_STATE label="Ventil 1 Set"
+        Text item=eGardenaVentilKontrolle_1_STATE label="BeetSteckdose [%s]" icon=[eGardenaVentilKontrolle_1_STATE==ON="iconify:mdi:valve-closed"]
+        Default item=GardenaVentilKontrolle_1_STATE label="BeetSteckdose Set"
         Text label=""
-        Text item=eGardenaVentilKontrolle_2_STATE label="Ventil 2 [%s]" icon=[eGardenaVentilKontrolle_2_STATE==ON="iconify:mdi:valve-closed"]
-        Default item=GardenaVentilKontrolle_2_STATE label="Ventil 2 Set"
+        Text item=eGardenaVentilKontrolle_2_STATE label="Rasen Bäume [%s]" icon=[eGardenaVentilKontrolle_2_STATE==ON="iconify:mdi:valve-closed"]
+        Default item=GardenaVentilKontrolle_2_STATE label="Rasen Bäume Set"
         Text label=""
-        Text item=eGardenaVentilKontrolle_3_STATE label="Ventil 3 [%s]" icon=[eGardenaVentilKontrolle_3_STATE==ON="iconify:mdi:valve-closed"]
-        Default item=GardenaVentilKontrolle_3_STATE label="Ventil 3 Set"
+        Text item=eGardenaVentilKontrolle_3_STATE label="Pool Terrasse [%s]" icon=[eGardenaVentilKontrolle_3_STATE==ON="iconify:mdi:valve-closed"]
+        Default item=GardenaVentilKontrolle_3_STATE label="Pool Terrasse Set"
         Text label=""
-        Text item=eGardenaVentilKontrolle_1_3_STATE label="Ventil 4 [%s]" icon=[eGardenaVentilKontrolle_1_3_STATE==ON="iconify:mdi:valve-closed"]
-        Default item=GardenaVentilKontrolle_1_3_STATE label="Ventil 4 Set"
+        Text item=eGardenaVentilKontrolle_1_3_STATE label="Pool Straße [%s]" icon=[eGardenaVentilKontrolle_1_3_STATE==ON="iconify:mdi:valve-closed"]
+        Default item=GardenaVentilKontrolle_1_3_STATE label="Pool Straße Set"
         Text label=""
         Text item=eGardenaVentilKontrolle_4_STATE label="Terrasse [%s]" icon=[eGardenaVentilKontrolle_4_STATE==ON="iconify:mdi:valve-closed"]
         Default item=GardenaVentilKontrolle_4_STATE label="Terrasse Set"
