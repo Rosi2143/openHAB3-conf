@@ -20,10 +20,10 @@ class GardenaValveControl(HABApp.Rule):
         self.valve1_state = SwitchItem.get_item("eGardenaVentilKontrolle_1_STATE")
         self.valve2_state = SwitchItem.get_item("eGardenaVentilKontrolle_2_STATE")
         self.valve3_state = SwitchItem.get_item("eGardenaVentilKontrolle_3_STATE")
-        self.valve4_state = SwitchItem.get_item("eGardenaVentilKontrolle_1_3_STATE")
-        self.valve5_state = SwitchItem.get_item("eGardenaVentilKontrolle_4_STATE")
-        self.valve6_state = SwitchItem.get_item("eGardenaVentilKontrolle_5_STATE")
-        self.valve7_state = SwitchItem.get_item("eGardenaVentilKontrolle_6_STATE")
+        self.valve4_state = SwitchItem.get_item("eGardenaVentilKontrolle_4_STATE")
+        self.valve5_state = SwitchItem.get_item("eGardenaVentilKontrolle_5_STATE")
+        self.valve6_state = SwitchItem.get_item("eGardenaVentilKontrolle_6_STATE")
+        self.valve7_state = SwitchItem.get_item("eGardenaVentilKontrolle_7_STATE")
 
         self.valve_all_state = SwitchItem.get_item("eGardenaVentilKontrolle_4_6_STATE")
 
@@ -33,10 +33,10 @@ class GardenaValveControl(HABApp.Rule):
         self.valve1_state_set = SwitchItem.get_item("GardenaVentilKontrolle_1_STATE")
         self.valve2_state_set = SwitchItem.get_item("GardenaVentilKontrolle_2_STATE")
         self.valve3_state_set = SwitchItem.get_item("GardenaVentilKontrolle_3_STATE")
-        self.valve4_state_set = SwitchItem.get_item("GardenaVentilKontrolle_1_3_STATE")
-        self.valve5_state_set = SwitchItem.get_item("GardenaVentilKontrolle_4_STATE")
-        self.valve6_state_set = SwitchItem.get_item("GardenaVentilKontrolle_5_STATE")
-        self.valve7_state_set = SwitchItem.get_item("GardenaVentilKontrolle_6_STATE")
+        self.valve4_state_set = SwitchItem.get_item("GardenaVentilKontrolle_4_STATE")
+        self.valve5_state_set = SwitchItem.get_item("GardenaVentilKontrolle_5_STATE")
+        self.valve6_state_set = SwitchItem.get_item("GardenaVentilKontrolle_6_STATE")
+        self.valve7_state_set = SwitchItem.get_item("GardenaVentilKontrolle_7_STATE")
 
         self.valve_all_state_set = SwitchItem.get_item(
             "GardenaVentilKontrolle_4_6_STATE"

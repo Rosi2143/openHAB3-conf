@@ -21,17 +21,17 @@ sitemap haus label="My home automation" {
         Text item=eGardenaVentilKontrolle_3_STATE label="Pool Terrasse [%s]" icon=[eGardenaVentilKontrolle_3_STATE==ON="iconify:mdi:valve-closed"]
         Default item=GardenaVentilKontrolle_3_STATE label="Pool Terrasse Set"
         Text label=""
-        Text item=eGardenaVentilKontrolle_1_3_STATE label="Pool Straße [%s]" icon=[eGardenaVentilKontrolle_1_3_STATE==ON="iconify:mdi:valve-closed"]
-        Default item=GardenaVentilKontrolle_1_3_STATE label="Pool Straße Set"
+        Text item=eGardenaVentilKontrolle_4_STATE label="Pool Straße [%s]" icon=[eGardenaVentilKontrolle_4_STATE==ON="iconify:mdi:valve-closed"]
+        Default item=GardenaVentilKontrolle_4_STATE label="Pool Straße Set"
         Text label=""
-        Text item=eGardenaVentilKontrolle_4_STATE label="Terrasse [%s]" icon=[eGardenaVentilKontrolle_4_STATE==ON="iconify:mdi:valve-closed"]
-        Default item=GardenaVentilKontrolle_4_STATE label="Terrasse Set"
+        Text item=eGardenaVentilKontrolle_5_STATE label="Terrasse [%s]" icon=[eGardenaVentilKontrolle_5_STATE==ON="iconify:mdi:valve-closed"]
+        Default item=GardenaVentilKontrolle_5_STATE label="Terrasse Set"
         Text label=""
-        Text item=eGardenaVentilKontrolle_5_STATE label="Tomaten [%s]" icon=[eGardenaVentilKontrolle_5_STATE==ON="iconify:mdi:valve-closed"]
-        Default item=GardenaVentilKontrolle_5_STATE label="Tomaten Set"
+        Text item=eGardenaVentilKontrolle_6_STATE label="Tomaten [%s]" icon=[eGardenaVentilKontrolle_6_STATE==ON="iconify:mdi:valve-closed"]
+        Default item=GardenaVentilKontrolle_6_STATE label="Tomaten Set"
         Text label=""
-        Text item=eGardenaVentilKontrolle_6_STATE label="Erkerweg [%s]" icon=[eGardenaVentilKontrolle_6_STATE==ON="iconify:mdi:valve-closed"]
-        Default item=GardenaVentilKontrolle_6_STATE label="Erkerweg Set"
+        Text item=eGardenaVentilKontrolle_7_STATE label="Erkerweg [%s]" icon=[eGardenaVentilKontrolle_7_STATE==ON="iconify:mdi:valve-closed"]
+        Default item=GardenaVentilKontrolle_7_STATE label="Erkerweg Set"
         Text label=""
     }
     Frame label="Livarno" {
