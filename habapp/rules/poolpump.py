@@ -42,6 +42,9 @@ class MyPoolPumpTimer(HABApp.Rule):
             self.poolpump_activation_item.get_value(),
         )
 
+        if self.poolpump_usage_item.get_value() == "ON":
+            self.activate_pump(None)
+
     def activate_pump(self, event: ValueChangeEvent):
         """activate the pump for a given time if the activation item is set to ON
 
@@ -49,9 +52,9 @@ class MyPoolPumpTimer(HABApp.Rule):
             state (datetime): duration for which the pump shall be ON
         """
 
-        if self.poolpump_activation_item.get_value() == "ON":
+        if self.poolpump_usage_item.get_value() == "ON":
             duration = int(self.poolpump_duration_item.get_value())
-            logger.info("set pump: ON for %s h", self.place, duration)
+            logger.info("set pump: ON for %s h", duration)
             self.poolpump_state_item.on()
             self.run.at(
                 time=timedelta(hours=duration),
@@ -60,7 +63,7 @@ class MyPoolPumpTimer(HABApp.Rule):
         else:
             logger.info(
                 "poolpump handling is deactivated by item %s",
-                POOLPUMP_ACTIVATION_ITEM_NAME,
+                POOLPUMP_USAGE_ITEM_NAME,
             )
 
     def deactivate_pump(self):
