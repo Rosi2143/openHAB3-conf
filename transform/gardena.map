@@ -1,7 +1,15 @@
 1=BeetSteckdose
 2=RasenBäume
 3=PoolTerrasse
+4=PoolStraße
+5=Terrasse
+6=Tomaten
+7=Erkerweg
 
 BeetSteckdose=1
 RasenBäume=2
 PoolTerrasse=3
+PoolStraße=4
+Terrasse=5
+Tomaten=6
+Erkerweg=7
