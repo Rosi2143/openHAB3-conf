@@ -4,7 +4,7 @@ from datetime import timedelta, datetime
 import re
 
 import HABApp
-from HABApp.openhab.items import SwitchItem, NumberItem
+from HABApp.openhab.items import NumberItem, StringItem, SwitchItem
 from HABApp.core.events import ValueChangeEventFilter, ValueChangeEvent
 from HABApp.openhab import transformations
 
@@ -14,17 +14,45 @@ GARDANA_MAP = transformations.map[
     "gardena.map"
 ]  # load the transformation, can be used anywhere
 
-GARDENA_AUTOMATE_LIST = [
-    {"valve_name": "BeetSteckdose", "time_min": 10},
-    {"valve_name": "RasenBäume", "time_min": 10},
-    {"valve_name": "PoolTerrasse", "time_min": 10},
-    {"valve_name": "PoolStraße", "time_min": 10},
-    {"valve_name": "Terrasse", "time_min": 10},
-    {"valve_name": "Erkerweg", "time_min": 10},
+GARDENA_AUTOMATE_LIST_MORNING = [
+    {"valve_name": "RasenBäume", "onTime_min": 30, "pauseTime_min": 40},
+    {"valve_name": "PoolTerrasse", "onTime_min": 20, "pauseTime_min": 15},
+    {"valve_name": "PoolStraße", "onTime_min": 20, "pauseTime_min": 25},
+    {"valve_name": "Terrasse", "onTime_min": 20, "pauseTime_min": 10},
+    {"valve_name": "Erkerweg", "onTime_min": 20, "pauseTime_min": 10},
+    {"valve_name": "BeetSteckdose", "onTime_min": 20, "pauseTime_min": 10},
 ]
 
+GARDENA_AUTOMATE_LIST_EVENING = [
+    {"valve_name": "RasenBäume", "onTime_min": 15, "pauseTime_min": 40},
+    {"valve_name": "PoolTerrasse", "onTime_min": 10, "pauseTime_min": 15},
+    {"valve_name": "PoolStraße", "onTime_min": 10, "pauseTime_min": 25},
+    {"valve_name": "Terrasse", "onTime_min": 10, "pauseTime_min": 10},
+    {"valve_name": "Erkerweg", "onTime_min": 10, "pauseTime_min": 10},
+    {"valve_name": "BeetSteckdose", "onTime_min": 10, "pauseTime_min": 10},
+]
+
+GARDENA_AUTOMATE_LIST_LAWN_FAST = [
+    {"valve_name": "PoolTerrasse", "onTime_min": 10, "pauseTime_min": 1},
+    {"valve_name": "PoolStraße", "onTime_min": 10, "pauseTime_min": 1},
+    {"valve_name": "RasenBäume", "onTime_min": 15, "pauseTime_min": 1},
+]
+
+GARDENA_AUTOMATE_LIST_BEDS = [
+    {"valve_name": "Terrasse", "onTime_min": 10, "pauseTime_min": 1},
+    {"valve_name": "Erkerweg", "onTime_min": 10, "pauseTime_min": 1},
+    {"valve_name": "BeetSteckdose", "onTime_min": 10, "pauseTime_min": 1},
+]
+
+GARDENA_AUTOMATE_MAP = {
+    "morning": GARDENA_AUTOMATE_LIST_MORNING,
+    "evening": GARDENA_AUTOMATE_LIST_EVENING,
+    "lawn_fast": GARDENA_AUTOMATE_LIST_LAWN_FAST,
+    "beds": GARDENA_AUTOMATE_LIST_BEDS,
+}
+
 NUM_OF_VALVES = 7
-MAX_EXPECTED_RAIN_MM = 5  # mm
+MAX_EXPECTED_RAIN_MM = 3  # mm
 ONTIME_UPDATE_INTERVAL_SEC = 10  # s
 
 
@@ -36,125 +64,157 @@ class GardenaValveControl(HABApp.Rule):
         super().__init__()
 
         # get the states
-        self.valve1_state = SwitchItem.get_item("eGardenaVentilKontrolle_1_STATE")
-        self.valve2_state = SwitchItem.get_item("eGardenaVentilKontrolle_2_STATE")
-        self.valve3_state = SwitchItem.get_item("eGardenaVentilKontrolle_3_STATE")
-        self.valve4_state = SwitchItem.get_item("eGardenaVentilKontrolle_4_STATE")
-        self.valve5_state = SwitchItem.get_item("eGardenaVentilKontrolle_5_STATE")
-        self.valve6_state = SwitchItem.get_item("eGardenaVentilKontrolle_6_STATE")
-        self.valve7_state = SwitchItem.get_item("eGardenaVentilKontrolle_7_STATE")
+        self.valve1_state_item = SwitchItem.get_item("eGardenaVentilKontrolle_1_STATE")
+        self.valve2_state_item = SwitchItem.get_item("eGardenaVentilKontrolle_2_STATE")
+        self.valve3_state_item = SwitchItem.get_item("eGardenaVentilKontrolle_3_STATE")
+        self.valve4_state_item = SwitchItem.get_item("eGardenaVentilKontrolle_4_STATE")
+        self.valve5_state_item = SwitchItem.get_item("eGardenaVentilKontrolle_5_STATE")
+        self.valve6_state_item = SwitchItem.get_item("eGardenaVentilKontrolle_6_STATE")
+        self.valve7_state_item = SwitchItem.get_item("eGardenaVentilKontrolle_7_STATE")
 
         self.valve_list = [
-            self.valve1_state,
-            self.valve2_state,
-            self.valve3_state,
-            self.valve4_state,
-            self.valve5_state,
-            self.valve6_state,
-            self.valve7_state,
+            self.valve1_state_item,
+            self.valve2_state_item,
+            self.valve3_state_item,
+            self.valve4_state_item,
+            self.valve5_state_item,
+            self.valve6_state_item,
+            self.valve7_state_item,
         ]
-        self.valve_all_state = SwitchItem.get_item("eGardenaVentilKontrolle_4_6_STATE")
+        self.valve_all_state_item = SwitchItem.get_item(
+            "eGardenaVentilKontrolle_4_6_STATE"
+        )
 
-        self.pump_state = SwitchItem.get_item("ePumpe_3_STATE")
-        self.pump_running_state = SwitchItem.get_item("PumpeRunning")
+        self.pump_state_item = SwitchItem.get_item("ePumpe_3_STATE")
+        self.pump_running_state_item = SwitchItem.get_item("PumpeRunning")
 
-        self.IsDay = SwitchItem.get_item("IstTag")
-        self.currentRain = NumberItem.get_item(
+        self.IsDay_item = SwitchItem.get_item("IstTag")
+        self.currentRain_item = NumberItem.get_item(
             "openWeatherVorhersage_Current_PrecipitationAmount"
         )
-        self.h03Rain = NumberItem.get_item(
+        self.h03Rain_item = NumberItem.get_item(
             "openWeatherVorhersage_ForecastHours03_PrecipitationAmount"
         )
-        self.h06Rain = NumberItem.get_item(
+        self.h06Rain_item = NumberItem.get_item(
             "openWeatherVorhersage_ForecastHours06_PrecipitationAmount"
         )
-        self.h09Rain = NumberItem.get_item(
+        self.h09Rain_item = NumberItem.get_item(
             "openWeatherVorhersage_ForecastHours09_PrecipitationAmount"
         )
-        self.h12Rain = NumberItem.get_item(
+        self.h12Rain_item = NumberItem.get_item(
             "openWeatherVorhersage_ForecastHours12_PrecipitationAmount"
         )
-        self.h15Rain = NumberItem.get_item(
+        self.h15Rain_item = NumberItem.get_item(
             "openWeatherVorhersage_ForecastHours15_PrecipitationAmount"
         )
-        self.h18Rain = NumberItem.get_item(
+        self.h18Rain_item = NumberItem.get_item(
             "openWeatherVorhersage_ForecastHours18_PrecipitationAmount"
         )
         self.rain_list = [
-            self.currentRain,
-            self.h03Rain,
-            self.h06Rain,
-            self.h09Rain,
-            self.h12Rain,
-            self.h15Rain,
-            self.h18Rain,
+            self.currentRain_item,
+            self.h03Rain_item,
+            self.h06Rain_item,
+            self.h09Rain_item,
+            self.h12Rain_item,
+            self.h15Rain_item,
+            self.h18Rain_item,
         ]
 
         # set the states
-        self.valve1_state_set = SwitchItem.get_item("GardenaVentilKontrolle_1_STATE")
-        self.valve2_state_set = SwitchItem.get_item("GardenaVentilKontrolle_2_STATE")
-        self.valve3_state_set = SwitchItem.get_item("GardenaVentilKontrolle_3_STATE")
-        self.valve4_state_set = SwitchItem.get_item("GardenaVentilKontrolle_4_STATE")
-        self.valve5_state_set = SwitchItem.get_item("GardenaVentilKontrolle_5_STATE")
-        self.valve6_state_set = SwitchItem.get_item("GardenaVentilKontrolle_6_STATE")
-        self.valve7_state_set = SwitchItem.get_item("GardenaVentilKontrolle_7_STATE")
+        self.valve1_state_set_item = SwitchItem.get_item(
+            "GardenaVentilKontrolle_1_STATE"
+        )
+        self.valve2_state_set_item = SwitchItem.get_item(
+            "GardenaVentilKontrolle_2_STATE"
+        )
+        self.valve3_state_set_item = SwitchItem.get_item(
+            "GardenaVentilKontrolle_3_STATE"
+        )
+        self.valve4_state_set_item = SwitchItem.get_item(
+            "GardenaVentilKontrolle_4_STATE"
+        )
+        self.valve5_state_set_item = SwitchItem.get_item(
+            "GardenaVentilKontrolle_5_STATE"
+        )
+        self.valve6_state_set_item = SwitchItem.get_item(
+            "GardenaVentilKontrolle_6_STATE"
+        )
+        self.valve7_state_set_item = SwitchItem.get_item(
+            "GardenaVentilKontrolle_7_STATE"
+        )
 
         self.valve_ONTIME_list = [0] * NUM_OF_VALVES
 
         self.valve_set_list = [
-            self.valve1_state_set,
-            self.valve2_state_set,
-            self.valve3_state_set,
-            self.valve4_state_set,
-            self.valve5_state_set,
-            self.valve6_state_set,
-            self.valve7_state_set,
+            self.valve1_state_set_item,
+            self.valve2_state_set_item,
+            self.valve3_state_set_item,
+            self.valve4_state_set_item,
+            self.valve5_state_set_item,
+            self.valve6_state_set_item,
+            self.valve7_state_set_item,
         ]
-        self.valve_all_state_set = SwitchItem.get_item(
+        self.valve_all_state_set_item = SwitchItem.get_item(
             "GardenaVentilKontrolle_4_6_STATE"
         )
 
-        self.pump_state_set = SwitchItem.get_item("ePumpe_4_STATE")
+        self.pump_state_set_item = SwitchItem.get_item("ePumpe_4_STATE")
 
         # automatic program
-        self.automatic_active = SwitchItem.get_item("GardenaAutomaticWatering_Active")
-        self.automatic = SwitchItem.get_item("GardenaAutomaticWatering")
-        self.automatic_step = 0
+        self.automatic_activated_item = SwitchItem.get_item(
+            "GardenaAutomaticWatering_Active"
+        )
+        self.automatic_running_item = SwitchItem.get_item("GardenaAutomaticWatering")
+        self.automatic_step_item = NumberItem.get_item("GardenaAutomaticStep")
+        self.automatic_selection_item = StringItem.get_item("GardenaAutomaticSelect")
         self.automatic_job = None
+        self.automatic_state = "OFF"
+        self.gardena_automate_list = GARDENA_AUTOMATE_MAP[
+            self.automatic_selection_item.get_value("morning")
+        ]
 
         self.counter_update_job = None
 
-        self.valve1_state.listen_event(
+        self.valve1_state_item.listen_event(
             self.handle_valve_state_change, ValueChangeEventFilter()
         )
-        self.valve2_state.listen_event(
+        self.valve2_state_item.listen_event(
             self.handle_valve_state_change, ValueChangeEventFilter()
         )
-        self.valve3_state.listen_event(
+        self.valve3_state_item.listen_event(
             self.handle_valve_state_change, ValueChangeEventFilter()
         )
-        self.valve4_state.listen_event(
+        self.valve4_state_item.listen_event(
             self.handle_valve_state_change, ValueChangeEventFilter()
         )
-        self.valve5_state.listen_event(
+        self.valve5_state_item.listen_event(
             self.handle_valve_state_change, ValueChangeEventFilter()
         )
-        self.valve6_state.listen_event(
+        self.valve6_state_item.listen_event(
             self.handle_valve_state_change, ValueChangeEventFilter()
         )
-        self.valve7_state.listen_event(
+        self.valve7_state_item.listen_event(
             self.handle_valve_state_change, ValueChangeEventFilter()
         )
 
-        self.pump_state.listen_event(self.check_pump_state, ValueChangeEventFilter())
-        self.pump_running_state.listen_event(
+        self.pump_state_item.listen_event(
+            self.check_pump_state, ValueChangeEventFilter()
+        )
+        self.pump_running_state_item.listen_event(
             self.check_pump_running_state, ValueChangeEventFilter()
         )
 
-        self.automatic.listen_event(self.automatic_watering, ValueChangeEventFilter())
+        self.automatic_running_item.listen_event(
+            self.automatic_watering, ValueChangeEventFilter()
+        )
+        self.automatic_selection_item.listen_event(
+            self.automatic_select, ValueChangeEventFilter()
+        )
 
         # environment data
-        self.IsDay.listen_event(self.check_start_automatic)
+        self.IsDay_item.listen_event(
+            self.check_start_automatic, ValueChangeEventFilter(value="ON")
+        )
 
         logger.info("\n\ninitialized gardena")
         for val_number in range(NUM_OF_VALVES):
@@ -163,16 +223,16 @@ class GardenaValveControl(HABApp.Rule):
                 GARDANA_MAP[str(val_number + 1)],
                 self.valve_list[val_number].get_value(),
             )
-        logger.info("valve_all_state: %s", self.valve_all_state.get_value())
+        logger.info("valve_all_state: %s", self.valve_all_state_item.get_value())
 
-        logger.info("pump_state: %s", self.pump_state.get_value())
-        logger.info("pump_running_state: %s", self.pump_running_state.get_value())
+        logger.info("pump_state: %s", self.pump_state_item.get_value())
+        logger.info("pump_running_state: %s", self.pump_running_state_item.get_value())
 
-        logger.info("IsDay: %s", self.IsDay.get_value())
+        logger.info("IsDay: %s", self.IsDay_item.get_value())
         logger.info(
             "previousRain: %s mm",
             sum(
-                self.currentRain.get_persistence_data(
+                self.currentRain_item.get_persistence_data(
                     start_time=datetime.now() - timedelta(hours=18),
                     end_time=datetime.now(),
                 )
@@ -180,15 +240,22 @@ class GardenaValveControl(HABApp.Rule):
                 .values()
             ),
         )
-        logger.info("currentRain: %s mm", self.currentRain.get_value())
+        logger.info("currentRain: %s mm", self.currentRain_item.get_value())
         logger.info(
             "expected rain: %0.2f mm",
             sum(rain_element.get_value() for rain_element in self.rain_list),
         )
 
-        self.check_start_automatic()
-        logger.info("automatic_active: %s", self.automatic_active.get_value())
-        logger.info("automatic: %s", self.automatic.get_value())
+        #        self.check_start_automatic(ValueChangeEvent(name="check_start", value="ON", old_value="OFF"))
+        logger.info(
+            "automatic_activated: %s", self.automatic_activated_item.get_value()
+        )
+        logger.info("automatic_running: %s", self.automatic_running_item.get_value())
+        logger.info("automatic_step: %s", self.automatic_step_item.get_value())
+        logger.info(
+            "automatic_selection: %s", self.automatic_selection_item.get_value()
+        )
+        logger.info("automatic list: %s", self.gardena_automate_list)
 
     def handle_valve_state_change(self, event: ValueChangeEvent):
         """handle valve state change
@@ -208,28 +275,28 @@ class GardenaValveControl(HABApp.Rule):
         counter_item = NumberItem.get_item(counter_item_name)
 
         if (
-            self.valve1_state.get_value() == "ON"
-            or self.valve2_state.get_value() == "ON"
-            or self.valve3_state.get_value() == "ON"
-            or self.valve4_state.get_value() == "ON"
-            or self.valve5_state.get_value() == "ON"
-            or self.valve6_state.get_value() == "ON"
-            or self.valve7_state.get_value() == "ON"
+            self.valve1_state_item.get_value() == "ON"
+            or self.valve2_state_item.get_value() == "ON"
+            or self.valve3_state_item.get_value() == "ON"
+            or self.valve4_state_item.get_value() == "ON"
+            or self.valve5_state_item.get_value() == "ON"
+            or self.valve6_state_item.get_value() == "ON"
+            or self.valve7_state_item.get_value() == "ON"
         ):
             logger.info("set LED: ON")
-            self.valve_all_state_set.on()
+            self.valve_all_state_set_item.oh_send_command("ON")
 
             # turn on pump
-            if self.pump_state.get_value() == "OFF":
+            if self.pump_state_item.get_value() == "OFF":
                 logger.info("switch pump ON")
-                self.pump_state_set.on()
+                self.pump_state_set_item.oh_send_command("ON")
             else:
                 logger.info("pump already ON")
 
         else:
             logger.info("set LED: OFF")
             # turn off pump
-            self.valve_all_state_set.off()
+            self.valve_all_state_set_item.oh_send_command("OFF")
 
         valve_number = int(re.search(r"\d+", event.name)[0])
 
@@ -247,6 +314,8 @@ class GardenaValveControl(HABApp.Rule):
         else:
             now = datetime.now()
             last_change = self.valve_ONTIME_list[valve_number - 1]
+            if last_change == 0:
+                last_change = now
             time_on = (now - last_change).total_seconds()
             logger.info("last change: %s", last_change)
             logger.info("now: %s", now)
@@ -297,8 +366,9 @@ class GardenaValveControl(HABApp.Rule):
             logger.info("switch all valves OFF")
             self.set_all_valve_off()
             if self.automatic_job is not None:
-                self.automatic_job.cancel()
-            self.automatic.off()
+                if self.counter_update_job.remaining() is not None:
+                    self.automatic_job.cancel()
+            self.automatic_running_item.oh_send_command("OFF")
 
     def check_pump_running_state(self, event: ValueChangeEvent):
         """track state of pump running
@@ -318,40 +388,84 @@ class GardenaValveControl(HABApp.Rule):
         logger.info("set all valves OFF")
         for val_number in range(NUM_OF_VALVES):
             if self.valve_list[val_number].get_value() == "ON":
-                self.valve_set_list[val_number].off()
+                self.valve_set_list[val_number].oh_send_command("OFF")
+
+    def reset_on_time(self):
+        logger.info("reset on time")
+        for val_number in range(NUM_OF_VALVES):
+            counter_item_name = self.valve_list[val_number].name.replace(
+                "STATE", "ONTIME"
+            )
+            counter_item = NumberItem.get_item(counter_item_name)
+            counter_item.oh_send_command(0)
 
     def change_automatic_state(self):
-        logger.info("change automatic step old: %d", self.automatic_step)
+        automatic_step = max(1, self.automatic_step_item.get_value())
+        logger.info("change automatic step old: %d", automatic_step)
         self.set_all_valve_off()
         start_timer = True
-        if self.automatic_step < len(GARDENA_AUTOMATE_LIST):
-            valve_name = GARDENA_AUTOMATE_LIST[self.automatic_step - 1]["valve_name"]
-            valve_id = int(GARDANA_MAP[valve_name])
-            self.valve_set_list[valve_id - 1].on()
-            logger.info("switch valve %s ON (id=%d)", valve_name, valve_id)
+        if automatic_step <= len(self.gardena_automate_list):
+            if self.automatic_state == "watering":
+                valve_name = self.gardena_automate_list[automatic_step - 1][
+                    "valve_name"
+                ]
+                valve_id = int(GARDANA_MAP[valve_name])
+                self.valve_set_list[valve_id - 1].oh_send_command("ON")
+                logger.info("switch valve %s ON (id=%d)", valve_name, valve_id)
+            else:
+                logger.info(
+                    "not setting valve -- automatic state: %s", self.automatic_state
+                )
         else:
             logger.info("switch pump OFF - automatic done")
-            self.pump_state_set.off()
-            self.automatic.off()
+            self.pump_state_set_item.oh_send_command("OFF")
+            self.automatic_running_item.oh_send_command("OFF")
             start_timer = False
 
         if start_timer:
             if self.automatic_job is not None:
                 if self.automatic_job.remaining() is not None:
                     self.automatic_job.cancel()
-            watering_time_min = GARDENA_AUTOMATE_LIST[self.automatic_step - 1][
-                "time_min"
-            ]
-            logger.info("start timer for %d min", watering_time_min)
+            if self.automatic_state == "watering":
+                time_min = self.gardena_automate_list[automatic_step - 1]["onTime_min"]
+                logger.info("start watering timer for %d min", time_min)
+                self.automatic_state = "pausing"
+            else:
+                time_min = self.gardena_automate_list[automatic_step - 1][
+                    "pauseTime_min"
+                ]
+                logger.info("start pause timer for %d min", time_min)
+                self.automatic_state = "watering"
+                self.automatic_step_item.oh_send_command(automatic_step + 1)
+
             self.automatic_job = self.run.at(
-                time=timedelta(minutes=watering_time_min),
+                time=timedelta(minutes=time_min),
                 callback=self.change_automatic_state,
             )
-            self.automatic_step += 1
         else:
             self.automatic_job = None
-            self.automatic_step = 0
-        logger.info("change automatic step new: %d", self.automatic_step)
+            self.automatic_step_item.oh_send_command(0)
+            self.automatic_state = "OFF"
+        logger.info(
+            "change automatic step new: %d", self.automatic_step_item.get_value()
+        )
+
+    def automatic_select(self, event: ValueChangeEvent):
+        """automatic selection
+
+        Args:
+            event: change event
+        """
+
+        logger.info(
+            "automatic_selection: rule fired because of %s %s --> %s",
+            event.name,
+            event.old_value,
+            event.value,
+        )
+        self.gardena_automate_list = GARDENA_AUTOMATE_MAP[event.value]
+        logger.info("automatic selection: %s", event.value)
+        logger.info("automatic selection: %s", self.gardena_automate_list)
 
     def automatic_watering(self, event: ValueChangeEvent):
         """automatic watering
@@ -367,43 +481,57 @@ class GardenaValveControl(HABApp.Rule):
             event.value,
         )
 
+        automatic_step = max(1, self.automatic_step_item.get_value())
         if event.value == "ON":
             logger.info("automatic watering ON")
+            self.automatic_running_item.oh_send_command("ON")
 
-            if self.valve_all_state.get_value() == "OFF":
-                logger.info("Start programm")
-                self.automatic_step = 1
+            numOfSteps = len(self.gardena_automate_list)
+            if self.valve_all_state_item.get_value() == "OFF":
+                logger.info("Start programm at step %d/%d", automatic_step, numOfSteps)
+                self.reset_on_time()
             else:
-                if self.automatic_step < len(GARDENA_AUTOMATE_LIST):
-                    logger.info("Continue programm with step %s", self.automatic_step)
+                if automatic_step < len(self.gardena_automate_list):
+                    logger.info(
+                        "Continue programm with step %d/%d", automatic_step, numOfSteps
+                    )
                 else:
-                    logger.info("undefined value for step %s", self.automatic_step)
-                    self.automatic.off()
+                    logger.info(
+                        "undefined value for step %d/%d", automatic_step, numOfSteps
+                    )
+                    self.automatic_running_item.oh_send_command("OFF")
                     return
 
+            self.automatic_state = "watering"
             self.change_automatic_state()
 
         else:
-            logger.info("automatic watering OFF at step %s", self.automatic_step)
-            self.pump_state_set.off()
+            logger.info("automatic watering OFF at step %s", automatic_step)
+            self.pump_state_set_item.oh_send_command("OFF")
             if self.automatic_job is not None:
                 if self.automatic_job.remaining() is not None:
                     self.automatic_job.cancel()
 
-    def check_start_automatic(self):
+    def check_start_automatic(self, event: ValueChangeEvent):
         """check if automatic watering should be started
 
         Args:
             event: change event
         """
+        logger.info(
+            "\n###############################################################\n"
+        )
 
         logger.info(
-            "check_start_automatic",
+            "check_start_automatic: rule fired because of %s %s --> %s",
+            event.name,
+            event.old_value,
+            event.value,
         )
 
         expected_rain = sum(rain_element.get_value() for rain_element in self.rain_list)
         previous_rain = sum(
-            self.currentRain.get_persistence_data(
+            self.currentRain_item.get_persistence_data(
                 start_time=datetime.now() - timedelta(hours=18),
                 end_time=datetime.now(),
             )
@@ -412,17 +540,21 @@ class GardenaValveControl(HABApp.Rule):
         )
         logger.info("expected rain: %0.2f mm", expected_rain)
         logger.info("previous rain: %0.2f mm", previous_rain)
-        logger.info("automatic_active: %s", self.automatic_active.get_value())
+        logger.info("automatic_active: %s", self.automatic_activated_item.get_value())
 
-        if self.automatic_active.get_value() == "OFF":
+        if self.automatic_activated_item.get_value() == "OFF":
+            logger.info("automatic watering is not active")
             return
 
-        if (expected_rain < MAX_EXPECTED_RAIN_MM) and (
-            previous_rain < MAX_EXPECTED_RAIN_MM
-        ):
+        if (expected_rain + previous_rain) < MAX_EXPECTED_RAIN_MM:
+            self.automatic_step_item.oh_send_command(1)
+            self.automatic_selection_item.oh_send_command("morning")
+
             self.automatic_watering(
-                ValueChangeEvent(name="check_start", value="ON", old_value="OFF")
+                ValueChangeEvent(name="check_start", value="ON", old_value="OFF"),
             )
+        else:
+            logger.info("no automatic watering because of rain")
 
 
 # Rules
