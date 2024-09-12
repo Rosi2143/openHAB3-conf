@@ -3,99 +3,198 @@
 	xmlns:tns="http://www.example.org/Holiday" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.example.org/Holiday /Holiday.xsd">
 	<tns:Holidays>
-	<!-- filename = /etc/openhab/html/FerienKalender/ferien_niedersachsen_2024.ics -->
+	<!-- filename = /etc/openhab/scripts/2024.ics -->
 		<!-- reason = Winterferien 2024 Niedersachsen -->
-		<tns:Fixed month="FEBRUARY" day="01" descriptionPropertiesKey="Winterferien 2024 Niedersachsen" />
-		<tns:Fixed month="FEBRUARY" day="02" descriptionPropertiesKey="Winterferien 2024 Niedersachsen" />
+		<tns:Fixed month="FEBRUARY" day="01" descriptionPropertiesKey="Winterferien 2024 Niedersachsen" validFrom="2024" validTo="2024" />
+		<tns:Fixed month="FEBRUARY" day="02" descriptionPropertiesKey="Winterferien 2024 Niedersachsen" validFrom="2024" validTo="2024" />
 		<!-- reason = Osterferien 2024 Niedersachsen -->
-		<tns:Fixed month="MARCH" day="18" descriptionPropertiesKey="Osterferien 2024 Niedersachsen" />
-		<tns:Fixed month="MARCH" day="19" descriptionPropertiesKey="Osterferien 2024 Niedersachsen" />
-		<tns:Fixed month="MARCH" day="20" descriptionPropertiesKey="Osterferien 2024 Niedersachsen" />
-		<tns:Fixed month="MARCH" day="21" descriptionPropertiesKey="Osterferien 2024 Niedersachsen" />
-		<tns:Fixed month="MARCH" day="22" descriptionPropertiesKey="Osterferien 2024 Niedersachsen" />
-		<tns:Fixed month="MARCH" day="23" descriptionPropertiesKey="Osterferien 2024 Niedersachsen" />
-		<tns:Fixed month="MARCH" day="24" descriptionPropertiesKey="Osterferien 2024 Niedersachsen" />
-		<tns:Fixed month="MARCH" day="25" descriptionPropertiesKey="Osterferien 2024 Niedersachsen" />
-		<tns:Fixed month="MARCH" day="26" descriptionPropertiesKey="Osterferien 2024 Niedersachsen" />
-		<tns:Fixed month="MARCH" day="27" descriptionPropertiesKey="Osterferien 2024 Niedersachsen" />
-		<tns:Fixed month="MARCH" day="28" descriptionPropertiesKey="Osterferien 2024 Niedersachsen" />
+		<tns:Fixed month="MARCH" day="18" descriptionPropertiesKey="Osterferien 2024 Niedersachsen" validFrom="2024" validTo="2024" />
+		<tns:Fixed month="MARCH" day="19" descriptionPropertiesKey="Osterferien 2024 Niedersachsen" validFrom="2024" validTo="2024" />
+		<tns:Fixed month="MARCH" day="20" descriptionPropertiesKey="Osterferien 2024 Niedersachsen" validFrom="2024" validTo="2024" />
+		<tns:Fixed month="MARCH" day="21" descriptionPropertiesKey="Osterferien 2024 Niedersachsen" validFrom="2024" validTo="2024" />
+		<tns:Fixed month="MARCH" day="22" descriptionPropertiesKey="Osterferien 2024 Niedersachsen" validFrom="2024" validTo="2024" />
+		<tns:Fixed month="MARCH" day="23" descriptionPropertiesKey="Osterferien 2024 Niedersachsen" validFrom="2024" validTo="2024" />
+		<tns:Fixed month="MARCH" day="24" descriptionPropertiesKey="Osterferien 2024 Niedersachsen" validFrom="2024" validTo="2024" />
+		<tns:Fixed month="MARCH" day="25" descriptionPropertiesKey="Osterferien 2024 Niedersachsen" validFrom="2024" validTo="2024" />
+		<tns:Fixed month="MARCH" day="26" descriptionPropertiesKey="Osterferien 2024 Niedersachsen" validFrom="2024" validTo="2024" />
+		<tns:Fixed month="MARCH" day="27" descriptionPropertiesKey="Osterferien 2024 Niedersachsen" validFrom="2024" validTo="2024" />
+		<tns:Fixed month="MARCH" day="28" descriptionPropertiesKey="Osterferien 2024 Niedersachsen" validFrom="2024" validTo="2024" />
 		<!-- reason = Pfingstferien 2024 Niedersachsen -->
-		<tns:Fixed month="MAY" day="10" descriptionPropertiesKey="Pfingstferien 2024 Niedersachsen" />
+		<tns:Fixed month="MAY" day="10" descriptionPropertiesKey="Pfingstferien 2024 Niedersachsen" validFrom="2024" validTo="2024" />
 		<!-- reason = Pfingstferien 2024 Niedersachsen -->
-		<tns:Fixed month="MAY" day="21" descriptionPropertiesKey="Pfingstferien 2024 Niedersachsen" />
+		<tns:Fixed month="MAY" day="21" descriptionPropertiesKey="Pfingstferien 2024 Niedersachsen" validFrom="2024" validTo="2024" />
 		<!-- reason = Sommerferien 2024 Niedersachsen -->
-		<tns:Fixed month="JUNE" day="24" descriptionPropertiesKey="Sommerferien 2024 Niedersachsen" />
-		<tns:Fixed month="JUNE" day="25" descriptionPropertiesKey="Sommerferien 2024 Niedersachsen" />
-		<tns:Fixed month="JUNE" day="26" descriptionPropertiesKey="Sommerferien 2024 Niedersachsen" />
-		<tns:Fixed month="JUNE" day="27" descriptionPropertiesKey="Sommerferien 2024 Niedersachsen" />
-		<tns:Fixed month="JUNE" day="28" descriptionPropertiesKey="Sommerferien 2024 Niedersachsen" />
-		<tns:Fixed month="JUNE" day="29" descriptionPropertiesKey="Sommerferien 2024 Niedersachsen" />
-		<tns:Fixed month="JUNE" day="30" descriptionPropertiesKey="Sommerferien 2024 Niedersachsen" />
-		<tns:Fixed month="JULY" day="01" descriptionPropertiesKey="Sommerferien 2024 Niedersachsen" />
-		<tns:Fixed month="JULY" day="02" descriptionPropertiesKey="Sommerferien 2024 Niedersachsen" />
-		<tns:Fixed month="JULY" day="03" descriptionPropertiesKey="Sommerferien 2024 Niedersachsen" />
-		<tns:Fixed month="JULY" day="04" descriptionPropertiesKey="Sommerferien 2024 Niedersachsen" />
-		<tns:Fixed month="JULY" day="05" descriptionPropertiesKey="Sommerferien 2024 Niedersachsen" />
-		<tns:Fixed month="JULY" day="06" descriptionPropertiesKey="Sommerferien 2024 Niedersachsen" />
-		<tns:Fixed month="JULY" day="07" descriptionPropertiesKey="Sommerferien 2024 Niedersachsen" />
-		<tns:Fixed month="JULY" day="08" descriptionPropertiesKey="Sommerferien 2024 Niedersachsen" />
-		<tns:Fixed month="JULY" day="09" descriptionPropertiesKey="Sommerferien 2024 Niedersachsen" />
-		<tns:Fixed month="JULY" day="10" descriptionPropertiesKey="Sommerferien 2024 Niedersachsen" />
-		<tns:Fixed month="JULY" day="11" descriptionPropertiesKey="Sommerferien 2024 Niedersachsen" />
-		<tns:Fixed month="JULY" day="12" descriptionPropertiesKey="Sommerferien 2024 Niedersachsen" />
-		<tns:Fixed month="JULY" day="13" descriptionPropertiesKey="Sommerferien 2024 Niedersachsen" />
-		<tns:Fixed month="JULY" day="14" descriptionPropertiesKey="Sommerferien 2024 Niedersachsen" />
-		<tns:Fixed month="JULY" day="15" descriptionPropertiesKey="Sommerferien 2024 Niedersachsen" />
-		<tns:Fixed month="JULY" day="16" descriptionPropertiesKey="Sommerferien 2024 Niedersachsen" />
-		<tns:Fixed month="JULY" day="17" descriptionPropertiesKey="Sommerferien 2024 Niedersachsen" />
-		<tns:Fixed month="JULY" day="18" descriptionPropertiesKey="Sommerferien 2024 Niedersachsen" />
-		<tns:Fixed month="JULY" day="19" descriptionPropertiesKey="Sommerferien 2024 Niedersachsen" />
-		<tns:Fixed month="JULY" day="20" descriptionPropertiesKey="Sommerferien 2024 Niedersachsen" />
-		<tns:Fixed month="JULY" day="21" descriptionPropertiesKey="Sommerferien 2024 Niedersachsen" />
-		<tns:Fixed month="JULY" day="22" descriptionPropertiesKey="Sommerferien 2024 Niedersachsen" />
-		<tns:Fixed month="JULY" day="23" descriptionPropertiesKey="Sommerferien 2024 Niedersachsen" />
-		<tns:Fixed month="JULY" day="24" descriptionPropertiesKey="Sommerferien 2024 Niedersachsen" />
-		<tns:Fixed month="JULY" day="25" descriptionPropertiesKey="Sommerferien 2024 Niedersachsen" />
-		<tns:Fixed month="JULY" day="26" descriptionPropertiesKey="Sommerferien 2024 Niedersachsen" />
-		<tns:Fixed month="JULY" day="27" descriptionPropertiesKey="Sommerferien 2024 Niedersachsen" />
-		<tns:Fixed month="JULY" day="28" descriptionPropertiesKey="Sommerferien 2024 Niedersachsen" />
-		<tns:Fixed month="JULY" day="29" descriptionPropertiesKey="Sommerferien 2024 Niedersachsen" />
-		<tns:Fixed month="JULY" day="30" descriptionPropertiesKey="Sommerferien 2024 Niedersachsen" />
-		<tns:Fixed month="JULY" day="31" descriptionPropertiesKey="Sommerferien 2024 Niedersachsen" />
-		<tns:Fixed month="AUGUST" day="01" descriptionPropertiesKey="Sommerferien 2024 Niedersachsen" />
-		<tns:Fixed month="AUGUST" day="02" descriptionPropertiesKey="Sommerferien 2024 Niedersachsen" />
-		<tns:Fixed month="AUGUST" day="03" descriptionPropertiesKey="Sommerferien 2024 Niedersachsen" />
+		<tns:Fixed month="JUNE" day="24" descriptionPropertiesKey="Sommerferien 2024 Niedersachsen" validFrom="2024" validTo="2024" />
+		<tns:Fixed month="JUNE" day="25" descriptionPropertiesKey="Sommerferien 2024 Niedersachsen" validFrom="2024" validTo="2024" />
+		<tns:Fixed month="JUNE" day="26" descriptionPropertiesKey="Sommerferien 2024 Niedersachsen" validFrom="2024" validTo="2024" />
+		<tns:Fixed month="JUNE" day="27" descriptionPropertiesKey="Sommerferien 2024 Niedersachsen" validFrom="2024" validTo="2024" />
+		<tns:Fixed month="JUNE" day="28" descriptionPropertiesKey="Sommerferien 2024 Niedersachsen" validFrom="2024" validTo="2024" />
+		<tns:Fixed month="JUNE" day="29" descriptionPropertiesKey="Sommerferien 2024 Niedersachsen" validFrom="2024" validTo="2024" />
+		<tns:Fixed month="JUNE" day="30" descriptionPropertiesKey="Sommerferien 2024 Niedersachsen" validFrom="2024" validTo="2024" />
+		<tns:Fixed month="JULY" day="01" descriptionPropertiesKey="Sommerferien 2024 Niedersachsen" validFrom="2024" validTo="2024" />
+		<tns:Fixed month="JULY" day="02" descriptionPropertiesKey="Sommerferien 2024 Niedersachsen" validFrom="2024" validTo="2024" />
+		<tns:Fixed month="JULY" day="03" descriptionPropertiesKey="Sommerferien 2024 Niedersachsen" validFrom="2024" validTo="2024" />
+		<tns:Fixed month="JULY" day="04" descriptionPropertiesKey="Sommerferien 2024 Niedersachsen" validFrom="2024" validTo="2024" />
+		<tns:Fixed month="JULY" day="05" descriptionPropertiesKey="Sommerferien 2024 Niedersachsen" validFrom="2024" validTo="2024" />
+		<tns:Fixed month="JULY" day="06" descriptionPropertiesKey="Sommerferien 2024 Niedersachsen" validFrom="2024" validTo="2024" />
+		<tns:Fixed month="JULY" day="07" descriptionPropertiesKey="Sommerferien 2024 Niedersachsen" validFrom="2024" validTo="2024" />
+		<tns:Fixed month="JULY" day="08" descriptionPropertiesKey="Sommerferien 2024 Niedersachsen" validFrom="2024" validTo="2024" />
+		<tns:Fixed month="JULY" day="09" descriptionPropertiesKey="Sommerferien 2024 Niedersachsen" validFrom="2024" validTo="2024" />
+		<tns:Fixed month="JULY" day="10" descriptionPropertiesKey="Sommerferien 2024 Niedersachsen" validFrom="2024" validTo="2024" />
+		<tns:Fixed month="JULY" day="11" descriptionPropertiesKey="Sommerferien 2024 Niedersachsen" validFrom="2024" validTo="2024" />
+		<tns:Fixed month="JULY" day="12" descriptionPropertiesKey="Sommerferien 2024 Niedersachsen" validFrom="2024" validTo="2024" />
+		<tns:Fixed month="JULY" day="13" descriptionPropertiesKey="Sommerferien 2024 Niedersachsen" validFrom="2024" validTo="2024" />
+		<tns:Fixed month="JULY" day="14" descriptionPropertiesKey="Sommerferien 2024 Niedersachsen" validFrom="2024" validTo="2024" />
+		<tns:Fixed month="JULY" day="15" descriptionPropertiesKey="Sommerferien 2024 Niedersachsen" validFrom="2024" validTo="2024" />
+		<tns:Fixed month="JULY" day="16" descriptionPropertiesKey="Sommerferien 2024 Niedersachsen" validFrom="2024" validTo="2024" />
+		<tns:Fixed month="JULY" day="17" descriptionPropertiesKey="Sommerferien 2024 Niedersachsen" validFrom="2024" validTo="2024" />
+		<tns:Fixed month="JULY" day="18" descriptionPropertiesKey="Sommerferien 2024 Niedersachsen" validFrom="2024" validTo="2024" />
+		<tns:Fixed month="JULY" day="19" descriptionPropertiesKey="Sommerferien 2024 Niedersachsen" validFrom="2024" validTo="2024" />
+		<tns:Fixed month="JULY" day="20" descriptionPropertiesKey="Sommerferien 2024 Niedersachsen" validFrom="2024" validTo="2024" />
+		<tns:Fixed month="JULY" day="21" descriptionPropertiesKey="Sommerferien 2024 Niedersachsen" validFrom="2024" validTo="2024" />
+		<tns:Fixed month="JULY" day="22" descriptionPropertiesKey="Sommerferien 2024 Niedersachsen" validFrom="2024" validTo="2024" />
+		<tns:Fixed month="JULY" day="23" descriptionPropertiesKey="Sommerferien 2024 Niedersachsen" validFrom="2024" validTo="2024" />
+		<tns:Fixed month="JULY" day="24" descriptionPropertiesKey="Sommerferien 2024 Niedersachsen" validFrom="2024" validTo="2024" />
+		<tns:Fixed month="JULY" day="25" descriptionPropertiesKey="Sommerferien 2024 Niedersachsen" validFrom="2024" validTo="2024" />
+		<tns:Fixed month="JULY" day="26" descriptionPropertiesKey="Sommerferien 2024 Niedersachsen" validFrom="2024" validTo="2024" />
+		<tns:Fixed month="JULY" day="27" descriptionPropertiesKey="Sommerferien 2024 Niedersachsen" validFrom="2024" validTo="2024" />
+		<tns:Fixed month="JULY" day="28" descriptionPropertiesKey="Sommerferien 2024 Niedersachsen" validFrom="2024" validTo="2024" />
+		<tns:Fixed month="JULY" day="29" descriptionPropertiesKey="Sommerferien 2024 Niedersachsen" validFrom="2024" validTo="2024" />
+		<tns:Fixed month="JULY" day="30" descriptionPropertiesKey="Sommerferien 2024 Niedersachsen" validFrom="2024" validTo="2024" />
+		<tns:Fixed month="JULY" day="31" descriptionPropertiesKey="Sommerferien 2024 Niedersachsen" validFrom="2024" validTo="2024" />
+		<tns:Fixed month="AUGUST" day="01" descriptionPropertiesKey="Sommerferien 2024 Niedersachsen" validFrom="2024" validTo="2024" />
+		<tns:Fixed month="AUGUST" day="02" descriptionPropertiesKey="Sommerferien 2024 Niedersachsen" validFrom="2024" validTo="2024" />
+		<tns:Fixed month="AUGUST" day="03" descriptionPropertiesKey="Sommerferien 2024 Niedersachsen" validFrom="2024" validTo="2024" />
 		<!-- reason = Herbstferien 2024 Niedersachsen -->
-		<tns:Fixed month="OCTOBER" day="04" descriptionPropertiesKey="Herbstferien 2024 Niedersachsen" />
-		<tns:Fixed month="OCTOBER" day="05" descriptionPropertiesKey="Herbstferien 2024 Niedersachsen" />
-		<tns:Fixed month="OCTOBER" day="06" descriptionPropertiesKey="Herbstferien 2024 Niedersachsen" />
-		<tns:Fixed month="OCTOBER" day="07" descriptionPropertiesKey="Herbstferien 2024 Niedersachsen" />
-		<tns:Fixed month="OCTOBER" day="08" descriptionPropertiesKey="Herbstferien 2024 Niedersachsen" />
-		<tns:Fixed month="OCTOBER" day="09" descriptionPropertiesKey="Herbstferien 2024 Niedersachsen" />
-		<tns:Fixed month="OCTOBER" day="10" descriptionPropertiesKey="Herbstferien 2024 Niedersachsen" />
-		<tns:Fixed month="OCTOBER" day="11" descriptionPropertiesKey="Herbstferien 2024 Niedersachsen" />
-		<tns:Fixed month="OCTOBER" day="12" descriptionPropertiesKey="Herbstferien 2024 Niedersachsen" />
-		<tns:Fixed month="OCTOBER" day="13" descriptionPropertiesKey="Herbstferien 2024 Niedersachsen" />
-		<tns:Fixed month="OCTOBER" day="14" descriptionPropertiesKey="Herbstferien 2024 Niedersachsen" />
-		<tns:Fixed month="OCTOBER" day="15" descriptionPropertiesKey="Herbstferien 2024 Niedersachsen" />
-		<tns:Fixed month="OCTOBER" day="16" descriptionPropertiesKey="Herbstferien 2024 Niedersachsen" />
-		<tns:Fixed month="OCTOBER" day="17" descriptionPropertiesKey="Herbstferien 2024 Niedersachsen" />
-		<tns:Fixed month="OCTOBER" day="18" descriptionPropertiesKey="Herbstferien 2024 Niedersachsen" />
-		<tns:Fixed month="OCTOBER" day="19" descriptionPropertiesKey="Herbstferien 2024 Niedersachsen" />
+		<tns:Fixed month="OCTOBER" day="04" descriptionPropertiesKey="Herbstferien 2024 Niedersachsen" validFrom="2024" validTo="2024" />
+		<tns:Fixed month="OCTOBER" day="05" descriptionPropertiesKey="Herbstferien 2024 Niedersachsen" validFrom="2024" validTo="2024" />
+		<tns:Fixed month="OCTOBER" day="06" descriptionPropertiesKey="Herbstferien 2024 Niedersachsen" validFrom="2024" validTo="2024" />
+		<tns:Fixed month="OCTOBER" day="07" descriptionPropertiesKey="Herbstferien 2024 Niedersachsen" validFrom="2024" validTo="2024" />
+		<tns:Fixed month="OCTOBER" day="08" descriptionPropertiesKey="Herbstferien 2024 Niedersachsen" validFrom="2024" validTo="2024" />
+		<tns:Fixed month="OCTOBER" day="09" descriptionPropertiesKey="Herbstferien 2024 Niedersachsen" validFrom="2024" validTo="2024" />
+		<tns:Fixed month="OCTOBER" day="10" descriptionPropertiesKey="Herbstferien 2024 Niedersachsen" validFrom="2024" validTo="2024" />
+		<tns:Fixed month="OCTOBER" day="11" descriptionPropertiesKey="Herbstferien 2024 Niedersachsen" validFrom="2024" validTo="2024" />
+		<tns:Fixed month="OCTOBER" day="12" descriptionPropertiesKey="Herbstferien 2024 Niedersachsen" validFrom="2024" validTo="2024" />
+		<tns:Fixed month="OCTOBER" day="13" descriptionPropertiesKey="Herbstferien 2024 Niedersachsen" validFrom="2024" validTo="2024" />
+		<tns:Fixed month="OCTOBER" day="14" descriptionPropertiesKey="Herbstferien 2024 Niedersachsen" validFrom="2024" validTo="2024" />
+		<tns:Fixed month="OCTOBER" day="15" descriptionPropertiesKey="Herbstferien 2024 Niedersachsen" validFrom="2024" validTo="2024" />
+		<tns:Fixed month="OCTOBER" day="16" descriptionPropertiesKey="Herbstferien 2024 Niedersachsen" validFrom="2024" validTo="2024" />
+		<tns:Fixed month="OCTOBER" day="17" descriptionPropertiesKey="Herbstferien 2024 Niedersachsen" validFrom="2024" validTo="2024" />
+		<tns:Fixed month="OCTOBER" day="18" descriptionPropertiesKey="Herbstferien 2024 Niedersachsen" validFrom="2024" validTo="2024" />
+		<tns:Fixed month="OCTOBER" day="19" descriptionPropertiesKey="Herbstferien 2024 Niedersachsen" validFrom="2024" validTo="2024" />
 		<!-- reason = Herbstferien 2024 Niedersachsen -->
-		<tns:Fixed month="NOVEMBER" day="01" descriptionPropertiesKey="Herbstferien 2024 Niedersachsen" />
+		<tns:Fixed month="NOVEMBER" day="01" descriptionPropertiesKey="Herbstferien 2024 Niedersachsen" validFrom="2024" validTo="2024" />
 		<!-- reason = Weihnachtsferien 2024 Niedersachsen -->
-		<tns:Fixed month="DECEMBER" day="23" descriptionPropertiesKey="Weihnachtsferien 2024 Niedersachsen" />
-		<tns:Fixed month="DECEMBER" day="24" descriptionPropertiesKey="Weihnachtsferien 2024 Niedersachsen" />
-		<tns:Fixed month="DECEMBER" day="25" descriptionPropertiesKey="Weihnachtsferien 2024 Niedersachsen" />
-		<tns:Fixed month="DECEMBER" day="26" descriptionPropertiesKey="Weihnachtsferien 2024 Niedersachsen" />
-		<tns:Fixed month="DECEMBER" day="27" descriptionPropertiesKey="Weihnachtsferien 2024 Niedersachsen" />
-		<tns:Fixed month="DECEMBER" day="28" descriptionPropertiesKey="Weihnachtsferien 2024 Niedersachsen" />
-		<tns:Fixed month="DECEMBER" day="29" descriptionPropertiesKey="Weihnachtsferien 2024 Niedersachsen" />
-		<tns:Fixed month="DECEMBER" day="30" descriptionPropertiesKey="Weihnachtsferien 2024 Niedersachsen" />
-		<tns:Fixed month="DECEMBER" day="31" descriptionPropertiesKey="Weihnachtsferien 2024 Niedersachsen" />
-		<tns:Fixed month="JANUARY" day="01" descriptionPropertiesKey="Weihnachtsferien 2024 Niedersachsen" />
-		<tns:Fixed month="JANUARY" day="02" descriptionPropertiesKey="Weihnachtsferien 2024 Niedersachsen" />
-		<tns:Fixed month="JANUARY" day="03" descriptionPropertiesKey="Weihnachtsferien 2024 Niedersachsen" />
-		<tns:Fixed month="JANUARY" day="04" descriptionPropertiesKey="Weihnachtsferien 2024 Niedersachsen" />
+		<tns:Fixed month="DECEMBER" day="23" descriptionPropertiesKey="Weihnachtsferien 2024 Niedersachsen" validFrom="2024" validTo="2024" />
+		<tns:Fixed month="DECEMBER" day="24" descriptionPropertiesKey="Weihnachtsferien 2024 Niedersachsen" validFrom="2024" validTo="2024" />
+		<tns:Fixed month="DECEMBER" day="25" descriptionPropertiesKey="Weihnachtsferien 2024 Niedersachsen" validFrom="2024" validTo="2024" />
+		<tns:Fixed month="DECEMBER" day="26" descriptionPropertiesKey="Weihnachtsferien 2024 Niedersachsen" validFrom="2024" validTo="2024" />
+		<tns:Fixed month="DECEMBER" day="27" descriptionPropertiesKey="Weihnachtsferien 2024 Niedersachsen" validFrom="2024" validTo="2024" />
+		<tns:Fixed month="DECEMBER" day="28" descriptionPropertiesKey="Weihnachtsferien 2024 Niedersachsen" validFrom="2024" validTo="2024" />
+		<tns:Fixed month="DECEMBER" day="29" descriptionPropertiesKey="Weihnachtsferien 2024 Niedersachsen" validFrom="2024" validTo="2024" />
+		<tns:Fixed month="DECEMBER" day="30" descriptionPropertiesKey="Weihnachtsferien 2024 Niedersachsen" validFrom="2024" validTo="2024" />
+		<tns:Fixed month="DECEMBER" day="31" descriptionPropertiesKey="Weihnachtsferien 2024 Niedersachsen" validFrom="2024" validTo="2024" />
+		<tns:Fixed month="JANUARY" day="01" descriptionPropertiesKey="Weihnachtsferien 2024 Niedersachsen" validFrom="2025" validTo="2025" />
+		<tns:Fixed month="JANUARY" day="02" descriptionPropertiesKey="Weihnachtsferien 2024 Niedersachsen" validFrom="2025" validTo="2025" />
+		<tns:Fixed month="JANUARY" day="03" descriptionPropertiesKey="Weihnachtsferien 2024 Niedersachsen" validFrom="2025" validTo="2025" />
+		<tns:Fixed month="JANUARY" day="04" descriptionPropertiesKey="Weihnachtsferien 2024 Niedersachsen" validFrom="2025" validTo="2025" />
+	<!-- filename = /etc/openhab/scripts/2025.ics -->
+		<!-- reason = Winterferien 2025 Niedersachsen -->
+		<tns:Fixed month="FEBRUARY" day="03" descriptionPropertiesKey="Winterferien 2025 Niedersachsen" validFrom="2025" validTo="2025" />
+		<tns:Fixed month="FEBRUARY" day="04" descriptionPropertiesKey="Winterferien 2025 Niedersachsen" validFrom="2025" validTo="2025" />
+		<!-- reason = Osterferien 2025 Niedersachsen -->
+		<tns:Fixed month="APRIL" day="07" descriptionPropertiesKey="Osterferien 2025 Niedersachsen" validFrom="2025" validTo="2025" />
+		<tns:Fixed month="APRIL" day="08" descriptionPropertiesKey="Osterferien 2025 Niedersachsen" validFrom="2025" validTo="2025" />
+		<tns:Fixed month="APRIL" day="09" descriptionPropertiesKey="Osterferien 2025 Niedersachsen" validFrom="2025" validTo="2025" />
+		<tns:Fixed month="APRIL" day="10" descriptionPropertiesKey="Osterferien 2025 Niedersachsen" validFrom="2025" validTo="2025" />
+		<tns:Fixed month="APRIL" day="11" descriptionPropertiesKey="Osterferien 2025 Niedersachsen" validFrom="2025" validTo="2025" />
+		<tns:Fixed month="APRIL" day="12" descriptionPropertiesKey="Osterferien 2025 Niedersachsen" validFrom="2025" validTo="2025" />
+		<tns:Fixed month="APRIL" day="13" descriptionPropertiesKey="Osterferien 2025 Niedersachsen" validFrom="2025" validTo="2025" />
+		<tns:Fixed month="APRIL" day="14" descriptionPropertiesKey="Osterferien 2025 Niedersachsen" validFrom="2025" validTo="2025" />
+		<tns:Fixed month="APRIL" day="15" descriptionPropertiesKey="Osterferien 2025 Niedersachsen" validFrom="2025" validTo="2025" />
+		<tns:Fixed month="APRIL" day="16" descriptionPropertiesKey="Osterferien 2025 Niedersachsen" validFrom="2025" validTo="2025" />
+		<tns:Fixed month="APRIL" day="17" descriptionPropertiesKey="Osterferien 2025 Niedersachsen" validFrom="2025" validTo="2025" />
+		<tns:Fixed month="APRIL" day="18" descriptionPropertiesKey="Osterferien 2025 Niedersachsen" validFrom="2025" validTo="2025" />
+		<tns:Fixed month="APRIL" day="19" descriptionPropertiesKey="Osterferien 2025 Niedersachsen" validFrom="2025" validTo="2025" />
+		<!-- reason = Osterferien 2025 Niedersachsen -->
+		<tns:Fixed month="APRIL" day="30" descriptionPropertiesKey="Osterferien 2025 Niedersachsen" validFrom="2025" validTo="2025" />
+		<!-- reason = Pfingstferien 2025 Niedersachsen -->
+		<tns:Fixed month="MAY" day="02" descriptionPropertiesKey="Pfingstferien 2025 Niedersachsen" validFrom="2025" validTo="2025" />
+		<!-- reason = Pfingstferien 2025 Niedersachsen -->
+		<tns:Fixed month="MAY" day="30" descriptionPropertiesKey="Pfingstferien 2025 Niedersachsen" validFrom="2025" validTo="2025" />
+		<!-- reason = Pfingstferien 2025 Niedersachsen -->
+		<tns:Fixed month="JUNE" day="10" descriptionPropertiesKey="Pfingstferien 2025 Niedersachsen" validFrom="2025" validTo="2025" />
+		<!-- reason = Sommerferien 2025 Niedersachsen -->
+		<tns:Fixed month="JULY" day="03" descriptionPropertiesKey="Sommerferien 2025 Niedersachsen" validFrom="2025" validTo="2025" />
+		<tns:Fixed month="JULY" day="04" descriptionPropertiesKey="Sommerferien 2025 Niedersachsen" validFrom="2025" validTo="2025" />
+		<tns:Fixed month="JULY" day="05" descriptionPropertiesKey="Sommerferien 2025 Niedersachsen" validFrom="2025" validTo="2025" />
+		<tns:Fixed month="JULY" day="06" descriptionPropertiesKey="Sommerferien 2025 Niedersachsen" validFrom="2025" validTo="2025" />
+		<tns:Fixed month="JULY" day="07" descriptionPropertiesKey="Sommerferien 2025 Niedersachsen" validFrom="2025" validTo="2025" />
+		<tns:Fixed month="JULY" day="08" descriptionPropertiesKey="Sommerferien 2025 Niedersachsen" validFrom="2025" validTo="2025" />
+		<tns:Fixed month="JULY" day="09" descriptionPropertiesKey="Sommerferien 2025 Niedersachsen" validFrom="2025" validTo="2025" />
+		<tns:Fixed month="JULY" day="10" descriptionPropertiesKey="Sommerferien 2025 Niedersachsen" validFrom="2025" validTo="2025" />
+		<tns:Fixed month="JULY" day="11" descriptionPropertiesKey="Sommerferien 2025 Niedersachsen" validFrom="2025" validTo="2025" />
+		<tns:Fixed month="JULY" day="12" descriptionPropertiesKey="Sommerferien 2025 Niedersachsen" validFrom="2025" validTo="2025" />
+		<tns:Fixed month="JULY" day="13" descriptionPropertiesKey="Sommerferien 2025 Niedersachsen" validFrom="2025" validTo="2025" />
+		<tns:Fixed month="JULY" day="14" descriptionPropertiesKey="Sommerferien 2025 Niedersachsen" validFrom="2025" validTo="2025" />
+		<tns:Fixed month="JULY" day="15" descriptionPropertiesKey="Sommerferien 2025 Niedersachsen" validFrom="2025" validTo="2025" />
+		<tns:Fixed month="JULY" day="16" descriptionPropertiesKey="Sommerferien 2025 Niedersachsen" validFrom="2025" validTo="2025" />
+		<tns:Fixed month="JULY" day="17" descriptionPropertiesKey="Sommerferien 2025 Niedersachsen" validFrom="2025" validTo="2025" />
+		<tns:Fixed month="JULY" day="18" descriptionPropertiesKey="Sommerferien 2025 Niedersachsen" validFrom="2025" validTo="2025" />
+		<tns:Fixed month="JULY" day="19" descriptionPropertiesKey="Sommerferien 2025 Niedersachsen" validFrom="2025" validTo="2025" />
+		<tns:Fixed month="JULY" day="20" descriptionPropertiesKey="Sommerferien 2025 Niedersachsen" validFrom="2025" validTo="2025" />
+		<tns:Fixed month="JULY" day="21" descriptionPropertiesKey="Sommerferien 2025 Niedersachsen" validFrom="2025" validTo="2025" />
+		<tns:Fixed month="JULY" day="22" descriptionPropertiesKey="Sommerferien 2025 Niedersachsen" validFrom="2025" validTo="2025" />
+		<tns:Fixed month="JULY" day="23" descriptionPropertiesKey="Sommerferien 2025 Niedersachsen" validFrom="2025" validTo="2025" />
+		<tns:Fixed month="JULY" day="24" descriptionPropertiesKey="Sommerferien 2025 Niedersachsen" validFrom="2025" validTo="2025" />
+		<tns:Fixed month="JULY" day="25" descriptionPropertiesKey="Sommerferien 2025 Niedersachsen" validFrom="2025" validTo="2025" />
+		<tns:Fixed month="JULY" day="26" descriptionPropertiesKey="Sommerferien 2025 Niedersachsen" validFrom="2025" validTo="2025" />
+		<tns:Fixed month="JULY" day="27" descriptionPropertiesKey="Sommerferien 2025 Niedersachsen" validFrom="2025" validTo="2025" />
+		<tns:Fixed month="JULY" day="28" descriptionPropertiesKey="Sommerferien 2025 Niedersachsen" validFrom="2025" validTo="2025" />
+		<tns:Fixed month="JULY" day="29" descriptionPropertiesKey="Sommerferien 2025 Niedersachsen" validFrom="2025" validTo="2025" />
+		<tns:Fixed month="JULY" day="30" descriptionPropertiesKey="Sommerferien 2025 Niedersachsen" validFrom="2025" validTo="2025" />
+		<tns:Fixed month="JULY" day="31" descriptionPropertiesKey="Sommerferien 2025 Niedersachsen" validFrom="2025" validTo="2025" />
+		<tns:Fixed month="AUGUST" day="01" descriptionPropertiesKey="Sommerferien 2025 Niedersachsen" validFrom="2025" validTo="2025" />
+		<tns:Fixed month="AUGUST" day="02" descriptionPropertiesKey="Sommerferien 2025 Niedersachsen" validFrom="2025" validTo="2025" />
+		<tns:Fixed month="AUGUST" day="03" descriptionPropertiesKey="Sommerferien 2025 Niedersachsen" validFrom="2025" validTo="2025" />
+		<tns:Fixed month="AUGUST" day="04" descriptionPropertiesKey="Sommerferien 2025 Niedersachsen" validFrom="2025" validTo="2025" />
+		<tns:Fixed month="AUGUST" day="05" descriptionPropertiesKey="Sommerferien 2025 Niedersachsen" validFrom="2025" validTo="2025" />
+		<tns:Fixed month="AUGUST" day="06" descriptionPropertiesKey="Sommerferien 2025 Niedersachsen" validFrom="2025" validTo="2025" />
+		<tns:Fixed month="AUGUST" day="07" descriptionPropertiesKey="Sommerferien 2025 Niedersachsen" validFrom="2025" validTo="2025" />
+		<tns:Fixed month="AUGUST" day="08" descriptionPropertiesKey="Sommerferien 2025 Niedersachsen" validFrom="2025" validTo="2025" />
+		<tns:Fixed month="AUGUST" day="09" descriptionPropertiesKey="Sommerferien 2025 Niedersachsen" validFrom="2025" validTo="2025" />
+		<tns:Fixed month="AUGUST" day="10" descriptionPropertiesKey="Sommerferien 2025 Niedersachsen" validFrom="2025" validTo="2025" />
+		<tns:Fixed month="AUGUST" day="11" descriptionPropertiesKey="Sommerferien 2025 Niedersachsen" validFrom="2025" validTo="2025" />
+		<tns:Fixed month="AUGUST" day="12" descriptionPropertiesKey="Sommerferien 2025 Niedersachsen" validFrom="2025" validTo="2025" />
+		<tns:Fixed month="AUGUST" day="13" descriptionPropertiesKey="Sommerferien 2025 Niedersachsen" validFrom="2025" validTo="2025" />
+		<!-- reason = Herbstferien 2025 Niedersachsen -->
+		<tns:Fixed month="OCTOBER" day="13" descriptionPropertiesKey="Herbstferien 2025 Niedersachsen" validFrom="2025" validTo="2025" />
+		<tns:Fixed month="OCTOBER" day="14" descriptionPropertiesKey="Herbstferien 2025 Niedersachsen" validFrom="2025" validTo="2025" />
+		<tns:Fixed month="OCTOBER" day="15" descriptionPropertiesKey="Herbstferien 2025 Niedersachsen" validFrom="2025" validTo="2025" />
+		<tns:Fixed month="OCTOBER" day="16" descriptionPropertiesKey="Herbstferien 2025 Niedersachsen" validFrom="2025" validTo="2025" />
+		<tns:Fixed month="OCTOBER" day="17" descriptionPropertiesKey="Herbstferien 2025 Niedersachsen" validFrom="2025" validTo="2025" />
+		<tns:Fixed month="OCTOBER" day="18" descriptionPropertiesKey="Herbstferien 2025 Niedersachsen" validFrom="2025" validTo="2025" />
+		<tns:Fixed month="OCTOBER" day="19" descriptionPropertiesKey="Herbstferien 2025 Niedersachsen" validFrom="2025" validTo="2025" />
+		<tns:Fixed month="OCTOBER" day="20" descriptionPropertiesKey="Herbstferien 2025 Niedersachsen" validFrom="2025" validTo="2025" />
+		<tns:Fixed month="OCTOBER" day="21" descriptionPropertiesKey="Herbstferien 2025 Niedersachsen" validFrom="2025" validTo="2025" />
+		<tns:Fixed month="OCTOBER" day="22" descriptionPropertiesKey="Herbstferien 2025 Niedersachsen" validFrom="2025" validTo="2025" />
+		<tns:Fixed month="OCTOBER" day="23" descriptionPropertiesKey="Herbstferien 2025 Niedersachsen" validFrom="2025" validTo="2025" />
+		<tns:Fixed month="OCTOBER" day="24" descriptionPropertiesKey="Herbstferien 2025 Niedersachsen" validFrom="2025" validTo="2025" />
+		<tns:Fixed month="OCTOBER" day="25" descriptionPropertiesKey="Herbstferien 2025 Niedersachsen" validFrom="2025" validTo="2025" />
+		<!-- reason = Weihnachtsferien 2025 Niedersachsen -->
+		<tns:Fixed month="DECEMBER" day="22" descriptionPropertiesKey="Weihnachtsferien 2025 Niedersachsen" validFrom="2025" validTo="2025" />
+		<tns:Fixed month="DECEMBER" day="23" descriptionPropertiesKey="Weihnachtsferien 2025 Niedersachsen" validFrom="2025" validTo="2025" />
+		<tns:Fixed month="DECEMBER" day="24" descriptionPropertiesKey="Weihnachtsferien 2025 Niedersachsen" validFrom="2025" validTo="2025" />
+		<tns:Fixed month="DECEMBER" day="25" descriptionPropertiesKey="Weihnachtsferien 2025 Niedersachsen" validFrom="2025" validTo="2025" />
+		<tns:Fixed month="DECEMBER" day="26" descriptionPropertiesKey="Weihnachtsferien 2025 Niedersachsen" validFrom="2025" validTo="2025" />
+		<tns:Fixed month="DECEMBER" day="27" descriptionPropertiesKey="Weihnachtsferien 2025 Niedersachsen" validFrom="2025" validTo="2025" />
+		<tns:Fixed month="DECEMBER" day="28" descriptionPropertiesKey="Weihnachtsferien 2025 Niedersachsen" validFrom="2025" validTo="2025" />
+		<tns:Fixed month="DECEMBER" day="29" descriptionPropertiesKey="Weihnachtsferien 2025 Niedersachsen" validFrom="2025" validTo="2025" />
+		<tns:Fixed month="DECEMBER" day="30" descriptionPropertiesKey="Weihnachtsferien 2025 Niedersachsen" validFrom="2025" validTo="2025" />
+		<tns:Fixed month="DECEMBER" day="31" descriptionPropertiesKey="Weihnachtsferien 2025 Niedersachsen" validFrom="2025" validTo="2025" />
+		<tns:Fixed month="JANUARY" day="01" descriptionPropertiesKey="Weihnachtsferien 2025 Niedersachsen" validFrom="2026" validTo="2026" />
+		<tns:Fixed month="JANUARY" day="02" descriptionPropertiesKey="Weihnachtsferien 2025 Niedersachsen" validFrom="2026" validTo="2026" />
+		<tns:Fixed month="JANUARY" day="03" descriptionPropertiesKey="Weihnachtsferien 2025 Niedersachsen" validFrom="2026" validTo="2026" />
+		<tns:Fixed month="JANUARY" day="04" descriptionPropertiesKey="Weihnachtsferien 2025 Niedersachsen" validFrom="2026" validTo="2026" />
+		<tns:Fixed month="JANUARY" day="05" descriptionPropertiesKey="Weihnachtsferien 2025 Niedersachsen" validFrom="2026" validTo="2026" />
 	</tns:Holidays></tns:Configuration>
