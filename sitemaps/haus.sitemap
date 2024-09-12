@@ -9,36 +9,45 @@ sitemap haus label="My home automation" {
         Switch item=Hue_Raum_Erkerweg_Betrieb label="Erkerweg"
     }
     Frame label="Bewässerung" {
+        Default item=GardenaAutomaticWatering_Active label="Automatic Aktiv [%s]" icon="iconify:cib:automatic"
+        Default item=GardenaAutomaticWatering label="Automatic Läuft [%s]"
+        Slider item=GardenaAutomaticStep label="Schritt [%d]" icon="iconify:tabler:number" minValue=1 maxValue=7 step=1 releaseOnly
+
+        Selection item=GardenaAutomaticSelect label="Programm" mappings=["morning"="Normal", "evening"="Spät", "lawn_fast"="Rasen schnell", "beds"="Beete"] icon="iconify:mdi:selection"
+        Default item=ePumpe_Power label="Leistung [%d%unit%]" icon="iconify:mdi:power-plug"
+        Text label=""
+
         Text item=ePumpe_3_STATE label="Pumpe [%s]" icon="iconify:material-symbols:water-pump"
         Default item=ePumpe_4_STATE label="Pumpe Set"
-        Text item=PumpeRunning  label="Running [%s]"
+        Text item=PumpeRunning  label="Running [%s]" icon="iconify:healthicons:running"
+
         Text item=eGardenaVentilKontrolle_1_STATE label="BeetSteckdose [%s]" icon=[eGardenaVentilKontrolle_1_STATE==ON="iconify:mdi:valve-closed"]
         Default item=GardenaVentilKontrolle_1_STATE label="BeetSteckdose Set"
-        Text item=eGardenaVentilKontrolle_1_ONTIME label="OnTime [%d]sec" icon="time"
+        Text item=eGardenaVentilKontrolle_1_ONTIME label="OnTime [%d%unit%]" icon="time"
 
         Text item=eGardenaVentilKontrolle_2_STATE label="Rasen Bäume [%s]" icon=[eGardenaVentilKontrolle_2_STATE==ON="iconify:mdi:valve-closed"]
         Default item=GardenaVentilKontrolle_2_STATE label="Rasen Bäume Set"
-        Text item=eGardenaVentilKontrolle_2_ONTIME label="OnTime [%d]sec" icon="time"
+        Text item=eGardenaVentilKontrolle_2_ONTIME label="OnTime [%d%unit%]" icon="time"
 
         Text item=eGardenaVentilKontrolle_3_STATE label="Pool Terrasse [%s]" icon=[eGardenaVentilKontrolle_3_STATE==ON="iconify:mdi:valve-closed"]
         Default item=GardenaVentilKontrolle_3_STATE label="Pool Terrasse Set"
-        Text item=eGardenaVentilKontrolle_3_ONTIME label="OnTime [%d]sec" icon="time"
+        Text item=eGardenaVentilKontrolle_3_ONTIME label="OnTime [%d%unit%]" icon="time"
 
         Text item=eGardenaVentilKontrolle_4_STATE label="Pool Straße [%s]" icon=[eGardenaVentilKontrolle_4_STATE==ON="iconify:mdi:valve-closed"]
         Default item=GardenaVentilKontrolle_4_STATE label="Pool Straße Set"
-        Text item=eGardenaVentilKontrolle_4_ONTIME label="OnTime [%d]sec" icon="time"
+        Text item=eGardenaVentilKontrolle_4_ONTIME label="OnTime [%d%unit%]" icon="time"
 
         Text item=eGardenaVentilKontrolle_5_STATE label="Terrasse [%s]" icon=[eGardenaVentilKontrolle_5_STATE==ON="iconify:mdi:valve-closed"]
         Default item=GardenaVentilKontrolle_5_STATE label="Terrasse Set"
-        Text item=eGardenaVentilKontrolle_5_ONTIME label="OnTime [%d]sec" icon="time"
+        Text item=eGardenaVentilKontrolle_5_ONTIME label="OnTime [%d%unit%]" icon="time"
 
         Text item=eGardenaVentilKontrolle_6_STATE label="Tomaten [%s]" icon=[eGardenaVentilKontrolle_6_STATE==ON="iconify:mdi:valve-closed"]
         Default item=GardenaVentilKontrolle_6_STATE label="Tomaten Set"
-        Text item=eGardenaVentilKontrolle_6_ONTIME label="OnTime [%d]sec" icon="time"
+        Text item=eGardenaVentilKontrolle_6_ONTIME label="OnTime [%d%unit%]" icon="time"
 
         Text item=eGardenaVentilKontrolle_7_STATE label="Erkerweg [%s]" icon=[eGardenaVentilKontrolle_7_STATE==ON="iconify:mdi:valve-closed"]
         Default item=GardenaVentilKontrolle_7_STATE label="Erkerweg Set"
-        Text item=eGardenaVentilKontrolle_7_ONTIME label="OnTime [%d]sec" icon="time"
+        Text item=eGardenaVentilKontrolle_7_ONTIME label="OnTime [%d%unit%]" icon="time"
     }
     Frame label="Livarno" {
         Default item=eSteckdosePool label="Steckdose Pool"
