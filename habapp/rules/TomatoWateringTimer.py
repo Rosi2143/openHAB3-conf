@@ -60,11 +60,13 @@ class MyTomatoTimer(HABApp.Rule):
         self.now = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
         logger.info("%s:Started TomatoTimer: %s", self.place, self.now)
         self.dark_outside_item = StringItem.get_item("Sonnendaten_Sonnenphase")
-        dark_outside_state = self.is_dark_outside(self.dark_outside_item.get_value())
+        dark_outside_state = self.is_dark_outside(
+            self.dark_outside_item.get_value("OFF")
+        )
         logger.info("%s:is it dark outside? --> %s", self.place, dark_outside_state)
 
         self.watering_active_item = SwitchItem.get_item(self.device_name_plug_state)
-        watering_active_state = self.watering_active_item.get_value()
+        watering_active_state = self.watering_active_item.get_value("OFF")
         logger.info("%s:watering active? --> %s", self.place, watering_active_state)
 
         self.watering_state = watering_active_state == "ON"
@@ -318,7 +320,7 @@ class MyTomatoTimer(HABApp.Rule):
             "LichtSensorEinfahrt_Beleuchtungsstaerke"
         )
         current_sun_exposure_driveway_state = (
-            current_sun_exposure_driveway_item.get_value()
+            current_sun_exposure_driveway_item.get_value(0)
         )
         logger.info(
             "%s:Licht: SensorEinfahrt ---   %0.2flx",
@@ -329,7 +331,7 @@ class MyTomatoTimer(HABApp.Rule):
             "LichtSensorErkerWeg_Beleuchtungsstaerke"
         )
         current_sun_exposure_orielway_state = (
-            current_sun_exposure_orielway_item.get_value()
+            current_sun_exposure_orielway_item.get_value(0)
         )
         logger.info(
             "%s:Licht: SensorErkerWeg ---   %0.2flx",
@@ -339,7 +341,7 @@ class MyTomatoTimer(HABApp.Rule):
         current_sun_exposure_well_item = NumberItem.get_item(
             "LichtSensorBrunnen_Beleuchtungsstarke"
         )
-        current_sun_exposure_well_state = current_sun_exposure_well_item.get_value()
+        current_sun_exposure_well_state = current_sun_exposure_well_item.get_value(0)
         logger.info(
             "%s:Licht: SensorBrunnen   ---   %0.2flx",
             self.place,
@@ -356,7 +358,7 @@ class MyTomatoTimer(HABApp.Rule):
                 if self.plug_thing_or_item.status != ThingStatusEnum.ONLINE:
                     offline = True
             if self.item_uid_plug is not None:
-                if self.plug_thing_or_item.get_value() != "ON":
+                if self.plug_thing_or_item.get_value("OFF") != "ON":
                     offline = True
             if offline:
                 logger.info(
@@ -481,7 +483,7 @@ class MyTomatoTimer(HABApp.Rule):
                 self.tomato_timer.get_next_run().strftime("%d/%m/%Y %H:%M:%S"),
             )
         else:
-            dark_outside_state = self.dark_outside_item.get_value()
+            dark_outside_state = self.dark_outside_item.get_value("OFF")
             is_dark = self.is_dark_outside(dark_outside_state)
             if is_dark:
                 logger.info("%s:Start next timer at sun rise", self.place)
