@@ -1,0 +1,29 @@
+Blinds:
+  RollladenGast:
+    time: 6
+    level: 80
+  RollladenSofaOst:
+    time: 7
+    level: 80
+  RollladenSofaSued:
+    time: 9
+    level: 80
+  RollladenWohnzimmerLinks:
+    time: 10
+    level: 85
+  RollladenWohnzimmerRechts:
+    time: 10
+    level: 75
+  RollladenEsszimmerSued:
+    time: 11
+    level: 70
+  RollladenEsszimmerErker:
+    time: 11
+    level: 70
+  RollladenKuecheWest:
+    time: 13
+    level: 90
+Conditions:
+  temperature: 25
+  radiation: 400
+  preview_hours: 9
