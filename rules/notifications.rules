@@ -5,13 +5,19 @@ rule "indego home notification"
 when
     Item Bosch_Indego_StatusText changed
 then
+    var DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm:ss");
+    var LocalTime localTime = LocalTime.now();
+    var timeRightNow = dtf.format(localTime)
+
     if (newState.toString.contains("Returning to Dock"))
     {
-        var DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm:ss");
-        var LocalTime localTime = LocalTime.now();
-        var timeRightNow = dtf.format(localTime)
-
         logInfo("Indego RTH", "Item " + triggeringItemName + " changed to \"" + newState + "\"")
         sendNotification("schrott.micha@web.de", "Indego \"" + newState + "\" at: " + timeRightNow, "iconify:mdi:robot-mower-outline", "Info")
+    }
+
+    if (newState.toString.contains("Idle in lawn"))
+    {
+        logInfo("Indego RTH", "Item " + triggeringItemName + " changed to \"" + newState + "\"")
+        sendNotification("schrott.micha@web.de", "Indego \"" + newState + "\" at: " + timeRightNow, "iconify:mdi:robot-mower-outline", "Error")
     }
 end
