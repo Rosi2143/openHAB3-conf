@@ -203,6 +203,8 @@ class IndegoStatemachine(StateMachine):
 
     def start_mowing(self) -> None:
         """set the start time of the mowing"""
+        self._logger.info("Starting mowing")
+
         self._start_time_mow = datetime.now()
         self._mowing_duration_sec = 0
 
@@ -214,27 +216,37 @@ class IndegoStatemachine(StateMachine):
         return self._start_time_mow
 
     def pause_mowing(self, last_state: str) -> None:
-        self._logger.info(
-            "Last Total Mow time  = %s",
-            self.format_time(self.get_previous_mow_duration_sec(last_state)),
-        )
-        self._logger.info(
-            "Current Mow time  = %s",
-            self.format_time(self.get_new_mowing_duration_sec(last_state)),
-        )
+        self._logger.info("Pause mowing")
+
+        if last_state == self.STATUS_MOW:
+            self._logger.info(
+                "Last Total Mow time  = %s",
+                self.format_time(self.get_previous_mow_duration_sec(last_state)),
+            )
+            self._logger.info(
+                "Current Mow time  = %s",
+                self.format_time(self.get_new_mowing_duration_sec(last_state)),
+            )
+
         self._mowing_duration_sec += self.get_new_mowing_duration_sec(last_state)
-        self._logger.info(
-            "New Total Mow time  = %s",
-            self.format_time(self.get_previous_mow_duration_sec(last_state)),
-        )
+
+        if last_state == self.STATUS_MOW:
+            self._logger.info(
+                "New Total Mow time  = %s",
+                self.format_time(self.get_previous_mow_duration_sec(last_state)),
+            )
 
     def resume_mowing(self, new_state: str) -> None:
+        self._logger.info("Resume mowing")
+
         self._logger.info(
             "Last Mow time  = %s",
             self.format_time(self.get_previous_mow_duration_sec(new_state)),
         )
 
     def stop_mowing(self, last_state: str) -> None:
+        self._logger.info("Stop mowing")
+
         self._logger.info(
             "Total Mow time  = %s",
             self.format_time(self.get_total_mow_duration_sec(last_state)),
@@ -438,17 +450,18 @@ class IndegoStatemachine(StateMachine):
             f"{self.get_trace_header()}entered {self.STATUS_MOW} - source state was {source.id}"
         )
 
-        self.start_mowing()
         if (source.id == self.STATUS_DOCK) or (
             source.id == self.STATUS_MOWING_COMPLETE
         ):
             self._logger.info(f"{self.get_trace_header()}starting mow timer")
+            self.start_mowing()
         elif (source.id == self.STATUS_PAUSE) or (
             source.id == self.STATUS_MOWING_COMPLETE
         ):
             self._logger.info(f"{self.get_trace_header()}stopping pause timer")
+            self.resume_mowing()
         elif source.id == self.STATUS_MOW:
-            self._logger.info(f"{self.get_trace_header()}resumt mow again")
+            self._logger.info(f"{self.get_trace_header()}resume mow again")
             self.resume_mowing(self.STATUS_MOW)
         else:
             self._logger.info(
@@ -514,7 +527,7 @@ class IndegoStatemachine(StateMachine):
         )
         self._logger.debug("%s###########################", self.get_trace_header())
         self._logger.debug(
-            "%smow_start_time   = %s",
+            "%scurrent_mow_start_time   = %s",
             self.get_trace_header(),
             self.get_mow_start_time(),
         )
@@ -541,6 +554,6 @@ class IndegoStatemachine(StateMachine):
         )
         self._logger.debug("%s###########################", self.get_trace_header())
         pausetime = self.get_pause_duration_sec(self.get_state_name())
-        mowtime = self.get_new_mowing_duration_sec(self.get_state_name()) - pausetime
+        mowtime = self.get_new_mowing_duration_sec(self.get_state_name())
 
         return mowtime, pausetime
