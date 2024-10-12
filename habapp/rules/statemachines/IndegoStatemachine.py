@@ -203,7 +203,7 @@ class IndegoStatemachine(StateMachine):
 
     def start_mowing(self) -> None:
         """set the start time of the mowing"""
-        self._logger.info("Starting mowing")
+        self._logger.info("Start mowing")
 
         self._start_time_mow = datetime.now()
         self._mowing_duration_sec = 0
@@ -289,7 +289,7 @@ class IndegoStatemachine(StateMachine):
         """
         return int(
             self.get_total_time().total_seconds()
-            - self.get_total_mow_duration_sec(state)
+            - self.get_total_mow_duration_sec("none")
         )
 
     def get_new_pause_duration_sec(self, state: str) -> int:
@@ -553,7 +553,7 @@ class IndegoStatemachine(StateMachine):
             self.get_new_pause_duration_sec(self.get_state_name()),
         )
         self._logger.debug("%s###########################", self.get_trace_header())
-        pausetime = self.get_pause_duration_sec(self.get_state_name())
-        mowtime = self.get_new_mowing_duration_sec(self.get_state_name())
+        current_pausetime = self.get_pause_duration_sec(self.get_state_name())
+        current_mowtime = self.get_new_mowing_duration_sec(self.get_state_name())
 
-        return mowtime, pausetime
+        return current_mowtime, current_pausetime

@@ -204,21 +204,28 @@ class Indego(HABApp.Rule):
             self.next_timer_job = None
             return
 
-        mowing_time, pause_time = indego_state_machine.get_action_timer()
+        current_mowing_time, current_pause_time = (
+            indego_state_machine.get_action_timer()
+        )
 
-        logger.info("Current MowTime  : %s", self.get_valid_time_format(mowing_time))
-        if self.last_mowing_time != mowing_time:
+        logger.info(
+            "Current MowTime  : %s", self.get_valid_time_format(current_mowing_time)
+        )
+        if self.last_mowing_time != current_mowing_time:
             self.openhab.send_command(
-                OH_ITEM_INDEGO_MOW_TIME, self.get_valid_time_format(mowing_time)
+                OH_ITEM_INDEGO_MOW_TIME, self.get_valid_time_format(current_mowing_time)
             )
-            self.last_mowing_time = mowing_time
+            self.last_mowing_time = current_mowing_time
 
-        logger.info("Current PauseTime: %s", self.get_valid_time_format(pause_time))
-        if self.last_pause_time != pause_time:
+        logger.info(
+            "Current PauseTime: %s", self.get_valid_time_format(current_pause_time)
+        )
+        if self.last_pause_time != current_pause_time:
             self.openhab.send_command(
-                OH_ITEM_INDEGO_PAUSE_TIME, self.get_valid_time_format(pause_time)
+                OH_ITEM_INDEGO_PAUSE_TIME,
+                self.get_valid_time_format(current_pause_time),
             )
-            self.last_pause_time = pause_time
+            self.last_pause_time = current_pause_time
 
 
 Indego()
