@@ -459,7 +459,7 @@ class IndegoStatemachine(StateMachine):
             source.id == self.STATUS_MOWING_COMPLETE
         ):
             self._logger.info(f"{self.get_trace_header()}stopping pause timer")
-            self.resume_mowing()
+            self.resume_mowing(self.STATUS_PAUSE)
         elif source.id == self.STATUS_MOW:
             self._logger.info(f"{self.get_trace_header()}resume mow again")
             self.resume_mowing(self.STATUS_MOW)

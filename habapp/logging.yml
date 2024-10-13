@@ -280,6 +280,15 @@ handlers:
     formatter: HABApp_format
     level: INFO
 
+  StatisticHandler:
+    class: HABApp.config.logging.MidnightRotatingFileHandler
+    filename: "/mnt/usb1/log/habapp/Statistc.log" # absolute filename is recommended
+    maxBytes: 10_000_000
+    backupCount: 3
+
+    formatter: HABApp_format
+    level: INFO
+
   Switch2LightHandler:
     class: HABApp.config.logging.MidnightRotatingFileHandler
     filename: "/mnt/usb1/log/habapp/Switch2Light.log" # absolute filename is recommended
@@ -508,6 +517,12 @@ loggers:
     level: INFO
     handlers:
       - ScenesHandler
+    propagate: False
+
+  Statistic:
+    level: INFO
+    handlers:
+      - StatisticHandler
     propagate: False
 
   Switch2Light:
